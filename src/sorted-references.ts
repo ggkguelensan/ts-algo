@@ -1,11 +1,90 @@
 import type { Compare } from "./quick-sort.js";
 
-/**
- * Native stable sorting of references with values cached once per occurrence.
- * Returns a new array; neither references nor entities are modified.
- * Dense input; callbacks must not mutate input or change ordering mid-sort.
- */
+type IterableItem<Source> = Source extends Iterable<infer Item> ? Item : never;
+
+/** Sort Map keys using values selected directly from its entities. */
+export function sortedReferences<Key, Entity, Value>(
+  source: ReadonlyMap<Key, Entity>,
+  getValue: (entity: Entity, key: Key) => Value,
+  compare: Compare<Value>,
+): Key[];
+
+/** Sort Set elements while preserving their identity. */
 export function sortedReferences<Ref, Value>(
+  source: ReadonlySet<Ref>,
+  getValue: (ref: Ref) => Value,
+  compare: Compare<Value>,
+): Ref[];
+
+export function sortedReferences<Ref, Value>(
+  references: readonly Ref[],
+  getValue: (ref: Ref) => Value,
+  compare: Compare<Value>,
+): Ref[];
+
+/** Consume an iterable once; Map uses its entity/key overload instead. */
+export function sortedReferences<Source extends Iterable<unknown>, Value>(
+  source: Source extends ReadonlyMap<unknown, unknown> ? never : Source,
+  getValue: (ref: IterableItem<Source>) => Value,
+  compare: Compare<Value>,
+): IterableItem<Source>[];
+
+/**
+ * Native stable sorting with cached values. Returns a new array of references.
+ * Arrays must be dense. Callbacks must not mutate the source or its ordering.
+ * Empty and singleton sources do not require getValue or compare calls.
+ */
+export function sortedReferences<Ref, Entity, Value>(
+  source: ReadonlyMap<Ref, Entity> | Iterable<Ref>,
+  getValue: ((entity: Entity, key: Ref) => Value) | ((ref: Ref) => Value),
+  compare: Compare<Value>,
+): Ref[] {
+  if (isMapLike(source)) {
+    // Overloads correlate Map inputs with entity/key selectors. TypeScript
+    // cannot retain that correlation in this union implementation.
+    const select = getValue as (entity: Entity, key: Ref) => Value;
+    const references = new Array<Ref>(source.size);
+    if (source.size <= 1) {
+      source.forEach((_entity, key) => { references[0] = key; });
+      return references;
+    }
+
+    const values = new Array<Value>(source.size);
+    const order = new Array<number>(source.size);
+    let i = 0;
+    // forEach avoids one [key, entity] entry array per Map element.
+    source.forEach((entity, key) => {
+      references[i] = key;
+      values[i] = select(entity, key);
+      order[i] = i;
+      i++;
+    });
+    return sortPrepared(references, values, order, compare);
+  }
+
+  const select = getValue as (ref: Ref) => Value;
+  // Preserve the existing indexed array path. Other iterable sources need
+  // one snapshot for random access; the source itself is consumed only once.
+  const references: readonly Ref[] = Array.isArray(source) ? source : Array.from(source);
+  return sortArray(references, select, compare);
+}
+
+// Structural detection also supports readonly Map wrappers and other realms.
+// Future map-like structures implement ReadonlyMap; ordinary sources Iterable.
+function isMapLike<Ref, Entity>(
+  source: ReadonlyMap<Ref, Entity> | Iterable<Ref>,
+): source is ReadonlyMap<Ref, Entity> {
+  return typeof source === "object" && source !== null
+    && "get" in source && typeof source.get === "function"
+    && "has" in source && typeof source.has === "function"
+    && "forEach" in source && typeof source.forEach === "function"
+    && "keys" in source && typeof source.keys === "function"
+    && "values" in source && typeof source.values === "function"
+    && "entries" in source && typeof source.entries === "function"
+    && "size" in source && typeof source.size === "number";
+}
+
+function sortArray<Ref, Value>(
   references: readonly Ref[],
   getValue: (ref: Ref) => Value,
   compare: Compare<Value>,
@@ -21,11 +100,20 @@ export function sortedReferences<Ref, Value>(
     order[i] = i;
   }
 
+  return sortPrepared(references, values, order, compare);
+}
+
+function sortPrepared<Ref, Value>(
+  references: readonly Ref[],
+  values: readonly Value[],
+  order: number[],
+  compare: Compare<Value>,
+): Ref[] {
   // Native sort preserves input order for equal values; no index tie-breaker.
   order.sort((a, b) => compare(values[a]!, values[b]!));
 
-  const result = new Array<Ref>(length);
-  for (let i = 0; i < length; i++) {
+  const result = new Array<Ref>(references.length);
+  for (let i = 0; i < references.length; i++) {
     result[i] = references[order[i]!]!;
   }
   return result;

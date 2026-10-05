@@ -4,10 +4,18 @@ import { quickSortInPlace, sortedReferences, sortedReferencesQuickSort } from ".
 
 const numeric = (a: number, b: number) => a - b;
 
-for (const [backend, sortReferences] of [
+type ArraySorter = <Ref, Value>(
+  refs: readonly Ref[],
+  getValue: (ref: Ref) => Value,
+  compare: (a: Value, b: Value) => number,
+) => Ref[];
+
+const backends: readonly (readonly [string, ArraySorter])[] = [
   ["native", sortedReferences],
   ["quick", sortedReferencesQuickSort],
-] as const) {
+];
+
+for (const [backend, sortReferences] of backends) {
   test(`${backend}: empty/singleton return fresh arrays without reading values`, () => {
     const getValue = () => { throw new Error("No value required"); };
     const empty: number[] = [];
