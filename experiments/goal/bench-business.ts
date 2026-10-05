@@ -9,6 +9,7 @@ for(const n of [200,2000])for(const[name,make]of Object.entries({catalogue,sched
   const scene=make(n),variants=scene.variants,expected=Object.values(variants)[0]!();
   for(const run of Object.values(variants))assert.deepEqual(run(),expected);
   rows.push({scenario:name,n,timings:measure(Object.fromEntries(Object.entries(variants).map(([name,run])=>[name,()=>consume(run())]))),result:expected});
+  if('buildAndQuery'in scene){for(const run of Object.values(scene.buildAndQuery))assert.deepEqual(run(),expected);rows.push({scenario:name,n,kind:'build and one full query',notes:'Entity/metadata fixture generation excluded. Native caller supplies valid topology; library constructors validate it. Graphology additionally runs topologicalSort for DAG validation.',timings:measure(Object.fromEntries(Object.entries(scene.buildAndQuery).map(([name,run])=>[name,()=>consume(run())]))),result:expected});}
 }
 for(const n of [1000,100000])for(const[name,make]of Object.entries({report,synchronization})){
   const scene=make(n),variants=scene.variants,expected=Object.values(variants)[0]!();for(const run of Object.values(variants))assert.deepEqual(run(),expected);

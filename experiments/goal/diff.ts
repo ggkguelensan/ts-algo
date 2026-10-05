@@ -3,6 +3,6 @@ export function indexBy<E,K>(items:Iterable<E>,key:(entity:E)=>K):Map<K,E> {
 }
 export function diffBy<K,E>(before:ReadonlyMap<K,E>,after:ReadonlyMap<K,E>,equal:(before:E,after:E,key:K)=>boolean):{added:K[];removed:K[];changed:K[]} {
   const added:K[]=[],removed:K[]=[],changed:K[]=[];
-  after.forEach((entity,key)=>{if(!before.has(key))added.push(key);else if(!equal(before.get(key)!,entity,key))changed.push(key);});
+  after.forEach((entity,key)=>{const previous=before.get(key);if(previous===undefined&&!before.has(key))added.push(key);else if(!equal(previous as E,entity,key))changed.push(key);});
   before.forEach((_,key)=>{if(!after.has(key))removed.push(key);});return {added,removed,changed};
 }

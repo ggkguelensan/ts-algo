@@ -13,6 +13,7 @@ for(const n of [1000,20000,100000])for(const shape of ['uniform','clustered','co
   const positions=Array.from({length:8},()=>({x:rand()*1000,y:rand()*1000,r:100}));
   for(const p of positions){const expected=scene.nearest.native(p.x,p.y,p.r);for(const run of Object.values(scene.nearest))assert.equal(run(p.x,p.y,p.r),expected);}
   rows.push({n,shape,kind:'nearest inclusive radius with source-order ties',queries:8,timings:measure(Object.fromEntries(Object.entries(scene.nearest).map(([name,run])=>[name,()=>{let sum=0;for(const p of positions)sum+=run(p.x,p.y,p.r)??0;return sum; }])))});
+  rows.push({n,shape,kind:'nearest plus entity filter/projection; geometric nearest then business filter',queries:8,timings:measure(Object.fromEntries(Object.entries(scene.nearest).map(([name,run])=>[name,()=>{let size=0;for(const p of positions){const id=run(p.x,p.y,p.r);size+=scene.finish(id===undefined?[]:[id]).length;}return size; }])))});
   rows.push({n,shape,kind:'build',timings:measure(Object.fromEntries(Object.entries(scene.builds).map(([name,run])=>[name,()=>{const index=run();return 'size'in index?typeof index.size==='number'?index.size:0:n; }])))});
 }
 save('spatial',rows);

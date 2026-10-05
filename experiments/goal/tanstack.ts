@@ -1,10 +1,11 @@
 import {createCollection,localOnlyCollectionOptions,createLiveQueryCollection,eq,and,sum,BTreeIndex} from '@tanstack/db';
 export type Order={id:number;customer:number;amount:number;paid:boolean};
 export type Customer={id:number;region:number;enabled:boolean};
-export async function liveReport(orderRows:Order[],customerRows:Customer[]){
+export async function liveReport(orderRows:Order[],customerRows:Customer[],options:{filterIndex?:boolean}={}){
   const orders=createCollection(localOnlyCollectionOptions({getKey:(e:Order)=>e.id,initialData:orderRows}));
   const customers=createCollection(localOnlyCollectionOptions({getKey:(e:Customer)=>e.id,initialData:customerRows}));
   orders.createIndex(e=>e.customer,{indexType:BTreeIndex});
+  if(options.filterIndex)orders.createIndex(e=>e.paid,{indexType:BTreeIndex});
   customers.createIndex(e=>e.id,{indexType:BTreeIndex});
   const stats=createLiveQueryCollection(q=>q.from({order:orders})
     .join({customer:customers},({order,customer})=>eq(order.customer,customer.id),'inner')

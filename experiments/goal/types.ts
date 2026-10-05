@@ -74,3 +74,14 @@ const conditionalRefs:Id[]=collect(from(map),conditionalOptions);
 function titles<R,E,S>(input:import('./source.ts').Source<R,E,S>,select:(e:E,id:R)=>string):string[]{return collect(input,{select});}
 const genericResult:string[]=titles(from(map),(e,id)=>`${id}:${e.kind}`);
 void reusable;void conditionalRefs;void genericResult;
+
+import {sorted as boundSorted} from './sorted-source.ts';
+const boundOrder:Id[]=boundSorted(from(map),e=>e.kind,(a,b)=>a.localeCompare(b));
+const contextualOrder:Id[]=boundSorted(from(map),(e,id,ctx)=>e.kind+ctx.suffix,(a,b)=>a.localeCompare(b),{context:{suffix:'!'}});
+// @ts-expect-error source context is not substituted for explicit query context
+boundSorted(external,(e,id,ctx)=>ctx.records.size,(a,b)=>a-b,{context:{suffix:'!'}});
+// @ts-expect-error a sorted callback requiring context needs explicit options
+boundSorted(from(map),(e,id,ctx:{minimum:number})=>ctx.minimum,(a,b)=>a-b);
+declare const readonlySet:ReadonlySet<Id>;
+const setOrder:Id[]=boundSorted(from(readonlySet),id=>id,(a,b)=>a.localeCompare(b));
+void boundOrder;void contextualOrder;void setOrder;

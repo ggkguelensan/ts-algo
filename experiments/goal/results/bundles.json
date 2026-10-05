@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-05T11:54:29.981Z",
+  "date": "2026-10-05T13:19:49.661Z",
   "target": "ES2023, browser, ESM",
   "dependencies": {
     "@rollup/plugin-commonjs": "29.0.3",
@@ -52,7 +52,11 @@
       "modules": [
         {
           "path": ".generated-bundles/native.ts",
-          "bytes": 88
+          "bytes": 88,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -108,35 +112,70 @@
       "modules": [
         {
           "path": "node_modules/remeda/dist/lazyDataLastImpl--3B10z3s.js",
-          "bytes": 96
+          "bytes": 96,
+          "renderedExports": [
+            "t"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/purry.js",
-          "bytes": 136
+          "bytes": 136,
+          "renderedExports": [
+            "purry"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/utilityEvaluators-IxVD3t2o.js",
-          "bytes": 75
+          "bytes": 75,
+          "renderedExports": [
+            "n",
+            "t"
+          ],
+          "removedExports": [
+            "r"
+          ]
         },
         {
           "path": "node_modules/remeda/dist/pipe.js",
-          "bytes": 913
+          "bytes": 913,
+          "renderedExports": [
+            "pipe"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/filter.js",
-          "bytes": 132
+          "bytes": 132,
+          "renderedExports": [
+            "filter"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/map.js",
-          "bytes": 123
+          "bytes": 123,
+          "renderedExports": [
+            "map"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/take.js",
-          "bytes": 159
+          "bytes": 159,
+          "renderedExports": [
+            "take"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/remeda.ts",
-          "bytes": 84
+          "bytes": 84,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -204,43 +243,105 @@
       "modules": [
         {
           "path": "node_modules/ix/util/identity.mjs",
-          "bytes": 57
+          "bytes": 57,
+          "renderedExports": [
+            "identity"
+          ],
+          "removedExports": [
+            "identityAsync"
+          ]
         },
         {
           "path": "node_modules/ix/util/bindcallback.mjs",
-          "bytes": 800
+          "bytes": 800,
+          "renderedExports": [
+            "bindCallback"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/ix/util/isiterable.mjs",
-          "bytes": 1078
+          "bytes": 1078,
+          "renderedExports": [
+            "isFunction",
+            "isObject",
+            "isArrayLike",
+            "isIterable",
+            "isIterator",
+            "isReadableNodeStream",
+            "isWritableNodeStream"
+          ],
+          "removedExports": [
+            "isPromise",
+            "isAsyncIterable",
+            "isObservable",
+            "isReadableDOMStream",
+            "isWritableDOMStream",
+            "isFetchResponse"
+          ]
         },
         {
           "path": "node_modules/ix/util/tointeger.mjs",
-          "bytes": 270
+          "bytes": 270,
+          "renderedExports": [
+            "toInteger"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/ix/util/tolength.mjs",
-          "bytes": 180
+          "bytes": 180,
+          "renderedExports": [
+            "toLength"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/ix/iterable/iterablex.mjs",
-          "bytes": 3459
+          "bytes": 3459,
+          "renderedExports": [
+            "IterableX",
+            "FromIterable",
+            "from"
+          ],
+          "removedExports": [
+            "as"
+          ]
         },
         {
           "path": "node_modules/ix/iterable/operators/filter.mjs",
-          "bytes": 1102
+          "bytes": 1102,
+          "renderedExports": [
+            "FilterIterable",
+            "filter"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/ix/iterable/operators/map.mjs",
-          "bytes": 1164
+          "bytes": 1164,
+          "renderedExports": [
+            "MapIterable",
+            "map"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/ix/iterable/operators/take.mjs",
-          "bytes": 952
+          "bytes": 952,
+          "renderedExports": [
+            "TakeIterable",
+            "take"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/ix.ts",
-          "bytes": 110
+          "bytes": 110,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -276,15 +377,44 @@
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 642
+          "bytes": 642,
+          "renderedExports": [
+            "entity",
+            "from"
+          ],
+          "removedExports": [
+            "sourceContext",
+            "subset"
+          ]
         },
         {
           "path": "query.ts",
-          "bytes": 3076
+          "bytes": 3076,
+          "renderedExports": [
+            "filtered",
+            "query",
+            "queryInput",
+            "selected",
+            "take",
+            "withContext"
+          ],
+          "removedExports": [
+            "drop",
+            "lazyFiltered",
+            "lazySelected",
+            "lazyTake",
+            "queryContext",
+            "resolve",
+            "sorted"
+          ]
         },
         {
           "path": ".generated-bundles/fused.ts",
-          "bytes": 119
+          "bytes": 119,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -320,15 +450,31 @@
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 642
+          "bytes": 642,
+          "renderedExports": [
+            "entity",
+            "from"
+          ],
+          "removedExports": [
+            "sourceContext",
+            "subset"
+          ]
         },
         {
           "path": "collect.ts",
-          "bytes": 598
+          "bytes": 598,
+          "renderedExports": [
+            "collect"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/restricted.ts",
-          "bytes": 109
+          "bytes": 109,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -368,15 +514,111 @@
       "modules": [
         {
           "path": "../../dist/src/internal/collection.js",
-          "bytes": 711
+          "bytes": 711,
+          "renderedExports": [
+            "isMapLike"
+          ],
+          "removedExports": []
         },
         {
           "path": "../../dist/src/sorted.js",
-          "bytes": 2283
+          "bytes": 2283,
+          "renderedExports": [
+            "sorted"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/sorted.ts",
-          "bytes": 63
+          "bytes": 63,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "sortedBound",
+      "bundler": "esbuild",
+      "bytes": 1441,
+      "gzip": 661,
+      "brotli": 604,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 405
+        },
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 552
+        },
+        {
+          "path": "sorted-source.ts",
+          "bytes": 68
+        },
+        {
+          "path": ".generated-bundles/sortedBound.ts",
+          "bytes": 65
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "sortedBound",
+      "bundler": "rollup",
+      "bytes": 1401,
+      "gzip": 636,
+      "brotli": 578,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 642,
+          "renderedExports": [
+            "entity",
+            "from"
+          ],
+          "removedExports": [
+            "sourceContext",
+            "subset"
+          ]
+        },
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 711,
+          "renderedExports": [
+            "isMapLike"
+          ],
+          "removedExports": []
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 2285,
+          "renderedExports": [
+            "sorted"
+          ],
+          "removedExports": []
+        },
+        {
+          "path": "sorted-source.ts",
+          "bytes": 177,
+          "renderedExports": [
+            "sorted"
+          ],
+          "removedExports": []
+        },
+        {
+          "path": ".generated-bundles/sortedBound.ts",
+          "bytes": 117,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -424,23 +666,45 @@
       "modules": [
         {
           "path": "../../dist/src/internal/collection.js",
-          "bytes": 711
+          "bytes": 711,
+          "renderedExports": [
+            "isMapLike"
+          ],
+          "removedExports": []
         },
         {
           "path": "../../dist/src/sorted.js",
-          "bytes": 2283
+          "bytes": 2283,
+          "renderedExports": [
+            "sorted"
+          ],
+          "removedExports": []
         },
         {
           "path": "../../dist/src/internal/reference-map.js",
-          "bytes": 698
+          "bytes": 698,
+          "renderedExports": [
+            "referenceMap"
+          ],
+          "removedExports": [
+            "snapshotMap"
+          ]
         },
         {
           "path": "../../dist/src/timeline.js",
-          "bytes": 8092
+          "bytes": 8092,
+          "renderedExports": [
+            "timeline"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/currentTime.ts",
-          "bytes": 107
+          "bytes": 107,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -476,15 +740,32 @@
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 817
+          "bytes": 817,
+          "renderedExports": [
+            "entity",
+            "from",
+            "sourceContext",
+            "subset"
+          ],
+          "removedExports": []
         },
         {
           "path": "temporal.ts",
-          "bytes": 3141
+          "bytes": 3141,
+          "renderedExports": [
+            "overlapping",
+            "startsBetween",
+            "temporal"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/temporal.ts",
-          "bytes": 155
+          "bytes": 155,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -524,19 +805,53 @@
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 817
+          "bytes": 817,
+          "renderedExports": [
+            "entity",
+            "from",
+            "sourceContext",
+            "subset"
+          ],
+          "removedExports": []
         },
         {
           "path": "temporal.ts",
-          "bytes": 3141
+          "bytes": 3141,
+          "renderedExports": [
+            "overlapping",
+            "startsBetween",
+            "temporal"
+          ],
+          "removedExports": []
         },
         {
           "path": "query.ts",
-          "bytes": 2795
+          "bytes": 2795,
+          "renderedExports": [
+            "query",
+            "queryInput",
+            "selected",
+            "withContext"
+          ],
+          "removedExports": [
+            "drop",
+            "filtered",
+            "lazyFiltered",
+            "lazySelected",
+            "lazyTake",
+            "queryContext",
+            "resolve",
+            "sorted",
+            "take"
+          ]
         },
         {
           "path": ".generated-bundles/temporalQuery.ts",
-          "bytes": 216
+          "bytes": 216,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -576,19 +891,40 @@
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 817
+          "bytes": 817,
+          "renderedExports": [
+            "entity",
+            "from",
+            "sourceContext",
+            "subset"
+          ],
+          "removedExports": []
         },
         {
           "path": "temporal.ts",
-          "bytes": 3141
+          "bytes": 3141,
+          "renderedExports": [
+            "overlapping",
+            "startsBetween",
+            "temporal"
+          ],
+          "removedExports": []
         },
         {
           "path": "collect.ts",
-          "bytes": 598
+          "bytes": 598,
+          "renderedExports": [
+            "collect"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/temporalCollect.ts",
-          "bytes": 208
+          "bytes": 208,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -628,15 +964,27 @@
       "modules": [
         {
           "path": "../../dist/src/internal/collection.js",
-          "bytes": 711
+          "bytes": 711,
+          "renderedExports": [
+            "isMapLike"
+          ],
+          "removedExports": []
         },
         {
           "path": "../../dist/src/point-index.js",
-          "bytes": 6942
+          "bytes": 6942,
+          "renderedExports": [
+            "pointIndex"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/spatial.ts",
-          "bytes": 162
+          "bytes": 162,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -668,11 +1016,19 @@
       "modules": [
         {
           "path": "node_modules/kdbush/index.js",
-          "bytes": 12950
+          "bytes": 12950,
+          "renderedExports": [
+            "default"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/kdbush.ts",
-          "bytes": 145
+          "bytes": 145,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -720,23 +1076,47 @@
       "modules": [
         {
           "path": "../../dist/src/internal/collection.js",
-          "bytes": 711
+          "bytes": 711,
+          "renderedExports": [
+            "isMapLike"
+          ],
+          "removedExports": []
         },
         {
           "path": "../../dist/src/point-index.js",
-          "bytes": 6942
+          "bytes": 6942,
+          "renderedExports": [
+            "pointIndex"
+          ],
+          "removedExports": []
         },
         {
           "path": "source.ts",
-          "bytes": 740
+          "bytes": 740,
+          "renderedExports": [
+            "entity",
+            "from"
+          ],
+          "removedExports": [
+            "sourceContext",
+            "subset"
+          ]
         },
         {
           "path": "collect.ts",
-          "bytes": 598
+          "bytes": 598,
+          "renderedExports": [
+            "collect"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/spatialCollect.ts",
-          "bytes": 533
+          "bytes": 533,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -772,11 +1152,830 @@
       "modules": [
         {
           "path": "../../dist/src/is-dense-array.js",
-          "bytes": 296
+          "bytes": 296,
+          "renderedExports": [
+            "isDenseArray"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/density.ts",
-          "bytes": 74
+          "bytes": 74,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "zodDensity",
+      "bundler": "esbuild",
+      "bytes": 12470,
+      "gzip": 4372,
+      "brotli": 3995,
+      "modules": [
+        {
+          "path": "../../node_modules/zod/v4/core/util.js",
+          "bytes": 2637
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/core.js",
+          "bytes": 1570
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/errors.js",
+          "bytes": 782
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/parse.js",
+          "bytes": 1089
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/regexes.js",
+          "bytes": 27
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/checks.js",
+          "bytes": 106
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/versions.js",
+          "bytes": 33
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/schemas.js",
+          "bytes": 4377
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/api.js",
+          "bytes": 235
+        },
+        {
+          "path": "../../node_modules/zod/v4/mini/parse.js",
+          "bytes": 0
+        },
+        {
+          "path": "../../node_modules/zod/v4/mini/schemas.js",
+          "bytes": 1265
+        },
+        {
+          "path": "../../dist/src/is-dense-array.js",
+          "bytes": 113
+        },
+        {
+          "path": "../../dist/src/zod/dense-array.js",
+          "bytes": 112
+        },
+        {
+          "path": "../../dist/src/zod/index.js",
+          "bytes": 0
+        },
+        {
+          "path": ".generated-bundles/zodDensity.ts",
+          "bytes": 105
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "zodDensity",
+      "bundler": "rollup",
+      "bytes": 12360,
+      "gzip": 4245,
+      "brotli": 3844,
+      "modules": [
+        {
+          "path": "../../node_modules/zod/v4/core/util.js",
+          "bytes": 9521,
+          "renderedExports": [
+            "jsonStringifyReplacer",
+            "cleanRegex",
+            "captureStackTrace",
+            "clone",
+            "normalizeParams",
+            "aborted",
+            "explicitlyAborted",
+            "prefixIssues",
+            "unwrapMessage",
+            "attachSchema",
+            "finalizeIssue",
+            "issue",
+            "members",
+            "own",
+            "hide",
+            "defineLazyInternal"
+          ],
+          "removedExports": [
+            "assertEqual",
+            "assertNotEqual",
+            "toZod",
+            "assertIs",
+            "assertNever",
+            "assert",
+            "getEnumValues",
+            "joinValues",
+            "cached",
+            "nullish",
+            "floatSafeRemainder",
+            "defineLazy",
+            "objectClone",
+            "assignProp",
+            "rawShape",
+            "mergeDefs",
+            "cloneDef",
+            "getElementAtPath",
+            "promiseAllObject",
+            "randomString",
+            "esc",
+            "slugify",
+            "isObject",
+            "allowsEval",
+            "isPlainObject",
+            "shallowClone",
+            "numKeys",
+            "getParsedType",
+            "propertyKeyTypes",
+            "primitiveTypes",
+            "escapeRegex",
+            "createTransparentProxy",
+            "stringifyPrimitive",
+            "optionalKeys",
+            "NUMBER_FORMAT_RANGES",
+            "BIGINT_FORMAT_RANGES",
+            "pick",
+            "omit",
+            "extend",
+            "safeExtend",
+            "merge",
+            "partial",
+            "required",
+            "getSizableOrigin",
+            "codePointLength",
+            "getLengthableOrigin",
+            "parsedType",
+            "cleanEnum",
+            "base64ToUint8Array",
+            "uint8ArrayToBase64",
+            "base64urlToUint8Array",
+            "uint8ArrayToBase64url",
+            "hexToUint8Array",
+            "uint8ArrayToHex",
+            "Class",
+            "derived",
+            "installLazyProp",
+            "CONSTANT_CATCH",
+            "constantCatch"
+          ]
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/core.js",
+          "bytes": 5998,
+          "renderedExports": [
+            "$constructor",
+            "$ZodAsyncError",
+            "globalConfig",
+            "config"
+          ],
+          "removedExports": [
+            "NEVER",
+            "$brand",
+            "$ZodEncodeError"
+          ]
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/errors.js",
+          "bytes": 2437,
+          "renderedExports": [
+            "$ZodRealError"
+          ],
+          "removedExports": [
+            "$ZodError",
+            "flattenError",
+            "formatError",
+            "treeifyError",
+            "toDotPath",
+            "prettifyError"
+          ]
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/parse.js",
+          "bytes": 3299,
+          "renderedExports": [
+            "_parse",
+            "parse",
+            "_parseAsync",
+            "parseAsync",
+            "_safeParse",
+            "safeParse",
+            "_safeParseAsync",
+            "safeParseAsync"
+          ],
+          "removedExports": [
+            "validate",
+            "validateAsync",
+            "_encode",
+            "encode",
+            "_decode",
+            "decode",
+            "_encodeAsync",
+            "encodeAsync",
+            "_decodeAsync",
+            "decodeAsync",
+            "_safeEncode",
+            "safeEncode",
+            "_safeDecode",
+            "safeDecode",
+            "_safeEncodeAsync",
+            "safeEncodeAsync",
+            "_safeDecodeAsync",
+            "safeDecodeAsync"
+          ]
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/regexes.js",
+          "bytes": 37,
+          "renderedExports": [
+            "number"
+          ],
+          "removedExports": [
+            "cuid",
+            "cuid2",
+            "ulid",
+            "xid",
+            "ksuid",
+            "nanoid",
+            "nanoidOfLength",
+            "duration",
+            "extendedDuration",
+            "guid",
+            "uuid",
+            "uuid4",
+            "uuid6",
+            "uuid7",
+            "email",
+            "html5Email",
+            "rfc5322Email",
+            "unicodeEmail",
+            "idnEmail",
+            "browserEmail",
+            "emoji",
+            "ipv4",
+            "ipv6",
+            "mac",
+            "cidrv4",
+            "cidrv6",
+            "base64",
+            "base64url",
+            "hostname",
+            "domain",
+            "httpProtocol",
+            "e164",
+            "creditCard",
+            "currencyCode",
+            "iban",
+            "date",
+            "time",
+            "datetime",
+            "anyString",
+            "string",
+            "bigint",
+            "integer",
+            "boolean",
+            "null",
+            "undefined",
+            "lowercase",
+            "uppercase",
+            "hex",
+            "md5_hex",
+            "md5_base64",
+            "md5_base64url",
+            "sha1_hex",
+            "sha1_base64",
+            "sha1_base64url",
+            "sha256_hex",
+            "sha256_base64",
+            "sha256_base64url",
+            "sha384_hex",
+            "sha384_base64",
+            "sha384_base64url",
+            "sha512_hex",
+            "sha512_base64",
+            "sha512_base64url"
+          ]
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/checks.js",
+          "bytes": 247,
+          "renderedExports": [
+            "$ZodCheck"
+          ],
+          "removedExports": [
+            "$ZodCheckLessThan",
+            "$ZodCheckGreaterThan",
+            "$ZodCheckMultipleOf",
+            "$ZodCheckNumberFormat",
+            "$ZodCheckBigIntFormat",
+            "$ZodCheckMaxSize",
+            "$ZodCheckMinSize",
+            "$ZodCheckSizeEquals",
+            "$ZodCheckMaxLength",
+            "$ZodCheckMinLength",
+            "$ZodCheckLengthEquals",
+            "$ZodCheckStringFormat",
+            "$ZodCheckRegex",
+            "$ZodCheckLowerCase",
+            "$ZodCheckUpperCase",
+            "$ZodCheckIncludes",
+            "$ZodCheckStartsWith",
+            "$ZodCheckEndsWith",
+            "$ZodCheckProperty",
+            "$ZodCheckProperties",
+            "$ZodCheckMimeType",
+            "$ZodCheckOverwrite"
+          ]
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/versions.js",
+          "bytes": 62,
+          "renderedExports": [
+            "version"
+          ],
+          "removedExports": []
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/schemas.js",
+          "bytes": 13279,
+          "renderedExports": [
+            "$ZodType",
+            "standardProps",
+            "$ZodNumber",
+            "$ZodArray",
+            "$ZodOptional",
+            "$ZodPipe",
+            "$ZodCustom"
+          ],
+          "removedExports": [
+            "$ZodString",
+            "$ZodStringFormat",
+            "$ZodGUID",
+            "$ZodUUID",
+            "$ZodEmail",
+            "URL_BAD_FORMAT",
+            "URL_UNPARSEABLE",
+            "canParseURL",
+            "validateURL",
+            "parseURLObject",
+            "stripTabAndNewline",
+            "urlHostnameOk",
+            "urlProtocolOk",
+            "$ZodURL",
+            "$ZodEmoji",
+            "$ZodNanoID",
+            "$ZodCUID",
+            "$ZodCUID2",
+            "$ZodULID",
+            "$ZodXID",
+            "$ZodKSUID",
+            "$ZodISODateTime",
+            "$ZodISODate",
+            "$ZodISOTime",
+            "$ZodISODuration",
+            "$ZodIPv4",
+            "isValidIPv6",
+            "$ZodIPv6",
+            "$ZodMAC",
+            "$ZodCIDRv4",
+            "isValidCIDRv6",
+            "$ZodCIDRv6",
+            "isValidBase64",
+            "base64Charset",
+            "$ZodBase64",
+            "base64urlCharset",
+            "isValidBase64URL",
+            "$ZodBase64URL",
+            "$ZodE164",
+            "isValidCreditCard",
+            "$ZodCreditCard",
+            "isValidIBAN",
+            "$ZodIBAN",
+            "isValidJWT",
+            "$ZodJWT",
+            "$ZodCustomStringFormat",
+            "$ZodNumberFormat",
+            "$ZodBoolean",
+            "$ZodBigInt",
+            "$ZodBigIntFormat",
+            "$ZodSymbol",
+            "$ZodUndefined",
+            "$ZodNull",
+            "$ZodAny",
+            "$ZodUnknown",
+            "$ZodNever",
+            "$ZodVoid",
+            "$ZodDate",
+            "$ZodObject",
+            "$ZodObjectJIT",
+            "$ZodUnion",
+            "$ZodXor",
+            "getDiscriminatedOption",
+            "$ZodDiscriminatedUnion",
+            "$ZodIntersection",
+            "mergeValues",
+            "$ZodTuple",
+            "$ZodRecord",
+            "$ZodMap",
+            "$ZodSet",
+            "$ZodEnum",
+            "$ZodLiteral",
+            "$ZodFile",
+            "$ZodTransform",
+            "$ZodExactOptional",
+            "$ZodNullable",
+            "$ZodDefault",
+            "$ZodPrefault",
+            "$ZodNonOptional",
+            "$ZodSuccess",
+            "$ZodCatch",
+            "$ZodNaN",
+            "$ZodCodec",
+            "$ZodPreprocess",
+            "$ZodReadonly",
+            "$ZodTemplateLiteral",
+            "$ZodFunction",
+            "$ZodPromise",
+            "$ZodLazy"
+          ]
+        },
+        {
+          "path": "../../node_modules/zod/v4/core/api.js",
+          "bytes": 577,
+          "renderedExports": [
+            "_number",
+            "_custom"
+          ],
+          "removedExports": [
+            "_string",
+            "_coercedString",
+            "_email",
+            "_guid",
+            "_uuid",
+            "_uuidv4",
+            "_uuidv6",
+            "_uuidv7",
+            "_url",
+            "_emoji",
+            "_nanoid",
+            "_cuid",
+            "_cuid2",
+            "_ulid",
+            "_xid",
+            "_ksuid",
+            "_ipv4",
+            "_ipv6",
+            "_mac",
+            "_cidrv4",
+            "_cidrv6",
+            "_base64",
+            "_base64url",
+            "_e164",
+            "_creditCard",
+            "_iban",
+            "_jwt",
+            "TimePrecision",
+            "_isoDateTime",
+            "_isoDate",
+            "_isoTime",
+            "_isoDuration",
+            "_coercedNumber",
+            "_int",
+            "_float32",
+            "_float64",
+            "_int32",
+            "_uint32",
+            "_boolean",
+            "_coercedBoolean",
+            "_bigint",
+            "_coercedBigint",
+            "_int64",
+            "_uint64",
+            "_symbol",
+            "_undefined",
+            "_null",
+            "_any",
+            "_unknown",
+            "_never",
+            "_void",
+            "_date",
+            "_coercedDate",
+            "_nan",
+            "_lt",
+            "_lte",
+            "_max",
+            "_gt",
+            "_gte",
+            "_min",
+            "_positive",
+            "_negative",
+            "_nonpositive",
+            "_nonnegative",
+            "_multipleOf",
+            "_maxSize",
+            "_minSize",
+            "_size",
+            "_maxLength",
+            "_minLength",
+            "_length",
+            "_regex",
+            "_lowercase",
+            "_uppercase",
+            "_includes",
+            "_startsWith",
+            "_endsWith",
+            "_property",
+            "_properties",
+            "_mime",
+            "_overwrite",
+            "_normalize",
+            "_trim",
+            "_toLowerCase",
+            "_toUpperCase",
+            "_slugify",
+            "_array",
+            "_union",
+            "_xor",
+            "_discriminatedUnion",
+            "_intersection",
+            "_tuple",
+            "_record",
+            "_map",
+            "_set",
+            "_enum",
+            "_nativeEnum",
+            "_literal",
+            "_file",
+            "_transform",
+            "_optional",
+            "_nullable",
+            "_default",
+            "_nonoptional",
+            "_success",
+            "_catch",
+            "_pipe",
+            "_readonly",
+            "_templateLiteral",
+            "_lazy",
+            "_promise",
+            "_refine",
+            "_superRefine",
+            "_check",
+            "describe",
+            "meta",
+            "_stringbool",
+            "_stringFormat"
+          ]
+        },
+        {
+          "path": "../../node_modules/zod/v4/mini/schemas.js",
+          "bytes": 2961,
+          "renderedExports": [
+            "ZodMiniType",
+            "ZodMiniNumber",
+            "number",
+            "ZodMiniArray",
+            "array",
+            "ZodMiniOptional",
+            "optional",
+            "ZodMiniPipe",
+            "pipe",
+            "ZodMiniCustom",
+            "custom"
+          ],
+          "removedExports": [
+            "ZodMiniString",
+            "string",
+            "ZodMiniStringFormat",
+            "ZodMiniEmail",
+            "email",
+            "ZodMiniGUID",
+            "guid",
+            "ZodMiniUUID",
+            "uuid",
+            "uuidv4",
+            "uuidv6",
+            "uuidv7",
+            "ZodMiniURL",
+            "url",
+            "httpUrl",
+            "ZodMiniEmoji",
+            "emoji",
+            "ZodMiniNanoID",
+            "nanoid",
+            "ZodMiniCUID",
+            "cuid",
+            "ZodMiniCUID2",
+            "cuid2",
+            "ZodMiniULID",
+            "ulid",
+            "ZodMiniXID",
+            "xid",
+            "ZodMiniKSUID",
+            "ksuid",
+            "ZodMiniIPv4",
+            "ipv4",
+            "ZodMiniIPv6",
+            "ipv6",
+            "ZodMiniCIDRv4",
+            "cidrv4",
+            "ZodMiniCIDRv6",
+            "cidrv6",
+            "ZodMiniMAC",
+            "mac",
+            "ZodMiniBase64",
+            "base64",
+            "ZodMiniBase64URL",
+            "base64url",
+            "ZodMiniE164",
+            "e164",
+            "ZodMiniCreditCard",
+            "creditCard",
+            "ZodMiniIBAN",
+            "iban",
+            "ZodMiniJWT",
+            "jwt",
+            "ZodMiniCustomStringFormat",
+            "stringFormat",
+            "hostname",
+            "hex",
+            "currencyCode",
+            "hash",
+            "ZodMiniNumberFormat",
+            "int",
+            "float32",
+            "float64",
+            "int32",
+            "uint32",
+            "ZodMiniBoolean",
+            "boolean",
+            "ZodMiniBigInt",
+            "bigint",
+            "ZodMiniBigIntFormat",
+            "int64",
+            "uint64",
+            "ZodMiniSymbol",
+            "symbol",
+            "ZodMiniUndefined",
+            "undefined",
+            "ZodMiniNull",
+            "null",
+            "ZodMiniAny",
+            "any",
+            "ZodMiniUnknown",
+            "unknown",
+            "ZodMiniNever",
+            "never",
+            "ZodMiniVoid",
+            "void",
+            "ZodMiniDate",
+            "date",
+            "keyof",
+            "ZodMiniObject",
+            "object",
+            "strictObject",
+            "looseObject",
+            "extend",
+            "safeExtend",
+            "merge",
+            "pick",
+            "omit",
+            "partial",
+            "exactPartial",
+            "required",
+            "catchall",
+            "ZodMiniUnion",
+            "union",
+            "ZodMiniXor",
+            "xor",
+            "ZodMiniDiscriminatedUnion",
+            "discriminatedUnion",
+            "ZodMiniIntersection",
+            "intersection",
+            "ZodMiniTuple",
+            "tuple",
+            "ZodMiniRecord",
+            "record",
+            "partialRecord",
+            "looseRecord",
+            "ZodMiniMap",
+            "map",
+            "ZodMiniSet",
+            "set",
+            "ZodMiniEnum",
+            "enum",
+            "nativeEnum",
+            "ZodMiniLiteral",
+            "literal",
+            "ZodMiniFile",
+            "file",
+            "ZodMiniTransform",
+            "transform",
+            "ZodMiniExactOptional",
+            "exactOptional",
+            "ZodMiniNullable",
+            "nullable",
+            "nullish",
+            "ZodMiniDefault",
+            "_default",
+            "ZodMiniPrefault",
+            "prefault",
+            "ZodMiniNonOptional",
+            "nonoptional",
+            "ZodMiniSuccess",
+            "success",
+            "ZodMiniCatch",
+            "catch",
+            "ZodMiniNaN",
+            "nan",
+            "ZodMiniCodec",
+            "codec",
+            "invertCodec",
+            "ZodMiniReadonly",
+            "readonly",
+            "ZodMiniTemplateLiteral",
+            "templateLiteral",
+            "ZodMiniLazy",
+            "lazy",
+            "ZodMiniPromise",
+            "promise",
+            "check",
+            "refine",
+            "superRefine",
+            "describe",
+            "meta",
+            "instanceof",
+            "stringbool",
+            "json",
+            "ZodMiniFunction",
+            "_function",
+            "function"
+          ]
+        },
+        {
+          "path": "../../dist/src/is-dense-array.js",
+          "bytes": 296,
+          "renderedExports": [
+            "isDenseArray"
+          ],
+          "removedExports": []
+        },
+        {
+          "path": "../../dist/src/zod/dense-array.js",
+          "bytes": 253,
+          "renderedExports": [
+            "denseArray"
+          ],
+          "removedExports": []
+        },
+        {
+          "path": ".generated-bundles/zodDensity.ts",
+          "bytes": 161,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "brandTypeOnly",
+      "bundler": "esbuild",
+      "bytes": 37,
+      "gzip": 57,
+      "brotli": 41,
+      "modules": [
+        {
+          "path": ".generated-bundles/brandTypeOnly.ts",
+          "bytes": 19
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "brandTypeOnly",
+      "bundler": "rollup",
+      "bytes": 38,
+      "gzip": 58,
+      "brotli": 42,
+      "modules": [
+        {
+          "path": ".generated-bundles/brandTypeOnly.ts",
+          "bytes": 27,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -812,15 +2011,33 @@
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 817
+          "bytes": 817,
+          "renderedExports": [
+            "entity",
+            "from",
+            "sourceContext",
+            "subset"
+          ],
+          "removedExports": []
         },
         {
           "path": "temporal.ts",
-          "bytes": 2287
+          "bytes": 2287,
+          "renderedExports": [
+            "startsBetween",
+            "temporal"
+          ],
+          "removedExports": [
+            "overlapping"
+          ]
         },
         {
           "path": ".generated-bundles/startsOnly.ts",
-          "bytes": 103
+          "bytes": 103,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -860,19 +2077,44 @@
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 817
+          "bytes": 817,
+          "renderedExports": [
+            "entity",
+            "from",
+            "sourceContext",
+            "subset"
+          ],
+          "removedExports": []
         },
         {
           "path": "temporal.ts",
-          "bytes": 3141
+          "bytes": 3141,
+          "renderedExports": [
+            "overlapping",
+            "startsBetween",
+            "temporal"
+          ],
+          "removedExports": []
         },
         {
           "path": "ranges.ts",
-          "bytes": 1779
+          "bytes": 1779,
+          "renderedExports": [
+            "freeSlots",
+            "overloaded",
+            "valid"
+          ],
+          "removedExports": [
+            "conflicts"
+          ]
         },
         {
           "path": ".generated-bundles/schedule.ts",
-          "bytes": 530
+          "bytes": 530,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -904,11 +2146,23 @@
       "modules": [
         {
           "path": "ranges.ts",
-          "bytes": 1779
+          "bytes": 1779,
+          "renderedExports": [
+            "freeSlots",
+            "overloaded",
+            "valid"
+          ],
+          "removedExports": [
+            "conflicts"
+          ]
         },
         {
           "path": ".generated-bundles/rangesOnly.ts",
-          "bytes": 246
+          "bytes": 246,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -936,7 +2190,11 @@
       "modules": [
         {
           "path": ".generated-bundles/nativeReport.ts",
-          "bytes": 536
+          "bytes": 536,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -976,19 +2234,62 @@
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 642
+          "bytes": 642,
+          "renderedExports": [
+            "entity",
+            "from"
+          ],
+          "removedExports": [
+            "sourceContext",
+            "subset"
+          ]
         },
         {
           "path": "query.ts",
-          "bytes": 532
+          "bytes": 532,
+          "renderedExports": [
+            "queryContext",
+            "queryInput",
+            "resolve",
+            "withContext"
+          ],
+          "removedExports": [
+            "drop",
+            "filtered",
+            "lazyFiltered",
+            "lazySelected",
+            "lazyTake",
+            "query",
+            "selected",
+            "sorted",
+            "take"
+          ]
         },
         {
           "path": "operators.ts",
-          "bytes": 749
+          "bytes": 749,
+          "renderedExports": [
+            "aggregateBy",
+            "leftJoin"
+          ],
+          "removedExports": [
+            "count",
+            "distinctBy",
+            "every",
+            "find",
+            "groupBy",
+            "innerJoinMany",
+            "reduce",
+            "some"
+          ]
         },
         {
           "path": ".generated-bundles/helperReport.ts",
-          "bytes": 654
+          "bytes": 654,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -1048,39 +2349,78 @@
       "modules": [
         {
           "path": "node_modules/remeda/dist/lazyDataLastImpl--3B10z3s.js",
-          "bytes": 94
+          "bytes": 94,
+          "renderedExports": [
+            "t"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/purry.js",
-          "bytes": 134
+          "bytes": 134,
+          "renderedExports": [
+            "purry"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/utilityEvaluators-IxVD3t2o.js",
-          "bytes": 37
+          "bytes": 37,
+          "renderedExports": [
+            "t"
+          ],
+          "removedExports": [
+            "n",
+            "r"
+          ]
         },
         {
           "path": "node_modules/remeda/dist/pipe.js",
-          "bytes": 913
+          "bytes": 913,
+          "renderedExports": [
+            "pipe"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/filter.js",
-          "bytes": 128
+          "bytes": 128,
+          "renderedExports": [
+            "filter"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/groupBy.js",
-          "bytes": 241
+          "bytes": 241,
+          "renderedExports": [
+            "groupBy"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/map.js",
-          "bytes": 121
+          "bytes": 121,
+          "renderedExports": [
+            "map"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/remeda/dist/sumBy.js",
-          "bytes": 187
+          "bytes": 187,
+          "renderedExports": [
+            "sumBy"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/remedaReport.ts",
-          "bytes": 611
+          "bytes": 611,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -1088,9 +2428,9 @@
     {
       "name": "tanstackReport",
       "bundler": "esbuild",
-      "bytes": 276814,
-      "gzip": 82547,
-      "brotli": 70943,
+      "bytes": 276874,
+      "gzip": 82556,
+      "brotli": 71016,
       "modules": [
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/builder/ref-proxy-identity.js",
@@ -1494,7 +2834,7 @@
         },
         {
           "path": "tanstack.ts",
-          "bytes": 874
+          "bytes": 934
         },
         {
           "path": ".generated-bundles/tanstackReport.ts",
@@ -1506,417 +2846,1159 @@
     {
       "name": "tanstackReport",
       "bundler": "rollup",
-      "bytes": 277324,
-      "gzip": 78997,
-      "brotli": 67710,
+      "bytes": 277384,
+      "gzip": 79007,
+      "brotli": 67738,
       "modules": [
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/builder/ref-proxy-identity.js",
-          "bytes": 423
+          "bytes": 423,
+          "renderedExports": [
+            "REF_PROXY_BRAND",
+            "isRefProxy",
+            "readRefProxyBrand"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/ir.js",
-          "bytes": 6929
+          "bytes": 6929,
+          "renderedExports": [
+            "Aggregate",
+            "CollectionRef",
+            "ConditionalSelect",
+            "Func",
+            "INCLUDES_SCALAR_FIELD",
+            "IncludesSubquery",
+            "PropRef",
+            "QueryRef",
+            "UnionAll",
+            "UnionFrom",
+            "Value",
+            "collectCollectionSources",
+            "createResidualWhere",
+            "followRef",
+            "getFromSources",
+            "getHavingExpression",
+            "getPropRefPropertyPath",
+            "getPropRefSourceAlias",
+            "getWhereExpression",
+            "isBasicOrAggregateExpression",
+            "isExpressionLike",
+            "isResidualWhere"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/hashing/temporal.js",
-          "bytes": 456
+          "bytes": 456,
+          "renderedExports": [
+            "isTemporal"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/utils.js",
-          "bytes": 6035
+          "bytes": 6035,
+          "renderedExports": [
+            "binarySearch",
+            "chunkedArrayPush",
+            "compareKeys",
+            "diffHalfOpen",
+            "getStringId",
+            "serializeValue"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/hashing/murmur.js",
-          "bytes": 3527
+          "bytes": 3527,
+          "renderedExports": [
+            "MurmurHashStream",
+            "getSymbolIdentity",
+            "randomHash"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/hashing/hash.js",
-          "bytes": 6235
+          "bytes": 6235,
+          "renderedExports": [
+            "equalHashValues",
+            "hash",
+            "registerOpaqueHash"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/multiset.js",
-          "bytes": 4096
+          "bytes": 4096,
+          "renderedExports": [
+            "MultiSet"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/graph.js",
-          "bytes": 1447
+          "bytes": 1447,
+          "renderedExports": [
+            "BinaryOperator",
+            "DifferenceStreamReader",
+            "DifferenceStreamWriter",
+            "LinearUnaryOperator",
+            "Operator",
+            "UnaryOperator"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/d2.js",
-          "bytes": 1726
+          "bytes": 1726,
+          "renderedExports": [
+            "D2",
+            "RootStreamBuilder",
+            "StreamBuilder"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/map.js",
-          "bytes": 559
+          "bytes": 559,
+          "renderedExports": [
+            "MapOperator",
+            "map"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/indexes.js",
-          "bytes": 11987
+          "bytes": 11987,
+          "renderedExports": [
+            "Index"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/reduce.js",
-          "bytes": 2483
+          "bytes": 2483,
+          "renderedExports": [
+            "ReduceOperator",
+            "reduce"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/groupBy.js",
-          "bytes": 4185
+          "bytes": 4185,
+          "renderedExports": [
+            "avg",
+            "count",
+            "groupBy",
+            "groupByOperators",
+            "max",
+            "min",
+            "sum"
+          ],
+          "removedExports": [
+            "median",
+            "mode"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/tap.js",
-          "bytes": 571
+          "bytes": 571,
+          "renderedExports": [
+            "TapOperator",
+            "tap"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/filter.js",
-          "bytes": 571
+          "bytes": 571,
+          "renderedExports": [
+            "FilterOperator",
+            "filter"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/concat.js",
-          "bytes": 746
+          "bytes": 746,
+          "renderedExports": [
+            "ConcatOperator",
+            "concat"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/output.js",
-          "bytes": 668
+          "bytes": 668,
+          "renderedExports": [
+            "OutputOperator",
+            "output"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/consolidate.js",
-          "bytes": 774
+          "bytes": 774,
+          "renderedExports": [
+            "ConsolidateOperator",
+            "consolidate"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/join.js",
-          "bytes": 4469
+          "bytes": 4469,
+          "renderedExports": [
+            "JoinOperator",
+            "join"
+          ],
+          "removedExports": [
+            "antiJoin",
+            "fullJoin",
+            "innerJoin",
+            "leftJoin",
+            "rightJoin"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/distinct.js",
-          "bytes": 1828
+          "bytes": 1828,
+          "renderedExports": [
+            "DistinctOperator",
+            "distinct"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/fractional-indexing/src/index.js",
-          "bytes": 16689
+          "bytes": 16689,
+          "renderedExports": [
+            "BASE_62_DIGITS",
+            "generateKeyBetween"
+          ],
+          "removedExports": [
+            "generateNKeysBetween"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/topKArray.js",
-          "bytes": 4390
+          "bytes": 4390,
+          "renderedExports": [
+            "TopKArray",
+            "createKeyedComparator",
+            "getIndex",
+            "getValue",
+            "indexedValue"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/topKState.js",
-          "bytes": 2862
+          "bytes": 2862,
+          "renderedExports": [
+            "TopKState",
+            "handleMoveIn",
+            "handleMoveOut",
+            "topKBatch"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/topKWithFractionalIndex.js",
-          "bytes": 2029
+          "bytes": 2029,
+          "renderedExports": [
+            "TopKWithFractionalIndexOperator",
+            "topKWithFractionalIndex"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/groupedTopKWithFractionalIndex.js",
-          "bytes": 3243
+          "bytes": 3243,
+          "renderedExports": [
+            "GroupedTopKWithFractionalIndexOperator",
+            "groupedTopKWithFractionalIndex"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/orderBy.js",
-          "bytes": 843
+          "bytes": 843,
+          "renderedExports": [
+            "orderByWithFractionalIndex",
+            "orderByWithFractionalIndexBase"
+          ],
+          "removedExports": [
+            "orderBy",
+            "orderByWithIndex"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/groupedOrderBy.js",
-          "bytes": 736
+          "bytes": 736,
+          "renderedExports": [
+            "groupedOrderByWithFractionalIndex"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/uuid.js",
-          "bytes": 820
+          "bytes": 820,
+          "renderedExports": [
+            "safeRandomUUID"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/errors.js",
-          "bytes": 18429
+          "bytes": 18429,
+          "renderedExports": [
+            "AggregateFunctionNotInSelectError",
+            "CannotCombineEmptyExpressionListError",
+            "CollectionConfigurationError",
+            "CollectionInErrorStateError",
+            "CollectionInputNotFoundError",
+            "CollectionIsInErrorStateError",
+            "CollectionOperationError",
+            "CollectionPreloadAbortedError",
+            "CollectionRequiresConfigError",
+            "CollectionRequiresSyncConfigError",
+            "CollectionStateError",
+            "DeleteKeyNotFoundError",
+            "DistinctRequiresSelectError",
+            "DuplicateAliasInSubqueryError",
+            "DuplicateKeyError",
+            "DuplicateKeySyncError",
+            "EmptyReferencePathError",
+            "FnSelectWithGroupByError",
+            "GroupByError",
+            "HavingRequiresGroupByError",
+            "InvalidCollectionStatusTransitionError",
+            "InvalidJoinCondition",
+            "InvalidJoinConditionLeftSourceError",
+            "InvalidJoinConditionRightSourceError",
+            "InvalidJoinConditionSameSourceError",
+            "InvalidJoinConditionSourceMismatchError",
+            "InvalidKeyError",
+            "InvalidSchemaError",
+            "InvalidSourceError",
+            "InvalidSourceTypeError",
+            "InvalidWhereExpressionError",
+            "JoinCollectionNotFoundError",
+            "JoinConditionMustBeEqualityError",
+            "JoinError",
+            "KeyUpdateNotAllowedError",
+            "LimitOffsetRequireOrderByError",
+            "LoadSubsetOperationAbortedError",
+            "MissingAliasInputsError",
+            "MissingDeleteHandlerError",
+            "MissingHandlerError",
+            "MissingInsertHandlerError",
+            "MissingMutationFunctionError",
+            "MissingUpdateArgumentError",
+            "MissingUpdateHandlerError",
+            "NegativeActiveSubscribersError",
+            "NoKeysPassedToDeleteError",
+            "NoKeysPassedToUpdateError",
+            "NoPendingSyncTransactionCommitError",
+            "NoPendingSyncTransactionWriteError",
+            "NonAggregateExpressionNotInGroupByError",
+            "OnlyOneSourceAllowedError",
+            "QueryBuilderError",
+            "QueryCompilationError",
+            "QueryMustHaveFromClauseError",
+            "QueryOptimizerError",
+            "SchemaMustBeSynchronousError",
+            "SchemaValidationError",
+            "SetWindowReentrancyError",
+            "SetWindowRequiresOrderByError",
+            "SubQueryMustHaveFromClauseError",
+            "SyncCleanupError",
+            "SyncRowReusedWithoutPreviousValueError",
+            "SyncTransactionAbortedError",
+            "SyncTransactionAlreadyCommittedError",
+            "SyncTransactionAlreadyCommittedWriteError",
+            "TanStackDBError",
+            "TransactionAlreadyCompletedRollbackError",
+            "TransactionError",
+            "TransactionNotPendingCommitError",
+            "TransactionNotPendingMutateError",
+            "UndefinedKeyError",
+            "UnknownExpressionTypeError",
+            "UnknownFunctionError",
+            "UnknownHavingExpressionTypeError",
+            "UnsafeAliasPathError",
+            "UnsupportedAggregateFunctionError",
+            "UnsupportedFnSelectResultError",
+            "UnsupportedFromTypeError",
+            "UnsupportedJoinSourceTypeError",
+            "UnsupportedJoinTypeError",
+            "UnsupportedRootScalarSelectError",
+            "UpdateKeyNotFoundError"
+          ],
+          "removedExports": [
+            "DebounceCallDroppedError",
+            "DuplicateDbInstanceError",
+            "InvalidStorageDataFormatError",
+            "InvalidStorageObjectFormatError",
+            "InvalidSyncPersistenceCapabilityError",
+            "LiveQueryObserverDisposedError",
+            "LiveQueryWindowControllerDisposedError",
+            "LocalStorageCollectionError",
+            "NonRetriableError",
+            "OnMutateMustBeSynchronousError",
+            "QueueCapacityExceededError",
+            "QueueDisposedError",
+            "SerializationError",
+            "StorageError",
+            "StorageKeyRequiredError",
+            "ThrottleCallDroppedError"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils.js",
-          "bytes": 6122
+          "bytes": 6122,
+          "renderedExports": [
+            "DEFAULT_COMPARE_OPTIONS",
+            "deepEquals",
+            "deepEqualsInternal",
+            "isTemporal"
+          ],
+          "removedExports": [
+            "resetWarnings",
+            "warnOnce"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/runtime-reference-identity.js",
-          "bytes": 1974
+          "bytes": 1974,
+          "renderedExports": [
+            "createRuntimeReferenceIdentityFactory",
+            "getRuntimeReferenceIdentity"
+          ],
+          "removedExports": [
+            "getStringCollationIdentity"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/comparison.js",
-          "bytes": 5458
+          "bytes": 5458,
+          "renderedExports": [
+            "UNDEFINED_SENTINEL",
+            "areSameValueZeroEqual",
+            "areValuesEqual",
+            "ascComparator",
+            "compareTemporalValues",
+            "compareValues",
+            "defaultComparator",
+            "denormalizeUndefined",
+            "descComparator",
+            "isUint8Array",
+            "isUnorderable",
+            "makeCheckedComparator",
+            "makeComparator",
+            "normalizeForBTree",
+            "normalizeValue"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/evaluators.js",
-          "bytes": 14463
+          "bytes": 14463,
+          "renderedExports": [
+            "compileExpression",
+            "compileSingleRowExpression",
+            "isCaseWhenConditionTrue",
+            "toBooleanPredicate"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/indexes/reverse-index.js",
-          "bytes": 955
+          "bytes": 955,
+          "renderedExports": [
+            "ReverseIndex"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/virtual-props.js",
-          "bytes": 695
+          "bytes": 695,
+          "renderedExports": [
+            "VIRTUAL_PROP_NAMES",
+            "enrichRowWithVirtualProps",
+            "hasVirtualPropPath",
+            "isVirtualPropName"
+          ],
+          "removedExports": [
+            "hasVirtualProps"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/index-optimization.js",
-          "bytes": 12764
+          "bytes": 12764,
+          "renderedExports": [
+            "findIndexForField",
+            "intersectSets",
+            "optimizeExpressionWithIndexes",
+            "unionSets"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/indexes/index-registry.js",
-          "bytes": 842
+          "bytes": 842,
+          "renderedExports": [
+            "checkCollectionSizeForIndex",
+            "emitIndexSuggestion",
+            "isDevModeEnabled"
+          ],
+          "removedExports": [
+            "clearQueryPatterns",
+            "configureIndexDevMode",
+            "getIndexDevModeConfig",
+            "getQueryPatterns",
+            "trackQuery"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/indexes/auto-index.js",
-          "bytes": 2472
+          "bytes": 2472,
+          "renderedExports": [
+            "ensureIndexForExpression",
+            "ensureIndexForField"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/equality-conjunct.js",
-          "bytes": 1024
+          "bytes": 1024,
+          "renderedExports": [
+            "equalityConjunct",
+            "equalityKey",
+            "readPath"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/expressions.js",
-          "bytes": 1931
+          "bytes": 1931,
+          "renderedExports": [
+            "getSourceAliasesFromExpression",
+            "normalizeExpressionPaths",
+            "normalizeOrderByPaths"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/equality-value-identity.js",
-          "bytes": 1729
+          "bytes": 1729,
+          "renderedExports": [
+            "createParentContext",
+            "createValueIdentity",
+            "getEqualityValueIdentity",
+            "getParentContextIdentity",
+            "getParentContextValue"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/type-guards.js",
-          "bytes": 361
+          "bytes": 361,
+          "renderedExports": [
+            "isPlainObject",
+            "isPromiseLike"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/route-metadata.js",
-          "bytes": 4892
+          "bytes": 4892,
+          "renderedExports": [
+            "INCLUDES_PUBLIC_KEY",
+            "INCLUDES_ROUTING",
+            "attachRouteMetadata",
+            "attachRouteMetadataToResult",
+            "getNamespacedRouteMetadata",
+            "getRouteMetadata",
+            "getRoutedScalarMetadata",
+            "stripInternalCallbackMetadata",
+            "stripInternalRouteMetadata",
+            "stripRouteMetadata",
+            "transformPublicContainers"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/group-by.js",
-          "bytes": 22468
+          "bytes": 22468,
+          "renderedExports": [
+            "containsAggregate",
+            "processGroupBy",
+            "replaceAggregatesByRefs"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/order-by.js",
-          "bytes": 8072
+          "bytes": 8072,
+          "renderedExports": [
+            "buildCompareOptions",
+            "processOrderBy"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/change-events.js",
-          "bytes": 6697
+          "bytes": 6697,
+          "renderedExports": [
+            "compileStoredRowPrefilter",
+            "createFilterFunctionFromExpression",
+            "createFilteredCallback",
+            "currentStateAsChanges"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/SortedMap.js",
-          "bytes": 6189
+          "bytes": 6189,
+          "renderedExports": [
+            "SortedMap"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/transaction-metadata.js",
-          "bytes": 63
+          "bytes": 63,
+          "renderedExports": [
+            "DIRECT_TRANSACTION_METADATA_KEY"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/state.js",
-          "bytes": 50924
+          "bytes": 50924,
+          "renderedExports": [
+            "CollectionStateManager"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/scheduler.js",
-          "bytes": 3925
+          "bytes": 3925,
+          "renderedExports": [
+            "Scheduler",
+            "getActivePublicationContext",
+            "recordPublicationError",
+            "transactionScopedScheduler",
+            "withPublicationContext"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/callbacks.js",
-          "bytes": 237
+          "bytes": 237,
+          "renderedExports": [
+            "runAllCallbacks"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/builder/wrapper-identity.js",
-          "bytes": 260
+          "bytes": 260,
+          "renderedExports": [
+            "getWrapperExpressionName",
+            "registerWrapper"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/builder/ref-proxy.js",
-          "bytes": 7497
+          "bytes": 7497,
+          "renderedExports": [
+            "createRefProxy",
+            "createRefProxyWithSelected",
+            "createSingleRowRefProxy",
+            "isRefProxy",
+            "toExpression"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/builder/functions.js",
-          "bytes": 1770
+          "bytes": 1770,
+          "renderedExports": [
+            "CaseWhenWrapper",
+            "ConcatToArrayWrapper",
+            "MaterializeWrapper",
+            "ToArrayWrapper",
+            "and",
+            "eq",
+            "gt",
+            "gte",
+            "inArray",
+            "isNull",
+            "isUndefined",
+            "lt",
+            "not",
+            "or",
+            "sum"
+          ],
+          "removedExports": [
+            "add",
+            "avg",
+            "caseWhen",
+            "coalesce",
+            "concat",
+            "count",
+            "divide",
+            "ilike",
+            "length",
+            "like",
+            "lower",
+            "lte",
+            "materialize",
+            "max",
+            "min",
+            "multiply",
+            "operators",
+            "subtract",
+            "toArray",
+            "upper"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/event-emitter.js",
-          "bytes": 3497
+          "bytes": 3497,
+          "renderedExports": [
+            "EventEmitter"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/cursor.js",
-          "bytes": 1791
+          "bytes": 1791,
+          "renderedExports": [
+            "buildCursor",
+            "buildCursorCurrent",
+            "canExpressCursorOrder"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/error.js",
-          "bytes": 184
+          "bytes": 184,
+          "renderedExports": [
+            "normalizeError"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/deferred.js",
-          "bytes": 374
+          "bytes": 374,
+          "renderedExports": [
+            "createDeferred"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/subscription.js",
-          "bytes": 38743
+          "bytes": 38743,
+          "renderedExports": [
+            "CollectionSubscription"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/changes.js",
-          "bytes": 8307
+          "bytes": 8307,
+          "renderedExports": [
+            "CollectionChangesManager"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/browser-polyfills.js",
-          "bytes": 791
+          "bytes": 791,
+          "renderedExports": [
+            "safeCancelIdleCallback",
+            "safeRequestIdleCallback"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/cleanup-queue.js",
-          "bytes": 2168
+          "bytes": 2168,
+          "renderedExports": [
+            "CleanupQueue"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/lifecycle.js",
-          "bytes": 9548
+          "bytes": 9548,
+          "renderedExports": [
+            "CollectionLifecycleManager",
+            "UNSUBSCRIBED_GC_FLOOR_MS"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/internal.js",
-          "bytes": 72
+          "bytes": 72,
+          "renderedExports": [
+            "LIVE_QUERY_INTERNAL"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/sync.js",
-          "bytes": 27363
+          "bytes": 27363,
+          "renderedExports": [
+            "CollectionSyncManager"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/indexes/base-index.js",
-          "bytes": 4272
+          "bytes": 4272,
+          "renderedExports": [
+            "BaseIndex",
+            "builtInIndexResolverNames"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/indexes.js",
-          "bytes": 8350
+          "bytes": 8350,
+          "renderedExports": [
+            "CollectionIndexesManager"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/proxy.js",
-          "bytes": 16467
+          "bytes": 16467,
+          "renderedExports": [
+            "createArrayChangeProxy",
+            "createChangeProxy",
+            "withArrayChangeTracking",
+            "withChangeTracking",
+            "withFlatChangeTracking"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/transactions.js",
-          "bytes": 15961
+          "bytes": 15961,
+          "renderedExports": [
+            "TransactionScope",
+            "createTransaction",
+            "getActiveTransaction"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/mutations.js",
-          "bytes": 14116
+          "bytes": 14116,
+          "renderedExports": [
+            "CollectionMutationsManager"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/events.js",
-          "bytes": 1404
+          "bytes": 1404,
+          "renderedExports": [
+            "CollectionEventsManager"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection/index.js",
-          "bytes": 16220
+          "bytes": 16220,
+          "renderedExports": [
+            "CollectionImpl",
+            "createCollection"
+          ],
+          "removedExports": [
+            "withCollectionSyncConfigCleanup",
+            "withCollectionSyncConfigFactory"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/collection-options.js",
-          "bytes": 238
+          "bytes": 238,
+          "renderedExports": [
+            "collectionOptionsBrand",
+            "hasCollectionOptionsBrand"
+          ],
+          "removedExports": [
+            "collectionOptionsFactory"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/collection-registry.js",
-          "bytes": 380
+          "bytes": 380,
+          "renderedExports": [
+            "getBuilderFromConfig",
+            "getCollectionBuilder",
+            "registerCollectionBuilder"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/get-or-create.js",
-          "bytes": 175
+          "bytes": 175,
+          "renderedExports": [
+            "getOrCreate"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/optimizer.js",
-          "bytes": 17741
+          "bytes": 17741,
+          "renderedExports": [
+            "optimizeQuery"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/materialized-pipeline.js",
-          "bytes": 10369
+          "bytes": 10369,
+          "renderedExports": [
+            "BUCKET_FACADE_REF",
+            "materializeCompilation"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/builder/query-ir.js",
-          "bytes": 62
+          "bytes": 62,
+          "renderedExports": [
+            "getQueryIR"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/builder/clone-query.js",
-          "bytes": 2733
+          "bytes": 2733,
+          "renderedExports": [
+            "cloneQueryForPlacement"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/builder/index.js",
-          "bytes": 35712
+          "bytes": 35712,
+          "renderedExports": [
+            "BaseQueryBuilder",
+            "buildQuery",
+            "getQueryIR"
+          ],
+          "removedExports": [
+            "Query"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/source-record.js",
-          "bytes": 79
+          "bytes": 79,
+          "renderedExports": [
+            "createSourceRecord"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/lazy-targets.js",
-          "bytes": 5144
+          "bytes": 5144,
+          "renderedExports": [
+            "containsUnionFrom",
+            "getLazyLoadTargets"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/parent-routes.js",
-          "bytes": 761
+          "bytes": 761,
+          "renderedExports": [
+            "crossJoinParentRoutes"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/query-equivalence.js",
-          "bytes": 1258
+          "bytes": 1258,
+          "renderedExports": [
+            "queriesMatchForCaching"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/joins.js",
-          "bytes": 15855
+          "bytes": 15855,
+          "renderedExports": [
+            "processJoins",
+            "registerLazyDemandPlan"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/select.js",
-          "bytes": 7353
+          "bytes": 7353,
+          "renderedExports": [
+            "processSelect"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/compiler/index.js",
-          "bytes": 52920
+          "bytes": 52920,
+          "renderedExports": [
+            "INCLUDES_PUBLIC_KEY",
+            "INCLUDES_ROUTING",
+            "compileQuery",
+            "validateFnSelectResult"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/ordered-source-loader.js",
-          "bytes": 23814
+          "bytes": 23814,
+          "renderedExports": [
+            "OrderedSourceLoader"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/utils.js",
-          "bytes": 3726
+          "bytes": 3726,
+          "renderedExports": [
+            "buildQueryFromConfig",
+            "computeSubscriptionOrderByHints",
+            "extractCollectionFromSource",
+            "extractCollectionSources",
+            "extractCollectionsFromQuery",
+            "reconcileChangesForD2",
+            "sendChangesToInput",
+            "splitUpdates"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/subset-demand-controller.js",
-          "bytes": 6104
+          "bytes": 6104,
+          "renderedExports": [
+            "SubsetDemandController",
+            "hasPendingJoinedWork"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/collection-subscriber.js",
-          "bytes": 8299
+          "bytes": 8299,
+          "renderedExports": [
+            "CollectionSubscriber"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/bucket-facade-adapter.js",
-          "bytes": 11860
+          "bytes": 11860,
+          "renderedExports": [
+            "BucketFacadeAdapter"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/graph-scheduler.js",
-          "bytes": 370
+          "bytes": 370,
+          "renderedExports": [
+            "scheduleQueryGraphRun"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live/collection-config-builder.js",
-          "bytes": 27556
+          "bytes": 27556,
+          "renderedExports": [
+            "CollectionConfigBuilder"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/query/live-query-collection.js",
-          "bytes": 957
+          "bytes": 957,
+          "renderedExports": [
+            "createLiveQueryCollection",
+            "liveQueryCollectionOptions"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/client.js",
-          "bytes": 286
+          "bytes": 286,
+          "renderedExports": [
+            "withCollectionConfigFactory"
+          ],
+          "removedExports": [
+            "DbClient",
+            "collectionOptions",
+            "isCollectionOptions"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/local-only.js",
-          "bytes": 3736
+          "bytes": 3736,
+          "renderedExports": [
+            "localOnlyCollectionOptions"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/array-utils.js",
-          "bytes": 66
+          "bytes": 66,
+          "renderedExports": [
+            "compareKeysReversed"
+          ],
+          "removedExports": [
+            "findInsertPositionInArray"
+          ]
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/utils/btree.js",
-          "bytes": 12199
+          "bytes": 12199,
+          "renderedExports": [
+            "BTree"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/@tanstack/db/dist/esm/indexes/btree-index.js",
-          "bytes": 9216
+          "bytes": 9216,
+          "renderedExports": [
+            "BTreeIndex"
+          ],
+          "removedExports": []
         },
         {
           "path": "tanstack.ts",
-          "bytes": 1405
+          "bytes": 1508,
+          "renderedExports": [
+            "liveReport"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/tanstackReport.ts",
-          "bytes": 273
+          "bytes": 273,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -1952,15 +4034,34 @@
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 711
+          "bytes": 711,
+          "renderedExports": [
+            "entity",
+            "from",
+            "sourceContext"
+          ],
+          "removedExports": [
+            "subset"
+          ]
         },
         {
           "path": "dependencies.ts",
-          "bytes": 1855
+          "bytes": 1855,
+          "renderedExports": [
+            "causalOrder",
+            "causesOf",
+            "dependencies",
+            "descendants"
+          ],
+          "removedExports": []
         },
         {
           "path": ".generated-bundles/graphOnly.ts",
-          "bytes": 108
+          "bytes": 108,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -2040,91 +4141,190 @@
       "modules": [
         {
           "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/events/events.js?commonjs-module",
-          "bytes": 27
+          "bytes": 27,
+          "renderedExports": [
+            "__module"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/events/events.js",
-          "bytes": 14291
+          "bytes": 14291,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/events/events.js?commonjs-es-import",
-          "bytes": 36
+          "bytes": 36,
+          "renderedExports": [],
+          "removedExports": [
+            "__moduleExports",
+            "default"
+          ]
         },
         {
           "path": "node_modules/graphology/dist/graphology.mjs",
-          "bytes": 177570
+          "bytes": 177570,
+          "renderedExports": [
+            "DirectedGraph",
+            "Graph",
+            "InvalidArgumentsGraphError",
+            "MultiDirectedGraph",
+            "MultiGraph",
+            "MultiUndirectedGraph",
+            "NotFoundGraphError",
+            "UndirectedGraph",
+            "UsageGraphError",
+            "default"
+          ],
+          "removedExports": []
         },
         {
           "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/index.js?commonjs-exports",
-          "bytes": 23
+          "bytes": 23,
+          "renderedExports": [
+            "__exports"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/graphology-utils/is-graph.js",
-          "bytes": 688
+          "bytes": 688,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/graphology-dag/has-cycle.js",
-          "bytes": 2015
+          "bytes": 2015,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/graphology-dag/will-create-cycle.js",
-          "bytes": 2018
+          "bytes": 2018,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/topological-sort.js?commonjs-exports",
-          "bytes": 25
+          "bytes": 25,
+          "renderedExports": [
+            "__exports"
+          ],
+          "removedExports": []
         },
         {
           "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/node_modules/mnemonist/utils/iterables.js?commonjs-exports",
-          "bytes": 19
+          "bytes": 19,
+          "renderedExports": [
+            "__exports"
+          ],
+          "removedExports": []
         },
         {
           "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/obliterator/support.js?commonjs-exports",
-          "bytes": 17
+          "bytes": 17,
+          "renderedExports": [
+            "__exports"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/obliterator/support.js",
-          "bytes": 263
+          "bytes": 263,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/obliterator/foreach.js",
-          "bytes": 1967
+          "bytes": 1967,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/node_modules/mnemonist/utils/typed-arrays.js?commonjs-exports",
-          "bytes": 21
+          "bytes": 21,
+          "renderedExports": [
+            "__exports"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/graphology-dag/node_modules/mnemonist/utils/typed-arrays.js",
-          "bytes": 4529
+          "bytes": 4529,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/graphology-dag/node_modules/mnemonist/utils/iterables.js",
-          "bytes": 2226
+          "bytes": 2226,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/obliterator/iterator.js",
-          "bytes": 2025
+          "bytes": 2025,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/graphology-dag/node_modules/mnemonist/fixed-deque.js",
-          "bytes": 7469
+          "bytes": 7469,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/graphology-dag/topological-sort.js",
-          "bytes": 3867
+          "bytes": 3867,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "node_modules/graphology-dag/index.js",
-          "bytes": 607
+          "bytes": 607,
+          "renderedExports": [
+            "__require"
+          ],
+          "removedExports": []
         },
         {
           "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/index.js?commonjs-es-import",
-          "bytes": 50
+          "bytes": 50,
+          "renderedExports": [],
+          "removedExports": [
+            "__moduleExports",
+            "default"
+          ]
         },
         {
           "path": ".generated-bundles/graphology.ts",
-          "bytes": 172
+          "bytes": 172,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -2132,9 +4332,9 @@
     {
       "name": "hierarchy",
       "bundler": "esbuild",
-      "bytes": 1418,
-      "gzip": 690,
-      "brotli": 630,
+      "bytes": 1471,
+      "gzip": 706,
+      "brotli": 648,
       "modules": [
         {
           "path": "source.ts",
@@ -2142,7 +4342,7 @@
         },
         {
           "path": "hierarchy.ts",
-          "bytes": 804
+          "bytes": 857
         },
         {
           "path": ".generated-bundles/hierarchy.ts",
@@ -2154,21 +4354,43 @@
     {
       "name": "hierarchy",
       "bundler": "rollup",
-      "bytes": 1377,
-      "gzip": 678,
-      "brotli": 617,
+      "bytes": 1430,
+      "gzip": 693,
+      "brotli": 634,
       "modules": [
         {
           "path": "source.ts",
-          "bytes": 817
+          "bytes": 817,
+          "renderedExports": [
+            "entity",
+            "from",
+            "sourceContext",
+            "subset"
+          ],
+          "removedExports": []
         },
         {
           "path": "hierarchy.ts",
-          "bytes": 1535
+          "bytes": 1599,
+          "renderedExports": [
+            "hierarchy",
+            "subtree"
+          ],
+          "removedExports": [
+            "children",
+            "nextSibling",
+            "previousSibling",
+            "roots",
+            "sortChildren"
+          ]
         },
         {
           "path": ".generated-bundles/hierarchy.ts",
-          "bytes": 166
+          "bytes": 166,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"
@@ -2176,13 +4398,13 @@
     {
       "name": "diff",
       "bundler": "esbuild",
-      "bytes": 270,
-      "gzip": 210,
-      "brotli": 181,
+      "bytes": 291,
+      "gzip": 226,
+      "brotli": 197,
       "modules": [
         {
           "path": "diff.ts",
-          "bytes": 180
+          "bytes": 201
         },
         {
           "path": ".generated-bundles/diff.ts",
@@ -2194,17 +4416,27 @@
     {
       "name": "diff",
       "bundler": "rollup",
-      "bytes": 270,
-      "gzip": 209,
-      "brotli": 180,
+      "bytes": 292,
+      "gzip": 223,
+      "brotli": 196,
       "modules": [
         {
           "path": "diff.ts",
-          "bytes": 362
+          "bytes": 416,
+          "renderedExports": [
+            "diffBy"
+          ],
+          "removedExports": [
+            "indexBy"
+          ]
         },
         {
           "path": ".generated-bundles/diff.ts",
-          "bytes": 130
+          "bytes": 130,
+          "renderedExports": [
+            "run"
+          ],
+          "removedExports": []
         }
       ],
       "smoke": "passed"

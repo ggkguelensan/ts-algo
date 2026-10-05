@@ -1,7 +1,7 @@
-# Scope investigation — ongoing
+# Scope investigation — evidence record
 
-This is the evidence and decision record for the active goal. It does not
-replace `docs/design.md` until the mandatory experiments have been completed.
+This is the reproducibility and evidence record. Final purpose, module choices
+and implementation order have one authoritative source: [docs/design.md](../../docs/design.md).
 The starting public implementation is commit `d6dd0bd`.
 
 ## Hypotheses to falsify
@@ -14,7 +14,8 @@ The starting public implementation is commit `d6dd0bd`.
 | Adapter layer | Applications already using established libraries | Direct integration | Shared selection contracts | Additional bytes, lifetime and conversion overhead | Compare direct competitor use against adapter end-to-end |
 | Narrow combination | Applications repeatedly selecting external entities by time/space/hierarchy | Bespoke application code | Small modules that compose without owning entities | Difficult generic transitions and competing lifetimes | All mandatory scenarios plus consumer type-check and retention measurements |
 
-No hypothesis has yet been selected as the final purpose.
+The narrow combination was selected; the other hypotheses were rejected as a
+general purpose. See the final design for the evidence-backed survival decisions.
 
 ## Actual implementation versus intention
 
@@ -38,6 +39,10 @@ npm run check
 npm test
 npm run test:bun
 node verify-package.mjs
+node bench-costs.ts
+bun bench-costs.ts
+node bench-sequences.ts
+bun bench-sequences.ts
 node bench-query.ts
 bun bench-query.ts
 node bench-temporal.ts
@@ -59,6 +64,9 @@ node type-cost.mjs
 node bundles.mjs
 node summarize.mjs
 node summarize-business.mjs
+node summarize-costs.mjs
+node type-display.mjs
+node verify-final.mjs
 ```
 
 Benchmarks must run sequentially without tests or other benchmarks in parallel.
@@ -159,7 +167,7 @@ module bytes is bundler-specific. Fixture code contributes to totals.
 Coverage now includes native/query/collect alternatives, sorted, current/time-
 only lookup, time+query/collect, scheduling, spatial+collect, KDBush, hierarchy,
 separate graph algorithms, Graphology, diff, density and complete joined reports
-(native/helpers/Remeda/TanStack). Fifty outputs execute with expected results.
+(native/helpers/Remeda/TanStack). The saved outputs execute with expected results.
 Browser resolution includes the events polyfill for Graphology in both
 bundlers; leaving a Node external would understate its browser footprint.
 Output execution uses Node, not a full browser integration test.
@@ -177,7 +185,7 @@ type-only. The public sorted fixture excludes other structures.
 scenarios, temporal updates, spatial competitors, retained reports, memory
 observations and scaled compiler costs. `scenarios.test.ts` checks fixed
 expected results and independent randomized range oracles; temporal tests
-add 900 differential windows. All 23 experiment tests pass on Node and Bun.
+add 900 differential windows. All 29 experiment tests pass on Node and Bun.
 Main strict consumer checking passes. TanStack has a separate configuration
 using skipLibCheck=true because its installed declarations fail the same strict
 settings; the errors are preserved rather than suppressed from the record.
@@ -192,7 +200,7 @@ Restricted collect improves the abstraction cost especially on Bun, but does
 not beat the direct loop. TanStack maintains joins/aggregates through committed
 updates and shows different amortization behavior; its cold startup and larger
 bundle must be evaluated against the number of future updates. The setup
-includes join/total indices; optional paid-filter indexing remains untested.
+includes join/total indices; both join-only and additional paid-filter-index configurations are measured.
 
 Retention samples distinguish retaining the original store from retaining its
 entities: legacy tree copies entries, releases the input Map, and still owns
@@ -218,26 +226,11 @@ instantiations; native expressions remain cheaper. Reused callbacks, generic
 wrappers and conditional options compile in types.ts. Arbitrary heterogeneous
 conditional plans are not proven by this fixture or supported as a public API.
 
-## Survival ledger — evidence-backed, pending final scope audit
+## Final decisions
 
-| Direction | Current decision | Evidence and remaining cost |
-|---|---|---|
-| General fused query | Keep experimental; do not promote current plan | Literal take rejection, step limit, callback barriers, larger footprint than collect; joins/reports do not establish a speed win |
-| Restricted collect + source binding | Candidate for the small selection module | Smaller bundle and lower compiler time than tested generic alternatives; fair native loop remains faster; verified projection retention cases, allocation still exceeds native fixture |
-| Independent time/range operations | Keep as primary candidate, split causal graph | Bounds/DST/oracle tests, smaller imports, selective-query gains; full rebuild and large result sets can lose to scans |
-| Hierarchy over external references | Simplify to topology data + functions | External parents, live replacement, multiple roots, cycle checks and native-indexed scenario; no special traversal speed advantage claimed |
-| Narrow DAG helpers | Separate optional direction | Required tasks scenario and small graph import; broad graph needs use Graphology rather than recreate its features |
-| Static point search | Keep competing implementation/optional adapters | Current point index competitive in these fixtures, KDBush compact retained representation; adapters have sorting/tie/resolver costs |
-| Join/group helper family | Keep limited experiments | DX and absence/cardinality typing demonstrated; report direct aggregation faster and native is smaller; avoid claiming a SQL replacement |
-| Diff/indexBy | Keep small candidate | Duplicate/undefined contracts and synchronization benchmark; compare optimized native loop before claiming unique speed value |
-| Priority queue | Prefer established heap for partial processing; native sort for batches | Heap wins extracting 20, loses draining all; cancellation implemented as versioned stale entries, not indexed heap deletion |
-| Queue/deque/lists | Preserve current public behavior pending focused comparison | Existing tests/contracts are not evidence that a custom Map-backed linked list beats handles/arrays/Mnemonist |
-| QuickSort | Keep theoretical references | Native sort is public foundation; no new QS promotion |
-| Dense-array validation / Brand | Keep narrow, optional validation module | Packaging/core import isolation and original density contracts; brands do not validate or provide numeric precision |
-| Own reactive database | Exclude from core | TanStack retained report earns different capabilities; Drizzle belongs with a database engine |
-| Generic Result/Optional/pipe family | Avoid mandatory wrappers | Found discriminant needed only to preserve valid undefined; no demonstrated need for an entire replacement functional framework |
-
-These decisions concern candidate scope, not new public exports.
+The survival ledger and profiles are authoritative in [design.md](../../docs/design.md).
+The prototypes remain non-public; completing this investigation does not migrate
+the released interface.
 
 ## Additional scope assessment
 
@@ -274,17 +267,24 @@ and implementations are authoritative for runnable experiments. Documentation:
 - [Graphology](https://graphology.github.io/standard-library/) — graph and independent algorithm modules.
 - [LINQ](https://learn.microsoft.com/en-us/dotnet/csharp/linq/) — language/ecosystem comparison only.
 
-## Next evidence required
+## Final verification coverage
 
-`source.test.ts` now directly verifies live Map membership/replacement,
-snapshot selection references, valid undefined versus missing entities,
-independent external bindings, one-shot consumption and iterator closure on
-callback error. Reference-only collect does not resolve missing entities;
-entity-aware callbacks do. Arrays/Set use their elements as identity references.
+Source mutation/one-shot/error contracts are in source.test.ts. Executable target
+examples and Source sorting are in target-examples.ts / target.test.ts. The
+unannotated return types are emitted by type-display.mjs; sorted operation
+context is explicit and separate from source context.
 
-Before declaring completion: review what evidence supports queue/list and
-optimized-native diff decisions;
-write executable target-interface examples; reconcile docs/design.md with the
-selected scope; audit every objective item and save the final purpose, limits
-and implementation order. The current evidence supports a narrower direction,
-not universal speed superiority or an already-completed public API migration.
+bench-costs.ts isolates resolution/materialization and single/repeated queries,
+then compares identical full Map sorting paths (including a forEach decoration
+baseline). bench-sequences.ts compares cursor/current/Mnemonist FIFO, waves and
+node-handle versus Map-link editing. Map-links is an optimistic unchecked draft,
+not a public contender. bench-business.ts now includes native-loop diff and
+cold build+query for hierarchy/tasks. Spatial nearest additionally resolves,
+filters and projects the geometric result; it does not search for the nearest
+qualifying entity. TanStack includes both paid-filter-index configurations.
+
+Unbound temporal retention is runtime-dependent in the saved worker: Node
+releases the store, Bun retains it. No store-release guarantee is accepted from
+this experiment. Context/closure retainer mechanisms remain uncertain.
+
+The requirement-by-requirement completion audit is [completion.md](completion.md).

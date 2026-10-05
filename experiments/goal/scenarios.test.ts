@@ -52,7 +52,7 @@ test('report: external lookup, missing customers, grouped aggregates and ranking
   const small=report(4);assert.deepEqual(small.variants.direct(),[{region:2,total:3}]);
 });
 test('synchronization: stable keys, structural comparison, duplicates and undefined',()=>{
-  const scene=synchronization(100),expected=scene.variants.native();assert.deepEqual(scene.variants.helpers(),expected);assert.deepEqual(expected.removed,Array.from({length:10},(_,i)=>i));assert.equal(expected.added.length,10);
+  const scene=synchronization(100),expected=scene.variants.native();for(const run of Object.values(scene.variants))assert.deepEqual(run(),expected);assert.deepEqual(expected.removed,Array.from({length:10},(_,i)=>i));assert.equal(expected.added.length,10);
   assert.throws(()=>indexBy([{id:1},{id:1}],e=>e.id),/Duplicate/);
   assert.deepEqual(diffBy(new Map([[1,undefined]]),new Map([[1,undefined],[2,undefined]]),(a,b)=>a===b),{added:[2],removed:[],changed:[]});
 });
@@ -60,7 +60,7 @@ test('spatial: same entities, inclusive areas, nearest ties, projection across i
   for(const shape of ['uniform','clustered','coincident']){
     const scene=spatial(300,shape);
     for(const [x,y,width]of [[0,0,20],[40,40,20],[0,0,1000],[50,50,0]]){const bounds={id:-1,x:0,y:0,minX:x!,minY:y!,maxX:x!+width!,maxY:y!+width!};const expected=scene.within.native(bounds).sort((a,b)=>a-b);for(const run of Object.values(scene.within))assert.deepEqual(run(bounds).sort((a,b)=>a-b),expected);for(const run of Object.values(scene.within))assert.deepEqual(scene.finish(run(bounds)),scene.finish(expected));}
-    for(const [x,y,r]of [[25,25,100],[50,50,0],[50,50,1],[2000,2000,1]]){const expected=scene.nearest.native(x!,y!,r!);for(const[name,run]of Object.entries(scene.nearest))assert.equal(run(x!,y!,r!),expected,`${shape}/${name}/${r}`);}
+    for(const [x,y,r]of [[25,25,100],[50,50,0],[50,50,1],[2000,2000,1]]){const expected=scene.nearest.native(x!,y!,r!);for(const[name,run]of Object.entries(scene.nearest)){const actual=run(x!,y!,r!);assert.equal(actual,expected,`${shape}/${name}/${r}`);assert.deepEqual(scene.finish(actual===undefined?[]:[actual]),scene.finish(expected===undefined?[]:[expected]));}}
   }
 });
 test('priority: immutable jobs, deadline changes, cancellation and stable ties',()=>{

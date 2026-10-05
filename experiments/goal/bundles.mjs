@@ -18,6 +18,7 @@ const cases={
   fused:{code:`import {from} from '../source.ts';import {query,queryInput,filtered,selected,take} from '../query.ts';export const run=()=>query(queryInput(from([1,2,3,4])),filtered(x=>x%2===0),selected(x=>x*3),take(2));`,expected:[6,12]},
   restricted:{code:`import {from} from '../source.ts';import {collect} from '../collect.ts';export const run=()=>collect(from([1,2,3,4]),{where:x=>x%2===0,select:x=>x*3,limit:2});`,expected:[6,12]},
   sorted:{code:`import {sorted} from '../../../dist/src/index.js';export const run=()=>sorted([3,1,2],x=>x,(a,b)=>a-b);`,expected:[1,2,3]},
+  sortedBound:{code:`import {from} from '../source.ts';import {sorted} from '../sorted-source.ts';export const run=()=>sorted(from(new Map([[1,{n:2}],[2,{n:1}]])),e=>e.n,(a,b)=>a-b);`,expected:[2,1]},
   currentTime:{code:`import {timeline} from '../../../dist/src/index.js';export const run=()=>timeline(new Map([[1,{at:10}],[2,{at:20}]])).overlapping(0,15);`,expected:[1]},
   temporal:{code:`import {from} from '../source.ts';import {temporal,overlapping} from '../temporal.ts';export const run=()=>Array.from(overlapping(temporal(from(new Map([[1,{at:10}],[2,{at:20}]])),e=>e.at),{start:0,end:15}));`,expected:[1]},
   temporalQuery:{code:`import {from} from '../source.ts';import {temporal,overlapping} from '../temporal.ts';import {query,queryInput,selected} from '../query.ts';export const run=()=>query(queryInput(overlapping(temporal(from(new Map([[1,{at:10,title:'one'}],[2,{at:20,title:'two'}]])),e=>e.at),{start:0,end:15})),selected(e=>e.title));`,expected:['one']},
@@ -26,6 +27,8 @@ const cases={
   kdbush:{code:`import KDBush from 'kdbush';export const run=()=>{const index=new KDBush(2);index.add(1,1);index.add(10,10);index.finish();return index.range(0,0,2,2);};`,expected:[0]},
   spatialCollect:{code:`import {pointIndex} from '../../../dist/src/index.js';import {from} from '../source.ts';import {collect} from '../collect.ts';export const run=()=>{const store=new Map([[1,{title:'one',enabled:true}],[2,{title:'two',enabled:false}]]),coords=new Map([[1,{x:1,y:1}],[2,{x:10,y:10}]]),index=pointIndex(store,{x:(_,id)=>coords.get(id).x,y:(_,id)=>coords.get(id).y}),refs=index.within({minX:0,minY:0,maxX:2,maxY:2});return collect(from(refs,{context:store,get:(id,ctx)=>ctx.get(id)}),{where:e=>e.enabled,select:(e,id)=>({id,title:e.title})});};`,expected:[{id:1,title:'one'}]},
   density:{code:`import {isDenseArray} from '../../../dist/src/index.js';export const run=()=>[isDenseArray([1,undefined]),isDenseArray(new Array(2))];`,expected:[true,false]},
+  zodDensity:{code:`import {denseArray} from '../../../dist/src/zod/index.js';import * as z from '../../../node_modules/zod/mini/index.js';export const run=()=>{const schema=denseArray(z.optional(z.number()));return [schema.safeParse([1,undefined]).success,schema.safeParse(new Array(2)).success];};`,expected:[true,false]},
+  brandTypeOnly:{code:`import type {Brand} from '../../../dist/src/index.js';type Id=Brand<string,'Id'>;export const run=()=>typeof 'reference';`,expected:'string'},
   startsOnly:{code:`import {from} from '../source.ts';import {temporal,startsBetween} from '../temporal.ts';export const run=()=>Array.from(startsBetween(temporal(from([1,2,3]),e=>e),{start:1,end:3}));`,expected:[1,2]},
   schedule:{code:`import {from,entity} from '../source.ts';import {temporal,overlapping} from '../temporal.ts';import {freeSlots,overloaded} from '../ranges.ts';export const run=()=>{const store=new Map([[1,{units:2}],[2,{units:2}]]),times=new Map([[1,{start:0,end:10}],[2,{start:5,end:15}]]),index=temporal(from(store),(_,id)=>times.get(id)),window={start:0,end:20},selection=overlapping(index,window),reservations=Array.from(selection,id=>({...times.get(id),units:entity(selection,id).units}));return {free:freeSlots(reservations,window),overloaded:overloaded(reservations,window,3)};};`,expected:{free:[{start:15,end:20}],overloaded:[{start:5,end:10}]}},
   rangesOnly:{code:`import {freeSlots,overloaded} from '../ranges.ts';export const run=()=>{const reservations=[{start:0,end:10,units:2},{start:5,end:15,units:2}],window={start:0,end:20};return {free:freeSlots(reservations,window),overloaded:overloaded(reservations,window,3)};};`,expected:{free:[{start:15,end:20}],overloaded:[{start:5,end:10}]}},
@@ -53,7 +56,7 @@ try {
         const result=await rollup({input:entry,plugins:[nodeResolve({browser:true,preferBuiltins:false}),commonjs(),{name:'erase-types',async transform(code,id){if(id.endsWith('.ts'))return (await transform(code,{loader:'ts',target:'es2023',format:'esm'})).code;}}]});
         const output=await result.generate({format:'esm'}),chunk=output.output.find(x=>x.type==='chunk');
         const compressed=await minify(chunk.code,{module:true,ecma:2023});code=compressed.code;
-        modules=Object.entries(chunk.modules).filter(([,info])=>info.renderedLength>0).map(([path,info])=>({path:normalize(path),bytes:info.renderedLength}));
+        modules=Object.entries(chunk.modules).filter(([,info])=>info.renderedLength>0).map(([path,info])=>({path:normalize(path),bytes:info.renderedLength,renderedExports:info.renderedExports,removedExports:info.removedExports}));
         await result.close();
       }
       const output=resolve(scratch,`${name}-${bundler}.mjs`);writeFileSync(output,code);
@@ -66,6 +69,9 @@ try {
       if(['temporal','temporalCollect','startsOnly','schedule'].includes(name))assert(!/dependencies\.ts|graphology|src\/timeline/.test(liveModules),'Time import leaked causal algorithms');
       if(name==='sorted')assert(!/src\/(tree|timeline|point-index|queue|deque)/.test(liveModules),'Sorted import leaked structures');
       if(name==='temporal')assert(!/node_modules\/date-fns/.test(liveModules),'Type-only date-fns became runtime dependency');
+      if(name!=='zodDensity')assert(!/node_modules\/zod|src\/zod/.test(liveModules),'Core import leaked optional Zod');
+      if(name==='brandTypeOnly')assert(!/dist\/src/.test(liveModules),'Type-only Brand became runtime dependency');
+      if(name==='startsOnly'&&bundler==='rollup')assert(modules.some(m=>m.path==='temporal.ts'&&m.removedExports.includes('overlapping')),'Starts-only consumer retained unused overlapping export');
     }
   }
   mkdirSync(resolve(here,'results'),{recursive:true});

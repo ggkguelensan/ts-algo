@@ -74,6 +74,8 @@ Construction variants own different capabilities: the sorted baseline uses pre-n
 | restricted | rollup | 754 | 453 | 400 |
 | sorted | esbuild | 942 | 439 | 396 |
 | sorted | rollup | 946 | 422 | 384 |
+| sortedBound | esbuild | 1441 | 661 | 604 |
+| sortedBound | rollup | 1401 | 636 | 578 |
 | currentTime | esbuild | 4158 | 1877 | 1732 |
 | currentTime | rollup | 4211 | 1780 | 1651 |
 | temporal | esbuild | 2176 | 1046 | 971 |
@@ -90,6 +92,10 @@ Construction variants own different capabilities: the sorted baseline uses pre-n
 | spatialCollect | rollup | 3708 | 1611 | 1461 |
 | density | esbuild | 172 | 158 | 132 |
 | density | rollup | 173 | 155 | 125 |
+| zodDensity | esbuild | 12470 | 4372 | 3995 |
+| zodDensity | rollup | 12360 | 4245 | 3844 |
+| brandTypeOnly | esbuild | 37 | 57 | 41 |
+| brandTypeOnly | rollup | 38 | 58 | 42 |
 | startsOnly | esbuild | 1765 | 870 | 793 |
 | startsOnly | rollup | 1724 | 866 | 795 |
 | schedule | esbuild | 3344 | 1477 | 1375 |
@@ -102,16 +108,16 @@ Construction variants own different capabilities: the sorted baseline uses pre-n
 | helperReport | rollup | 1361 | 637 | 577 |
 | remedaReport | esbuild | 2175 | 1046 | 953 |
 | remedaReport | rollup | 2145 | 1023 | 940 |
-| tanstackReport | esbuild | 276814 | 82547 | 70943 |
-| tanstackReport | rollup | 277324 | 78997 | 67710 |
+| tanstackReport | esbuild | 276874 | 82556 | 71016 |
+| tanstackReport | rollup | 277384 | 79007 | 67738 |
 | graphOnly | esbuild | 1471 | 694 | 633 |
 | graphOnly | rollup | 1434 | 669 | 616 |
 | graphology | esbuild | 77047 | 16296 | 14289 |
 | graphology | rollup | 76687 | 15564 | 13674 |
-| hierarchy | esbuild | 1418 | 690 | 630 |
-| hierarchy | rollup | 1377 | 678 | 617 |
-| diff | esbuild | 270 | 210 | 181 |
-| diff | rollup | 270 | 209 | 180 |
+| hierarchy | esbuild | 1471 | 706 | 648 |
+| hierarchy | rollup | 1430 | 693 | 634 |
+| diff | esbuild | 291 | 226 | 197 |
+| diff | rollup | 292 | 223 | 196 |
 
 ## Decisions supported so far
 

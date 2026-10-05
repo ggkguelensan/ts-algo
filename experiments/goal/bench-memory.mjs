@@ -3,7 +3,7 @@ import {writeFileSync,mkdirSync,readFileSync} from 'node:fs';
 import {cpus} from 'node:os';
 const n=50000,results=[];
 for(const runtime of ['node','bun']){
-  for(const variant of ['source','tree','currentTime','temporal','points','boundPoints','kdbush','keys','projected','projectedInline','restricted','restrictedInline','projectedNative'])for(let sample=0;sample<3;sample++){
+  for(const variant of ['source','tree','currentTime','temporal','unboundTemporal','points','boundPoints','kdbush','keys','projected','projectedInline','restricted','restrictedInline','projectedNative'])for(let sample=0;sample<3;sample++){
     const row=JSON.parse(execFileSync(runtime,['--expose-gc','memory-worker.mjs',variant,String(n)],{encoding:'utf8'}));results.push({runtime,sample,...row});
   }
   for(const variant of ['fused','restricted','remeda','native']){

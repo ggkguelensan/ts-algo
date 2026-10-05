@@ -24,6 +24,7 @@ function make(){
     case 'tree':return tree(store,{parent:(_,id)=>id===0?null:Math.floor((id-1)/4)});
     case 'currentTime':return timeline(store,{time:e=>e.at});
     case 'temporal':return temporal(from(store),e=>e.at);
+    case 'unboundTemporal':return temporal(from([...store.keys()]),(_,id)=>store.get(id).at);
     case 'points':return pointIndex(store,{x:e=>e.x,y:e=>e.y});
     case 'boundPoints':return {index:pointIndex(store,{x:e=>e.x,y:e=>e.y}),source:from(store)};
     case 'kdbush':{const index=new KDBush(n);for(const e of store.values())index.add(e.x,e.y);index.finish();return index;}

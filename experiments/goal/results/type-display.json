@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-05T13:23:59.677Z",
+  "typescript": "7.0.2",
+  "notes": "Compiler-emitted declarations of unannotated result expressions and target-example returns; domain inputs are explicitly typed. Chosen collect/sorted diagnostics are included; query diagnostics are in type-cost.json. No IDE-rendering claim.",
+  "consumer": "import type {Brand} from '../../../dist/src/brand.js';\nimport {from,type Source} from '../source.ts';import {query,withContext,filtered,selected} from '../query.ts';\nimport {find,aggregateBy} from '../operators.ts';import {collect} from '../collect.ts';import {sorted} from '../sorted-source.ts';\ntype Id=Brand<string,'Id'>;type Entity={kind:'invoice';total:number}|{kind:'note';text:string};declare const store:ReadonlyMap<Id,Entity>;\nconst input=withContext(from(store),{minimum:10});\nexport const amounts=query(input,filtered((e):e is Extract<Entity,{kind:'invoice'}>=>e.kind==='invoice'),selected((e,id,ctx)=>({id,amount:e.total+ctx.minimum})));\nexport const found=find(input,e=>e.kind==='invoice');\nexport const totals=aggregateBy(input,e=>e.kind,()=>0,(sum,e)=>sum+(e.kind==='invoice'?e.total:0));\nexport const restricted=collect(from(store),{where:(e):e is Extract<Entity,{kind:'invoice'}>=>e.kind==='invoice',select:(e,id,ctx)=>({id,amount:e.total+ctx.minimum}),context:{minimum:10}});\nfunction* literals():Generator<1|2>{yield 1;yield 2;}export const literalRefs=collect(from(literals()),{limit:1});\nfunction titles<R,E,S>(source:Source<R,E,S>,select:(e:E,id:R)=>string):string[]{return collect(source,{select});}\nexport const genericResult=titles(from(store),(e,id)=>id+e.kind);\nexport const boundOrder=sorted(from(store),e=>e.kind,(a,b)=>a.localeCompare(b));\nexport const contextualOrder=sorted(from(store),(e,id,ctx)=>e.kind+ctx.suffix,(a,b)=>a.localeCompare(b),{context:{suffix:'!'}});\ndeclare const set:ReadonlySet<Id>;export const setOrder=sorted(from(set),id=>id,(a,b)=>a.localeCompare(b));\n",
+  "declarations": {
+    "consumer": "import type { Brand } from '../../../dist/src/brand.js';\ntype Id = Brand<string, 'Id'>;\nexport declare const amounts: {\n    id: Id;\n    amount: number;\n}[];\nexport declare const found: import(\"../operators.ts\").Found<Id>;\nexport declare const totals: Map<\"invoice\" | \"note\", number>;\nexport declare const restricted: {\n    id: Id;\n    amount: number;\n}[];\nexport declare const literalRefs: (1 | 2)[];\nexport declare const genericResult: string[];\nexport declare const boundOrder: Id[];\nexport declare const contextualOrder: Id[];\nexport declare const setOrder: Id[];\nexport {};\n",
+    "examples": "export declare function scheduleExample(): {\n    refs: string[];\n    titles: string[];\n    free: import(\"./ranges.ts\").Span[];\n    overloaded: import(\"./ranges.ts\").Span[];\n};\nexport declare function catalogueExample(): {\n    roots: readonly string[];\n    children: readonly string[];\n    next: string | undefined;\n    refs: string[];\n    rows: {\n        id: string;\n        title: string;\n    }[];\n};\n"
+  },
+  "diagnostics": [
+    {
+      "name": "entity",
+      "expression": "collect(from(store),{select:e=>e.missing});",
+      "output": ".generated-display/bad.ts(5,34): error TS2339: Property 'missing' does not exist on type 'Entity'.\n  Property 'missing' does not exist on type '{ kind: \"invoice\"; total: number; }'.\n"
+    },
+    {
+      "name": "context",
+      "expression": "collect(from(store),{context:{minimum:10},select:(e,id,ctx)=>ctx.owner});",
+      "output": ".generated-display/bad.ts(5,66): error TS2339: Property 'owner' does not exist on type '{ minimum: number; }'.\n"
+    },
+    {
+      "name": "missingContext",
+      "expression": "collect(from(store),{where:(e,id,ctx:{minimum:number})=>ctx.minimum>0});",
+      "output": ".generated-display/bad.ts(5,21): error TS2769: No overload matches this call.\n  The last overload gave the following error.\n    Argument of type '{ where: (e: Entity, id: Id, ctx: { minimum: number; }) => boolean; }' is not assignable to parameter of type 'Options<Id, Entity, { minimum: number; }>'.\n      Property 'context' is missing in type '{ where: (e: Entity, id: Id, ctx: { minimum: number; }) => boolean; }' but required in type '{ context: { minimum: number; }; }'.\n"
+    },
+    {
+      "name": "sortedContext",
+      "expression": "sorted(from(store),(e,id,ctx:{direction:number})=>ctx.direction,(a,b)=>a-b);",
+      "output": ".generated-display/bad.ts(5,20): error TS2345: Argument of type '(e: any, id: any, ctx: { direction: number; }) => number' is not assignable to parameter of type '(entity: Entity, ref: Id) => number'.\n  Target signature provides too few arguments. Expected 3 or more, but got 2.\n.generated-display/bad.ts(5,21): error TS7006: Parameter 'e' implicitly has an 'any' type.\n.generated-display/bad.ts(5,23): error TS7006: Parameter 'id' implicitly has an 'any' type.\n"
+    }
+  ]
+}
