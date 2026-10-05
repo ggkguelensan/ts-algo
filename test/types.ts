@@ -1,5 +1,5 @@
 // Compiled by tsc, not executed. Check inference and overload rejection.
-import { sortedReferences } from "../src/index.js";
+import { sortedReferences, pointIndex } from "../src/index.js";
 
 type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends
   (<T>() => T extends B ? 1 : 2) ? true : false;
@@ -33,3 +33,12 @@ sortedReferences(map, ([key, entity]: [string, { age: number }]) => entity.age, 
 sortedReferences(map, entity => entity.age, (a: string, b: string) => a.localeCompare(b));
 
 void mapResult; void setResult; void arrayResult; void iterableResult;
+
+const positions: ReadonlyMap<string, { x: number; y: number }> = new Map();
+const spatial = pointIndex(positions, { x: p => p.x, y: p => p.y });
+type SpatialKeys = Assert<Equal<ReturnType<typeof spatial.within>, string[]>>;
+const pointSet = new Set([{ x: 1, y: 2 }]);
+const spatialSet = pointIndex(pointSet, { x: p => p.x, y: p => p.y });
+type SpatialEntities = Assert<Equal<ReturnType<typeof spatialSet.within>, { x: number; y: number }[]>>;
+// @ts-expect-error Map selects an entity, not an entry tuple.
+pointIndex(positions, { x: ([key, p]: [string, { x: number }]) => p.x, y: () => 0 });

@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "bundler": "Bun 1.3.14",
+    "target": "browser",
+    "format": "esm",
+    "minify": true,
+    "date": "2026-10-05T04:49:02.845Z"
+  },
+  "rows": [
+    {
+      "exports": [
+        "sortedReferences"
+      ],
+      "bytes": 900,
+      "gzipBytes": 441
+    },
+    {
+      "exports": [
+        "pointIndex"
+      ],
+      "bytes": 2635,
+      "gzipBytes": 1267
+    },
+    {
+      "exports": [
+        "sortedReferences",
+        "pointIndex"
+      ],
+      "bytes": 3185,
+      "gzipBytes": 1486
+    },
+    {
+      "exports": [
+        "quickSortInPlace",
+        "sortedReferencesQuickSort"
+      ],
+      "bytes": 610,
+      "gzipBytes": 395
+    }
+  ]
+}

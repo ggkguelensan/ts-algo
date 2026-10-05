@@ -1,3 +1,4 @@
+import { isMapLike } from "./internal/collection.js";
 import type { Compare } from "./quick-sort.js";
 
 type IterableItem<Source> = Source extends Iterable<infer Item> ? Item : never;
@@ -67,21 +68,6 @@ export function sortedReferences<Ref, Entity, Value>(
   // one snapshot for random access; the source itself is consumed only once.
   const references: readonly Ref[] = Array.isArray(source) ? source : Array.from(source);
   return sortArray(references, select, compare);
-}
-
-// Structural detection also supports readonly Map wrappers and other realms.
-// Future map-like structures implement ReadonlyMap; ordinary sources Iterable.
-function isMapLike<Ref, Entity>(
-  source: ReadonlyMap<Ref, Entity> | Iterable<Ref>,
-): source is ReadonlyMap<Ref, Entity> {
-  return typeof source === "object" && source !== null
-    && "get" in source && typeof source.get === "function"
-    && "has" in source && typeof source.has === "function"
-    && "forEach" in source && typeof source.forEach === "function"
-    && "keys" in source && typeof source.keys === "function"
-    && "values" in source && typeof source.values === "function"
-    && "entries" in source && typeof source.entries === "function"
-    && "size" in source && typeof source.size === "number";
 }
 
 function sortArray<Ref, Value>(
