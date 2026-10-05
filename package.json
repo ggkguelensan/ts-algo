@@ -4,6 +4,22 @@
   "private": true,
   "type": "module",
   "description": "Small reference-preserving tools for recurring business logic",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./zod": {
+      "types": "./dist/src/zod/index.d.ts",
+      "import": "./dist/src/zod/index.js"
+    }
+  },
+  "peerDependencies": {
+    "zod": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "zod": { "optional": true }
+  },
   "scripts": {
     "build": "tsc",
     "check": "tsc --noEmit",
@@ -14,6 +30,8 @@
     "bench:spatial": "npm run build && node dist/bench/spatial.js",
     "bench:spatial:bun": "npm run build && bun dist/bench/spatial.js",
     "bench:bundle": "npm run build && node dist/bench/bundle.js",
+    "bench:validation": "npm run build && node --expose-gc dist/bench/validation.js",
+    "bench:validation:bun": "npm run build && bun --expose-gc dist/bench/validation.js",
     "bench:hierarchy-time": "npm run build && node --expose-gc dist/bench/hierarchy-time.js",
     "bench:hierarchy-time:bun": "npm run build && bun --expose-gc dist/bench/hierarchy-time.js",
     "bench:sequences-intervals": "npm run build && node --expose-gc dist/bench/sequences-intervals.js",
@@ -21,6 +39,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.0.0",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "zod": "^4.6.5"
   }
 }

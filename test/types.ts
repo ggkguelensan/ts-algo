@@ -1,10 +1,18 @@
 // Compiled by tsc, not executed. Check inference and overload rejection.
 import { sorted, pointIndex, tree, timeline, queue, deque, linkedList, doublyLinkedList } from "../src/index.js";
 import type { Brand } from "../src/index.js";
+import * as z from "zod/mini";
+import { denseArray } from "../src/zod/index.js";
 
 type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends
   (<T>() => T extends B ? 1 : 2) ? true : false;
 type Assert<T extends true> = T;
+const denseNumbers = denseArray(z.number());
+type DenseOutput = Assert<Equal<z.output<typeof denseNumbers>, number[]>>;
+const denseLengths = denseArray(z.pipe(z.string(), z.transform(value => value.length)));
+type DenseTransformed = Assert<Equal<z.output<typeof denseLengths>, number[]>>;
+const denseUserIds = denseArray(z.string().brand<"UserId">());
+type DenseBranded = Assert<Equal<z.output<typeof denseUserIds>, (string & z.$brand<"UserId">)[]>>;
 type Milliseconds = Brand<number, "Milliseconds">;
 type Seconds = Brand<number, "Seconds">;
 type BrandBase = Assert<Milliseconds extends number ? true : false>;

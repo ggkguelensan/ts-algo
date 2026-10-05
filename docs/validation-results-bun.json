@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "recordedAt": "2026-10-05T09:38:10.573Z",
+    "node": "v24.3.0",
+    "bun": "1.3.14",
+    "zod": "4.6.5",
+    "cpu": "Apple M5",
+    "platform": "darwin",
+    "arch": "arm64",
+    "settings": {
+      "samples": 7,
+      "warmups": 3,
+      "gcBeforeSample": true
+    },
+    "checksum": 6010110
+  },
+  "rows": [
+    {
+      "size": 100,
+      "variant": "shapeOnly",
+      "repetitions": 1000,
+      "medianMs": 0.0013822920000000067,
+      "minMs": 0.001282083,
+      "maxMs": 0.0014661660000000012
+    },
+    {
+      "size": 100,
+      "variant": "elementsOnly",
+      "repetitions": 1000,
+      "medianMs": 0.0007672499999999899,
+      "minMs": 0.0007370410000000049,
+      "maxMs": 0.0008397920000000027
+    },
+    {
+      "size": 100,
+      "variant": "shapeAndElements",
+      "repetitions": 1000,
+      "medianMs": 0.002191208000000003,
+      "minMs": 0.0021523340000000105,
+      "maxMs": 0.0024410000000000026
+    },
+    {
+      "size": 10000,
+      "variant": "shapeOnly",
+      "repetitions": 10,
+      "medianMs": 0.478449999999998,
+      "minMs": 0.42352499999999793,
+      "maxMs": 0.4934124999999995
+    },
+    {
+      "size": 10000,
+      "variant": "elementsOnly",
+      "repetitions": 10,
+      "medianMs": 0.07316250000000082,
+      "minMs": 0.07134580000000028,
+      "maxMs": 0.07758750000000134
+    },
+    {
+      "size": 10000,
+      "variant": "shapeAndElements",
+      "repetitions": 10,
+      "medianMs": 0.4984082999999998,
+      "minMs": 0.47037079999999776,
+      "maxMs": 0.5106291999999997
+    },
+    {
+      "size": 100000,
+      "variant": "shapeOnly",
+      "repetitions": 1,
+      "medianMs": 5.2708749999999895,
+      "minMs": 5.1302499999999895,
+      "maxMs": 5.453666999999996
+    },
+    {
+      "size": 100000,
+      "variant": "elementsOnly",
+      "repetitions": 1,
+      "medianMs": 0.7513749999999959,
+      "minMs": 0.718166999999994,
+      "maxMs": 0.7695410000000038
+    },
+    {
+      "size": 100000,
+      "variant": "shapeAndElements",
+      "repetitions": 1,
+      "medianMs": 6.119874999999979,
+      "minMs": 5.881916999999987,
+      "maxMs": 6.254957999999988
+    }
+  ]
+}

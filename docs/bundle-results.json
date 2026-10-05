@@ -1,10 +1,11 @@
 {
   "metadata": {
     "bundler": "Bun 1.3.14",
+    "zod": "4.6.5",
     "target": "browser",
     "format": "esm",
     "minify": true,
-    "date": "2026-10-05T09:13:07.210Z"
+    "date": "2026-10-05T09:38:12.328Z"
   },
   "rows": [
     {
@@ -12,14 +13,21 @@
         "sorted"
       ],
       "bytes": 917,
-      "gzipBytes": 457
+      "gzipBytes": 456
+    },
+    {
+      "exports": [
+        "isDenseArray"
+      ],
+      "bytes": 166,
+      "gzipBytes": 158
     },
     {
       "exports": [
         "pointIndex"
       ],
       "bytes": 2662,
-      "gzipBytes": 1290
+      "gzipBytes": 1289
     },
     {
       "exports": [
@@ -34,14 +42,14 @@
         "tree"
       ],
       "bytes": 2435,
-      "gzipBytes": 1124
+      "gzipBytes": 1123
     },
     {
       "exports": [
         "timeline"
       ],
       "bytes": 4162,
-      "gzipBytes": 1939
+      "gzipBytes": 1938
     },
     {
       "exports": [
@@ -55,21 +63,21 @@
         "deque"
       ],
       "bytes": 694,
-      "gzipBytes": 375
+      "gzipBytes": 374
     },
     {
       "exports": [
         "linkedList"
       ],
       "bytes": 901,
-      "gzipBytes": 497
+      "gzipBytes": 496
     },
     {
       "exports": [
         "doublyLinkedList"
       ],
       "bytes": 922,
-      "gzipBytes": 509
+      "gzipBytes": 507
     },
     {
       "exports": [
@@ -84,6 +92,13 @@
       ],
       "bytes": 10383,
       "gzipBytes": 4267
+    },
+    {
+      "exports": [
+        "denseArray"
+      ],
+      "bytes": 11118,
+      "gzipBytes": 4003
     }
   ]
 }

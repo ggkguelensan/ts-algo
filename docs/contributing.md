@@ -28,6 +28,8 @@ npm run bench:hierarchy-time:bun
 npm run bench:sequences-intervals
 npm run bench:sequences-intervals:bun
 npm run bench:bundle
+npm run bench:validation
+npm run bench:validation:bun
 ```
 
 Скрипты пересобирают проект и перезаписывают соответствующие отчёты в docs.
