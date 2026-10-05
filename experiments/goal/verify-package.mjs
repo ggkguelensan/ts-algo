@@ -23,20 +23,32 @@ try {
   // Its own package scope prevents ts-algo's parent self-reference hiding a broken tarball.
   run('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund', resolve(scratch, packed.filename), `zod@${manifest.devDependencies.zod.replace(/^\^/, '')}`], consumer);
   const smoke = `import assert from 'node:assert/strict';
-import {sorted} from 'ts-algo';
+import {sorted,from,subset,entity,collect} from 'ts-algo';
 import {denseArray} from 'ts-algo/zod';
 import * as z from 'zod/mini';
 assert.deepEqual(sorted(new Map([['b', {n:2}], ['a', {n:1}]]), x=>x.n, (a,b)=>a-b), ['a','b']);
 assert.deepEqual(denseArray(z.number()).parse([1,2]), [1,2]);
 assert.equal(denseArray(z.number()).safeParse(new Array(2)).success, false);
+const store=new Map([['a',{rank:2}],['b',{rank:1}]]),source=from(store);
+assert.equal(from(source),source);
+assert.deepEqual(sorted(source,e=>e.rank,(a,b)=>a-b),['b','a']);
+assert.deepEqual(collect(subset(source,['b']),{context:{multiplier:3},select:(e,id,c)=>({id,total:e.rank*c.multiplier})}),[{id:'b',total:3}]);
+store.set('b',{rank:4});assert.equal(entity(source,'b').rank,4);
 `;
   writeFileSync(resolve(consumer, 'smoke.mjs'), smoke);
   run('node', ['smoke.mjs'], consumer);
   run('bun', ['smoke.mjs'], consumer);
-  writeFileSync(resolve(consumer,'types.ts'),`import {sorted,type Brand} from 'ts-algo';
+  writeFileSync(resolve(consumer,'types.ts'),`import {sorted,from,subset,entity,collect,type Brand} from 'ts-algo';
 import {denseArray} from 'ts-algo/zod';import * as z from 'zod/mini';
 type Id=Brand<string,'Id'>;declare const store:ReadonlyMap<Id,{rank:number}>;
 const refs:Id[]=sorted(store,e=>e.rank,(a,b)=>a-b);
+const source=from(store);const ordered:Id[]=sorted(source,e=>e.rank,(a,b)=>a-b);
+const rows:{id:Id;total:number}[]=collect(subset(source,ordered),{context:{multiplier:3},select:(e,id,c)=>({id,total:e.rank*c.multiplier})});
+const value:number=entity(source,refs[0]!).rank;
+// @ts-expect-error callback requires explicit operation context
+collect(source,{where:(e,id,c:{minimum:number})=>e.rank>c.minimum});
+// @ts-expect-error Source cannot fall back to selecting its reference as entity
+sorted(source,(id:Id)=>id,(a,b)=>a.localeCompare(b));
 const schema=denseArray(z.number());const values:number[]=schema.parse([1,2]);
 // @ts-expect-error Map output preserves branded keys, not entities
 const wrong:{rank:number}[]=refs;
@@ -48,7 +60,8 @@ void values;void wrong;
   const runtimeJSBytes=packed.files.filter(file=>file.path.endsWith('.js')).reduce((sum,file)=>sum+file.size,0);
   const report = { checkedAt: new Date().toISOString(), node: process.version, bun:run('bun',['--version'],consumer).trim(),typescript:JSON.parse(readFileSync(resolve(here,'node_modules/typescript/package.json'),'utf8')).version,files: [...files], size: packed.size, unpackedSize: packed.unpackedSize, declarationBytes,runtimeJSBytes,coreAndZod: 'passed Node and Bun in isolated consumer',installedDeclarationConsumer:'passed strict TypeScript without skipLibCheck', excludedResearch: true };
   mkdirSync(resolve(here, 'results'), {recursive:true});
-  writeFileSync(resolve(here, 'results/package.json'), JSON.stringify(report, null, 2)+'\n');
+  const reportName=process.argv.includes('--migration')?'migration-package.json':'package.json';
+  writeFileSync(resolve(here, 'results',reportName), JSON.stringify(report, null, 2)+'\n');
   console.log(JSON.stringify({files:files.size, size:packed.size, unpackedSize:packed.unpackedSize, smoke:report.coreAndZod}));
 } finally {
   rmSync(scratch, {recursive:true, force:true});

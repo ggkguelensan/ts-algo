@@ -1,0 +1,278 @@
+{
+  "date": "2026-10-05T23:24:50.970Z",
+  "target": "ES2023/browser/ESM",
+  "dependencies": {
+    "@rollup/plugin-commonjs": "29.0.3",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "@tanstack/db": "0.11.3",
+    "@types/d3-quadtree": "3.0.6",
+    "@types/node": "26.6.4",
+    "@types/rbush": "4.0.0",
+    "d3-quadtree": "3.0.1",
+    "date-fns": "4.4.0",
+    "drizzle-orm": "0.45.3",
+    "esbuild": "0.28.2",
+    "flatbush": "4.6.2",
+    "graphology": "0.26.0",
+    "graphology-dag": "0.4.1",
+    "ix": "7.0.0",
+    "kdbush": "4.1.0",
+    "mnemonist": "0.40.5",
+    "rbush": "4.0.1",
+    "remeda": "2.51.0",
+    "rollup": "4.64.0",
+    "terser": "5.51.2",
+    "typescript": "7.0.2"
+  },
+  "notes": "Intermediate public core source consumer. Final Goal additionally requires installed archive consumers for all domain entries. Module attribution differs between bundlers.",
+  "results": [
+    {
+      "name": "sorted",
+      "bundler": "esbuild",
+      "bytes": 1141,
+      "gzip": 514,
+      "brotli": 467,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "../../dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "../../dist/src/source.js",
+          "bytes": 97
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 631
+        },
+        {
+          "path": ".generated-core-bundles-43hMd8/sorted.ts",
+          "bytes": 38
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "sorted",
+      "bundler": "rollup",
+      "bytes": 1128,
+      "gzip": 517,
+      "brotli": 460,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 711
+        },
+        {
+          "path": "../../dist/src/internal/source-state.js",
+          "bytes": 110
+        },
+        {
+          "path": "../../dist/src/source.js",
+          "bytes": 358
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 2626
+        },
+        {
+          "path": ".generated-core-bundles-43hMd8/sorted.ts",
+          "bytes": 63
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "collect",
+      "bundler": "esbuild",
+      "bytes": 1167,
+      "gzip": 573,
+      "brotli": 503,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "../../dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "../../dist/src/source.js",
+          "bytes": 419
+        },
+        {
+          "path": "../../dist/src/collect.js",
+          "bytes": 305
+        },
+        {
+          "path": ".generated-core-bundles-43hMd8/collect.ts",
+          "bytes": 68
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "collect",
+      "bundler": "rollup",
+      "bytes": 1112,
+      "gzip": 547,
+      "brotli": 475,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 711
+        },
+        {
+          "path": "../../dist/src/internal/source-state.js",
+          "bytes": 110
+        },
+        {
+          "path": "../../dist/src/source.js",
+          "bytes": 1060
+        },
+        {
+          "path": "../../dist/src/collect.js",
+          "bytes": 1109
+        },
+        {
+          "path": ".generated-core-bundles-43hMd8/collect.ts",
+          "bytes": 109
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "boundSort",
+      "bundler": "esbuild",
+      "bytes": 1504,
+      "gzip": 673,
+      "brotli": 619,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "../../dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "../../dist/src/source.js",
+          "bytes": 419
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 631
+        },
+        {
+          "path": ".generated-core-bundles-43hMd8/boundSort.ts",
+          "bytes": 79
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "boundSort",
+      "bundler": "rollup",
+      "bytes": 1462,
+      "gzip": 652,
+      "brotli": 593,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 711
+        },
+        {
+          "path": "../../dist/src/internal/source-state.js",
+          "bytes": 110
+        },
+        {
+          "path": "../../dist/src/source.js",
+          "bytes": 1060
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 2626
+        },
+        {
+          "path": ".generated-core-bundles-43hMd8/boundSort.ts",
+          "bytes": 130
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "boundPage",
+      "bundler": "esbuild",
+      "bytes": 1938,
+      "gzip": 877,
+      "brotli": 803,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "../../dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "../../dist/src/source.js",
+          "bytes": 478
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 631
+        },
+        {
+          "path": "../../dist/src/collect.js",
+          "bytes": 305
+        },
+        {
+          "path": ".generated-core-bundles-43hMd8/boundPage.ts",
+          "bytes": 149
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "boundPage",
+      "bundler": "rollup",
+      "bytes": 1907,
+      "gzip": 851,
+      "brotli": 781,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 711
+        },
+        {
+          "path": "../../dist/src/internal/source-state.js",
+          "bytes": 110
+        },
+        {
+          "path": "../../dist/src/source.js",
+          "bytes": 1270
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 2626
+        },
+        {
+          "path": "../../dist/src/collect.js",
+          "bytes": 1109
+        },
+        {
+          "path": ".generated-core-bundles-43hMd8/boundPage.ts",
+          "bytes": 251
+        }
+      ],
+      "smoke": "passed"
+    }
+  ]
+}

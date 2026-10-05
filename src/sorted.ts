@@ -1,7 +1,24 @@
 import { isMapLike } from "./internal/collection.js";
 import type { Compare } from "./compare.js";
+import { entity, isSource, type Source as BoundSource } from "./source.js";
+import { sourceState } from "./internal/source-state.js";
 
 type IterableItem<Source> = Source extends Iterable<infer Item> ? Item : never;
+
+/** Sort original bound references using live entities; return a new refs array. */
+export function sorted<Ref, Entity, SourceContext, Value>(
+  source: BoundSource<Ref, Entity, SourceContext>,
+  getValue: (entity: Entity, ref: Ref) => Value,
+  compare: Compare<Value>,
+): Ref[];
+
+/** Operation context is explicit and independent from the source context. */
+export function sorted<Ref, Entity, SourceContext, Value, Context>(
+  source: BoundSource<Ref, Entity, SourceContext>,
+  getValue: (entity: Entity, ref: Ref, context: Context) => Value,
+  compare: Compare<Value>,
+  options: { context: Context },
+): Ref[];
 
 /** Sort Map keys using values selected directly from its entities. */
 export function sorted<Key, Entity, Value>(
@@ -25,7 +42,7 @@ export function sorted<Ref, Value>(
 
 /** Consume an iterable once; Map uses its entity/key overload instead. */
 export function sorted<Source extends Iterable<unknown>, Value>(
-  source: Source extends ReadonlyMap<unknown, unknown> ? never : Source,
+  source: Source extends ReadonlyMap<unknown, unknown> | { readonly [sourceState]: unknown } ? never : Source,
   getValue: (ref: IterableItem<Source>) => Value,
   compare: Compare<Value>,
 ): IterableItem<Source>[];
@@ -35,11 +52,19 @@ export function sorted<Source extends Iterable<unknown>, Value>(
  * Arrays must be dense. Callbacks must not mutate the source or its ordering.
  * Empty and singleton sources do not require getValue or compare calls.
  */
-export function sorted<Ref, Entity, Value>(
-  source: ReadonlyMap<Ref, Entity> | Iterable<Ref>,
-  getValue: ((entity: Entity, key: Ref) => Value) | ((ref: Ref) => Value),
+export function sorted<Ref, Entity, Value, SourceContext, Context>(
+  source: BoundSource<Ref, Entity, SourceContext> | ReadonlyMap<Ref, Entity> | Iterable<Ref>,
+  getValue: ((entity: Entity, key: Ref, context: Context) => Value) | ((ref: Ref) => Value),
   compare: Compare<Value>,
+  options?: { context: Context },
 ): Ref[] {
+  if (isSource<Ref, Entity, SourceContext>(source)) {
+    const select = getValue as (entity: Entity, ref: Ref, context: Context) => Value;
+    // Without options only the two-argument callback overload is available.
+    const context = options?.context as Context;
+    const references = Array.from(source);
+    return sortArray(references, ref => select(entity(source, ref), ref, context), compare);
+  }
   if (isMapLike(source)) {
     // Overloads correlate Map inputs with entity/key selectors. TypeScript
     // cannot retain that correlation in this union implementation.

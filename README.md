@@ -55,6 +55,53 @@ const keys = sorted(users, user => user.age, (a, b) => a - b);
 
 Собственный Brand и бренд Zod используют разные unique symbol и не взаимозаменяемы даже при одинаковом имени. Выберите одно определение для каждого доменного типа. Алгоритмы ts-algo обобщённые и сохраняют оба варианта; Zod не является зависимостью библиотеки. Создание схемы и парсинг выполняются в runtime, поэтому проверяйте данные на входе приложения, а не внутри компаратора сортировки.
 
+## Источники и выборки
+
+`from` связывает ссылки с сущностями. Для Map ключи и значения читаются из
+текущего хранилища; Array/Set/Iterable используют элементы как сущности.
+Повторный `from(source)` сохраняет привязку. Одноразовый Iterable остаётся
+одноразовым; `subset` меняет набор ссылок без копирования переданного источника.
+
+```ts
+import { from, subset, entity, collect, sorted } from "ts-algo";
+
+const people = new Map([
+  ["anna", { age: 30, active: true }],
+  ["boris", { age: 20, active: false }],
+  ["vera", { age: 25, active: true }],
+]);
+const source = from(people);
+const rows = collect(source, {
+  context: { minimum: 21 },
+  where: (person, id, ctx) => person.active && person.age >= ctx.minimum,
+  select: (person, id) => ({ id, age: person.age }),
+  limit: 20,
+});
+// [{ id: "anna", age: 30 }, { id: "vera", age: 25 }]
+
+const order = sorted(source, person => person.age, (a, b) => a - b);
+const first = collect(subset(source, order), { limit: 1 }); // ["boris"]
+const boris = entity(source, "boris");
+```
+
+Порядок collect фиксирован: where → select → limit. Без select возвращаются
+ссылки, с select — значения проекции без добавленного происхождения. Resolver
+вызывается один раз на посещённую ссылку, если callback требует сущность.
+Reference-only collect не проверяет наличие сущностей. limit=0 не читает источник;
+ранняя остановка и ошибка callback закрывают итератор.
+
+Внешний источник можно передать явно:
+`from(ids, { context: storage, get: (id, storage) => storage.load(id) })`.
+Getter синхронный и задаёт собственную политику отсутствия/ошибок. Для Map
+отсутствующий ключ при entity/projection вызывает RangeError, присутствующий
+undefined остаётся допустимым значением. Привязка удерживает resolver/контекст;
+она не делает snapshot сущностей. Снимок создаётся явно через `new Map(people)`.
+
+Контекст collect/sorted задаётся отдельно от контекста источника. Для sorted
+он передаётся четвёртым аргументом `{ context }`. Колбэки не должны изменять
+состав источника во время операции. Для «ограничить, затем сортировать» сначала
+вызовите collect, затем sorted; это отличается от сортировки полной выборки.
+
 ## Сортировка
 
 Получите новый массив ссылок, упорядоченный по выбранному значению. Для Map результат содержит ключи, для Set, массива и Iterable — исходные элементы.
