@@ -1,209 +1,189 @@
 # ts-algo
 
-Небольшие инструменты для повторяющихся задач бизнес-логики. Ссылки на сущности сохраняются, интерфейсы опираются на Iterable/ReadonlyMap и нативную сортировку. Есть сортировка, дерево с переходами между соседями, хронология точек/интервалов с причинностью, очередь FIFO, deque, два связных списка и индекс 2D-точек. Точная арифметика и операции над свободными слотами пока проектируются.
+Инструменты для повторяющихся задач бизнес-логики на TypeScript: сортировка сущностей, иерархии, связанные события, пространственный поиск и очереди.
 
-[Принципы и приоритеты](docs/design.md).
+Работайте с существующими Map, Set и Iterable. Сущности сохраняют идентичность; индексы хранят их ссылки и необходимые для поиска метаданные. Без runtime-зависимостей, с типами TypeScript и отдельными ESM-экспортами.
 
-## Дерево и хронология
-
-```ts
-const hierarchy = tree(items, { parent: item => item.parentId });
-const orderedTree = hierarchy.sortBy(item => item.title, (a, b) => a.localeCompare(b));
-hierarchy.nextSibling(itemId);
-hierarchy.previousSibling(itemId);
-const flatKeys = sortedReferences(hierarchy, item => item.title, (a, b) => a.localeCompare(b));
-
-const events = timeline(storage, {
-  time: event => event.at, // либо { start, end }
-  causes: event => event.causedBy,
-});
-const history = events.between(start, end, event => event.ownerId === ownerId);
-const intersecting = events.overlapping(start, end);
-const causes = events.ancestors(eventId);
-```
-
-Хронология связывает ссылки со временем и причинностью. `ownerId` и другие бизнес-свойства остаются у сущностей. Внешние источники можно передать через `context`, а получение сущности — через `get`; геттеры времени и связей тоже получают контекст. Без options сущности могут содержать `{ at }` или `{ start, end }`, `causes`/`effects`. `between` выбирает начала в `[start, end)`, `overlapping` находит также ранние длительные события. Состав/время/связи кешируются; свойства через resolver читаются при фильтрации. [Контракты и примеры внешнего хранилища](docs/tree-timeline.md).
-
-## Очереди и списки
-
-```ts
-const jobs = queue<Job>();
-jobs.enqueue(job);
-const next = jobs.dequeue();
-
-const pending = deque<Job>();
-pending.pushFront(urgentJob);
-pending.pushBack(job);
-
-const list = doublyLinkedList<Job>();
-const handle = list.append(job);
-list.insertBefore(handle, urgentJob);
-handle.previous?.value;
-list.remove(handle);
-
-const single = linkedList([job]); // только next
-const ordered = sortedReferences(list, job => job.priority, (a, b) => a - b);
-```
-
-Queue/deque используют массивы без обёрток на элемент; связные списки дают стабильные узлы для локальных правок. [Операции, сложность и компромиссы](docs/sequences.md).
-
-39 runtime-тестов проходят в Node и Bun; вывод типов проверяется компилятором. [Точки/деревья: Node](docs/hierarchy-time-results-node.md), [Bun](docs/hierarchy-time-results-bun.md); [очереди/интервалы: Node](docs/sequences-intervals-results-node.md), [Bun](docs/sequences-intervals-results-bun.md); [размер импортов](docs/bundle-results.md).
+## Установка
 
 ```sh
-npm run bench:hierarchy-time
-npm run bench:hierarchy-time:bun
-npm run bench:sequences-intervals
-npm run bench:sequences-intervals:bun
+npm install ts-algo
 ```
 
-## Пространственный индекс
+```ts
+import { sortedReferences, tree, timeline, pointIndex } from "ts-algo";
+```
+
+## Сортировка
+
+Получите новый массив ссылок, упорядоченный по выбранному значению. Для Map результат содержит ключи, для Set, массива и Iterable — исходные элементы.
 
 ```ts
-import { pointIndex } from "./src/index.js";
+import { sortedReferences } from "ts-algo";
 
-const storage = new Map([
-  ["a", { x: 10, y: 20 }],
-  ["b", { x: 80, y: 90 }],
+const people = new Map([
+  ["anna", { age: 30 }],
+  ["boris", { age: 20 }],
+  ["vera", { age: 30 }],
 ]);
-const index = pointIndex(storage, { x: entity => entity.x, y: entity => entity.y });
-const keys = index.within({ minX: 0, minY: 0, maxX: 50, maxY: 50 }); // ["a"]
-const nearest = index.nearest(12, 20, 10); // { reference: "a", distance: 2 }
+
+const keys = sortedReferences(people, person => person.age, (a, b) => a - b);
+// ["boris", "anna", "vera"]
+
+const items = [...people.values()];
+const ordered = sortedReferences(items, person => person.age, (a, b) => a - b);
+// Исходные объекты в новом порядке; items и people не изменяются.
 ```
 
-Map возвращает ключи; Set, массив и Iterable — исходные элементы. Координаты считываются один раз при построении. Индекс не изменяет сущности; после изменения координат или состава нужно пересоздать снимок. Это bucket-quadtree для точек в плоскости. Границы области и радиус включены; порядок `within` не определён, равные расстояния `nearest` разрешаются исходным порядком. Координаты должны быть конечными. Подробнее об ограничениях и сложности — в [проектировании](docs/design.md#пространство).
+Сортировка устойчива: равные значения сохраняют порядок источника. При двух и более элементах селектор вызывается один раз на каждое вхождение; пустой и одноэлементный источники не вызывают селектор. Значения кешируются, порядок определяется нативным `Array.sort`.
 
-```sh
-npm test
-npm run test:bun
-npm run bench:spatial
-npm run bench:spatial:bun
-npm run bench:bundle
-```
+Принимайте согласованный компаратор, используйте плотные массивы и конечные Iterable. Колбэки не должны менять источник. [Подробный контракт и стоимость](docs/sorting.md).
 
-Отчёты: [Node/V8](docs/spatial-results-node.md), [Bun/JavaScriptCore](docs/spatial-results-bun.md), [размер JS и gzip](docs/bundle-results.md). Измеряем отдельно построение, 64 запроса к готовому индексу и построение вместе с запросами; baseline — Array.filter и линейный поиск ближайшей точки. Совпадающие точки показывают случай, когда индекс для nearest медленнее линейного обхода. Оба runtime проходят одинаковые 39 тестов; TypeScript-проверки отдельно проверяют вывод типов.
+## Дерево
 
-## Сортировка ссылок
-
-Интерфейс над нативным `Array.sort`: значения получаем из внешнего хранилища, кешируем и сортируем индексы. Возвращаем новый массив исходных ссылок. Объекты `{ ref, value }` на каждый элемент не создаём. Учебный Quicksort находится в [references](references/README.md) и не входит в публичный API.
-
-## API
+Создайте иерархию из Map с селектором родителя. Несколько корней допустимы.
 
 ```ts
-import { sortedReferences } from "./src/index.js";
+import { tree, sortedReferences } from "ts-algo";
 
-type Entity = Readonly<{ age: number }>;
-const storage = new Map<string, Entity>([
-  ["anna", Object.freeze({ age: 30 })],
-  ["boris", Object.freeze({ age: 20 })],
-  ["vera", Object.freeze({ age: 30 })],
+type Item = Readonly<{ parentId: string | null; title: string }>;
+const items = new Map<string, Item>([
+  ["catalog", { parentId: null, title: "Каталог" }],
+  ["phones", { parentId: "catalog", title: "Телефоны" }],
+  ["books", { parentId: "catalog", title: "Книги" }],
 ]);
-const sorted = sortedReferences(
-  storage,
-  entity => entity.age,
-  (a, b) => a - b,
-);
-// sorted: ["boris", "anna", "vera"]
-// storage и сущности сохраняются.
+
+const catalog = tree(items, { parent: item => item.parentId });
+catalog.children("catalog");     // ["phones", "books"]
+catalog.nextSibling("phones");   // "books"
+catalog.previousSibling("books"); // "phones"
+[...catalog.subtree("catalog")]; // ["catalog", "phones", "books"]
+
+const ordered = catalog.sortBy(item => item.title, (a, b) => a.localeCompare(b));
+ordered.children("catalog"); // ["books", "phones"]
+
+const keys = sortedReferences(catalog, item => item.title, (a, b) => a.localeCompare(b));
+// Плоский массив ключей, упорядоченный по названию.
 ```
+
+`sortBy` возвращает новый вид с сохранением иерархии. Переходы к соседям остаются внутри одной группы детей. Корневой родитель — null/undefined; ключи узлов должны быть non-nullish. Отсутствующий родитель и циклы вызывают RangeError. Состав и связи — снимок при создании. [Контракт дерева](docs/tree-timeline.md#дерево).
+
+## Хронология
+
+Привяжите события к моменту или промежутку времени и причинным связям. Бизнес-свойства, например `ownerId`, остаются у событий.
 
 ```ts
-// Map: селектор получает сущность и ключ, результат содержит ключи.
-sortedReferences(map, (entity, key) => entity.age, compare); // Key[]
+import { timeline } from "ts-algo";
 
-// Set и массив: селектор получает элемент, результат содержит элементы.
-sortedReferences(set, entity => entity.age, compare); // Entity[]
-sortedReferences(array, entity => entity.age, compare); // Entity[]
+type Event = Readonly<{
+  start: number;
+  end: number;
+  ownerId: string;
+  causes: readonly string[];
+}>;
+const storage = new Map<string, Event>([
+  ["order", { start: 0, end: 10, ownerId: "customer", causes: [] }],
+  ["payment", { start: 5, end: 5, ownerId: "customer", causes: ["order"] }],
+]);
 
-// Другие итерируемые коллекции и генераторы поддерживаются тем же интерфейсом.
-sortedReferences(iterable, entity => entity.age, compare); // Entity[]
+const history = timeline(storage);
+history.between(5, 6);     // ["payment"]: начало внутри окна
+history.overlapping(5, 6); // ["order", "payment"]: пересечение окна
+history.filter(event => event.ownerId === "customer"); // ["order", "payment"]
+history.causesOf("payment"); // ["order"]
+history.effectsOf("order");  // ["payment"]
 ```
 
-Перегрузки принимают `ReadonlyMap`, `ReadonlySet`, массивы и обычные `Iterable`. Для Map ссылка — ключ; селектор получает `(entity, key)` непосредственно при обходе записей, без `Map.get`. Для остальных источников ссылка — элемент. Результат всегда массив. Сортировка Set возвращает те же объекты, а не их копии; устойчивость сохраняет порядок обхода источника.
+Без селекторов поддерживаются поля `{ at }` или `{ start, end }` и необязательные `causes`/`effects`. Для другой формы данных передайте `time`, `causes` и/или `effects`. Через `context` и `get` можно получать сущности и метаданные из внешних источников.
 
-Массив ссылок на отдельное хранилище по-прежнему поддерживается. В этом случае селектор сам получает сущность по ссылке и отвечает за отсутствующие сущности. `compare` возвращает отрицательное число, ноль или положительное число. Он должен задавать согласованный порядок, не возвращать `NaN` и не менять данные. Массивы должны быть плотными, без пропущенных элементов. Колбэки не должны изменять источник или порядок сравнения во время сортировки.
+Окна и длительности полуоткрытые: `[start, end)`. Нулевая длительность — точечное событие. Время должно быть конечным числом в единицах вызывающего кода; часовые пояса автоматически не преобразуются. Причинные связи допускают несколько причин, но запрещают отсутствующие ссылки и циклы.
 
-При числе элементов больше одного селектор вызывается ровно один раз на каждое вхождение ссылки. Пустые и одноэлементные источники возвращают новый массив без вызова селектора или компаратора. Сущности не копируются и не изменяются; существующие объектные ссылки сохраняют идентичность. Неизменяемость сущностей — контракт вызывающего кода: алгоритм не замораживает объекты.
+Состав, время и причинность кешируются при создании. Чтение сущностей и фильтры обращаются к актуальному внешнему источнику; изменение временных метаданных требует перестроения. [Все операции и пример внешнего хранилища](docs/tree-timeline.md#хронология-ссылки-время-и-причинность).
 
-Map обходится через `forEach`: промежуточный массив ключей снаружи и пары `[key, entity]` на каждый элемент не нужны. Внутри хранится массив ключей для индексного доступа. Set и обычный Iterable один раз материализуются перед вычислением значений. Одноразовый генератор потребляется полностью; бесконечный Iterable для сортировки не подходит.
+## Пространственный поиск
 
-Для будущих структур есть два существующих протокола: `Iterable<Ref>` для элементов и `ReadonlyMap<Key, Entity>` для хранилищ по ключу. Реализация распознаёт Map по его методам и размеру, поэтому работают также readonly-обёртки и Map из другого JS realm. Новая структура может реализовать один из этих протоколов без новой перегрузки. Специальный интерфейс нужен лишь при иной семантике ссылок.
-
-Равные ключи сохраняют исходный порядок благодаря устойчивости нативного `Array.sort`. Дополнительное сравнение исходных индексов не требуется.
-
-## Алгоритм и память
-
-Основной `sortedReferences` создаёт кеш значений и индексы, вызывает `order.sort(...)`, затем собирает результат. Для массивов — три вспомогательных массива. Для Map, Set и других Iterable дополнительно требуется массив ссылок, который заменяет прежний внешний `Array.from(...)`: суммарно четыре массива при числе элементов больше одного. Объекты на каждый элемент библиотека не создаёт. Устойчивость и стратегия сортировки обеспечиваются движком. В измеренной версии V8 худшее время сортировки индексов — `O(n log n)`, внутренние буферы движка требуют `O(n)` дополнительной памяти.
-
-## Сравнение API с Array.sort
-
-Для той же задачи стандартный API выглядит так:
+Найдите точки внутри области или ближайшую точку на плоскости.
 
 ```ts
-const sorted = references.slice().sort(
-  (a, b) => compare(getValue(a), getValue(b)),
-);
+import { pointIndex } from "ts-algo";
+
+const places = new Map([
+  ["office", { x: 10, y: 20 }],
+  ["warehouse", { x: 80, y: 90 }],
+]);
+const index = pointIndex(places, { x: place => place.x, y: place => place.y });
+
+index.within({ minX: 0, minY: 0, maxX: 50, maxY: 50 }); // ["office"]
+index.nearest(12, 20, 10); // { reference: "office", distance: 2 }
 ```
 
-| Свойство | sortedReferences | references.slice().sort(...) |
+Map возвращает ключи; Set, массив и Iterable — элементы. Границы области и радиус включены. Порядок `within` не определён; при равном расстоянии `nearest` выбирает первое вхождение источника. Если подходящей точки нет, результат — undefined.
+
+Координаты считываются один раз и должны быть конечными. После изменения координат или состава пересоздайте индекс. [Устройство и ограничения](docs/design.md#пространство).
+
+## Очереди
+
+FIFO для обработки заданий и deque для операций с обоих концов.
+
+```ts
+import { queue, deque } from "ts-algo";
+
+const jobs = queue<string>();
+jobs.enqueue("send-email");
+jobs.enqueue("update-report");
+jobs.dequeue(); // "send-email"
+jobs.peek();    // "update-report"
+
+const pending = deque(["regular"]);
+pending.pushFront("urgent");
+pending.pushBack("later");
+pending.popFront(); // "urgent"
+pending.popBack();  // "later"
+```
+
+Операции с концами амортизированно O(1). Значения хранятся в массивах без объекта-узла на каждый элемент. Пустое извлечение возвращает undefined; если undefined — допустимое значение, проверяйте `size`.
+
+## Связные списки
+
+Используйте стабильные узлы для вставок и удаления рядом с известной позицией.
+
+```ts
+import { linkedList, doublyLinkedList } from "ts-algo";
+
+const single = linkedList(["a"]);
+const first = single.first;
+if (first) single.insertAfter(first, "b");
+// [...single]: ["a", "b"]
+
+const sequence = doublyLinkedList(["a", "c"]);
+const last = sequence.last;
+if (last) {
+  const middle = sequence.insertBefore(last, "b");
+  middle.previous?.value; // "a"
+  middle.next?.value;     // "c"
+  sequence.remove(middle);
+}
+// [...sequence]: ["a", "c"]
+```
+
+У односвязного списка есть `next`, у двусвязного — также `previous`. Связи узлов доступны только для чтения; изменение выполняется методами списка. Чужие и отсоединённые узлы вызывают RangeError.
+
+Все очереди и списки реализуют Iterable и работают с `sortedReferences`. Сортировка возвращает массив значений; порядок самой коллекции сохраняется. [Операции, сложность и выбор структуры](docs/sequences.md).
+
+## Производительность и размер
+
+Измерения сравнивают операции с нативными решениями и учитывают стоимость построения индексов. Выбор зависит от данных: массив с курсором эффективен для разового FIFO, пакетный `filter` — для массовых удалений, индексы — для повторных выборочных запросов.
+
+| Область | Node / V8 | Bun / JavaScriptCore |
 |---|---|---|
-| Новый массив ссылок | Да | Да, благодаря slice |
-| Сохранение исходного массива | Да | Да, благодаря slice |
-| Отдельная функция получения значения | Аргумент API | Вызов внутри компаратора |
-| Кеширование значений | Один раз на вхождение при n > 1 | Нет; обычно два получения на сравнение |
-| Устойчивость | Нативная, требуется стандартом | Требуется стандартом |
-| Дополнительные массивы нашего кода | Значения, индексы, результат | Копия ссылок |
-| Внутренние буферы движка | V8 выделяет рабочие буферы для сортировки индексов | V8 выделяет рабочие буферы для сортировки ссылок |
-| Источники | Map, Set, плотные массивы, Iterable | Массив ссылок |
-| Общая семантика JS-массивов | Контракт плотного массива | Стандартная обработка undefined, дырок и свойств |
+| Точки | [Отчёт](docs/spatial-results-node.md) | [Отчёт](docs/spatial-results-bun.md) |
+| Дерево и хронология | [Отчёт](docs/hierarchy-time-results-node.md) | [Отчёт](docs/hierarchy-time-results-bun.md) |
+| Очереди, списки и интервалы | [Отчёт](docs/sequences-intervals-results-node.md) | [Отчёт](docs/sequences-intervals-results-bun.md) |
 
-Стандарт также предоставляет `references.toSorted(compareRefs)` для нового массива. Сам по себе ни `sort`, ни `toSorted` не кеширует результат пользовательского `getValue`. У `sort` без компаратора сравнение строковое; для чисел нужен компаратор. [Спецификация ECMAScript](https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.sort).
+[Сортировка и кеширование](docs/benchmark-results.md) · [Map/Set](docs/collections-results.md) · [Размер отдельных импортов](docs/bundle-results.md).
 
-Нужное нам разделение API и кеширование можно реализовать поверх стандартной сортировки индексов. Поэтому сравниваем отдельно:
+Отчёты фиксируют конкретные версии runtime и одну машину. Они не измеряют браузеры или пиковую память. Учебные алгоритмы находятся в [references](references/README.md) и используются только для сравнений.
 
-1. **qs-stable** — учебный `sortedReferencesQuickSort` с устойчивым порядком.
-2. **v8-direct** — копия ссылок, получение значений при каждом сравнении.
-3. **v8-cached** — основной `sortedReferences`: такие же три массива, кеш значений и новый результат; индексы сортирует V8. Устойчивость обеспечивает движок, сравнение индексов при равных ключах не требуется.
+## Разработка
 
-Разница между direct и cached показывает эффект кеша. Разница между qs-stable и v8-cached показывает поведение алгоритмов с одинаковым представлением данных и одинаковой семантикой результата, включая цену обеспечения устойчивости у QS.
-
-## Какая сортировка внутри V8
-
-В измеренной среде Node v25.8.1 / V8 14.1.146.11-node.21 обычный `Array.prototype.sort` использует **TimSort** — устойчивую адаптивную сортировку слиянием. Она использует уже упорядоченные участки: линейное время на упорядоченных данных, худшее `O(n log n)`, вспомогательная память `O(n)`. Изменение массива на месте в API не означает постоянную дополнительную память реализации. [Исходник Node этой версии](https://github.com/nodejs/node/blob/v25.8.1/deps/v8/third_party/v8/builtins/array-sort.tq), [объяснение V8](https://v8.dev/blog/array-sort#timsort).
-
-Это утверждение о конкретной версии. На момент проверки текущая ветка V8 `main` уже описывает реализацию как **PowerSort** — тоже устойчивую адаптивную сортировку слиянием. Название алгоритма не является гарантией JavaScript; `TypedArray.sort` — отдельная реализация, здесь её не измеряем. [Текущий исходник V8](https://github.com/v8/v8/blob/main/third_party/v8/builtins/array-sort.tq).
-
-## Проверка и бенчмарк
-
-Нужен современный Node.js с поддержкой ES2023; замеры выполнены на версии из отчёта. TypeScript проверяется со `strict` и `noUncheckedIndexedAccess`.
-
-```sh
-npm ci
-npm run check
-npm test
-npm run bench
-npm run bench:collections
-```
-
-Бенчмарк генерирует [таблицу](docs/benchmark-results.md) и [все измерения в JSON](docs/benchmark-results.json). В JSON также записаны числа сравнений и получений значений. Подробности среды и методики находятся в отчёте. Измеряется весь вызов API, включая кеширование, выделение массивов и создание результата. Пиковая память в байтах не измеряется.
-
-Отдельный [бенчмарк перегрузок](docs/collections-results.md) сравнивает новые вызовы Array/Map/Set с прежним массивным интерфейсом; [исходные измерения](docs/collections-results.json). Для Map и Set время внешнего `Array.from` включено в прежний вариант.
-
-Размеры по умолчанию: 1 000, 10 000 и 100 000. Семь форм входа и три стоимости получения значения. Для формы organ-pipe размер ограничен 10 000 из-за квадратичной работы QS; предел задаёт `BENCH_ADVERSARIAL_MAX`. Данные генерируются детерминированно; каждый результат проверяется против стандартной устойчивой сортировки. Счётчики измеряются отдельно от времени. Порядок вариантов в раундах меняется, перед запуском вызывается GC; автоматический GC внутри замера возможен.
-
-Для другого запуска:
-
-```sh
-BENCH_SIZES=1000,10000 BENCH_SAMPLES=9 BENCH_WARMUPS=4 npm run bench
-```
-
-Этот запуск перезапишет отчёт и JSON. Один микробенчмарк не доказывает универсального превосходства: сравнивать нужно на собственных данных и стоимости колбэков.
-
-## Что показал запуск
-
-Полные значения приведены в [отчёте](docs/benchmark-results.md). На случайных данных большого размера наш QS оказался близок к V8 с тем же кешем, но медленнее. При доступе через Map кеширование заметно помогает по сравнению с получением сущности внутри каждого сравнения. Это преимущество API и кеширования, а не доказательство преимущества Quicksort.
-
-На уже упорядоченных и одинаковых ключах стандартная адаптивная сортировка выигрывает значительно. Наш устойчивый вариант считает одинаковые ключи различными из-за сравнения исходных индексов.
-
-На organ-pipe выявлен квадратичный случай: при увеличении размера с 1 000 до 10 000 число сравнений QS выросло с 250 500 до 25 005 000 — примерно в 100 раз. У V8 на том же входе — с 1 998 до 19 998. Это объясняет большой разрыв во времени независимо от небольших колебаний измерений.
-
-Практический выбор для устойчивой сортировки ссылок в этой среде: оставить разделение `references / getValue / compare` и кеш значений, а сортировку индексов поручить V8. Этот вариант теперь является основным API: [sortedReferences](src/sorted-references.ts). Собственный QS сохранён только в [теоретических референсах](references/README.md) для тестов и сравнений.
+[Сборка, проверки и запуск бенчмарков](docs/contributing.md) · [Принципы и план развития](docs/design.md).
