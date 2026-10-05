@@ -14,6 +14,40 @@ npm install ts-algo
 import { sorted, tree, timeline, pointIndex } from "ts-algo";
 ```
 
+## Брендированные типы
+
+`Brand<T, Name>` различает единицы измерения и идентификаторы на этапе компиляции:
+
+```ts
+import type { Brand } from "ts-algo";
+
+type Milliseconds = Brand<number, "Milliseconds">;
+type Seconds = Brand<number, "Seconds">;
+type UserId = Brand<string, "UserId">;
+```
+
+Тип и его импорт стираются из JavaScript. `Milliseconds` остаётся числом, но обычный number и Seconds не присваиваются ему автоматически. Объявление бренда само не проверяет значение; арифметика не сохраняет единицы автоматически.
+
+Для проверки внешних данных рекомендуем [Zod Mini](https://zod.dev/packages/mini), устанавливаемый отдельно (`npm install zod`). Можно использовать его собственные бренды:
+
+```ts
+import * as z from "zod/mini";
+import { sorted } from "ts-algo";
+
+const UserIdSchema = z.string().check(z.minLength(1)).brand<"UserId">();
+type UserId = z.infer<typeof UserIdSchema>;
+
+const users = new Map<UserId, { age: number }>([
+  [UserIdSchema.parse("anna"), { age: 30 }],
+  [UserIdSchema.parse("boris"), { age: 20 }],
+]);
+
+const keys = sorted(users, user => user.age, (a, b) => a - b);
+// UserId[]: бренд Zod сохраняется без преобразования.
+```
+
+Собственный Brand и бренд Zod используют разные unique symbol и не взаимозаменяемы даже при одинаковом имени. Выберите одно определение для каждого доменного типа. Алгоритмы ts-algo обобщённые и сохраняют оба варианта; Zod не является зависимостью библиотеки. Создание схемы и парсинг выполняются в runtime, поэтому проверяйте данные на входе приложения, а не внутри компаратора сортировки.
+
 ## Сортировка
 
 Получите новый массив ссылок, упорядоченный по выбранному значению. Для Map результат содержит ключи, для Set, массива и Iterable — исходные элементы.

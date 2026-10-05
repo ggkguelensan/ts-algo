@@ -1,9 +1,22 @@
 // Compiled by tsc, not executed. Check inference and overload rejection.
 import { sorted, pointIndex, tree, timeline, queue, deque, linkedList, doublyLinkedList } from "../src/index.js";
+import type { Brand } from "../src/index.js";
 
 type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends
   (<T>() => T extends B ? 1 : 2) ? true : false;
 type Assert<T extends true> = T;
+type Milliseconds = Brand<number, "Milliseconds">;
+type Seconds = Brand<number, "Seconds">;
+type BrandBase = Assert<Milliseconds extends number ? true : false>;
+type BrandRejectsRaw = Assert<Equal<number extends Milliseconds ? true : false, false>>;
+type BrandSeparatesUnits = Assert<Equal<Seconds extends Milliseconds ? true : false, false>>;
+type MultipleBrands = Brand<Brand<string, "EntityId">, "UserId">;
+type BrandComposition = Assert<MultipleBrands extends Brand<string, "EntityId" | "UserId"> ? true : false>;
+function sortedBrandedKeys(storage: ReadonlyMap<Brand<string, "UserId">, { age: number }>) {
+  const result = sorted(storage, entity => entity.age, (a, b) => a - b);
+  type PreservedKeys = Assert<Equal<typeof result, Brand<string, "UserId">[]>>;
+  return result;
+}
 const numeric = (a: number, b: number) => a - b;
 
 const map: ReadonlyMap<string, Readonly<{ age: number }>> = new Map();
