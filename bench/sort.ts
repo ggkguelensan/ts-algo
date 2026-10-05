@@ -2,33 +2,17 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { cpus } from "node:os";
 import { performance } from "node:perf_hooks";
-import { sortedReferences } from "../src/index.js";
+import { sortedReferences, sortedReferencesQuickSort } from "../src/index.js";
 
 type GetValue = (ref: number) => number;
 type Compare = (a: number, b: number) => number;
 type Algorithm = (refs: readonly number[], getValue: GetValue, compare: Compare) => number[];
 
-// Same key cache, index representation, and result construction as our API.
-// Native sort supplies stability itself, so it needs no index tie-breaker.
-const nativeCached: Algorithm = (refs, getValue, compare) => {
-  if (refs.length <= 1) return refs.slice();
-  const values = new Array<number>(refs.length);
-  const order = new Array<number>(refs.length);
-  for (let i = 0; i < refs.length; i++) {
-    values[i] = getValue(refs[i]!);
-    order[i] = i;
-  }
-  order.sort((a, b) => compare(values[a]!, values[b]!));
-  const result = new Array<number>(refs.length);
-  for (let i = 0; i < refs.length; i++) result[i] = refs[order[i]!]!;
-  return result;
-};
-
 const algorithms: Record<string, Algorithm> = {
-  "qs-stable": (refs, getValue, compare) => sortedReferences(refs, getValue, compare),
+  "qs-stable": (refs, getValue, compare) => sortedReferencesQuickSort(refs, getValue, compare),
   "v8-direct": (refs, getValue, compare) =>
     refs.slice().sort((a, b) => compare(getValue(a), getValue(b))),
-  "v8-cached": nativeCached,
+  "v8-cached": (refs, getValue, compare) => sortedReferences(refs, getValue, compare),
 };
 const names = Object.keys(algorithms);
 const shapes = ["random", "sorted", "reverse", "almost-sorted", "equal", "few-distinct", "organ-pipe"];

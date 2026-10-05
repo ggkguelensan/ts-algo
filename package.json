@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Indirect sorting of immutable entities and comparison with V8 Array.sort",
+  "description": "Cached native sorting of immutable entity references with an educational Quicksort comparison",
   "scripts": {
     "build": "tsc",
     "check": "tsc --noEmit",
