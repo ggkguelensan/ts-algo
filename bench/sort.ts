@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { cpus } from "node:os";
 import { performance } from "node:perf_hooks";
-import { sortedReferences, sortedReferencesQuickSort } from "../src/index.js";
+import { sortedReferences } from "../src/index.js";
+import { sortedReferencesQuickSort } from "../references/sorted-references-quick-sort.js";
 
 type GetValue = (ref: number) => number;
 type Compare = (a: number, b: number) => number;

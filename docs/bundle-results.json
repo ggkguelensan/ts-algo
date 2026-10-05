@@ -4,7 +4,7 @@
     "target": "browser",
     "format": "esm",
     "minify": true,
-    "date": "2026-10-05T08:54:30.664Z"
+    "date": "2026-10-05T09:01:47.279Z"
   },
   "rows": [
     {
@@ -12,14 +12,14 @@
         "sortedReferences"
       ],
       "bytes": 927,
-      "gzipBytes": 463
+      "gzipBytes": 464
     },
     {
       "exports": [
         "pointIndex"
       ],
       "bytes": 2662,
-      "gzipBytes": 1289
+      "gzipBytes": 1290
     },
     {
       "exports": [
@@ -27,15 +27,7 @@
         "pointIndex"
       ],
       "bytes": 3212,
-      "gzipBytes": 1509
-    },
-    {
-      "exports": [
-        "quickSortInPlace",
-        "sortedReferencesQuickSort"
-      ],
-      "bytes": 637,
-      "gzipBytes": 420
+      "gzipBytes": 1507
     },
     {
       "exports": [
@@ -70,7 +62,7 @@
         "linkedList"
       ],
       "bytes": 901,
-      "gzipBytes": 498
+      "gzipBytes": 497
     },
     {
       "exports": [
@@ -91,7 +83,7 @@
         "doublyLinkedList"
       ],
       "bytes": 10393,
-      "gzipBytes": 4270
+      "gzipBytes": 4271
     }
   ]
 }

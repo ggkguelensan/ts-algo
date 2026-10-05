@@ -1,4 +1,4 @@
-import type { Compare } from "./quick-sort.js";
+import type { Compare } from "./compare.js";
 import { sortedReferences } from "./sorted-references.js";
 import { referenceMap, snapshotMap } from "./internal/reference-map.js";
 

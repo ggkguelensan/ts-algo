@@ -1,4 +1,5 @@
-import { quickSortInPlace, type Compare } from "./quick-sort.js";
+import { quickSortInPlace } from "./quick-sort.js";
+import type { Compare } from "../src/compare.js";
 
 export interface SortOptions {
   /** Preserve input order for equal values. Default: true. */

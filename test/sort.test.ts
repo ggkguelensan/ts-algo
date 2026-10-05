@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { quickSortInPlace, sortedReferences, sortedReferencesQuickSort } from "../src/index.js";
+import { sortedReferences } from "../src/index.js";
+import { quickSortInPlace } from "../references/quick-sort.js";
+import { sortedReferencesQuickSort } from "../references/sorted-references-quick-sort.js";
 
 const numeric = (a: number, b: number) => a - b;
 

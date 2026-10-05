@@ -1,5 +1,5 @@
 import { isMapLike } from "./internal/collection.js";
-import type { Compare } from "./quick-sort.js";
+import type { Compare } from "./compare.js";
 
 type IterableItem<Source> = Source extends Iterable<infer Item> ? Item : never;
 

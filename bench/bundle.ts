@@ -11,7 +11,7 @@ const directory = mkdtempSync(resolve("dist/bundle-"));
 const rows = [];
 try {
   for (const names of [["sortedReferences"], ["pointIndex"], ["sortedReferences", "pointIndex"],
-    ["quickSortInPlace", "sortedReferencesQuickSort"], ["tree"], ["timeline"],
+    ["tree"], ["timeline"],
     ["queue"], ["deque"], ["linkedList"], ["doublyLinkedList"],
     ["sortedReferences", "pointIndex", "tree", "timeline", "queue", "deque", "linkedList", "doublyLinkedList"]]) {
     const fixture = join(directory, "entry.ts");
@@ -22,8 +22,6 @@ try {
     const module = await import(pathToFileURL(artifact).href);
     for (const name of names) assert.equal(typeof module[name], "function");
     if (module.sortedReferences) assert.deepEqual(module.sortedReferences([2, 1], (x: number) => x, (a: number, b: number) => a - b), [1, 2]);
-    if (module.quickSortInPlace) { const a = [2, 1, 2]; module.quickSortInPlace(a, (a: number, b: number) => a - b); assert.deepEqual(a, [1, 2, 2]); }
-    if (module.sortedReferencesQuickSort) assert.deepEqual(module.sortedReferencesQuickSort([2, 1], (x: number) => x, (a: number, b: number) => a - b), [1, 2]);
     if (module.pointIndex) assert.equal(module.pointIndex([{ x: 1, y: 2 }], {
       x: (p: { x: number }) => p.x, y: (p: { y: number }) => p.y,
     }).nearest(1, 2).distance, 0);

@@ -1,4 +1,4 @@
-export type Compare<T> = (a: T, b: T) => number;
+import type { Compare } from "../src/compare.js";
 
 /**
  * Three-way Quicksort for dense arrays. Mutates items; is not stable.
