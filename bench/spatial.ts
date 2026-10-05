@@ -1,4 +1,4 @@
-import { performance } from "node:perf_hooks";
+import { measure, checksum } from "./measure.js";
 import { writeFileSync } from "node:fs";
 import { cpus } from "node:os";
 import assert from "node:assert/strict";
@@ -11,22 +11,6 @@ const metadata = { runtime, version: process.versions.bun ?? process.version,
   samples: 7, warmups: 3, queries: 64, date: new Date().toISOString() };
 const coordinates = { x: (p: Point) => p.x, y: (p: Point) => p.y };
 type Point = { x: number; y: number; id: number };
-let sink = 0;
-function measure(variants: Record<string, () => number>): Record<string, { median: number; min: number; max: number }> {
-  const entries = Object.entries(variants);
-  const samples: Record<string, number[]> = Object.fromEntries(entries.map(([name]) => [name, []]));
-  for (let round = -metadata.warmups; round < metadata.samples; round++) {
-    for (let offset = 0; offset < entries.length; offset++) {
-      const [name, run] = entries[(offset + round + metadata.warmups) % entries.length]!;
-      const start = performance.now(); sink += run(); const duration = performance.now() - start;
-      if (round >= 0) samples[name]!.push(duration);
-    }
-  }
-  return Object.fromEntries(Object.entries(samples).map(([name, values]) => {
-    values.sort((a, b) => a - b);
-    return [name, { median: values[Math.floor(values.length / 2)]!, min: values[0]!, max: values.at(-1)! }];
-  }));
-}
 let seed = 0xabcdef;
 function random() { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 2 ** 32; }
 function linearNearest(points: readonly Point[], x: number, y: number): Point | undefined {
@@ -74,12 +58,12 @@ for (const n of [1000, 10000, 100000]) {
       "single-range-build-query": () => pointIndex(points, coordinates).within(first).length,
       "wide-range-native": () => points.filter(p => matches(p, wide)).length,
       "wide-range-index": () => index.within(wide).length,
-    });
+    }, metadata);
     rows.push({ n, shape, times });
   }
 }
 const stem = `docs/spatial-results-${runtime}`;
-writeFileSync(`${stem}.json`, JSON.stringify({ metadata, rows, sink }, null, 2) + "\n");
+writeFileSync(`${stem}.json`, JSON.stringify({ metadata, rows, sink: checksum }, null, 2) + "\n");
 const names = ["build", "range-native", "range-index", "range-build-query", "nearest-linear", "nearest-index", "nearest-build-query"];
 const otherNames = ["single-range-native", "single-range-build-query", "wide-range-native", "wide-range-index"];
 const text = `# Spatial benchmark: ${runtime}\n\n${metadata.version}; ${metadata.engine}; ${metadata.cpu}; ${metadata.platform}.\n\n` +

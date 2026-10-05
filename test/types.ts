@@ -1,5 +1,5 @@
 // Compiled by tsc, not executed. Check inference and overload rejection.
-import { sortedReferences, pointIndex } from "../src/index.js";
+import { sortedReferences, pointIndex, tree, timeline } from "../src/index.js";
 
 type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends
   (<T>() => T extends B ? 1 : 2) ? true : false;
@@ -42,3 +42,19 @@ const spatialSet = pointIndex(pointSet, { x: p => p.x, y: p => p.y });
 type SpatialEntities = Assert<Equal<ReturnType<typeof spatialSet.within>, { x: number; y: number }[]>>;
 // @ts-expect-error Map selects an entity, not an entry tuple.
 pointIndex(positions, { x: ([key, p]: [string, { x: number }]) => p.x, y: () => 0 });
+
+const hierarchy = tree(new Map([["root", { parentId: null, rank: 1 }]]), { parent: e => e.parentId });
+const treeOrder = sortedReferences(hierarchy, e => e.rank, numeric);
+type TreeKeys = Assert<Equal<typeof treeOrder, string[]>>;
+const chronological = timeline(new Map([["event", { at: 0, owner: 42, causes: [] as string[] }]]), {
+  at: e => e.at, owner: e => e.owner, causes: e => e.causes,
+});
+type EventKeys = Assert<Equal<ReturnType<typeof chronological.between>, string[]>>;
+chronological.forOwner(42);
+// @ts-expect-error owner type is inferred from its selector.
+chronological.forOwner("42");
+const ownerless = timeline(new Map([["event", 0]]), { at: e => e });
+// @ts-expect-error an ownerless timeline cannot be queried by an owner.
+ownerless.forOwner(42);
+// @ts-expect-error null is reserved for root parents, not a node key.
+tree(new Map([[null, { parentId: null }]]), { parent: e => e.parentId });

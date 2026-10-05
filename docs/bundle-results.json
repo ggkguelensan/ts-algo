@@ -4,7 +4,7 @@
     "target": "browser",
     "format": "esm",
     "minify": true,
-    "date": "2026-10-05T04:49:02.845Z"
+    "date": "2026-10-05T05:14:23.183Z"
   },
   "rows": [
     {
@@ -35,7 +35,31 @@
         "sortedReferencesQuickSort"
       ],
       "bytes": 610,
-      "gzipBytes": 395
+      "gzipBytes": 396
+    },
+    {
+      "exports": [
+        "tree"
+      ],
+      "bytes": 2184,
+      "gzipBytes": 1016
+    },
+    {
+      "exports": [
+        "timeline"
+      ],
+      "bytes": 3028,
+      "gzipBytes": 1411
+    },
+    {
+      "exports": [
+        "sortedReferences",
+        "pointIndex",
+        "tree",
+        "timeline"
+      ],
+      "bytes": 6304,
+      "gzipBytes": 2729
     }
   ]
 }

@@ -1,8 +1,28 @@
 # ts-algo
 
-Небольшие инструменты для повторяющихся задач бизнес-логики: работа со ссылками на сущности, временем, пространством и точными вычислениями. Простой интерфейс, нативные средства JS и измеряемая стоимость runtime. Сейчас реализованы сортировка ссылок и статический индекс 2D-точек; интервалы и точная арифметика пока проектируются.
+Небольшие инструменты для повторяющихся задач бизнес-логики: работа со ссылками на сущности, временем, пространством и точными вычислениями. Простой интерфейс, нативные средства JS и измеряемая стоимость runtime. Сейчас реализованы сортировка ссылок, дерево, временная линия с владельцами и причинными связями, индекс 2D-точек; интервалы и точная арифметика пока проектируются.
 
 [Принципы, приоритеты и контракты будущих модулей](docs/design.md).
+
+## Дерево и временная линия
+
+```ts
+const hierarchy = tree(items, { parent: item => item.parentId });
+const orderedTree = hierarchy.sortBy(item => item.title, (a, b) => a.localeCompare(b));
+const flatKeys = sortedReferences(hierarchy, item => item.title, (a, b) => a.localeCompare(b));
+
+const events = timeline(storage, {
+  at: event => event.at,
+  owner: event => event.ownerId,
+  causes: event => event.causedBy,
+});
+const history = events.forOwner(ownerId).between(start, end);
+const causes = events.ancestors(eventId);
+```
+
+`tree` хранит иерархию с одним родителем; `sortBy` сохраняет связи, а `sortedReferences` возвращает плоский рейтинг. Временная линия хранит события-точки: бинарный поиск по времени, индекс владельцев и DAG причинности с несколькими причинами. Хронологический и причинный порядок различаются. Оба модуля реализуют ReadonlyMap и используют существующий интерфейс сортировки. [Полные примеры и ограничения](docs/tree-timeline.md).
+
+[Замеры Node/V8](docs/hierarchy-time-results-node.md), [Bun/JavaScriptCore](docs/hierarchy-time-results-bun.md), [размер модулей](docs/bundle-results.md). Команды: `npm run bench:hierarchy-time`, `npm run bench:hierarchy-time:bun`. Все 30 тестов проходят в обоих runtime.
 
 ## Пространственный индекс
 
@@ -28,7 +48,7 @@ npm run bench:spatial:bun
 npm run bench:bundle
 ```
 
-Отчёты: [Node/V8](docs/spatial-results-node.md), [Bun/JavaScriptCore](docs/spatial-results-bun.md), [размер JS и gzip](docs/bundle-results.md). Измеряем отдельно построение, 64 запроса к готовому индексу и построение вместе с запросами; baseline — Array.filter и линейный поиск ближайшей точки. Совпадающие точки показывают случай, когда индекс для nearest медленнее линейного обхода. Оба runtime проходят одинаковые 24 теста; TypeScript-проверки отдельно проверяют вывод типов.
+Отчёты: [Node/V8](docs/spatial-results-node.md), [Bun/JavaScriptCore](docs/spatial-results-bun.md), [размер JS и gzip](docs/bundle-results.md). Измеряем отдельно построение, 64 запроса к готовому индексу и построение вместе с запросами; baseline — Array.filter и линейный поиск ближайшей точки. Совпадающие точки показывают случай, когда индекс для nearest медленнее линейного обхода. Оба runtime проходят одинаковые 30 тестов; TypeScript-проверки отдельно проверяют вывод типов.
 
 ## Сортировка ссылок
 
