@@ -115,6 +115,27 @@ resolver. Замена сущности в Map отражается в филь�
 
 ## Точки и интервалы
 
+Для работы с датами выбран date-fns. Пока Timeline принимает числовое время;
+готовые Date и Interval преобразуйте в селекторе один раз при построении:
+
+```ts
+import { parseISO, addHours, getTime } from "date-fns";
+import { timeline } from "ts-algo";
+
+const start = parseISO("2026-10-05T10:00:00Z");
+const end = addHours(start, 1);
+const events = new Map([["meeting", { start, end }]]);
+const history = timeline(events, {
+  time: event => ({ start: getTime(event.start), end: getTime(event.end) }),
+});
+history.overlapping(getTime(start), getTime(end)); // ["meeting"]
+```
+
+date-fns устанавливается приложением отдельно. Прямой приём дат и типов
+Interval запланирован в [архитектуре временного модуля](design.md#время-хронология-и-будущие-операции-интервалов).
+Поддержку Date этот пример реализует через селектор, не через существующий
+числовой тип EventTime.
+
 - `between(a, b)` выбирает события, **начинающиеся** в `[a, b)`.
 - `overlapping(a, b)` выбирает **пересекающие** `[a, b)`, включая начавшиеся раньше.
 - Положительный интервал — `[start, end)`: конец ровно на a не пересекает окно.
