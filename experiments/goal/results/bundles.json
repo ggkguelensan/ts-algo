@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-05T11:02:36.832Z",
+  "date": "2026-10-05T11:54:29.981Z",
   "target": "ES2023, browser, ESM",
   "dependencies": {
     "@rollup/plugin-commonjs": "29.0.3",
@@ -249,8 +249,8 @@
       "name": "fused",
       "bundler": "esbuild",
       "bytes": 1902,
-      "gzip": 878,
-      "brotli": 800,
+      "gzip": 879,
+      "brotli": 803,
       "modules": [
         {
           "path": "source.ts",
@@ -280,11 +280,55 @@
         },
         {
           "path": "query.ts",
-          "bytes": 3065
+          "bytes": 3076
         },
         {
           "path": ".generated-bundles/fused.ts",
           "bytes": 119
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "restricted",
+      "bundler": "esbuild",
+      "bytes": 795,
+      "gzip": 471,
+      "brotli": 416,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 405
+        },
+        {
+          "path": "collect.ts",
+          "bytes": 305
+        },
+        {
+          "path": ".generated-bundles/restricted.ts",
+          "bytes": 67
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "restricted",
+      "bundler": "rollup",
+      "bytes": 754,
+      "gzip": 453,
+      "brotli": 400,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 642
+        },
+        {
+          "path": "collect.ts",
+          "bytes": 598
+        },
+        {
+          "path": ".generated-bundles/restricted.ts",
+          "bytes": 109
         }
       ],
       "smoke": "passed"
@@ -449,8 +493,8 @@
       "name": "temporalQuery",
       "bundler": "esbuild",
       "bytes": 3442,
-      "gzip": 1532,
-      "brotli": 1417,
+      "gzip": 1533,
+      "brotli": 1418,
       "modules": [
         {
           "path": "source.ts",
@@ -488,11 +532,63 @@
         },
         {
           "path": "query.ts",
-          "bytes": 2784
+          "bytes": 2795
         },
         {
           "path": ".generated-bundles/temporalQuery.ts",
           "bytes": 216
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "temporalCollect",
+      "bundler": "esbuild",
+      "bytes": 2516,
+      "gzip": 1210,
+      "brotli": 1123,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 493
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 1574
+        },
+        {
+          "path": "collect.ts",
+          "bytes": 305
+        },
+        {
+          "path": ".generated-bundles/temporalCollect.ts",
+          "bytes": 126
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "temporalCollect",
+      "bundler": "rollup",
+      "bytes": 2506,
+      "gzip": 1194,
+      "brotli": 1105,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 817
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 3141
+        },
+        {
+          "path": "collect.ts",
+          "bytes": 598
+        },
+        {
+          "path": ".generated-bundles/temporalCollect.ts",
+          "bytes": 208
         }
       ],
       "smoke": "passed"
@@ -582,6 +678,70 @@
       "smoke": "passed"
     },
     {
+      "name": "spatialCollect",
+      "bundler": "esbuild",
+      "bytes": 3676,
+      "gzip": 1685,
+      "brotli": 1524,
+      "modules": [
+        {
+          "path": "../../dist/src/index.js",
+          "bytes": 0
+        },
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "../../dist/src/point-index.js",
+          "bytes": 2287
+        },
+        {
+          "path": "source.ts",
+          "bytes": 405
+        },
+        {
+          "path": "collect.ts",
+          "bytes": 305
+        },
+        {
+          "path": ".generated-bundles/spatialCollect.ts",
+          "bytes": 327
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "spatialCollect",
+      "bundler": "rollup",
+      "bytes": 3708,
+      "gzip": 1611,
+      "brotli": 1461,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 711
+        },
+        {
+          "path": "../../dist/src/point-index.js",
+          "bytes": 6942
+        },
+        {
+          "path": "source.ts",
+          "bytes": 740
+        },
+        {
+          "path": "collect.ts",
+          "bytes": 598
+        },
+        {
+          "path": ".generated-bundles/spatialCollect.ts",
+          "bytes": 533
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
       "name": "density",
       "bundler": "esbuild",
       "bytes": 172,
@@ -617,6 +777,1434 @@
         {
           "path": ".generated-bundles/density.ts",
           "bytes": 74
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "startsOnly",
+      "bundler": "esbuild",
+      "bytes": 1765,
+      "gzip": 870,
+      "brotli": 793,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 493
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 1194
+        },
+        {
+          "path": ".generated-bundles/startsOnly.ts",
+          "bytes": 60
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "startsOnly",
+      "bundler": "rollup",
+      "bytes": 1724,
+      "gzip": 866,
+      "brotli": 795,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 817
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 2287
+        },
+        {
+          "path": ".generated-bundles/startsOnly.ts",
+          "bytes": 103
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "schedule",
+      "bundler": "esbuild",
+      "bytes": 3344,
+      "gzip": 1477,
+      "brotli": 1375,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 493
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 1574
+        },
+        {
+          "path": "ranges.ts",
+          "bytes": 999
+        },
+        {
+          "path": ".generated-bundles/schedule.ts",
+          "bytes": 260
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "schedule",
+      "bundler": "rollup",
+      "bytes": 3345,
+      "gzip": 1452,
+      "brotli": 1345,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 817
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 3141
+        },
+        {
+          "path": "ranges.ts",
+          "bytes": 1779
+        },
+        {
+          "path": ".generated-bundles/schedule.ts",
+          "bytes": 530
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "rangesOnly",
+      "bundler": "esbuild",
+      "bytes": 1146,
+      "gzip": 570,
+      "brotli": 523,
+      "modules": [
+        {
+          "path": "ranges.ts",
+          "bytes": 999
+        },
+        {
+          "path": ".generated-bundles/rangesOnly.ts",
+          "bytes": 129
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "rangesOnly",
+      "bundler": "rollup",
+      "bytes": 1175,
+      "gzip": 560,
+      "brotli": 511,
+      "modules": [
+        {
+          "path": "ranges.ts",
+          "bytes": 1779
+        },
+        {
+          "path": ".generated-bundles/rangesOnly.ts",
+          "bytes": 246
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "nativeReport",
+      "bundler": "esbuild",
+      "bytes": 347,
+      "gzip": 250,
+      "brotli": 234,
+      "modules": [
+        {
+          "path": ".generated-bundles/nativeReport.ts",
+          "bytes": 329
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "nativeReport",
+      "bundler": "rollup",
+      "bytes": 354,
+      "gzip": 247,
+      "brotli": 224,
+      "modules": [
+        {
+          "path": ".generated-bundles/nativeReport.ts",
+          "bytes": 536
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "helperReport",
+      "bundler": "esbuild",
+      "bytes": 1396,
+      "gzip": 654,
+      "brotli": 605,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 405
+        },
+        {
+          "path": "query.ts",
+          "bytes": 269
+        },
+        {
+          "path": "operators.ts",
+          "bytes": 302
+        },
+        {
+          "path": ".generated-bundles/helperReport.ts",
+          "bytes": 402
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "helperReport",
+      "bundler": "rollup",
+      "bytes": 1361,
+      "gzip": 637,
+      "brotli": 577,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 642
+        },
+        {
+          "path": "query.ts",
+          "bytes": 532
+        },
+        {
+          "path": "operators.ts",
+          "bytes": 749
+        },
+        {
+          "path": ".generated-bundles/helperReport.ts",
+          "bytes": 654
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "remedaReport",
+      "bundler": "esbuild",
+      "bytes": 2175,
+      "gzip": 1046,
+      "brotli": 953,
+      "modules": [
+        {
+          "path": "node_modules/remeda/dist/lazyDataLastImpl--3B10z3s.js",
+          "bytes": 94
+        },
+        {
+          "path": "node_modules/remeda/dist/purry.js",
+          "bytes": 132
+        },
+        {
+          "path": "node_modules/remeda/dist/utilityEvaluators-IxVD3t2o.js",
+          "bytes": 27
+        },
+        {
+          "path": "node_modules/remeda/dist/pipe.js",
+          "bytes": 875
+        },
+        {
+          "path": "node_modules/remeda/dist/filter.js",
+          "bytes": 111
+        },
+        {
+          "path": "node_modules/remeda/dist/groupBy.js",
+          "bytes": 230
+        },
+        {
+          "path": "node_modules/remeda/dist/map.js",
+          "bytes": 106
+        },
+        {
+          "path": "node_modules/remeda/dist/sumBy.js",
+          "bytes": 182
+        },
+        {
+          "path": ".generated-bundles/remedaReport.ts",
+          "bytes": 400
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "remedaReport",
+      "bundler": "rollup",
+      "bytes": 2145,
+      "gzip": 1023,
+      "brotli": 940,
+      "modules": [
+        {
+          "path": "node_modules/remeda/dist/lazyDataLastImpl--3B10z3s.js",
+          "bytes": 94
+        },
+        {
+          "path": "node_modules/remeda/dist/purry.js",
+          "bytes": 134
+        },
+        {
+          "path": "node_modules/remeda/dist/utilityEvaluators-IxVD3t2o.js",
+          "bytes": 37
+        },
+        {
+          "path": "node_modules/remeda/dist/pipe.js",
+          "bytes": 913
+        },
+        {
+          "path": "node_modules/remeda/dist/filter.js",
+          "bytes": 128
+        },
+        {
+          "path": "node_modules/remeda/dist/groupBy.js",
+          "bytes": 241
+        },
+        {
+          "path": "node_modules/remeda/dist/map.js",
+          "bytes": 121
+        },
+        {
+          "path": "node_modules/remeda/dist/sumBy.js",
+          "bytes": 187
+        },
+        {
+          "path": ".generated-bundles/remedaReport.ts",
+          "bytes": 611
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "tanstackReport",
+      "bundler": "esbuild",
+      "bytes": 276814,
+      "gzip": 82547,
+      "brotli": 70943,
+      "modules": [
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/ref-proxy-identity.js",
+          "bytes": 201
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/ir.js",
+          "bytes": 3117
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/hashing/temporal.js",
+          "bytes": 332
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/utils.js",
+          "bytes": 2919
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/hashing/murmur.js",
+          "bytes": 1864
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/hashing/hash.js",
+          "bytes": 2908
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/multiset.js",
+          "bytes": 1205
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/graph.js",
+          "bytes": 787
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/d2.js",
+          "bytes": 815
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/map.js",
+          "bytes": 256
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/indexes.js",
+          "bytes": 2981
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/reduce.js",
+          "bytes": 880
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/groupBy.js",
+          "bytes": 1951
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/tap.js",
+          "bytes": 255
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/filter.js",
+          "bytes": 260
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/concat.js",
+          "bytes": 403
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/output.js",
+          "bytes": 301
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/consolidate.js",
+          "bytes": 340
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/join.js",
+          "bytes": 1898
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/distinct.js",
+          "bytes": 652
+        },
+        {
+          "path": "node_modules/fractional-indexing/src/index.js",
+          "bytes": 3718
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/topKArray.js",
+          "bytes": 1430
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/topKState.js",
+          "bytes": 1148
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/topKWithFractionalIndex.js",
+          "bytes": 831
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/groupedTopKWithFractionalIndex.js",
+          "bytes": 1153
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/orderBy.js",
+          "bytes": 267
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/groupedOrderBy.js",
+          "bytes": 254
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/uuid.js",
+          "bytes": 605
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/errors.js",
+          "bytes": 12139
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils.js",
+          "bytes": 3143
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/runtime-reference-identity.js",
+          "bytes": 721
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/comparison.js",
+          "bytes": 2692
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/evaluators.js",
+          "bytes": 4609
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/reverse-index.js",
+          "bytes": 525
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/virtual-props.js",
+          "bytes": 311
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/index-optimization.js",
+          "bytes": 4673
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/index-registry.js",
+          "bytes": 619
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/auto-index.js",
+          "bytes": 973
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/equality-conjunct.js",
+          "bytes": 492
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/expressions.js",
+          "bytes": 694
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/equality-value-identity.js",
+          "bytes": 743
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/type-guards.js",
+          "bytes": 221
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/route-metadata.js",
+          "bytes": 1941
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/group-by.js",
+          "bytes": 8157
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/order-by.js",
+          "bytes": 2784
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/change-events.js",
+          "bytes": 2264
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/SortedMap.js",
+          "bytes": 1810
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/transaction-metadata.js",
+          "bytes": 30
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/state.js",
+          "bytes": 22109
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/scheduler.js",
+          "bytes": 1236
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/callbacks.js",
+          "bytes": 86
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/wrapper-identity.js",
+          "bytes": 116
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/ref-proxy.js",
+          "bytes": 3631
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/functions.js",
+          "bytes": 955
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/event-emitter.js",
+          "bytes": 915
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/cursor.js",
+          "bytes": 957
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/error.js",
+          "bytes": 106
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/deferred.js",
+          "bytes": 134
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/subscription.js",
+          "bytes": 15839
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/changes.js",
+          "bytes": 3519
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/browser-polyfills.js",
+          "bytes": 286
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/cleanup-queue.js",
+          "bytes": 1035
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/lifecycle.js",
+          "bytes": 3826
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/internal.js",
+          "bytes": 35
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/sync.js",
+          "bytes": 11697
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/base-index.js",
+          "bytes": 1908
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/indexes.js",
+          "bytes": 3333
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/proxy.js",
+          "bytes": 6735
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/transactions.js",
+          "bytes": 5084
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/mutations.js",
+          "bytes": 5779
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/events.js",
+          "bytes": 773
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/index.js",
+          "bytes": 4838
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection-options.js",
+          "bytes": 115
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/collection-registry.js",
+          "bytes": 132
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/get-or-create.js",
+          "bytes": 74
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/optimizer.js",
+          "bytes": 6892
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/materialized-pipeline.js",
+          "bytes": 3831
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/query-ir.js",
+          "bytes": 36
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/clone-query.js",
+          "bytes": 1117
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/index.js",
+          "bytes": 10126
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/source-record.js",
+          "bytes": 41
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/lazy-targets.js",
+          "bytes": 2126
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/parent-routes.js",
+          "bytes": 246
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/query-equivalence.js",
+          "bytes": 674
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/joins.js",
+          "bytes": 4577
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/select.js",
+          "bytes": 2900
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/index.js",
+          "bytes": 18295
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/ordered-source-loader.js",
+          "bytes": 10296
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/utils.js",
+          "bytes": 1695
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/subset-demand-controller.js",
+          "bytes": 3039
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/collection-subscriber.js",
+          "bytes": 3756
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/bucket-facade-adapter.js",
+          "bytes": 5116
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/graph-scheduler.js",
+          "bytes": 168
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/collection-config-builder.js",
+          "bytes": 12820
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live-query-collection.js",
+          "bytes": 291
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/client.js",
+          "bytes": 137
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/local-only.js",
+          "bytes": 1299
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/array-utils.js",
+          "bytes": 32
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/btree.js",
+          "bytes": 4495
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/btree-index.js",
+          "bytes": 3208
+        },
+        {
+          "path": "tanstack.ts",
+          "bytes": 874
+        },
+        {
+          "path": ".generated-bundles/tanstackReport.ts",
+          "bytes": 183
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "tanstackReport",
+      "bundler": "rollup",
+      "bytes": 277324,
+      "gzip": 78997,
+      "brotli": 67710,
+      "modules": [
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/ref-proxy-identity.js",
+          "bytes": 423
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/ir.js",
+          "bytes": 6929
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/hashing/temporal.js",
+          "bytes": 456
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/utils.js",
+          "bytes": 6035
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/hashing/murmur.js",
+          "bytes": 3527
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/hashing/hash.js",
+          "bytes": 6235
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/multiset.js",
+          "bytes": 4096
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/graph.js",
+          "bytes": 1447
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/d2.js",
+          "bytes": 1726
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/map.js",
+          "bytes": 559
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/indexes.js",
+          "bytes": 11987
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/reduce.js",
+          "bytes": 2483
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/groupBy.js",
+          "bytes": 4185
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/tap.js",
+          "bytes": 571
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/filter.js",
+          "bytes": 571
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/concat.js",
+          "bytes": 746
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/output.js",
+          "bytes": 668
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/consolidate.js",
+          "bytes": 774
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/join.js",
+          "bytes": 4469
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/distinct.js",
+          "bytes": 1828
+        },
+        {
+          "path": "node_modules/fractional-indexing/src/index.js",
+          "bytes": 16689
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/topKArray.js",
+          "bytes": 4390
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/topKState.js",
+          "bytes": 2862
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/topKWithFractionalIndex.js",
+          "bytes": 2029
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/groupedTopKWithFractionalIndex.js",
+          "bytes": 3243
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/orderBy.js",
+          "bytes": 843
+        },
+        {
+          "path": "node_modules/@tanstack/db-ivm/dist/esm/operators/groupedOrderBy.js",
+          "bytes": 736
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/uuid.js",
+          "bytes": 820
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/errors.js",
+          "bytes": 18429
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils.js",
+          "bytes": 6122
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/runtime-reference-identity.js",
+          "bytes": 1974
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/comparison.js",
+          "bytes": 5458
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/evaluators.js",
+          "bytes": 14463
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/reverse-index.js",
+          "bytes": 955
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/virtual-props.js",
+          "bytes": 695
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/index-optimization.js",
+          "bytes": 12764
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/index-registry.js",
+          "bytes": 842
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/auto-index.js",
+          "bytes": 2472
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/equality-conjunct.js",
+          "bytes": 1024
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/expressions.js",
+          "bytes": 1931
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/equality-value-identity.js",
+          "bytes": 1729
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/type-guards.js",
+          "bytes": 361
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/route-metadata.js",
+          "bytes": 4892
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/group-by.js",
+          "bytes": 22468
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/order-by.js",
+          "bytes": 8072
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/change-events.js",
+          "bytes": 6697
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/SortedMap.js",
+          "bytes": 6189
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/transaction-metadata.js",
+          "bytes": 63
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/state.js",
+          "bytes": 50924
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/scheduler.js",
+          "bytes": 3925
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/callbacks.js",
+          "bytes": 237
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/wrapper-identity.js",
+          "bytes": 260
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/ref-proxy.js",
+          "bytes": 7497
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/functions.js",
+          "bytes": 1770
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/event-emitter.js",
+          "bytes": 3497
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/cursor.js",
+          "bytes": 1791
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/error.js",
+          "bytes": 184
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/deferred.js",
+          "bytes": 374
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/subscription.js",
+          "bytes": 38743
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/changes.js",
+          "bytes": 8307
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/browser-polyfills.js",
+          "bytes": 791
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/cleanup-queue.js",
+          "bytes": 2168
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/lifecycle.js",
+          "bytes": 9548
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/internal.js",
+          "bytes": 72
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/sync.js",
+          "bytes": 27363
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/base-index.js",
+          "bytes": 4272
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/indexes.js",
+          "bytes": 8350
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/proxy.js",
+          "bytes": 16467
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/transactions.js",
+          "bytes": 15961
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/mutations.js",
+          "bytes": 14116
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/events.js",
+          "bytes": 1404
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection/index.js",
+          "bytes": 16220
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/collection-options.js",
+          "bytes": 238
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/collection-registry.js",
+          "bytes": 380
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/get-or-create.js",
+          "bytes": 175
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/optimizer.js",
+          "bytes": 17741
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/materialized-pipeline.js",
+          "bytes": 10369
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/query-ir.js",
+          "bytes": 62
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/clone-query.js",
+          "bytes": 2733
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/builder/index.js",
+          "bytes": 35712
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/source-record.js",
+          "bytes": 79
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/lazy-targets.js",
+          "bytes": 5144
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/parent-routes.js",
+          "bytes": 761
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/query-equivalence.js",
+          "bytes": 1258
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/joins.js",
+          "bytes": 15855
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/select.js",
+          "bytes": 7353
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/compiler/index.js",
+          "bytes": 52920
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/ordered-source-loader.js",
+          "bytes": 23814
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/utils.js",
+          "bytes": 3726
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/subset-demand-controller.js",
+          "bytes": 6104
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/collection-subscriber.js",
+          "bytes": 8299
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/bucket-facade-adapter.js",
+          "bytes": 11860
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/graph-scheduler.js",
+          "bytes": 370
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live/collection-config-builder.js",
+          "bytes": 27556
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/query/live-query-collection.js",
+          "bytes": 957
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/client.js",
+          "bytes": 286
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/local-only.js",
+          "bytes": 3736
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/array-utils.js",
+          "bytes": 66
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/utils/btree.js",
+          "bytes": 12199
+        },
+        {
+          "path": "node_modules/@tanstack/db/dist/esm/indexes/btree-index.js",
+          "bytes": 9216
+        },
+        {
+          "path": "tanstack.ts",
+          "bytes": 1405
+        },
+        {
+          "path": ".generated-bundles/tanstackReport.ts",
+          "bytes": 273
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphOnly",
+      "bundler": "esbuild",
+      "bytes": 1471,
+      "gzip": 694,
+      "brotli": 633,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 439
+        },
+        {
+          "path": "dependencies.ts",
+          "bytes": 953
+        },
+        {
+          "path": ".generated-bundles/graphOnly.ts",
+          "bytes": 61
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphOnly",
+      "bundler": "rollup",
+      "bytes": 1434,
+      "gzip": 669,
+      "brotli": 616,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 711
+        },
+        {
+          "path": "dependencies.ts",
+          "bytes": 1855
+        },
+        {
+          "path": ".generated-bundles/graphOnly.ts",
+          "bytes": 108
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphology",
+      "bundler": "esbuild",
+      "bytes": 77047,
+      "gzip": 16296,
+      "brotli": 14289,
+      "modules": [
+        {
+          "path": "node_modules/events/events.js",
+          "bytes": 6112
+        },
+        {
+          "path": "node_modules/graphology-utils/is-graph.js",
+          "bytes": 186
+        },
+        {
+          "path": "node_modules/graphology-dag/has-cycle.js",
+          "bytes": 532
+        },
+        {
+          "path": "node_modules/graphology-dag/will-create-cycle.js",
+          "bytes": 443
+        },
+        {
+          "path": "node_modules/obliterator/support.js",
+          "bytes": 99
+        },
+        {
+          "path": "node_modules/obliterator/foreach.js",
+          "bytes": 683
+        },
+        {
+          "path": "node_modules/graphology-dag/node_modules/mnemonist/utils/typed-arrays.js",
+          "bytes": 1323
+        },
+        {
+          "path": "node_modules/graphology-dag/node_modules/mnemonist/utils/iterables.js",
+          "bytes": 569
+        },
+        {
+          "path": "node_modules/obliterator/iterator.js",
+          "bytes": 627
+        },
+        {
+          "path": "node_modules/graphology-dag/node_modules/mnemonist/fixed-deque.js",
+          "bytes": 3136
+        },
+        {
+          "path": "node_modules/graphology-dag/topological-sort.js",
+          "bytes": 1471
+        },
+        {
+          "path": "node_modules/graphology-dag/index.js",
+          "bytes": 282
+        },
+        {
+          "path": "node_modules/graphology/dist/graphology.mjs",
+          "bytes": 60866
+        },
+        {
+          "path": ".generated-bundles/graphology.ts",
+          "bytes": 129
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphology",
+      "bundler": "rollup",
+      "bytes": 76687,
+      "gzip": 15564,
+      "brotli": 13674,
+      "modules": [
+        {
+          "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/events/events.js?commonjs-module",
+          "bytes": 27
+        },
+        {
+          "path": "node_modules/events/events.js",
+          "bytes": 14291
+        },
+        {
+          "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/events/events.js?commonjs-es-import",
+          "bytes": 36
+        },
+        {
+          "path": "node_modules/graphology/dist/graphology.mjs",
+          "bytes": 177570
+        },
+        {
+          "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/index.js?commonjs-exports",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/graphology-utils/is-graph.js",
+          "bytes": 688
+        },
+        {
+          "path": "node_modules/graphology-dag/has-cycle.js",
+          "bytes": 2015
+        },
+        {
+          "path": "node_modules/graphology-dag/will-create-cycle.js",
+          "bytes": 2018
+        },
+        {
+          "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/topological-sort.js?commonjs-exports",
+          "bytes": 25
+        },
+        {
+          "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/node_modules/mnemonist/utils/iterables.js?commonjs-exports",
+          "bytes": 19
+        },
+        {
+          "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/obliterator/support.js?commonjs-exports",
+          "bytes": 17
+        },
+        {
+          "path": "node_modules/obliterator/support.js",
+          "bytes": 263
+        },
+        {
+          "path": "node_modules/obliterator/foreach.js",
+          "bytes": 1967
+        },
+        {
+          "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/node_modules/mnemonist/utils/typed-arrays.js?commonjs-exports",
+          "bytes": 21
+        },
+        {
+          "path": "node_modules/graphology-dag/node_modules/mnemonist/utils/typed-arrays.js",
+          "bytes": 4529
+        },
+        {
+          "path": "node_modules/graphology-dag/node_modules/mnemonist/utils/iterables.js",
+          "bytes": 2226
+        },
+        {
+          "path": "node_modules/obliterator/iterator.js",
+          "bytes": 2025
+        },
+        {
+          "path": "node_modules/graphology-dag/node_modules/mnemonist/fixed-deque.js",
+          "bytes": 7469
+        },
+        {
+          "path": "node_modules/graphology-dag/topological-sort.js",
+          "bytes": 3867
+        },
+        {
+          "path": "node_modules/graphology-dag/index.js",
+          "bytes": 607
+        },
+        {
+          "path": "\u0000/Users/admin/Projects/ts-algo/experiments/goal/node_modules/graphology-dag/index.js?commonjs-es-import",
+          "bytes": 50
+        },
+        {
+          "path": ".generated-bundles/graphology.ts",
+          "bytes": 172
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "hierarchy",
+      "bundler": "esbuild",
+      "bytes": 1418,
+      "gzip": 690,
+      "brotli": 630,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 493
+        },
+        {
+          "path": "hierarchy.ts",
+          "bytes": 804
+        },
+        {
+          "path": ".generated-bundles/hierarchy.ts",
+          "bytes": 103
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "hierarchy",
+      "bundler": "rollup",
+      "bytes": 1377,
+      "gzip": 678,
+      "brotli": 617,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 817
+        },
+        {
+          "path": "hierarchy.ts",
+          "bytes": 1535
+        },
+        {
+          "path": ".generated-bundles/hierarchy.ts",
+          "bytes": 166
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "diff",
+      "bundler": "esbuild",
+      "bytes": 270,
+      "gzip": 210,
+      "brotli": 181,
+      "modules": [
+        {
+          "path": "diff.ts",
+          "bytes": 180
+        },
+        {
+          "path": ".generated-bundles/diff.ts",
+          "bytes": 72
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "diff",
+      "bundler": "rollup",
+      "bytes": 270,
+      "gzip": 209,
+      "brotli": 180,
+      "modules": [
+        {
+          "path": "diff.ts",
+          "bytes": 362
+        },
+        {
+          "path": ".generated-bundles/diff.ts",
+          "bytes": 130
         }
       ],
       "smoke": "passed"

@@ -6,23 +6,23 @@ All times below are median milliseconds per logical batch, normalized by calibra
 
 ## Array query: 100000 items, take 20
 
-| Runtime | Match modulus | Batches per logical run | Loop | Remeda | Ix | Bound lazy | Fused | Native arrays |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| node | 2 | 8 | 0.0007 | 0.0085 | 0.0118 | 0.0204 | 0.0107 | 6.0415 |
-| node | 100 | 8 | 0.0224 | 0.1735 | 0.2541 | 0.1201 | 0.1425 | 3.2855 |
-| bun | 2 | 8 | 0.0007 | 0.0091 | 0.0056 | 0.0116 | 0.0083 | 12.1649 |
-| bun | 100 | 8 | 0.0210 | 0.1611 | 0.1007 | 0.0616 | 0.1713 | 7.6567 |
+| Runtime | Match modulus | Batches per logical run | Loop | Remeda | Ix | Bound lazy | Fused | Restricted | Native arrays |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| node | 2 | 8 | 0.0008 | 0.0083 | 0.0118 | 0.0201 | 0.0093 | 0.0026 | 6.1136 |
+| node | 100 | 8 | 0.0212 | 0.1752 | 0.2575 | 0.1228 | 0.1453 | 0.0395 | 3.3392 |
+| bun | 2 | 8 | 0.0007 | 0.0094 | 0.0056 | 0.0118 | 0.0086 | 0.0015 | 12.1436 |
+| bun | 100 | 8 | 0.0213 | 0.1783 | 0.1020 | 0.0686 | 0.1814 | 0.0383 | 7.7676 |
 
 ## Map query: 100000 entities, 64 queries selecting 20 DTOs
 
-| Runtime | Loop | Remeda + snapshot | Remeda cached keys | Ix keys | Bound lazy | Fused |
-|---|---:|---:|---:|---:|---:|---:|
-| node | 0.0091 | 11.8662 | 0.0977 | 0.1420 | 0.2377 | 0.1228 |
-| bun | 0.0128 | 33.8682 | 0.0975 | 0.0821 | 0.1306 | 0.0883 |
+| Runtime | Loop | Remeda + snapshot | Remeda cached keys | Ix keys | Bound lazy | Fused | Restricted |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| node | 0.0089 | 9.9823 | 0.1011 | 0.1421 | 0.2235 | 0.1215 | 0.0648 |
+| bun | 0.0143 | 35.4699 | 0.1052 | 0.0855 | 0.1344 | 0.0878 | 0.0203 |
 
-node: one keys snapshot costs 0.1374 ms (excluded only from the cached-key variant).
+node: one keys snapshot costs 0.1555 ms (excluded only from the cached-key variant).
 
-bun: one keys snapshot costs 0.5250 ms (excluded only from the cached-key variant).
+bun: one keys snapshot costs 0.5093 ms (excluded only from the cached-key variant).
 
 ## Temporal: 100000 events, 16 windows of width 10
 
@@ -68,22 +68,50 @@ Construction variants own different capabilities: the sorted baseline uses pre-n
 | remeda | rollup | 1577 | 778 | 714 |
 | ix | esbuild | 3017 | 1243 | 1118 |
 | ix | rollup | 2980 | 1222 | 1106 |
-| fused | esbuild | 1902 | 878 | 800 |
+| fused | esbuild | 1902 | 879 | 803 |
 | fused | rollup | 1811 | 855 | 777 |
+| restricted | esbuild | 795 | 471 | 416 |
+| restricted | rollup | 754 | 453 | 400 |
 | sorted | esbuild | 942 | 439 | 396 |
 | sorted | rollup | 946 | 422 | 384 |
 | currentTime | esbuild | 4158 | 1877 | 1732 |
 | currentTime | rollup | 4211 | 1780 | 1651 |
 | temporal | esbuild | 2176 | 1046 | 971 |
 | temporal | rollup | 2162 | 1043 | 964 |
-| temporalQuery | esbuild | 3442 | 1532 | 1417 |
+| temporalQuery | esbuild | 3442 | 1533 | 1418 |
 | temporalQuery | rollup | 3413 | 1514 | 1386 |
+| temporalCollect | esbuild | 2516 | 1210 | 1123 |
+| temporalCollect | rollup | 2506 | 1194 | 1105 |
 | spatial | esbuild | 2747 | 1275 | 1165 |
 | spatial | rollup | 2785 | 1223 | 1107 |
 | kdbush | esbuild | 3587 | 1593 | 1426 |
 | kdbush | rollup | 3624 | 1590 | 1412 |
+| spatialCollect | esbuild | 3676 | 1685 | 1524 |
+| spatialCollect | rollup | 3708 | 1611 | 1461 |
 | density | esbuild | 172 | 158 | 132 |
 | density | rollup | 173 | 155 | 125 |
+| startsOnly | esbuild | 1765 | 870 | 793 |
+| startsOnly | rollup | 1724 | 866 | 795 |
+| schedule | esbuild | 3344 | 1477 | 1375 |
+| schedule | rollup | 3345 | 1452 | 1345 |
+| rangesOnly | esbuild | 1146 | 570 | 523 |
+| rangesOnly | rollup | 1175 | 560 | 511 |
+| nativeReport | esbuild | 347 | 250 | 234 |
+| nativeReport | rollup | 354 | 247 | 224 |
+| helperReport | esbuild | 1396 | 654 | 605 |
+| helperReport | rollup | 1361 | 637 | 577 |
+| remedaReport | esbuild | 2175 | 1046 | 953 |
+| remedaReport | rollup | 2145 | 1023 | 940 |
+| tanstackReport | esbuild | 276814 | 82547 | 70943 |
+| tanstackReport | rollup | 277324 | 78997 | 67710 |
+| graphOnly | esbuild | 1471 | 694 | 633 |
+| graphOnly | rollup | 1434 | 669 | 616 |
+| graphology | esbuild | 77047 | 16296 | 14289 |
+| graphology | rollup | 76687 | 15564 | 13674 |
+| hierarchy | esbuild | 1418 | 690 | 630 |
+| hierarchy | rollup | 1377 | 678 | 617 |
+| diff | esbuild | 270 | 210 | 181 |
+| diff | rollup | 270 | 209 | 180 |
 
 ## Decisions supported so far
 

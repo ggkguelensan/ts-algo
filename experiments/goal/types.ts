@@ -29,3 +29,48 @@ function* literals(){yield 1;yield 2;}
 // @ts-expect-error experimental variadic interface currently rejects this valid query
 query(queryInput(from(literals())),take(1));
 void expected;void ids;void numbers;
+
+// Standalone terminal helpers infer output and cardinality without a query plan.
+import {find,groupBy,aggregateBy,leftJoin,innerJoinMany,distinctBy} from './operators.ts';
+const grouped:Map<Entity['kind'],Id[]>=groupBy(source,e=>e.kind);
+const totals:Map<Entity['kind'],number>=aggregateBy(source,e=>e.kind,()=>0,(sum,e)=>sum+(e.kind==='invoice'?e.total:0));
+const found=find(source,e=>e.kind==='invoice');if(found.found){const id:Id=found.value;void id;}
+const unique:Id[]=distinctBy(source,e=>e.kind);
+const readonlyArray:readonly number[]=[1,2];const arrayResults:number[]=query(queryInput(from(readonlyArray)),selected(n=>n*2));
+const external=from(['one'],{context:{records:new Map([['one',{amount:2}]])},get:(id,ctx)=>ctx.records.get(id)!});
+const contextResult:number[]=query(withContext(external,{multiplier:3}),selected((e,id,ctx)=>e.amount*ctx.multiplier));
+const joined:Array<{id:Id;value:number|undefined}>=leftJoin(source,new Map<Entity['kind'],number>(),e=>e.kind,(_,match,id)=>({id,value:match.found?match.value:undefined}));
+const expanded:Array<{id:Id;text:string}>=innerJoinMany(source,new Map<Entity['kind'],readonly string[]>(),e=>e.kind,(_,text,id)=>({id,text}));
+// @ts-expect-error a left join must handle an absent match before reading value
+leftJoin(source,new Map<Entity['kind'],number>(),e=>e.kind,(_,match)=>match.value);
+// @ts-expect-error query context cannot silently access source context
+query(withContext(external,{multiplier:3}),selected((e,id,ctx)=>ctx.records));
+// @ts-expect-error aggregate output is number, not string
+const wrongGroups:Map<Entity['kind'],string>=totals;
+const enabled=true;
+const conditional:Id[]=query(source,filtered(e=>!enabled||e.kind==='invoice'));
+void grouped;void totals;void unique;void arrayResults;void contextResult;void joined;void expanded;void conditional;
+
+import {collect} from './collect.ts';
+const restricted:Array<{id:Id;amount:number}>=collect(from(map),{
+  where:(e):e is Extract<Entity,{kind:'invoice'}>=>e.kind==='invoice',
+  select:(e,id,ctx)=>({id,amount:e.total+ctx.minimum}),context:{minimum:10},limit:20,
+});
+const literalRefs:Array<1|2>=collect(from(literals()),{limit:1});
+// @ts-expect-error narrowed entity no longer has note's text
+collect(from(map),{where:(e):e is Extract<Entity,{kind:'invoice'}>=>e.kind==='invoice',select:e=>e.text});
+// @ts-expect-error wrong context property
+collect(from(map),{context:{minimum:1},select:(e,id,ctx)=>ctx.maximum});
+void restricted;void literalRefs;
+// @ts-expect-error a callback requiring context must be supplied that context
+collect(from(map),{select:(e,id,ctx:{minimum:number})=>ctx.minimum});
+
+// Reused callbacks and conditional options, without erasing Ref/Entity/Context.
+const invoice=(e:Entity):e is Extract<Entity,{kind:'invoice'}>=>e.kind==='invoice';
+const selectInvoice=(e:Extract<Entity,{kind:'invoice'}>,id:Id,ctx:{minimum:number})=>({id,amount:e.total+ctx.minimum});
+const reusable:Array<{id:Id;amount:number}>=collect(from(map),{where:invoice,select:selectInvoice,context:{minimum:10}});
+const conditionalOptions={where:(e:Entity)=>!enabled||e.kind==='invoice',limit:enabled?20:Infinity};
+const conditionalRefs:Id[]=collect(from(map),conditionalOptions);
+function titles<R,E,S>(input:import('./source.ts').Source<R,E,S>,select:(e:E,id:R)=>string):string[]{return collect(input,{select});}
+const genericResult:string[]=titles(from(map),(e,id)=>`${id}:${e.kind}`);
+void reusable;void conditionalRefs;void genericResult;

@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-05T11:32:36.631Z",
+  "results": [
+    {
+      "runtime": "node",
+      "TZ": "UTC",
+      "calendarDayHours": 24,
+      "fixed24Hours": 24,
+      "halfOpenBoundaryPassed": true,
+      "dateFnsClosedBoundary": true
+    },
+    {
+      "runtime": "node",
+      "TZ": "America/New_York",
+      "calendarDayHours": 23,
+      "fixed24Hours": 24,
+      "halfOpenBoundaryPassed": true,
+      "dateFnsClosedBoundary": true
+    },
+    {
+      "runtime": "bun",
+      "TZ": "UTC",
+      "calendarDayHours": 24,
+      "fixed24Hours": 24,
+      "halfOpenBoundaryPassed": true,
+      "dateFnsClosedBoundary": true
+    },
+    {
+      "runtime": "bun",
+      "TZ": "America/New_York",
+      "calendarDayHours": 23,
+      "fixed24Hours": 24,
+      "halfOpenBoundaryPassed": true,
+      "dateFnsClosedBoundary": true
+    }
+  ]
+}

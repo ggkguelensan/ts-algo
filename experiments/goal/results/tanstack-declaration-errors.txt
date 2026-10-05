@@ -1,0 +1,65 @@
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(23,163): error TS2344: Type '{ [K in keyof (Omit<TContext, "hasResult" | "result"> & Pick<TContext, "baseSchema" | "fromSourceName" | "schema"> & { result: PrettifyIfPlainObject<TResult>; hasResult: true; })]: (Omit<...> & ... 1 more ... & { ...; })[K]; }' does not satisfy the constraint 'Context'.
+  Types of property 'refsSchema' are incompatible.
+    Type 'TContext["refsSchema"]' is not assignable to type 'ContextSchema'.
+      Type 'ContextSchema | undefined' is not assignable to type 'ContextSchema'.
+        Type 'undefined' is not assignable to type 'ContextSchema'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(100,142): error TS2344: Type 'MergeContextForJoinCallback<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }>' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(100,241): error TS2344: Type 'MergeContextWithJoinType<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }, TJoinType>' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(116,82): error TS2344: Type 'MergeContextForJoinCallback<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }>' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(116,163): error TS2344: Type 'MergeContextWithJoinType<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }, "left">' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(132,83): error TS2344: Type 'MergeContextForJoinCallback<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }>' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(132,164): error TS2344: Type 'MergeContextWithJoinType<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }, "right">' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(148,83): error TS2344: Type 'MergeContextForJoinCallback<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }>' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(148,164): error TS2344: Type 'MergeContextWithJoinType<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }, "inner">' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(164,82): error TS2344: Type 'MergeContextForJoinCallback<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }>' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(164,163): error TS2344: Type 'MergeContextWithJoinType<TContext, { [K in keyof { [K in keyof TSource]: TSource[K] extends CollectionImpl<any, any, any, any, any> ? InferCollectionType<TSource[K]> : ...; }]: { [K in keyof TSource]: ...; }[K]; }, "full">' does not satisfy the constraint 'Context'.
+  Types of property 'fromSourceNames' are incompatible.
+    Type 'TContext["fromSourceNames"]' is not assignable to type 'readonly string[]'.
+      Type 'readonly string[] | undefined' is not assignable to type 'readonly string[]'.
+        Type 'undefined' is not assignable to type 'readonly string[]'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(257,146): error TS2344: Type '{ [K in keyof (Omit<TContext, "hasResult" | "result"> & Pick<TContext, "baseSchema" | "fromSourceName" | "schema"> & { result: PrettifyIfPlainObject<ResultTypeFromSelect<TSelectObject>>; hasResult: true; })]: (Omit<...> & ... 1 more ... & { ...; })[K]; }' does not satisfy the constraint 'Context'.
+  Types of property 'refsSchema' are incompatible.
+    Type 'TContext["refsSchema"]' is not assignable to type 'ContextSchema'.
+      Type 'ContextSchema | undefined' is not assignable to type 'ContextSchema'.
+        Type 'undefined' is not assignable to type 'ContextSchema'.
+node_modules/@tanstack/db/dist/esm/query/builder/index.d.ts(258,126): error TS2344: Type '{ [K in keyof (Omit<TContext, "hasResult" | "result"> & Pick<TContext, "baseSchema" | "fromSourceName" | "schema"> & { result: PrettifyIfPlainObject<ResultTypeFromSelectValue<TSelectValue>>; hasResult: true; })]: (Omit<...> & ... 1 more ... & { ...; })[K]; }' does not satisfy the constraint 'Context'.
+  Types of property 'refsSchema' are incompatible.
+    Type 'TContext["refsSchema"]' is not assignable to type 'ContextSchema'.
+      Type 'ContextSchema | undefined' is not assignable to type 'ContextSchema'.
+        Type 'undefined' is not assignable to type 'ContextSchema'.

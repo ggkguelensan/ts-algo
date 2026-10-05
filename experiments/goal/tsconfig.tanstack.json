@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "skipLibCheck": true },
+  "include": ["tanstack.ts", "tanstack.test.ts", "bench-tanstack.ts"],
+  "exclude": []
+}

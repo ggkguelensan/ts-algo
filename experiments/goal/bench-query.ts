@@ -5,6 +5,7 @@ import {filter as ixFilter,map as ixMap,take as ixTake} from 'ix/iterable/operat
 import {from} from './source.ts';
 import {query,queryInput,filtered,selected,take,lazyFiltered,lazySelected,lazyTake} from './query.ts';
 import {measure,save} from './measure.ts';
+import {collect} from './collect.ts';
 
 const reports=[];
 for(const n of [1000,20000,100000])for(const modulus of [2,100])for(const limit of [20,n]) {
@@ -17,6 +18,7 @@ for(const n of [1000,20000,100000])for(const modulus of [2,100])for(const limit 
     ix:()=>Array.from(ixFrom(values).pipe(ixFilter(pred),ixMap(project),ixTake(limit))),
     boundLazy:()=>Array.from(lazyTake(lazySelected(lazyFiltered(source,pred),project),limit)),
     fused:()=>query(source,filtered(pred),selected(project),take(limit)),
+    restricted:()=>collect(from(values),{where:pred,select:project,limit}),
   };
   const expected=variants.directLoop();for(const run of Object.values(variants))assert.deepEqual(run(),expected);
   const repeats=n===1000?64:8;
@@ -36,6 +38,7 @@ for(const n of [1000,100000]) {
     ixKeys:()=>Array.from(ixFrom(storage.keys()).pipe(ixFilter(id=>storage.get(id)!.enabled),ixMap(id=>({id,amount:storage.get(id)!.amount})),ixTake(20))),
     boundLazy:()=>Array.from(lazyTake(lazySelected(lazyFiltered(source,e=>e.enabled),(e,id)=>({id,amount:e.amount})),20)),
     fused:()=>query(source,filtered(e=>e.enabled),selected((e,id)=>({id,amount:e.amount})),take(20)),
+    restricted:()=>collect(from(storage),{where:e=>e.enabled,select:(e,id)=>({id,amount:e.amount}),limit:20}),
   };
   const expected=variants.directLoop();for(const run of Object.values(variants))assert.deepEqual(run(),expected);
   const repeats=64;

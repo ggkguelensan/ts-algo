@@ -14,6 +14,8 @@ export function withContext<R,E,S,C>(source:Source<R,E,S>,context:C):Input<R,E,C
 export function queryInput<R,E,S>(source:Source<R,E,S>):Input<R,E> {
   return withContext(source,undefined);
 }
+export function resolve<R,E,C>(source:Input<R,E,C>,ref:R):E {return source[inputState].resolve(ref);}
+export function queryContext<R,E,C>(source:Input<R,E,C>):C {return source[inputState].context;}
 type Callback<E,R,C,V>=(value:E,ref:R,context:C)=>V;
 type Kind='filter'|'select'|'take'|'drop'|'sort';
 export interface Step<R,E,C,NextR=R,NextE=E> {

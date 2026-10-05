@@ -12,19 +12,19 @@ reproducible evidence, rather than a design intention.
 - [x] Current state, packaging and hypotheses — [research](research.md), [package check](results/package.json)
 - [ ] Competing source/context models and query implementations
 - [ ] Temporal-only index and timeline comparison
-- [ ] Catalogue scenario
-- [ ] Scheduling/capacity scenario
-- [ ] Dependency/tasks scenario
-- [ ] Joined report scenario
-- [ ] Synchronization scenario
-- [ ] Spatial scenario
-- [ ] Priority scenario
+- [x] Catalogue scenario — [tests](scenarios.test.ts), [measurements](results/business.md)
+- [x] Scheduling/capacity scenario — [range oracles](scenarios.test.ts), [measurements](results/business.md)
+- [x] Dependency/tasks scenario — [native indexed baseline](scenario-tasks.ts), [measurements](results/business.md)
+- [x] Joined report scenario — [alternatives](scenarios.ts), [retained TanStack query](tanstack.ts), [measurements](results/business.md)
+- [x] Synchronization scenario — [duplicates/undefined](scenarios.test.ts), [measurements](results/business.md)
+- [x] Spatial scenario — [six implementations plus native loop](scenario-spatial.ts), [measurements](results/business.md)
+- [x] Priority scenario — [batch/partial processing](scenario-priority.ts), [measurements](results/business.md)
 - [ ] Additional scope and competitor decisions
-- [ ] Node/V8 and Bun/JSC raw performance results
-- [ ] Allocation/retention and natural GC observations
-- [ ] Two bundlers, executable outputs, gzip and Brotli
-- [ ] Positive/negative inference and diagnostic examples
-- [ ] Scaled consumer type-check cost
+- [x] Node/V8 and Bun/JSC raw performance results — [query/time/bundles](results/initial.md), [business/updates/spatial](results/business.md)
+- [x] Allocation/retention and natural GC observations — [worker](memory-worker.mjs), [raw limitations](results/memory.json)
+- [x] Two bundlers, executable outputs, gzip and Brotli — [50 fixtures](results/bundles.json)
+- [x] Positive/negative inference and diagnostic examples — [types](types.ts), [diagnostics](results/type-cost.json)
+- [x] Scaled consumer type-check cost — [fresh compiler processes](type-cost.mjs), [raw](results/type-cost.json)
 - [ ] Decision ledger, final purpose, target interface and implementation order
 
 Until the evidence is complete, the investigation remains ongoing.

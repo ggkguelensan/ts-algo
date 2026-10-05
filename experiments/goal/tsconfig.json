@@ -10,5 +10,6 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["*.ts", "types/**/*.ts"]
+  "include": ["*.ts", "types/**/*.ts"],
+  "exclude": ["tanstack.ts", "tanstack.test.ts", "bench-tanstack.ts"]
 }
