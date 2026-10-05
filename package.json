@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Small reference-preserving tools for recurring business logic",
+  "files": ["dist/src"],
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
@@ -21,6 +22,7 @@
     "zod": { "optional": true }
   },
   "scripts": {
+    "prepack": "npm run build",
     "build": "tsc",
     "check": "tsc --noEmit",
     "test": "npm run build && node --test dist/test/*.test.js",

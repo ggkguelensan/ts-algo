@@ -1,0 +1,625 @@
+{
+  "date": "2026-10-05T11:02:36.832Z",
+  "target": "ES2023, browser, ESM",
+  "dependencies": {
+    "@rollup/plugin-commonjs": "29.0.3",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "@tanstack/db": "0.11.3",
+    "@types/d3-quadtree": "3.0.6",
+    "@types/node": "26.6.4",
+    "@types/rbush": "4.0.0",
+    "d3-quadtree": "3.0.1",
+    "date-fns": "4.4.0",
+    "drizzle-orm": "0.45.3",
+    "esbuild": "0.28.2",
+    "flatbush": "4.6.2",
+    "graphology": "0.26.0",
+    "graphology-dag": "0.4.1",
+    "ix": "7.0.0",
+    "kdbush": "4.1.0",
+    "mnemonist": "0.40.5",
+    "rbush": "4.0.1",
+    "remeda": "2.51.0",
+    "rollup": "4.64.0",
+    "terser": "5.51.2",
+    "typescript": "7.0.2"
+  },
+  "notes": [
+    "Minifiers differ: esbuild built-in vs terser. Module bytes are bundler-specific attribution, not directly comparable.",
+    "Smoke fixtures ensure imports execute; their literal code also contributes bytes. Temporal date-fns dependency is type-only."
+  ],
+  "results": [
+    {
+      "name": "native",
+      "bundler": "esbuild",
+      "bytes": 80,
+      "gzip": 96,
+      "brotli": 84,
+      "modules": [
+        {
+          "path": ".generated-bundles/native.ts",
+          "bytes": 62
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "native",
+      "bundler": "rollup",
+      "bytes": 80,
+      "gzip": 97,
+      "brotli": 84,
+      "modules": [
+        {
+          "path": ".generated-bundles/native.ts",
+          "bytes": 88
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "remeda",
+      "bundler": "esbuild",
+      "bytes": 1597,
+      "gzip": 804,
+      "brotli": 728,
+      "modules": [
+        {
+          "path": "node_modules/remeda/dist/lazyDataLastImpl--3B10z3s.js",
+          "bytes": 94
+        },
+        {
+          "path": "node_modules/remeda/dist/purry.js",
+          "bytes": 132
+        },
+        {
+          "path": "node_modules/remeda/dist/utilityEvaluators-IxVD3t2o.js",
+          "bytes": 58
+        },
+        {
+          "path": "node_modules/remeda/dist/pipe.js",
+          "bytes": 875
+        },
+        {
+          "path": "node_modules/remeda/dist/filter.js",
+          "bytes": 111
+        },
+        {
+          "path": "node_modules/remeda/dist/map.js",
+          "bytes": 106
+        },
+        {
+          "path": "node_modules/remeda/dist/take.js",
+          "bytes": 151
+        },
+        {
+          "path": ".generated-bundles/remeda.ts",
+          "bytes": 52
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "remeda",
+      "bundler": "rollup",
+      "bytes": 1577,
+      "gzip": 778,
+      "brotli": 714,
+      "modules": [
+        {
+          "path": "node_modules/remeda/dist/lazyDataLastImpl--3B10z3s.js",
+          "bytes": 96
+        },
+        {
+          "path": "node_modules/remeda/dist/purry.js",
+          "bytes": 136
+        },
+        {
+          "path": "node_modules/remeda/dist/utilityEvaluators-IxVD3t2o.js",
+          "bytes": 75
+        },
+        {
+          "path": "node_modules/remeda/dist/pipe.js",
+          "bytes": 913
+        },
+        {
+          "path": "node_modules/remeda/dist/filter.js",
+          "bytes": 132
+        },
+        {
+          "path": "node_modules/remeda/dist/map.js",
+          "bytes": 123
+        },
+        {
+          "path": "node_modules/remeda/dist/take.js",
+          "bytes": 159
+        },
+        {
+          "path": ".generated-bundles/remeda.ts",
+          "bytes": 84
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "ix",
+      "bundler": "esbuild",
+      "bytes": 3017,
+      "gzip": 1243,
+      "brotli": 1118,
+      "modules": [
+        {
+          "path": "node_modules/ix/util/identity.mjs",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ix/util/bindcallback.mjs",
+          "bytes": 302
+        },
+        {
+          "path": "node_modules/ix/util/isiterable.mjs",
+          "bytes": 401
+        },
+        {
+          "path": "node_modules/ix/util/tointeger.mjs",
+          "bytes": 105
+        },
+        {
+          "path": "node_modules/ix/util/tolength.mjs",
+          "bytes": 81
+        },
+        {
+          "path": "node_modules/ix/iterable/iterablex.mjs",
+          "bytes": 1297
+        },
+        {
+          "path": "node_modules/ix/iterable/index.mjs",
+          "bytes": 0
+        },
+        {
+          "path": "node_modules/ix/iterable/operators/filter.mjs",
+          "bytes": 264
+        },
+        {
+          "path": "node_modules/ix/iterable/operators/map.mjs",
+          "bytes": 225
+        },
+        {
+          "path": "node_modules/ix/iterable/operators/take.mjs",
+          "bytes": 229
+        },
+        {
+          "path": ".generated-bundles/ix.ts",
+          "bytes": 71
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "ix",
+      "bundler": "rollup",
+      "bytes": 2980,
+      "gzip": 1222,
+      "brotli": 1106,
+      "modules": [
+        {
+          "path": "node_modules/ix/util/identity.mjs",
+          "bytes": 57
+        },
+        {
+          "path": "node_modules/ix/util/bindcallback.mjs",
+          "bytes": 800
+        },
+        {
+          "path": "node_modules/ix/util/isiterable.mjs",
+          "bytes": 1078
+        },
+        {
+          "path": "node_modules/ix/util/tointeger.mjs",
+          "bytes": 270
+        },
+        {
+          "path": "node_modules/ix/util/tolength.mjs",
+          "bytes": 180
+        },
+        {
+          "path": "node_modules/ix/iterable/iterablex.mjs",
+          "bytes": 3459
+        },
+        {
+          "path": "node_modules/ix/iterable/operators/filter.mjs",
+          "bytes": 1102
+        },
+        {
+          "path": "node_modules/ix/iterable/operators/map.mjs",
+          "bytes": 1164
+        },
+        {
+          "path": "node_modules/ix/iterable/operators/take.mjs",
+          "bytes": 952
+        },
+        {
+          "path": ".generated-bundles/ix.ts",
+          "bytes": 110
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "fused",
+      "bundler": "esbuild",
+      "bytes": 1902,
+      "gzip": 878,
+      "brotli": 800,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 405
+        },
+        {
+          "path": "query.ts",
+          "bytes": 1421
+        },
+        {
+          "path": ".generated-bundles/fused.ts",
+          "bytes": 58
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "fused",
+      "bundler": "rollup",
+      "bytes": 1811,
+      "gzip": 855,
+      "brotli": 777,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 642
+        },
+        {
+          "path": "query.ts",
+          "bytes": 3065
+        },
+        {
+          "path": ".generated-bundles/fused.ts",
+          "bytes": 119
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "sorted",
+      "bundler": "esbuild",
+      "bytes": 942,
+      "gzip": 439,
+      "brotli": 396,
+      "modules": [
+        {
+          "path": "../../dist/src/index.js",
+          "bytes": 0
+        },
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 552
+        },
+        {
+          "path": ".generated-bundles/sorted.ts",
+          "bytes": 38
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "sorted",
+      "bundler": "rollup",
+      "bytes": 946,
+      "gzip": 422,
+      "brotli": 384,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 711
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 2283
+        },
+        {
+          "path": ".generated-bundles/sorted.ts",
+          "bytes": 63
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "currentTime",
+      "bundler": "esbuild",
+      "bytes": 4158,
+      "gzip": 1877,
+      "brotli": 1732,
+      "modules": [
+        {
+          "path": "../../dist/src/index.js",
+          "bytes": 0
+        },
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 552
+        },
+        {
+          "path": "../../dist/src/internal/reference-map.js",
+          "bytes": 267
+        },
+        {
+          "path": "../../dist/src/timeline.js",
+          "bytes": 2920
+        },
+        {
+          "path": ".generated-bundles/currentTime.ts",
+          "bytes": 67
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "currentTime",
+      "bundler": "rollup",
+      "bytes": 4211,
+      "gzip": 1780,
+      "brotli": 1651,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 711
+        },
+        {
+          "path": "../../dist/src/sorted.js",
+          "bytes": 2283
+        },
+        {
+          "path": "../../dist/src/internal/reference-map.js",
+          "bytes": 698
+        },
+        {
+          "path": "../../dist/src/timeline.js",
+          "bytes": 8092
+        },
+        {
+          "path": ".generated-bundles/currentTime.ts",
+          "bytes": 107
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "temporal",
+      "bundler": "esbuild",
+      "bytes": 2176,
+      "gzip": 1046,
+      "brotli": 971,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 493
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 1574
+        },
+        {
+          "path": ".generated-bundles/temporal.ts",
+          "bytes": 91
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "temporal",
+      "bundler": "rollup",
+      "bytes": 2162,
+      "gzip": 1043,
+      "brotli": 964,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 817
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 3141
+        },
+        {
+          "path": ".generated-bundles/temporal.ts",
+          "bytes": 155
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "temporalQuery",
+      "bundler": "esbuild",
+      "bytes": 3442,
+      "gzip": 1532,
+      "brotli": 1417,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 493
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 1574
+        },
+        {
+          "path": "query.ts",
+          "bytes": 1234
+        },
+        {
+          "path": ".generated-bundles/temporalQuery.ts",
+          "bytes": 123
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "temporalQuery",
+      "bundler": "rollup",
+      "bytes": 3413,
+      "gzip": 1514,
+      "brotli": 1386,
+      "modules": [
+        {
+          "path": "source.ts",
+          "bytes": 817
+        },
+        {
+          "path": "temporal.ts",
+          "bytes": 3141
+        },
+        {
+          "path": "query.ts",
+          "bytes": 2784
+        },
+        {
+          "path": ".generated-bundles/temporalQuery.ts",
+          "bytes": 216
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "spatial",
+      "bundler": "esbuild",
+      "bytes": 2747,
+      "gzip": 1275,
+      "brotli": 1165,
+      "modules": [
+        {
+          "path": "../../dist/src/index.js",
+          "bytes": 0
+        },
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "../../dist/src/point-index.js",
+          "bytes": 2287
+        },
+        {
+          "path": ".generated-bundles/spatial.ts",
+          "bytes": 108
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "spatial",
+      "bundler": "rollup",
+      "bytes": 2785,
+      "gzip": 1223,
+      "brotli": 1107,
+      "modules": [
+        {
+          "path": "../../dist/src/internal/collection.js",
+          "bytes": 711
+        },
+        {
+          "path": "../../dist/src/point-index.js",
+          "bytes": 6942
+        },
+        {
+          "path": ".generated-bundles/spatial.ts",
+          "bytes": 162
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "kdbush",
+      "bundler": "esbuild",
+      "bytes": 3587,
+      "gzip": 1593,
+      "brotli": 1426,
+      "modules": [
+        {
+          "path": "node_modules/kdbush/index.js",
+          "bytes": 3483
+        },
+        {
+          "path": ".generated-bundles/kdbush.ts",
+          "bytes": 86
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "kdbush",
+      "bundler": "rollup",
+      "bytes": 3624,
+      "gzip": 1590,
+      "brotli": 1412,
+      "modules": [
+        {
+          "path": "node_modules/kdbush/index.js",
+          "bytes": 12950
+        },
+        {
+          "path": ".generated-bundles/kdbush.ts",
+          "bytes": 145
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "density",
+      "bundler": "esbuild",
+      "bytes": 172,
+      "gzip": 158,
+      "brotli": 132,
+      "modules": [
+        {
+          "path": "../../dist/src/is-dense-array.js",
+          "bytes": 112
+        },
+        {
+          "path": "../../dist/src/index.js",
+          "bytes": 0
+        },
+        {
+          "path": ".generated-bundles/density.ts",
+          "bytes": 42
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "density",
+      "bundler": "rollup",
+      "bytes": 173,
+      "gzip": 155,
+      "brotli": 125,
+      "modules": [
+        {
+          "path": "../../dist/src/is-dense-array.js",
+          "bytes": 296
+        },
+        {
+          "path": ".generated-bundles/density.ts",
+          "bytes": 74
+        }
+      ],
+      "smoke": "passed"
+    }
+  ]
+}
