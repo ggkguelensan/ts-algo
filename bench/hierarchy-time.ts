@@ -1,7 +1,8 @@
 import { cpus } from "node:os";
 import { writeFileSync } from "node:fs";
 import assert from "node:assert/strict";
-import { tree, timeline } from "../src/index.js";
+import { tree } from "../src/index.js";
+import { timeline } from "../references/legacy-timeline.js";
 import { measure, checksum } from "./measure.js";
 
 const runtime = process.versions.bun ? "bun" : "node";

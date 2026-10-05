@@ -1,6 +1,6 @@
 import {DirectedGraph} from 'graphology';
 import {topologicalSort} from 'graphology-dag';
-import {timeline} from '../../dist/src/timeline.js';
+import {timeline} from '../../dist/references/legacy-timeline.js';
 import {from} from './source.ts';
 import {dependencies,causesOf,descendants,causalOrder} from './dependencies.ts';
 export function tasks(n=1000){

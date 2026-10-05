@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { from, entity } from './source.ts';
 import { temporal, overlapping, startsBetween } from './temporal.ts';
-import { timeline } from '../../dist/src/timeline.js';
+import { timeline } from '../../dist/references/legacy-timeline.js';
 
 const intersects = (a: number, b: number, start: number, end: number) => start !== end && a < end && (a === b ? a >= start : b > start);
 test('half-open intervals, points, nesting, ties and empty windows', () => {

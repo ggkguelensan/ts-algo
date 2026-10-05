@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { StaticIntervalTree } from 'mnemonist';
-import { timeline } from '../../dist/src/timeline.js';
+import { timeline } from '../../dist/references/legacy-timeline.js';
 import { from } from './source.ts';
 import { temporal, overlapping } from './temporal.ts';
 import { measure, random, save } from './measure.ts';

@@ -1,7 +1,8 @@
+import { timeline } from "../references/legacy-timeline.js";
 import assert from "node:assert/strict";
 import { writeFileSync } from "node:fs";
 import { cpus } from "node:os";
-import { queue, deque, linkedList, doublyLinkedList, timeline } from "../src/index.js";
+import { queue, deque, linkedList, doublyLinkedList } from "../src/index.js";
 import { measure, checksum } from "./measure.js";
 
 const runtime = process.versions.bun ? "bun" : "node";

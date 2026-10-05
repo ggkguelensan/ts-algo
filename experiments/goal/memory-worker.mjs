@@ -4,7 +4,7 @@ import {from} from './source.ts';
 import {query,queryInput,filtered,selected} from './query.ts';
 import {temporal} from './temporal.ts';
 import {tree} from '../../dist/src/tree.js';
-import {timeline} from '../../dist/src/timeline.js';
+import {timeline} from '../../dist/references/legacy-timeline.js';
 import {pointIndex} from '../../dist/src/point-index.js';
 import KDBush from 'kdbush';
 import * as R from 'remeda';

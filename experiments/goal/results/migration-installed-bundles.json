@@ -1,0 +1,542 @@
+{
+  "date": "2026-10-05T23:44:13.254Z",
+  "target": "ES2023/browser/ESM",
+  "dependencies": {
+    "@rollup/plugin-commonjs": "29.0.3",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "@tanstack/db": "0.11.3",
+    "@types/d3-quadtree": "3.0.6",
+    "@types/node": "26.6.4",
+    "@types/rbush": "4.0.0",
+    "d3-quadtree": "3.0.1",
+    "date-fns": "4.4.0",
+    "drizzle-orm": "0.45.3",
+    "esbuild": "0.28.2",
+    "flatbush": "4.6.2",
+    "graphology": "0.26.0",
+    "graphology-dag": "0.4.1",
+    "ix": "7.0.0",
+    "kdbush": "4.1.0",
+    "mnemonist": "0.40.5",
+    "rbush": "4.0.1",
+    "remeda": "2.51.0",
+    "rollup": "4.64.0",
+    "terser": "5.51.2",
+    "typescript": "7.0.2"
+  },
+  "notes": "Bare public imports from independent installed tarball consumer; minifiers/module attribution differ; fixture code contributes bytes. All outputs execute expected results and assert module exclusion.",
+  "results": [
+    {
+      "name": "sorted",
+      "bundler": "esbuild",
+      "bytes": 1141,
+      "gzip": 511,
+      "brotli": 469,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 97
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/sorted.js",
+          "bytes": 631
+        },
+        {
+          "path": "apps/sorted.mjs",
+          "bytes": 38
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "sorted",
+      "bundler": "rollup",
+      "bytes": 1128,
+      "gzip": 517,
+      "brotli": 460,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 358,
+          "removedExports": [
+            "from",
+            "subset"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/sorted.js",
+          "bytes": 2626,
+          "removedExports": []
+        },
+        {
+          "path": "apps/sorted.mjs",
+          "bytes": 46,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "collect",
+      "bundler": "esbuild",
+      "bytes": 1167,
+      "gzip": 573,
+      "brotli": 503,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 419
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 305
+        },
+        {
+          "path": "apps/collect.mjs",
+          "bytes": 68
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "collect",
+      "bundler": "rollup",
+      "bytes": 1112,
+      "gzip": 547,
+      "brotli": 475,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1060,
+          "removedExports": [
+            "subset"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 1109,
+          "removedExports": []
+        },
+        {
+          "path": "apps/collect.mjs",
+          "bytes": 80,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "startsOnly",
+      "bundler": "esbuild",
+      "bytes": 2684,
+      "gzip": 1187,
+      "brotli": 1092,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 478
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 305
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/state.js",
+          "bytes": 25
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/normalize.js",
+          "bytes": 406
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/timeline.js",
+          "bytes": 905
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/starts-between.js",
+          "bytes": 138
+        },
+        {
+          "path": "apps/startsOnly.mjs",
+          "bytes": 52
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "startsOnly",
+      "bundler": "rollup",
+      "bytes": 2661,
+      "gzip": 1160,
+      "brotli": 1071,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1270,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 1109,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/state.js",
+          "bytes": 37,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/normalize.js",
+          "bytes": 793,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/timeline.js",
+          "bytes": 2241,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/starts-between.js",
+          "bytes": 414,
+          "removedExports": []
+        },
+        {
+          "path": "apps/startsOnly.mjs",
+          "bytes": 83,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "overlapOnly",
+      "bundler": "esbuild",
+      "bytes": 2997,
+      "gzip": 1331,
+      "brotli": 1236,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 478
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 305
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/state.js",
+          "bytes": 25
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/normalize.js",
+          "bytes": 406
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/timeline.js",
+          "bytes": 905
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/overlapping.js",
+          "bytes": 433
+        },
+        {
+          "path": "apps/overlapOnly.mjs",
+          "bytes": 70
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "overlapOnly",
+      "bundler": "rollup",
+      "bytes": 2982,
+      "gzip": 1298,
+      "brotli": 1203,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1270,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 1109,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/state.js",
+          "bytes": 37,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/normalize.js",
+          "bytes": 793,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/timeline.js",
+          "bytes": 2241,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/overlapping.js",
+          "bytes": 1621,
+          "removedExports": []
+        },
+        {
+          "path": "apps/overlapOnly.mjs",
+          "bytes": 99,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "freeOnly",
+      "bundler": "esbuild",
+      "bytes": 558,
+      "gzip": 334,
+      "brotli": 298,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/span.js",
+          "bytes": 154
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/free-slots.js",
+          "bytes": 339
+        },
+        {
+          "path": "apps/freeOnly.mjs",
+          "bytes": 47
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "freeOnly",
+      "bundler": "rollup",
+      "bytes": 568,
+      "gzip": 331,
+      "brotli": 291,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/span.js",
+          "bytes": 224,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/free-slots.js",
+          "bytes": 809,
+          "removedExports": []
+        },
+        {
+          "path": "apps/freeOnly.mjs",
+          "bytes": 59,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "schedule",
+      "bundler": "esbuild",
+      "bytes": 4383,
+      "gzip": 1797,
+      "brotli": 1675,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 478
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 305
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/state.js",
+          "bytes": 25
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/normalize.js",
+          "bytes": 406
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/timeline.js",
+          "bytes": 905
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/overlapping.js",
+          "bytes": 433
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/span.js",
+          "bytes": 154
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/free-slots.js",
+          "bytes": 339
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/overloaded.js",
+          "bytes": 707
+        },
+        {
+          "path": "apps/schedule.mjs",
+          "bytes": 256
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "schedule",
+      "bundler": "rollup",
+      "bytes": 4396,
+      "gzip": 1740,
+      "brotli": 1621,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1270,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 1109,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/state.js",
+          "bytes": 37,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/normalize.js",
+          "bytes": 793,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/timeline.js",
+          "bytes": 2241,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/time/overlapping.js",
+          "bytes": 1621,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/span.js",
+          "bytes": 224,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/free-slots.js",
+          "bytes": 809,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/ranges/overloaded.js",
+          "bytes": 1476,
+          "removedExports": []
+        },
+        {
+          "path": "apps/schedule.mjs",
+          "bytes": 370,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    }
+  ]
+}

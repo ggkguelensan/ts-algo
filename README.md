@@ -18,7 +18,8 @@ npm install ts-algo
 ```
 
 ```ts
-import { sorted, tree, timeline, pointIndex } from "ts-algo";
+import { sorted, tree, pointIndex } from "ts-algo";
+import { timeline, overlapping } from "ts-algo/time";
 ```
 
 ## Брендированные типы
@@ -182,39 +183,62 @@ const keys = sorted(catalog, item => item.title, (a, b) => a.localeCompare(b));
 
 Если связь уже хранится в сущности, используйте `parent: item => item.parentId`. В обоих вариантах дерево сохраняет собственный снимок связей и не добавляет полей сущностям.
 
-## Хронология
+## Время и диапазоны
 
-Привяжите события к моменту или промежутку времени и причинным связям. Бизнес-свойства, например `ownerId`, остаются у событий.
-
-Для дат и календарных расчётов опираемся на date-fns. Текущий Timeline хранит числовое время; Date преобразуются в timestamp в селекторе при построении. [Пример и план временного интерфейса](docs/tree-timeline.md#точки-и-интервалы).
+`ts-algo/time` — статический временной индекс над Source. События могут не иметь
+временных полей: время задаёт getter из сущности или внешнего хранилища.
+Индекс не содержит причинного графа и не знает бизнес-поля вроде ownerId.
 
 ```ts
-import { timeline } from "ts-algo";
+import { from, entity, collect } from "ts-algo";
+import { timeline, startsBetween, overlapping } from "ts-algo/time";
+import { conflicts, freeSlots, overloaded } from "ts-algo/ranges";
 
-type Event = Readonly<{
-  start: number;
-  end: number;
-  ownerId: string;
-  causes: readonly string[];
-}>;
-const storage = new Map<string, Event>([
-  ["order", { start: 0, end: 10, ownerId: "customer", causes: [] }],
-  ["payment", { start: 5, end: 5, ownerId: "customer", causes: ["order"] }],
-]);
-
-const history = timeline(storage);
-history.between(5, 6);     // ["payment"]: начало внутри окна
-history.overlapping(5, 6); // ["order", "payment"]: пересечение окна
-history.filter(event => event.ownerId === "customer"); // ["order", "payment"]
-history.causesOf("payment"); // ["order"]
-history.effectsOf("order");  // ["payment"]
+const events = from(new Map([
+  ["order", { owner: "customer", units: 2 }],
+  ["payment", { owner: "customer", units: 2 }],
+]));
+const times = from(new Map([
+  ["order", { start: 0, end: 10 }],
+  ["payment", { start: 5, end: 15 }],
+]));
+const history = timeline(events, (_, id) => entity(times, id));
+const window = { start: 0, end: 20 };
+collect(startsBetween(history, { start: 5, end: 6 })); // ["payment"]
+collect(overlapping(history, { start: 5, end: 6 })); // ["order", "payment"]
+const reservations = collect(overlapping(history, window), {
+  context: { owner: "customer" },
+  where: (event, id, ctx) => event.owner === ctx.owner,
+  select: (event, id) => ({ ...entity(times, id), units: event.units }),
+});
+conflicts(reservations);            // [[0, 1]]: индексы в reservations
+freeSlots(reservations, window);    // [{ start: 15, end: 20 }]
+overloaded(reservations, window, 3); // [{ start: 5, end: 10 }]
 ```
 
-Без селекторов поддерживаются поля `{ at }` или `{ start, end }` и необязательные `causes`/`effects`. Для другой формы данных передайте `time`, `causes` и/или `effects`. Через `context` и `get` можно получать сущности и метаданные из внешних источников.
+Окна полуоткрытые: `[start,end)`. Нулевая длительность — событие-точка; пустое
+окно не содержит событий. Range-операции не считают точку занятой длительностью.
+Результаты времени идут по началу события с сохранением порядка равных начал.
 
-Окна и длительности полуоткрытые: `[start, end)`. Нулевая длительность — точечное событие. Время должно быть конечным числом в единицах вызывающего кода; часовые пояса автоматически не преобразуются. Причинные связи допускают несколько причин, но запрещают отсутствующие ссылки и циклы.
+Date и number нормализуются при построении; со смешанными Date числа означают
+epoch milliseconds. Интерфейс start/end структурно совместим с date-fns Interval
+для Date/number, без runtime- или type-зависимости от date-fns. Строки разберите
+заранее с явной политикой часового пояса. Календарные addDays и длительность
+addHours имеют разную семантику на переходе летнего времени.
 
-Состав, время и причинность кешируются при создании. Чтение сущностей и фильтры обращаются к актуальному внешнему источнику; изменение временных метаданных требует перестроения. [Все операции и пример внешнего хранилища](docs/tree-timeline.md#хронология-ссылки-время-и-причинность).
+Состав/время фиксируются в индексе; сущности читаются из текущего хранилища.
+Временные выборки ленивы и повторяемы, окно фиксируется при вызове. Для массива
+результата используйте collect; limit может остановить поиск и разрешение
+сущностей раньше. Изменение времени требует перестроения. При частых правках
+или больших результатах прямой проход может быть дешевле индекса.
+
+Диапазоны используют конечные числовые start/end и не делают календарной
+арифметики. Вместимость и units неотрицательны; переполнение накопленной
+нагрузки отклоняется. Обычная арифметика IEEE-754 не обеспечивает точные суммы.
+[Контракты и границы](docs/design.md#время).
+
+Старый timeline с методами/причинностью перенесён в references и исключён из
+поставки. Причинный модуль находится на следующем этапе миграции.
 
 ## Пространственный поиск
 

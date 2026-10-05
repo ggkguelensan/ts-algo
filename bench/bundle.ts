@@ -18,7 +18,10 @@ try {
   for (const names of selections) {
     const fixture = join(directory, "entry.ts");
     const entry = names.includes("denseArray") ? "../../src/zod/index.ts" : "../../src/index.ts";
-    writeFileSync(fixture, `export { ${names.join(", ")} } from "${entry}";\n`);
+    const coreNames = names.filter(name => name !== "timeline");
+    const code = (coreNames.length ? `export { ${coreNames.join(", ")} } from "${entry}";\n` : "") +
+      (names.includes("timeline") ? `export {timeline,startsBetween,overlapping} from "../../src/time/index.ts";export {from,collect} from "../../src/index.ts";\n` : "");
+    writeFileSync(fixture, code);
     const output = execFileSync("bun", ["build", fixture, "--target=browser", "--format=esm", "--minify"], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
     const artifact = join(directory, `bundle-${rows.length}.mjs`);
     writeFileSync(artifact, output);
@@ -48,17 +51,13 @@ try {
       assert.deepEqual(result.sortBy(() => 0, () => 0).roots, ["root"]);
     }
     if (module.timeline) {
-      const result = module.timeline(new Map([["a", { at: 1 }], ["b", { at: 2 }]]), {
-        time: (e: { at: number }) => e.at, causes: (_e: unknown, key: string) => key === "b" ? ["a"] : [],
-      });
-      assert.deepEqual(result.between(1, 2), ["a"]);
-      assert.deepEqual(result.ancestors("b"), ["a"]);
+      const result = module.timeline(module.from(new Map([["a", { at: 1 }], ["b", { at: 2 }]])), (e: { at: number }) => e.at);
+      assert.deepEqual(module.collect(module.startsBetween(result, { start: 1, end: 2 })), ["a"]);
       const context = new Map([["span", { start: 0, end: 10, flag: true }]]);
-      const external = module.timeline(["span"], { context,
-        get: (key: string, ctx: typeof context) => ctx.get(key)!, time: (e: { start: number; end: number }) => e,
-      });
-      assert.deepEqual(external.overlapping(5, 6, (e: { flag: boolean }) => e.flag), ["span"]);
-      assert.equal(external.context, context);
+      const external = module.timeline(module.from(["span"], { context,
+        get: (key: string, ctx: typeof context) => ctx.get(key)!,
+      }), (e: { start: number; end: number }) => e);
+      assert.deepEqual(module.collect(module.overlapping(external, { start: 5, end: 6 }), { where: (e: { flag: boolean }) => e.flag }), ["span"]);
     }
     if (module.queue) { const q = module.queue([1, 2]); assert.equal(q.dequeue(), 1); q.enqueue(3); assert.deepEqual([...q], [2, 3]); }
     if (module.deque) { const q = module.deque([1, 2]); q.pushFront(0); assert.equal(q.popBack(), 2); assert.deepEqual([...q], [0, 1]); }

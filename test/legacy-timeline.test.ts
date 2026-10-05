@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { timeline, sorted } from "../src/index.js";
+import { sorted } from "../src/index.js";
+import { timeline } from "../references/legacy-timeline.js";
 
 test("chronology, owners and multi-cause DAG remain independent", () => {
   const source = new Map<string, Readonly<{ at: number; owner: string; causes: readonly string[] }>>([

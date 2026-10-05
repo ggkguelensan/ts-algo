@@ -19,8 +19,9 @@ general purpose. See the final design for the evidence-backed survival decisions
 
 ## Actual implementation versus intention
 
-The root currently exports sorted, Brand, isDenseArray, pointIndex, tree,
-timeline, queue/deque and linked lists. `/zod` is optional. Query, selection,
+At the research baseline, the root exported sorted, Brand, isDenseArray,
+pointIndex, tree, timeline, queue/deque and linked lists. The migration is tracked
+in design.md; the old timeline is now a historical reference. `/zod` is optional. Query, selection,
 projections, joins and general aggregates are not public implementations.
 Tree snapshots Map entries; Timeline resolves current entities while caching
 time and causal metadata. PointIndex does not retain an entity resolver.
@@ -75,6 +76,35 @@ Raw elapsed samples, loop counts and normalized batch costs are preserved in
 `results/*.json`, with runtime, dependency versions, hardware and seeds in the
 source. Different calibrated iteration counts measure steady workload cost,
 not latency percentiles of isolated application requests.
+
+## Public migration gates
+
+The active migration is authoritative in docs/design.md. Intermediate public
+core/time evidence is kept separately from the original comparison results:
+
+```sh
+npm --prefix ../.. run check
+npm --prefix ../.. test
+npm --prefix ../.. run test:bun
+npm run check
+npm test
+npm run test:bun
+node bench-public-core.ts
+bun bench-public-core.ts
+node bundles-public-core.mjs
+node bench-public-time.ts
+bun bench-public-time.ts
+node verify-package.mjs --migration
+node summarize-public-core.mjs
+node summarize-public-time.mjs
+```
+
+Run benchmarks sequentially. The installed-package gate bundles bare imports
+with both esbuild and Rollup and checks included modules/output. The public
+time declarations use structural Date/number windows without a date-fns type
+peer; official Interval compatibility is checked in public-time-types.ts.
+Previous method-based chronology is retained in references/legacy-timeline.ts
+for historical baselines and is excluded from the package.
 
 ## Competing query prototypes
 

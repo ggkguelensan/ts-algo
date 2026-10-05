@@ -6,7 +6,7 @@ import {temporal,overlapping} from './temporal.ts';
 import {freeSlots,overloaded,conflicts,type Reservation} from './ranges.ts';
 import {diffBy} from './diff.ts';
 import {tree} from '../../dist/src/tree.js';
-import {timeline} from '../../dist/src/timeline.js';
+import {timeline} from '../../dist/references/legacy-timeline.js';
 import {hierarchy,subtree} from './hierarchy.ts';
 import {collect} from './collect.ts';
 
