@@ -95,19 +95,23 @@ const ordered = sorted(numbers, value => value, (a, b) => a - b);
 
 ## Дерево
 
-Создайте иерархию из Map с селектором родителя. Несколько корней допустимы.
+Создайте иерархию из Map с селектором родителя. Сущность не обязана хранить связи дерева; их можно получить из отдельного хранилища. Несколько корней допустимы.
 
 ```ts
 import { tree, sorted } from "ts-algo";
 
-type Item = Readonly<{ parentId: string | null; title: string }>;
+type Item = Readonly<{ title: string }>;
 const items = new Map<string, Item>([
-  ["catalog", { parentId: null, title: "Каталог" }],
-  ["phones", { parentId: "catalog", title: "Телефоны" }],
-  ["books", { parentId: "catalog", title: "Книги" }],
+  ["catalog", { title: "Каталог" }],
+  ["phones", { title: "Телефоны" }],
+  ["books", { title: "Книги" }],
+]);
+const parents = new Map<string, string>([
+  ["phones", "catalog"],
+  ["books", "catalog"],
 ]);
 
-const catalog = tree(items, { parent: item => item.parentId });
+const catalog = tree(items, { parent: (_item, id) => parents.get(id) });
 catalog.children("catalog");     // ["phones", "books"]
 catalog.nextSibling("phones");   // "books"
 catalog.previousSibling("books"); // "phones"
@@ -121,6 +125,8 @@ const keys = sorted(catalog, item => item.title, (a, b) => a.localeCompare(b));
 ```
 
 `sortBy` возвращает новый вид с сохранением иерархии. Переходы к соседям остаются внутри одной группы детей. Корневой родитель — null/undefined; ключи узлов должны быть non-nullish. Отсутствующий родитель и циклы вызывают RangeError. Состав и связи — снимок при создании. [Контракт дерева](docs/tree-timeline.md#дерево).
+
+Если связь уже хранится в сущности, используйте `parent: item => item.parentId`. В обоих вариантах дерево сохраняет собственный снимок связей и не добавляет полей сущностям.
 
 ## Хронология
 
