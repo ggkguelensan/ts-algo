@@ -1,28 +1,60 @@
 # ts-algo
 
-Небольшие инструменты для повторяющихся задач бизнес-логики: работа со ссылками на сущности, временем, пространством и точными вычислениями. Простой интерфейс, нативные средства JS и измеряемая стоимость runtime. Сейчас реализованы сортировка ссылок, дерево, временная линия с владельцами и причинными связями, индекс 2D-точек; интервалы и точная арифметика пока проектируются.
+Небольшие инструменты для повторяющихся задач бизнес-логики. Ссылки на сущности сохраняются, интерфейсы опираются на Iterable/ReadonlyMap и нативную сортировку. Есть сортировка, дерево с переходами между соседями, хронология точек/интервалов с причинностью, очередь FIFO, deque, два связных списка и индекс 2D-точек. Точная арифметика и операции над свободными слотами пока проектируются.
 
-[Принципы, приоритеты и контракты будущих модулей](docs/design.md).
+[Принципы и приоритеты](docs/design.md).
 
-## Дерево и временная линия
+## Дерево и хронология
 
 ```ts
 const hierarchy = tree(items, { parent: item => item.parentId });
 const orderedTree = hierarchy.sortBy(item => item.title, (a, b) => a.localeCompare(b));
+hierarchy.nextSibling(itemId);
+hierarchy.previousSibling(itemId);
 const flatKeys = sortedReferences(hierarchy, item => item.title, (a, b) => a.localeCompare(b));
 
 const events = timeline(storage, {
-  at: event => event.at,
-  owner: event => event.ownerId,
+  time: event => event.at, // либо { start, end }
   causes: event => event.causedBy,
 });
-const history = events.forOwner(ownerId).between(start, end);
+const history = events.between(start, end, event => event.ownerId === ownerId);
+const intersecting = events.overlapping(start, end);
 const causes = events.ancestors(eventId);
 ```
 
-`tree` хранит иерархию с одним родителем; `sortBy` сохраняет связи, а `sortedReferences` возвращает плоский рейтинг. Временная линия хранит события-точки: бинарный поиск по времени, индекс владельцев и DAG причинности с несколькими причинами. Хронологический и причинный порядок различаются. Оба модуля реализуют ReadonlyMap и используют существующий интерфейс сортировки. [Полные примеры и ограничения](docs/tree-timeline.md).
+Хронология связывает ссылки со временем и причинностью. `ownerId` и другие бизнес-свойства остаются у сущностей. Внешние источники можно передать через `context`, а получение сущности — через `get`; геттеры времени и связей тоже получают контекст. Без options сущности могут содержать `{ at }` или `{ start, end }`, `causes`/`effects`. `between` выбирает начала в `[start, end)`, `overlapping` находит также ранние длительные события. Состав/время/связи кешируются; свойства через resolver читаются при фильтрации. [Контракты и примеры внешнего хранилища](docs/tree-timeline.md).
 
-[Замеры Node/V8](docs/hierarchy-time-results-node.md), [Bun/JavaScriptCore](docs/hierarchy-time-results-bun.md), [размер модулей](docs/bundle-results.md). Команды: `npm run bench:hierarchy-time`, `npm run bench:hierarchy-time:bun`. Все 30 тестов проходят в обоих runtime.
+## Очереди и списки
+
+```ts
+const jobs = queue<Job>();
+jobs.enqueue(job);
+const next = jobs.dequeue();
+
+const pending = deque<Job>();
+pending.pushFront(urgentJob);
+pending.pushBack(job);
+
+const list = doublyLinkedList<Job>();
+const handle = list.append(job);
+list.insertBefore(handle, urgentJob);
+handle.previous?.value;
+list.remove(handle);
+
+const single = linkedList([job]); // только next
+const ordered = sortedReferences(list, job => job.priority, (a, b) => a - b);
+```
+
+Queue/deque используют массивы без обёрток на элемент; связные списки дают стабильные узлы для локальных правок. [Операции, сложность и компромиссы](docs/sequences.md).
+
+39 runtime-тестов проходят в Node и Bun; вывод типов проверяется компилятором. [Точки/деревья: Node](docs/hierarchy-time-results-node.md), [Bun](docs/hierarchy-time-results-bun.md); [очереди/интервалы: Node](docs/sequences-intervals-results-node.md), [Bun](docs/sequences-intervals-results-bun.md); [размер импортов](docs/bundle-results.md).
+
+```sh
+npm run bench:hierarchy-time
+npm run bench:hierarchy-time:bun
+npm run bench:sequences-intervals
+npm run bench:sequences-intervals:bun
+```
 
 ## Пространственный индекс
 
@@ -48,7 +80,7 @@ npm run bench:spatial:bun
 npm run bench:bundle
 ```
 
-Отчёты: [Node/V8](docs/spatial-results-node.md), [Bun/JavaScriptCore](docs/spatial-results-bun.md), [размер JS и gzip](docs/bundle-results.md). Измеряем отдельно построение, 64 запроса к готовому индексу и построение вместе с запросами; baseline — Array.filter и линейный поиск ближайшей точки. Совпадающие точки показывают случай, когда индекс для nearest медленнее линейного обхода. Оба runtime проходят одинаковые 30 тестов; TypeScript-проверки отдельно проверяют вывод типов.
+Отчёты: [Node/V8](docs/spatial-results-node.md), [Bun/JavaScriptCore](docs/spatial-results-bun.md), [размер JS и gzip](docs/bundle-results.md). Измеряем отдельно построение, 64 запроса к готовому индексу и построение вместе с запросами; baseline — Array.filter и линейный поиск ближайшей точки. Совпадающие точки показывают случай, когда индекс для nearest медленнее линейного обхода. Оба runtime проходят одинаковые 39 тестов; TypeScript-проверки отдельно проверяют вывод типов.
 
 ## Сортировка ссылок
 

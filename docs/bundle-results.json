@@ -4,62 +4,94 @@
     "target": "browser",
     "format": "esm",
     "minify": true,
-    "date": "2026-10-05T05:14:23.183Z"
+    "date": "2026-10-05T08:54:30.664Z"
   },
   "rows": [
     {
       "exports": [
         "sortedReferences"
       ],
-      "bytes": 900,
-      "gzipBytes": 441
+      "bytes": 927,
+      "gzipBytes": 463
     },
     {
       "exports": [
         "pointIndex"
       ],
-      "bytes": 2635,
-      "gzipBytes": 1267
+      "bytes": 2662,
+      "gzipBytes": 1289
     },
     {
       "exports": [
         "sortedReferences",
         "pointIndex"
       ],
-      "bytes": 3185,
-      "gzipBytes": 1486
+      "bytes": 3212,
+      "gzipBytes": 1509
     },
     {
       "exports": [
         "quickSortInPlace",
         "sortedReferencesQuickSort"
       ],
-      "bytes": 610,
-      "gzipBytes": 396
+      "bytes": 637,
+      "gzipBytes": 420
     },
     {
       "exports": [
         "tree"
       ],
-      "bytes": 2184,
-      "gzipBytes": 1016
+      "bytes": 2435,
+      "gzipBytes": 1124
     },
     {
       "exports": [
         "timeline"
       ],
-      "bytes": 3028,
-      "gzipBytes": 1411
+      "bytes": 4162,
+      "gzipBytes": 1939
+    },
+    {
+      "exports": [
+        "queue"
+      ],
+      "bytes": 387,
+      "gzipBytes": 280
+    },
+    {
+      "exports": [
+        "deque"
+      ],
+      "bytes": 694,
+      "gzipBytes": 375
+    },
+    {
+      "exports": [
+        "linkedList"
+      ],
+      "bytes": 901,
+      "gzipBytes": 498
+    },
+    {
+      "exports": [
+        "doublyLinkedList"
+      ],
+      "bytes": 922,
+      "gzipBytes": 509
     },
     {
       "exports": [
         "sortedReferences",
         "pointIndex",
         "tree",
-        "timeline"
+        "timeline",
+        "queue",
+        "deque",
+        "linkedList",
+        "doublyLinkedList"
       ],
-      "bytes": 6304,
-      "gzipBytes": 2729
+      "bytes": 10393,
+      "gzipBytes": 4270
     }
   ]
 }

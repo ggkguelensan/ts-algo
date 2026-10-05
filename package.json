@@ -15,7 +15,9 @@
     "bench:spatial:bun": "npm run build && bun dist/bench/spatial.js",
     "bench:bundle": "npm run build && node dist/bench/bundle.js",
     "bench:hierarchy-time": "npm run build && node --expose-gc dist/bench/hierarchy-time.js",
-    "bench:hierarchy-time:bun": "npm run build && bun --expose-gc dist/bench/hierarchy-time.js"
+    "bench:hierarchy-time:bun": "npm run build && bun --expose-gc dist/bench/hierarchy-time.js",
+    "bench:sequences-intervals": "npm run build && node --expose-gc dist/bench/sequences-intervals.js",
+    "bench:sequences-intervals:bun": "npm run build && bun --expose-gc dist/bench/sequences-intervals.js"
   },
   "devDependencies": {
     "@types/node": "^25.0.0",

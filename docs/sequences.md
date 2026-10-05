@@ -1,0 +1,56 @@
+# Очереди и связные списки
+
+Все четыре коллекции принимают конечный Iterable, сохраняют идентичность значений
+и итерируются по значениям. Поэтому `sortedReferences(collection, select, compare)`
+возвращает новый отсортированный массив значений, не меняя коллекцию. Это не
+перестановка узлов связного списка. Не меняйте коллекцию во время итерации.
+
+| Коллекция | Операции | Представление / стоимость |
+|---|---|---|
+| `queue` | enqueue, dequeue, peek | Массив + позиция чтения; амортизированно O(1) |
+| `deque` | pushFront/Back, popFront/Back, peekFront/Back | Растущий кольцевой массив; амортизированно O(1) |
+| `linkedList` | append, prepend, insertAfter, removeAfter, removeFirst | По одному узлу с next; O(1) по известному узлу, remove(handle) O(n) |
+| `doublyLinkedList` | Те же вставки, insertBefore, remove, removeFirst/Last | Узлы с next/previous; O(1) по известному узлу |
+
+```ts
+const jobs = queue<Job>();
+jobs.enqueue(job);
+const next = jobs.dequeue(); // Job | undefined
+
+const pending = deque<Job>();
+pending.pushBack(job);
+pending.pushFront(urgentJob);
+const last = pending.popBack();
+
+const sequence = doublyLinkedList<Job>();
+const handle = sequence.append(job);
+sequence.insertBefore(handle, urgentJob);
+handle.previous?.value; // urgentJob
+sequence.remove(handle); // job; узел теперь отсоединён
+```
+
+`size` доступен у всех; `first`/`last` у списков — узлы, не значения. Поля узла
+`value`, `next`, `previous` readonly для вызывающего кода. Менять связи можно
+методами списка. Сущности не замораживаются и не оборачиваются дополнительно:
+узел списка — единственная обёртка. У queue/deque обёрток на элемент нет.
+
+Узлы — стабильные handles: другие вставки не меняют их идентичность. Чужой или
+уже удалённый узел вызывает RangeError. Удаление обнуляет связи и принадлежность.
+`clear()` у списков O(n), чтобы сохранённый handle не удерживал целую цепочку;
+значение самого сохранённого узла остаётся доступно. У queue удалённые слоты
+очищаются; после 1024 прочтений и потребления хотя бы половины массива происходит
+компактизация. У deque удалённые слоты очищаются, ёмкость автоматически не сжимается;
+`clear` сбрасывает буфер. Рост/компактизация иногда стоят O(n).
+
+Пустое извлечение/peek возвращает undefined. undefined можно хранить как значение:
+для различения пустоты используйте size. Источник не должен быть бесконечным.
+
+Списки полезны для локальных правок по сохранённым узлам. Для известного набора
+удалений один native Array.filter обычно проще и в наших замерах быстрее;
+список оплачивает узлы, ссылки и проверки принадлежности. Для FIFO массив с
+курсорным чтением уже эффективен; queue добавляет повторное использование,
+освобождение ссылок и компактизацию. Многократный Array.shift — другой baseline.
+
+[Node/V8](sequences-intervals-results-node.md), [Bun/JavaScriptCore](sequences-intervals-results-bun.md),
+[размер отдельных импортов](bundle-results.md). Замеры включают создание и операции;
+они не доказывают превосходство во всех сценариях. Peak heap пока не измеряется.

@@ -12,7 +12,8 @@ const rows = [];
 try {
   for (const names of [["sortedReferences"], ["pointIndex"], ["sortedReferences", "pointIndex"],
     ["quickSortInPlace", "sortedReferencesQuickSort"], ["tree"], ["timeline"],
-    ["sortedReferences", "pointIndex", "tree", "timeline"]]) {
+    ["queue"], ["deque"], ["linkedList"], ["doublyLinkedList"],
+    ["sortedReferences", "pointIndex", "tree", "timeline", "queue", "deque", "linkedList", "doublyLinkedList"]]) {
     const fixture = join(directory, "entry.ts");
     writeFileSync(fixture, `export { ${names.join(", ")} } from "../../src/index.ts";\n`);
     const output = execFileSync("bun", ["build", fixture, "--target=browser", "--format=esm", "--minify"], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
@@ -21,23 +22,37 @@ try {
     const module = await import(pathToFileURL(artifact).href);
     for (const name of names) assert.equal(typeof module[name], "function");
     if (module.sortedReferences) assert.deepEqual(module.sortedReferences([2, 1], (x: number) => x, (a: number, b: number) => a - b), [1, 2]);
+    if (module.quickSortInPlace) { const a = [2, 1, 2]; module.quickSortInPlace(a, (a: number, b: number) => a - b); assert.deepEqual(a, [1, 2, 2]); }
+    if (module.sortedReferencesQuickSort) assert.deepEqual(module.sortedReferencesQuickSort([2, 1], (x: number) => x, (a: number, b: number) => a - b), [1, 2]);
     if (module.pointIndex) assert.equal(module.pointIndex([{ x: 1, y: 2 }], {
       x: (p: { x: number }) => p.x, y: (p: { y: number }) => p.y,
     }).nearest(1, 2).distance, 0);
     if (module.tree) {
-      const result = module.tree(new Map([["root", { parent: null }], ["child", { parent: "root" }]]), {
+      const result = module.tree(new Map([["root", { parent: null }], ["child", { parent: "root" }], ["sibling", { parent: "root" }]]), {
         parent: (e: { parent: string | null }) => e.parent,
       });
-      assert.deepEqual([...result.keys()], ["root", "child"]);
+      assert.deepEqual([...result.keys()], ["root", "child", "sibling"]);
+      assert.equal(result.nextSibling("child"), "sibling");
+      assert.equal(result.previousSibling("sibling"), "child");
       assert.deepEqual(result.sortBy(() => 0, () => 0).roots, ["root"]);
     }
     if (module.timeline) {
       const result = module.timeline(new Map([["a", { at: 1 }], ["b", { at: 2 }]]), {
-        at: (e: { at: number }) => e.at, causes: (_e: unknown, key: string) => key === "b" ? ["a"] : [],
+        time: (e: { at: number }) => e.at, causes: (_e: unknown, key: string) => key === "b" ? ["a"] : [],
       });
       assert.deepEqual(result.between(1, 2), ["a"]);
       assert.deepEqual(result.ancestors("b"), ["a"]);
+      const context = new Map([["span", { start: 0, end: 10, flag: true }]]);
+      const external = module.timeline(["span"], { context,
+        get: (key: string, ctx: typeof context) => ctx.get(key)!, time: (e: { start: number; end: number }) => e,
+      });
+      assert.deepEqual(external.overlapping(5, 6, (e: { flag: boolean }) => e.flag), ["span"]);
+      assert.equal(external.context, context);
     }
+    if (module.queue) { const q = module.queue([1, 2]); assert.equal(q.dequeue(), 1); q.enqueue(3); assert.deepEqual([...q], [2, 3]); }
+    if (module.deque) { const q = module.deque([1, 2]); q.pushFront(0); assert.equal(q.popBack(), 2); assert.deepEqual([...q], [0, 1]); }
+    if (module.linkedList) { const list = module.linkedList([1]); list.insertAfter(list.first, 2); assert.deepEqual([...list], [1, 2]); }
+    if (module.doublyLinkedList) { const list = module.doublyLinkedList([1, 2]); assert.equal(list.last.previous.value, 1); list.remove(list.first); assert.deepEqual([...list], [2]); }
     rows.push({ exports: names, bytes: Buffer.byteLength(output), gzipBytes: gzipSync(output).length });
   }
 } finally { rmSync(directory, { recursive: true }); }
@@ -46,6 +61,6 @@ const metadata = { bundler: `Bun ${execFileSync("bun", ["--version"], { encoding
 writeFileSync("docs/bundle-results.json", JSON.stringify({ metadata, rows }, null, 2) + "\n");
 const report = `# Browser bundle size\n\n${metadata.bundler}, browser ESM, minified, export-only fixtures imported through src/index.ts.\n\n` +
   "| Exports | JS bytes | gzip bytes |\n|---|---:|---:|\n" + rows.map(r => `| ${r.exports.join(", ")} | ${r.bytes} | ${r.gzipBytes} |`).join("\n") +
-  "\n\nIncludes shared helpers; excludes TypeScript declarations. No runtime dependencies. Every generated artifact is imported and its exports checked before measuring; sort, point-index, tree and timeline bundles also receive smoke checks. These are incremental library artifacts, not a whole app; compressed contributions in a shared application bundle may differ. Bun bundling does not replace tsc type checking.\n";
+  "\n\nIncludes shared helpers; excludes TypeScript declarations. No runtime dependencies. Every generated artifact is imported and its exports checked before measuring; every selected module also receives smoke checks. These are incremental library artifacts, not a whole app; compressed contributions in a shared application bundle may differ. Bun bundling does not replace tsc type checking.\n";
 writeFileSync("docs/bundle-results.md", report);
 console.log(report);

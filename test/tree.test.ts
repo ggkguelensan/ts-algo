@@ -22,6 +22,14 @@ test("forest hierarchy, stable sibling sorting and flat sorting share entities",
   assert.equal(selections, 5); // two roots + three siblings; singleton unchanged
   assert.deepEqual([...sorted.keys()], ["root", "a", "tie", "b", "grandchild", "other"]);
   assert.deepEqual(forest.children("root"), ["b", "a", "tie"]);
+  assert.equal(forest.nextSibling("b"), "a");
+  assert.equal(forest.previousSibling("tie"), "a");
+  assert.equal(forest.previousSibling("b"), undefined);
+  assert.equal(sorted.nextSibling("a"), "tie");
+  assert.equal(sorted.previousSibling("b"), "tie");
+  assert.equal(sorted.nextSibling("grandchild"), undefined);
+  assert.equal(sorted.nextSibling("root"), "other");
+  assert.equal(sorted.previousSibling("other"), "root");
   assert.equal(sorted.parent("grandchild"), "b");
   assert.equal(sorted.get("a"), storage.get("a"));
   assert.deepEqual(sortedReferences(forest, e => e.rank, (a, b) => a - b), ["grandchild", "a", "tie", "b", "root", "other"]);

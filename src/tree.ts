@@ -6,6 +6,9 @@ export interface Tree<Key, Entity> extends ReadonlyMap<Key, Entity> {
   readonly roots: readonly Key[];
   children(key: Key): readonly Key[];
   parent(key: Key): Key | undefined;
+  /** Neighbours with the same parent; roots are one sibling group. */
+  nextSibling(key: Key): Key | undefined;
+  previousSibling(key: Key): Key | undefined;
   /** Preorder, including the starting node; iterative, safe for deep trees. */
   subtree(key: Key): IterableIterator<Key>;
   /** Immediate parent first; excludes the starting node. */
@@ -50,6 +53,10 @@ function makeTree<Key, Entity>(
   parents: ReadonlyMap<Key, Key>, children: ReadonlyMap<Key, readonly Key[]>,
 ): Tree<Key, Entity> {
   const empty: readonly Key[] = [];
+  const siblingPositions = new Map<Key, number>();
+  const index = (keys: readonly Key[]) => { for (let i = 0; i < keys.length; i++) siblingPositions.set(keys[i]!, i); };
+  index(roots);
+  children.forEach(index);
   function requireKey(key: Key) {
     if (!entities.has(key)) throw new RangeError("Missing tree node");
   }
@@ -67,6 +74,16 @@ function makeTree<Key, Entity>(
     roots,
     children(key) { requireKey(key); return children.get(key) ?? empty; },
     parent(key) { requireKey(key); return parents.get(key); },
+    nextSibling(key) {
+      requireKey(key);
+      const group = parents.has(key) ? children.get(parents.get(key)!)! : roots;
+      return group[siblingPositions.get(key)! + 1];
+    },
+    previousSibling(key) {
+      requireKey(key);
+      const group = parents.has(key) ? children.get(parents.get(key)!)! : roots;
+      return group[siblingPositions.get(key)! - 1];
+    },
     subtree(key) { requireKey(key); return walk([key]); },
     *ancestors(key) {
       requireKey(key);

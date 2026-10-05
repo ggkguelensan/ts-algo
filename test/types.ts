@@ -1,5 +1,5 @@
 // Compiled by tsc, not executed. Check inference and overload rejection.
-import { sortedReferences, pointIndex, tree, timeline } from "../src/index.js";
+import { sortedReferences, pointIndex, tree, timeline, queue, deque, linkedList, doublyLinkedList } from "../src/index.js";
 
 type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends
   (<T>() => T extends B ? 1 : 2) ? true : false;
@@ -46,15 +46,34 @@ pointIndex(positions, { x: ([key, p]: [string, { x: number }]) => p.x, y: () => 
 const hierarchy = tree(new Map([["root", { parentId: null, rank: 1 }]]), { parent: e => e.parentId });
 const treeOrder = sortedReferences(hierarchy, e => e.rank, numeric);
 type TreeKeys = Assert<Equal<typeof treeOrder, string[]>>;
-const chronological = timeline(new Map([["event", { at: 0, owner: 42, causes: [] as string[] }]]), {
-  at: e => e.at, owner: e => e.owner, causes: e => e.causes,
-});
+const chronological = timeline(new Map([["event", { at: 0, owner: 42, causes: [] as string[] }]]));
 type EventKeys = Assert<Equal<ReturnType<typeof chronological.between>, string[]>>;
+chronological.filter(e => e.owner === 42);
+const context = { load: (_id: string) => ({ label: "test" }), times: { start: 1, end: 2 } };
+const external = timeline(["id"], {
+  context,
+  get: (id, ctx) => ctx.load(id),
+  time: (_event, _id, ctx) => ctx.times,
+});
+type ExternalKeys = Assert<Equal<ReturnType<typeof external.filter>, string[]>>;
+external.filter((event, id, ctx) => event.label === id && ctx.times.start > 0);
+// @ts-expect-error chronology has no business-specific owner method.
 chronological.forOwner(42);
-// @ts-expect-error owner type is inferred from its selector.
-chronological.forOwner("42");
-const ownerless = timeline(new Map([["event", 0]]), { at: e => e });
-// @ts-expect-error an ownerless timeline cannot be queried by an owner.
-ownerless.forOwner(42);
+// @ts-expect-error invalid context property is rejected.
+external.filter((_event, _id, ctx) => ctx.absent);
+// @ts-expect-error a Map selector receives an entity, not an entry tuple.
+timeline(new Map([["id", { at: 1 }]]), { time: ([id, e]: [string, { at: number }]) => e.at });
+const q = queue([{ rank: 1 }]);
+const dq = deque([{ rank: 1 }]);
+const single = linkedList([{ rank: 1 }]);
+const double = doublyLinkedList([{ rank: 1 }]);
+sortedReferences(q, e => e.rank, numeric);
+sortedReferences(dq, e => e.rank, numeric);
+sortedReferences(single, e => e.rank, numeric);
+sortedReferences(double, e => e.rank, numeric);
+// @ts-expect-error singly-linked nodes have no previous pointer.
+single.first?.previous;
+// @ts-expect-error node links are readonly to callers.
+if (double.first) double.first.next = undefined;
 // @ts-expect-error null is reserved for root parents, not a node key.
 tree(new Map([[null, { parentId: null }]]), { parent: e => e.parentId });
