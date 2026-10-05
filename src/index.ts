@@ -1,5 +1,5 @@
 export type { Compare } from "./compare.js";
-export { sortedReferences } from "./sorted-references.js";
+export { sorted } from "./sorted.js";
 export { pointIndex, type PointIndex, type Bounds, type Nearest } from "./point-index.js";
 export { tree, type Tree } from "./tree.js";
 export { timeline, type Timeline, type EventTime, type TimeSpan, type TemporalFields, type EventPredicate } from "./timeline.js";

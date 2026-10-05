@@ -4,15 +4,15 @@
     "target": "browser",
     "format": "esm",
     "minify": true,
-    "date": "2026-10-05T09:01:47.279Z"
+    "date": "2026-10-05T09:13:07.210Z"
   },
   "rows": [
     {
       "exports": [
-        "sortedReferences"
+        "sorted"
       ],
-      "bytes": 927,
-      "gzipBytes": 464
+      "bytes": 917,
+      "gzipBytes": 457
     },
     {
       "exports": [
@@ -23,11 +23,11 @@
     },
     {
       "exports": [
-        "sortedReferences",
+        "sorted",
         "pointIndex"
       ],
-      "bytes": 3212,
-      "gzipBytes": 1507
+      "bytes": 3202,
+      "gzipBytes": 1504
     },
     {
       "exports": [
@@ -73,7 +73,7 @@
     },
     {
       "exports": [
-        "sortedReferences",
+        "sorted",
         "pointIndex",
         "tree",
         "timeline",
@@ -82,8 +82,8 @@
         "linkedList",
         "doublyLinkedList"
       ],
-      "bytes": 10393,
-      "gzipBytes": 4271
+      "bytes": 10383,
+      "gzipBytes": 4267
     }
   ]
 }

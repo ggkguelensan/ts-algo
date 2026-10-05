@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { queue, deque, linkedList, doublyLinkedList, sortedReferences, type LinkedList } from "../src/index.js";
+import { queue, deque, linkedList, doublyLinkedList, sorted, type LinkedList } from "../src/index.js";
 
 test("queue FIFO, compaction, cleared references, undefined values and identity", () => {
   const values = Array.from({ length: 6000 }, (_, id) => Object.freeze({ id }));
@@ -9,7 +9,7 @@ test("queue FIFO, compaction, cleared references, undefined values and identity"
   assert.equal(q.peek(), values[4000]);
   q.enqueue(values[0]!);
   assert.deepEqual([...q], [...values.slice(4000), values[0]]);
-  assert.deepEqual(sortedReferences(q, v => v.id, (a, b) => a - b), [values[0], ...values.slice(4000)]);
+  assert.deepEqual(sorted(q, v => v.id, (a, b) => a - b), [values[0], ...values.slice(4000)]);
   assert.equal(q.size, 2001);
   q.clear(); assert.equal(q.size, 0); assert.equal(q.dequeue(), undefined);
   const nullable = queue<undefined>(); nullable.enqueue(undefined);
@@ -58,7 +58,7 @@ test("doubly linked handles remain stable through edits, backwards traversal and
   const list = doublyLinkedList<Readonly<{ rank: number }>>([a]);
   const first = list.first!, last = list.append(c), middle = list.insertBefore(last, b);
   assert.equal(first.next, middle); assert.equal(middle.previous, first); assert.equal(last.previous, middle);
-  assert.deepEqual(sortedReferences(list, v => v.rank, (a, b) => a - b), [b, c, a]);
+  assert.deepEqual(sorted(list, v => v.rank, (a, b) => a - b), [b, c, a]);
   const backwards = []; for (let n = list.last; n; n = n.previous) backwards.push(n.value);
   assert.deepEqual(backwards, [c, b, a]);
   assert.equal(list.remove(middle), b); assert.equal(first.next, last); assert.equal(last.previous, first);

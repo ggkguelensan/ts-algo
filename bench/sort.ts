@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { cpus } from "node:os";
 import { performance } from "node:perf_hooks";
-import { sortedReferences } from "../src/index.js";
+import { sorted } from "../src/index.js";
 import { sortedReferencesQuickSort } from "../references/sorted-references-quick-sort.js";
 
 type GetValue = (ref: number) => number;
@@ -13,7 +13,7 @@ const algorithms: Record<string, Algorithm> = {
   "qs-stable": (refs, getValue, compare) => sortedReferencesQuickSort(refs, getValue, compare),
   "v8-direct": (refs, getValue, compare) =>
     refs.slice().sort((a, b) => compare(getValue(a), getValue(b))),
-  "v8-cached": (refs, getValue, compare) => sortedReferences(refs, getValue, compare),
+  "v8-cached": (refs, getValue, compare) => sorted(refs, getValue, compare),
 };
 const names = Object.keys(algorithms);
 const shapes = ["random", "sorted", "reverse", "almost-sorted", "equal", "few-distinct", "organ-pipe"];

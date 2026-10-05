@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { timeline, sortedReferences } from "../src/index.js";
+import { timeline, sorted } from "../src/index.js";
 
 test("chronology, owners and multi-cause DAG remain independent", () => {
   const source = new Map<string, Readonly<{ at: number; owner: string; causes: readonly string[] }>>([
@@ -25,7 +25,7 @@ test("chronology, owners and multi-cause DAG remain independent", () => {
   assert.deepEqual(events.ancestors("shipped"), ["paid", "approved", "order"]);
   assert.deepEqual(events.descendants("order"), ["paid", "approved", "shipped"]);
   assert.deepEqual(events.causalOrder(), ["order", "approved", "paid", "shipped"]);
-  assert.deepEqual(sortedReferences(events, e => e.at, (a, b) => b - a), ["approved", "paid", "shipped", "order"]);
+  assert.deepEqual(sorted(events, e => e.at, (a, b) => b - a), ["approved", "paid", "shipped", "order"]);
   events.forEach((value, key, map) => { assert.equal(map, events); assert.equal(value, source.get(key)); });
   assert.deepEqual(calls, { at: 4, causes: 4 });
   source.set("order", { at: 1000, owner: "new", causes: [] });
@@ -121,7 +121,7 @@ test("external context supplies entities, time, causes or effects; properties ar
   assert.deepEqual(line.filter((e, _id, ctx) => e.owner === ctx.owner), []);
   assert.deepEqual(line.overlapping(4, 5), ["a"]);
   assert.deepEqual(line.overlapping(2, 4, e => e.owner === "two"), ["a", "b"]);
-  assert.deepEqual(sortedReferences(line, e => e.label, (a, b) => a.localeCompare(b)), ["b", "a"]);
+  assert.deepEqual(sorted(line, e => e.label, (a, b) => a.localeCompare(b)), ["b", "a"]);
   entities.clear();
   assert.deepEqual(line.between(0, 10), ["a", "b"]); // metadata doesn't need entity resolution
   assert.throws(() => line.filter(() => true), /Missing/);
@@ -150,10 +150,10 @@ test("differential interval queries for long, overlapping, point and equal-end e
       return [id, { start, end: shape === "equal-end" ? 100 : start + (id % 3 ? Math.floor(random() * 100) : 0), flag: id % 2 === 0 }] as const;
     }));
     const line = timeline(data);
-    const sorted = [...data].sort((a, b) => a[1].start - b[1].start);
+    const ordered = [...data].sort((a, b) => a[1].start - b[1].start);
     for (let q = 0; q < 150; q++) {
       const start = Math.floor(random() * 220) - 10, end = start + Math.floor(random() * 30);
-      const expected = sorted.filter(([, e]) => start < end && (e.start === e.end
+      const expected = ordered.filter(([, e]) => start < end && (e.start === e.end
         ? e.start >= start && e.start < end : e.start < end && e.end > start));
       assert.deepEqual(line.overlapping(start, end), expected.map(([id]) => id));
       assert.deepEqual(line.overlapping(start, end, e => e.flag), expected.filter(([, e]) => e.flag).map(([id]) => id));

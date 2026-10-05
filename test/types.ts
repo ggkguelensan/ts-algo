@@ -1,5 +1,5 @@
 // Compiled by tsc, not executed. Check inference and overload rejection.
-import { sortedReferences, pointIndex, tree, timeline, queue, deque, linkedList, doublyLinkedList } from "../src/index.js";
+import { sorted, pointIndex, tree, timeline, queue, deque, linkedList, doublyLinkedList } from "../src/index.js";
 
 type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends
   (<T>() => T extends B ? 1 : 2) ? true : false;
@@ -7,7 +7,7 @@ type Assert<T extends true> = T;
 const numeric = (a: number, b: number) => a - b;
 
 const map: ReadonlyMap<string, Readonly<{ age: number }>> = new Map();
-const mapResult = sortedReferences(map, (entity, key) => {
+const mapResult = sorted(map, (entity, key) => {
   const id: string = key;
   void id;
   return entity.age;
@@ -15,22 +15,22 @@ const mapResult = sortedReferences(map, (entity, key) => {
 type MapResult = Assert<Equal<typeof mapResult, string[]>>;
 
 const set: ReadonlySet<Readonly<{ age: number }>> = new Set();
-const setResult = sortedReferences(set, entity => entity.age, numeric);
+const setResult = sorted(set, entity => entity.age, numeric);
 type SetResult = Assert<Equal<typeof setResult, Readonly<{ age: number }>[]>>;
 
-const arrayResult = sortedReferences([3, 1, 2] as const, x => x, numeric);
+const arrayResult = sorted([3, 1, 2] as const, x => x, numeric);
 type ArrayResult = Assert<Equal<typeof arrayResult, (1 | 2 | 3)[]>>;
 
 function* numbers() { yield 3; yield 1; yield 2; }
-const iterableResult = sortedReferences(numbers(), x => x, numeric);
+const iterableResult = sorted(numbers(), x => x, numeric);
 type IterableResult = Assert<Equal<typeof iterableResult, (1 | 2 | 3)[]>>;
 
 // Map must not accidentally select the generic iterable/entry-tuple overload.
 // @ts-expect-error Map selectors receive entities, not [key, entity] tuples.
-sortedReferences(map, ([key, entity]: [string, { age: number }]) => entity.age, numeric);
+sorted(map, ([key, entity]: [string, { age: number }]) => entity.age, numeric);
 
 // @ts-expect-error The selected numeric values need a numeric comparator.
-sortedReferences(map, entity => entity.age, (a: string, b: string) => a.localeCompare(b));
+sorted(map, entity => entity.age, (a: string, b: string) => a.localeCompare(b));
 
 void mapResult; void setResult; void arrayResult; void iterableResult;
 
@@ -44,7 +44,7 @@ type SpatialEntities = Assert<Equal<ReturnType<typeof spatialSet.within>, { x: n
 pointIndex(positions, { x: ([key, p]: [string, { x: number }]) => p.x, y: () => 0 });
 
 const hierarchy = tree(new Map([["root", { parentId: null, rank: 1 }]]), { parent: e => e.parentId });
-const treeOrder = sortedReferences(hierarchy, e => e.rank, numeric);
+const treeOrder = sorted(hierarchy, e => e.rank, numeric);
 type TreeKeys = Assert<Equal<typeof treeOrder, string[]>>;
 const chronological = timeline(new Map([["event", { at: 0, owner: 42, causes: [] as string[] }]]));
 type EventKeys = Assert<Equal<ReturnType<typeof chronological.between>, string[]>>;
@@ -67,10 +67,10 @@ const q = queue([{ rank: 1 }]);
 const dq = deque([{ rank: 1 }]);
 const single = linkedList([{ rank: 1 }]);
 const double = doublyLinkedList([{ rank: 1 }]);
-sortedReferences(q, e => e.rank, numeric);
-sortedReferences(dq, e => e.rank, numeric);
-sortedReferences(single, e => e.rank, numeric);
-sortedReferences(double, e => e.rank, numeric);
+sorted(q, e => e.rank, numeric);
+sorted(dq, e => e.rank, numeric);
+sorted(single, e => e.rank, numeric);
+sorted(double, e => e.rank, numeric);
 // @ts-expect-error singly-linked nodes have no previous pointer.
 single.first?.previous;
 // @ts-expect-error node links are readonly to callers.

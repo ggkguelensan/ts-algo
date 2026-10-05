@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { sortedReferences } from "../src/index.js";
+import { sorted } from "../src/index.js";
 import { quickSortInPlace } from "../references/quick-sort.js";
 import { sortedReferencesQuickSort } from "../references/sorted-references-quick-sort.js";
 
@@ -13,7 +13,7 @@ type ArraySorter = <Ref, Value>(
 ) => Ref[];
 
 const backends: readonly (readonly [string, ArraySorter])[] = [
-  ["native", sortedReferences],
+  ["native", sorted],
   ["quick", sortedReferencesQuickSort],
 ];
 

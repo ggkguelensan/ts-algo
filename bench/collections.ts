@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { cpus } from "node:os";
 import { performance } from "node:perf_hooks";
-import { sortedReferences } from "../src/index.js";
+import { sorted } from "../src/index.js";
 
 // Fixed baseline: array-only implementation from commit f91aab6.
 // Kept here to measure overload dispatch and direct Map traversal against it.
@@ -57,15 +57,15 @@ for (const size of sizes) {
     const cases = [
       { collection: "Array", variants: [
         { name: "before", run: () => arrayBaseline(refs, ref => keys[ref]!, numeric) },
-        { name: "overload", run: () => sortedReferences(refs, ref => keys[ref]!, numeric) },
+        { name: "overload", run: () => sorted(refs, ref => keys[ref]!, numeric) },
       ] },
       { collection: "Map", variants: [
         { name: "before", run: () => arrayBaseline(Array.from(map.keys()), ref => map.get(ref)!.age, numeric) },
-        { name: "overload", run: () => sortedReferences(map, entity => entity.age, numeric) },
+        { name: "overload", run: () => sorted(map, entity => entity.age, numeric) },
       ] },
       { collection: "Set", variants: [
         { name: "before", run: () => arrayBaseline(Array.from(set), ref => keys[ref]!, numeric) },
-        { name: "overload", run: () => sortedReferences(set, ref => keys[ref]!, numeric) },
+        { name: "overload", run: () => sorted(set, ref => keys[ref]!, numeric) },
       ] },
     ];
 

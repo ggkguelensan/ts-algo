@@ -1,10 +1,10 @@
 # Сортировка ссылок
 
 ```ts
-import { sortedReferences } from "ts-algo";
+import { sorted } from "ts-algo";
 
-const keys = sortedReferences(map, (entity, key) => entity.age, compare);
-const values = sortedReferences(set, entity => entity.age, compare);
+const keys = sorted(map, (entity, key) => entity.age, compare);
+const values = sorted(set, entity => entity.age, compare);
 ```
 
 Источник — ReadonlyMap, ReadonlySet, плотный массив или конечный Iterable.

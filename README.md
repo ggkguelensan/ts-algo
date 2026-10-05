@@ -11,7 +11,7 @@ npm install ts-algo
 ```
 
 ```ts
-import { sortedReferences, tree, timeline, pointIndex } from "ts-algo";
+import { sorted, tree, timeline, pointIndex } from "ts-algo";
 ```
 
 ## Сортировка
@@ -19,7 +19,7 @@ import { sortedReferences, tree, timeline, pointIndex } from "ts-algo";
 Получите новый массив ссылок, упорядоченный по выбранному значению. Для Map результат содержит ключи, для Set, массива и Iterable — исходные элементы.
 
 ```ts
-import { sortedReferences } from "ts-algo";
+import { sorted } from "ts-algo";
 
 const people = new Map([
   ["anna", { age: 30 }],
@@ -27,11 +27,11 @@ const people = new Map([
   ["vera", { age: 30 }],
 ]);
 
-const keys = sortedReferences(people, person => person.age, (a, b) => a - b);
+const keys = sorted(people, person => person.age, (a, b) => a - b);
 // ["boris", "anna", "vera"]
 
 const items = [...people.values()];
-const ordered = sortedReferences(items, person => person.age, (a, b) => a - b);
+const ordered = sorted(items, person => person.age, (a, b) => a - b);
 // Исходные объекты в новом порядке; items и people не изменяются.
 ```
 
@@ -44,7 +44,7 @@ const ordered = sortedReferences(items, person => person.age, (a, b) => a - b);
 Создайте иерархию из Map с селектором родителя. Несколько корней допустимы.
 
 ```ts
-import { tree, sortedReferences } from "ts-algo";
+import { tree, sorted } from "ts-algo";
 
 type Item = Readonly<{ parentId: string | null; title: string }>;
 const items = new Map<string, Item>([
@@ -62,7 +62,7 @@ catalog.previousSibling("books"); // "phones"
 const ordered = catalog.sortBy(item => item.title, (a, b) => a.localeCompare(b));
 ordered.children("catalog"); // ["books", "phones"]
 
-const keys = sortedReferences(catalog, item => item.title, (a, b) => a.localeCompare(b));
+const keys = sorted(catalog, item => item.title, (a, b) => a.localeCompare(b));
 // Плоский массив ключей, упорядоченный по названию.
 ```
 
@@ -168,7 +168,7 @@ if (last) {
 
 У односвязного списка есть `next`, у двусвязного — также `previous`. Связи узлов доступны только для чтения; изменение выполняется методами списка. Чужие и отсоединённые узлы вызывают RangeError.
 
-Все очереди и списки реализуют Iterable и работают с `sortedReferences`. Сортировка возвращает массив значений; порядок самой коллекции сохраняется. [Операции, сложность и выбор структуры](docs/sequences.md).
+Все очереди и списки реализуют Iterable и работают с `sorted`. Сортировка возвращает массив значений; порядок самой коллекции сохраняется. [Операции, сложность и выбор структуры](docs/sequences.md).
 
 ## Производительность и размер
 

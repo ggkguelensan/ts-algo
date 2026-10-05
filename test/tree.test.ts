@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { tree, sortedReferences, pointIndex } from "../src/index.js";
+import { tree, sorted, pointIndex } from "../src/index.js";
 
 test("forest hierarchy, stable sibling sorting and flat sorting share entities", () => {
   const storage = new Map<string, Readonly<{ parentId: string | null; rank: number; x: number; y: number }>>([
@@ -18,26 +18,26 @@ test("forest hierarchy, stable sibling sorting and flat sorting share entities",
   assert.deepEqual([...forest.ancestors("grandchild")], ["b", "root"]);
   assert.deepEqual([...forest.subtree("b")], ["b", "grandchild"]);
   let selections = 0;
-  const sorted = forest.sortBy(e => { selections++; return e.rank; }, (a, b) => a - b);
+  const ordered = forest.sortBy(e => { selections++; return e.rank; }, (a, b) => a - b);
   assert.equal(selections, 5); // two roots + three siblings; singleton unchanged
-  assert.deepEqual([...sorted.keys()], ["root", "a", "tie", "b", "grandchild", "other"]);
+  assert.deepEqual([...ordered.keys()], ["root", "a", "tie", "b", "grandchild", "other"]);
   assert.deepEqual(forest.children("root"), ["b", "a", "tie"]);
   assert.equal(forest.nextSibling("b"), "a");
   assert.equal(forest.previousSibling("tie"), "a");
   assert.equal(forest.previousSibling("b"), undefined);
-  assert.equal(sorted.nextSibling("a"), "tie");
-  assert.equal(sorted.previousSibling("b"), "tie");
-  assert.equal(sorted.nextSibling("grandchild"), undefined);
-  assert.equal(sorted.nextSibling("root"), "other");
-  assert.equal(sorted.previousSibling("other"), "root");
-  assert.equal(sorted.parent("grandchild"), "b");
-  assert.equal(sorted.get("a"), storage.get("a"));
-  assert.deepEqual(sortedReferences(forest, e => e.rank, (a, b) => a - b), ["grandchild", "a", "tie", "b", "root", "other"]);
-  assert.equal(pointIndex(sorted, { x: e => e.x, y: e => e.y }).nearest(2, 0)?.reference, "a");
-  assert.deepEqual([...sorted], [...sorted.keys()].map(key => [key, storage.get(key)]));
-  sorted.forEach((value, key, map) => { assert.equal(map, sorted); assert.equal(value, storage.get(key)); });
+  assert.equal(ordered.nextSibling("a"), "tie");
+  assert.equal(ordered.previousSibling("b"), "tie");
+  assert.equal(ordered.nextSibling("grandchild"), undefined);
+  assert.equal(ordered.nextSibling("root"), "other");
+  assert.equal(ordered.previousSibling("other"), "root");
+  assert.equal(ordered.parent("grandchild"), "b");
+  assert.equal(ordered.get("a"), storage.get("a"));
+  assert.deepEqual(sorted(forest, e => e.rank, (a, b) => a - b), ["grandchild", "a", "tie", "b", "root", "other"]);
+  assert.equal(pointIndex(ordered, { x: e => e.x, y: e => e.y }).nearest(2, 0)?.reference, "a");
+  assert.deepEqual([...ordered], [...ordered.keys()].map(key => [key, storage.get(key)]));
+  ordered.forEach((value, key, map) => { assert.equal(map, ordered); assert.equal(value, storage.get(key)); });
   storage.clear();
-  assert.equal(sorted.size, 6);
+  assert.equal(ordered.size, 6);
 });
 
 test("deep trees use iterative traversal; invalid forests and unknown nodes fail", () => {
@@ -64,6 +64,6 @@ test("object keys and undefined entities remain valid", () => {
   });
   assert.deepEqual(result.children(root), [child]);
   assert.ok(result.has(child));
-  assert.deepEqual(sortedReferences(result, (_entity, key) => key === root ? 1 : 0, (a, b) => a - b), [child, root]);
+  assert.deepEqual(sorted(result, (_entity, key) => key === root ? 1 : 0, (a, b) => a - b), [child, root]);
   assert.deepEqual([...result.values()], [undefined, undefined]);
 });

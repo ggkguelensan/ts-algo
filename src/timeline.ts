@@ -1,4 +1,4 @@
-import { sortedReferences } from "./sorted-references.js";
+import { sorted } from "./sorted.js";
 import { referenceMap } from "./internal/reference-map.js";
 import { isMapLike } from "./internal/collection.js";
 
@@ -120,7 +120,7 @@ export function timeline<Ref, Entity, Context>(
     const next = selectors.effects?.(entity, ref, context);
     if (next) for (const effect of next) edge(ref, effect);
   }
-  const keys = sortedReferences(refs, ref => rawStarts[positions.get(ref)!]!, (a, b) => a - b);
+  const keys = sorted(refs, ref => rawStarts[positions.get(ref)!]!, (a, b) => a - b);
   const starts = keys.map(ref => rawStarts[positions.get(ref)!]!);
   const ends = rawEnds ? keys.map(ref => rawEnds![positions.get(ref)!]!) : undefined;
   for (let i = 0; i < keys.length; i++) positions.set(keys[i]!, i);

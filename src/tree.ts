@@ -1,5 +1,5 @@
 import type { Compare } from "./compare.js";
-import { sortedReferences } from "./sorted-references.js";
+import { sorted } from "./sorted.js";
 import { referenceMap, snapshotMap } from "./internal/reference-map.js";
 
 export interface Tree<Key, Entity> extends ReadonlyMap<Key, Entity> {
@@ -91,7 +91,7 @@ function makeTree<Key, Entity>(
     },
     sortBy(select, compare) {
       const sort = (keys: readonly Key[]) => keys.length < 2 ? keys
-        : sortedReferences(keys, key => select(entities.get(key)!, key), compare);
+        : sorted(keys, key => select(entities.get(key)!, key), compare);
       const orderedChildren = new Map<Key, readonly Key[]>();
       children.forEach((keys, key) => { orderedChildren.set(key, sort(keys)); });
       return makeTree(entities, sort(roots), parents, orderedChildren);

@@ -10,10 +10,10 @@ import assert from "node:assert/strict";
 const directory = mkdtempSync(resolve("dist/bundle-"));
 const rows = [];
 try {
-  for (const names of [["sortedReferences"], ["pointIndex"], ["sortedReferences", "pointIndex"],
+  for (const names of [["sorted"], ["pointIndex"], ["sorted", "pointIndex"],
     ["tree"], ["timeline"],
     ["queue"], ["deque"], ["linkedList"], ["doublyLinkedList"],
-    ["sortedReferences", "pointIndex", "tree", "timeline", "queue", "deque", "linkedList", "doublyLinkedList"]]) {
+    ["sorted", "pointIndex", "tree", "timeline", "queue", "deque", "linkedList", "doublyLinkedList"]]) {
     const fixture = join(directory, "entry.ts");
     writeFileSync(fixture, `export { ${names.join(", ")} } from "../../src/index.ts";\n`);
     const output = execFileSync("bun", ["build", fixture, "--target=browser", "--format=esm", "--minify"], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
@@ -21,7 +21,7 @@ try {
     writeFileSync(artifact, output);
     const module = await import(pathToFileURL(artifact).href);
     for (const name of names) assert.equal(typeof module[name], "function");
-    if (module.sortedReferences) assert.deepEqual(module.sortedReferences([2, 1], (x: number) => x, (a: number, b: number) => a - b), [1, 2]);
+    if (module.sorted) assert.deepEqual(module.sorted([2, 1], (x: number) => x, (a: number, b: number) => a - b), [1, 2]);
     if (module.pointIndex) assert.equal(module.pointIndex([{ x: 1, y: 2 }], {
       x: (p: { x: number }) => p.x, y: (p: { y: number }) => p.y,
     }).nearest(1, 2).distance, 0);

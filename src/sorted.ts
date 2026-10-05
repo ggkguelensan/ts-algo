@@ -4,27 +4,27 @@ import type { Compare } from "./compare.js";
 type IterableItem<Source> = Source extends Iterable<infer Item> ? Item : never;
 
 /** Sort Map keys using values selected directly from its entities. */
-export function sortedReferences<Key, Entity, Value>(
+export function sorted<Key, Entity, Value>(
   source: ReadonlyMap<Key, Entity>,
   getValue: (entity: Entity, key: Key) => Value,
   compare: Compare<Value>,
 ): Key[];
 
 /** Sort Set elements while preserving their identity. */
-export function sortedReferences<Ref, Value>(
+export function sorted<Ref, Value>(
   source: ReadonlySet<Ref>,
   getValue: (ref: Ref) => Value,
   compare: Compare<Value>,
 ): Ref[];
 
-export function sortedReferences<Ref, Value>(
+export function sorted<Ref, Value>(
   references: readonly Ref[],
   getValue: (ref: Ref) => Value,
   compare: Compare<Value>,
 ): Ref[];
 
 /** Consume an iterable once; Map uses its entity/key overload instead. */
-export function sortedReferences<Source extends Iterable<unknown>, Value>(
+export function sorted<Source extends Iterable<unknown>, Value>(
   source: Source extends ReadonlyMap<unknown, unknown> ? never : Source,
   getValue: (ref: IterableItem<Source>) => Value,
   compare: Compare<Value>,
@@ -35,7 +35,7 @@ export function sortedReferences<Source extends Iterable<unknown>, Value>(
  * Arrays must be dense. Callbacks must not mutate the source or its ordering.
  * Empty and singleton sources do not require getValue or compare calls.
  */
-export function sortedReferences<Ref, Entity, Value>(
+export function sorted<Ref, Entity, Value>(
   source: ReadonlyMap<Ref, Entity> | Iterable<Ref>,
   getValue: ((entity: Entity, key: Ref) => Value) | ((ref: Ref) => Value),
   compare: Compare<Value>,
