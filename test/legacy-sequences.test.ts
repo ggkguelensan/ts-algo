@@ -1,6 +1,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { queue, deque, linkedList, doublyLinkedList, sorted, type LinkedList } from "../src/index.js";
+import { sorted } from "../src/index.js";
+import { queue } from "../references/legacy-queue.js";
+import { deque } from "../references/legacy-deque.js";
+import { linkedList,type LinkedList } from "../references/legacy-linked-list.js";
+import { doublyLinkedList } from "../references/legacy-doubly-linked-list.js";
 
 test("queue FIFO, compaction, cleared references, undefined values and identity", () => {
   const values = Array.from({ length: 6000 }, (_, id) => Object.freeze({ id }));

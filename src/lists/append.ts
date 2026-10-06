@@ -1,0 +1,4 @@
+import {listState,insert,type List,type LinkedList,type DoublyLinkedList,type LinkedNode,type DoublyLinkedNode} from "./state.js";
+export function append<V>(list:DoublyLinkedList<V>,value:V):DoublyLinkedNode<V>;
+export function append<V>(list:LinkedList<V>,value:V):LinkedNode<V>;
+export function append<V>(list:List<V>,value:V):LinkedNode<V>{const d=list[listState];return insert(d,value,d.tail,undefined);}

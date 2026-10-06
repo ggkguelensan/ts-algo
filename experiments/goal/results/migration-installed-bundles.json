@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-06T00:31:59.259Z",
+  "date": "2026-10-06T00:58:07.027Z",
   "target": "ES2023/browser/ESM",
   "dependencies": {
     "@rollup/plugin-commonjs": "29.0.3",
@@ -29,9 +29,9 @@
     {
       "name": "sorted",
       "bundler": "esbuild",
-      "bytes": 1141,
-      "gzip": 512,
-      "brotli": 468,
+      "bytes": 1139,
+      "gzip": 513,
+      "brotli": 472,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -51,7 +51,7 @@
         },
         {
           "path": "apps/sorted.mjs",
-          "bytes": 38
+          "bytes": 37
         }
       ],
       "smoke": "passed"
@@ -97,9 +97,9 @@
     {
       "name": "collect",
       "bundler": "esbuild",
-      "bytes": 1275,
+      "bytes": 1273,
       "gzip": 609,
-      "brotli": 536,
+      "brotli": 537,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -119,7 +119,7 @@
         },
         {
           "path": "apps/collect.mjs",
-          "bytes": 68
+          "bytes": 67
         }
       ],
       "smoke": "passed"
@@ -165,8 +165,8 @@
       "name": "startsOnly",
       "bundler": "esbuild",
       "bytes": 2792,
-      "gzip": 1217,
-      "brotli": 1122,
+      "gzip": 1213,
+      "brotli": 1118,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -266,7 +266,7 @@
       "name": "overlapOnly",
       "bundler": "esbuild",
       "bytes": 3105,
-      "gzip": 1361,
+      "gzip": 1358,
       "brotli": 1263,
       "modules": [
         {
@@ -415,7 +415,7 @@
       "bundler": "esbuild",
       "bytes": 4491,
       "gzip": 1826,
-      "brotli": 1706,
+      "brotli": 1703,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -542,8 +542,8 @@
       "name": "treeChildren",
       "bundler": "esbuild",
       "bytes": 1868,
-      "gzip": 820,
-      "brotli": 746,
+      "gzip": 821,
+      "brotli": 744,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -634,8 +634,8 @@
       "name": "treeSubtree",
       "bundler": "esbuild",
       "bytes": 2315,
-      "gzip": 1003,
-      "brotli": 908,
+      "gzip": 1002,
+      "brotli": 906,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -737,8 +737,8 @@
       "name": "graphCauses",
       "bundler": "esbuild",
       "bytes": 1763,
-      "gzip": 747,
-      "brotli": 668,
+      "gzip": 745,
+      "brotli": 670,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -834,8 +834,8 @@
       "name": "graphDescendants",
       "bundler": "esbuild",
       "bytes": 2430,
-      "gzip": 1033,
-      "brotli": 938,
+      "gzip": 1031,
+      "brotli": 939,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -946,8 +946,8 @@
       "name": "graphOrder",
       "bundler": "esbuild",
       "bytes": 2111,
-      "gzip": 921,
-      "brotli": 828,
+      "gzip": 919,
+      "brotli": 825,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -1052,7 +1052,7 @@
       "name": "spatialWithin",
       "bundler": "esbuild",
       "bytes": 3259,
-      "gzip": 1471,
+      "gzip": 1472,
       "brotli": 1336,
       "modules": [
         {
@@ -1162,8 +1162,8 @@
       "name": "spatialNearest",
       "bundler": "esbuild",
       "bytes": 2863,
-      "gzip": 1321,
-      "brotli": 1213,
+      "gzip": 1322,
+      "brotli": 1218,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -1258,6 +1258,360 @@
         {
           "path": "apps/spatialNearest.mjs",
           "bytes": 112,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "queueOnly",
+      "bundler": "esbuild",
+      "bytes": 248,
+      "gzip": 200,
+      "brotli": 173,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/state.js",
+          "bytes": 22
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/queue.js",
+          "bytes": 184
+        },
+        {
+          "path": "apps/queueOnly.mjs",
+          "bytes": 24
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "queueOnly",
+      "bundler": "rollup",
+      "bytes": 253,
+      "gzip": 198,
+      "brotli": 169,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/state.js",
+          "bytes": 35,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/queue.js",
+          "bytes": 377,
+          "removedExports": []
+        },
+        {
+          "path": "apps/queueOnly.mjs",
+          "bytes": 32,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "fifo",
+      "bundler": "esbuild",
+      "bytes": 559,
+      "gzip": 316,
+      "brotli": 278,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/state.js",
+          "bytes": 22
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/queue.js",
+          "bytes": 184
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/enqueue.js",
+          "bytes": 35
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/dequeue.js",
+          "bytes": 242
+        },
+        {
+          "path": "apps/fifo.mjs",
+          "bytes": 58
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "fifo",
+      "bundler": "rollup",
+      "bytes": 564,
+      "gzip": 309,
+      "brotli": 269,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/state.js",
+          "bytes": 35,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/queue.js",
+          "bytes": 377,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/enqueue.js",
+          "bytes": 71,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/queue/dequeue.js",
+          "bytes": 560,
+          "removedExports": []
+        },
+        {
+          "path": "apps/fifo.mjs",
+          "bytes": 93,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "dequeOps",
+      "bundler": "esbuild",
+      "bytes": 732,
+      "gzip": 376,
+      "brotli": 346,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/deque/state.js",
+          "bytes": 188
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/deque/deque.js",
+          "bytes": 231
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/deque/push-front.js",
+          "bytes": 108
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/deque/pop-back.js",
+          "bytes": 134
+        },
+        {
+          "path": "apps/dequeOps.mjs",
+          "bytes": 53
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "dequeOps",
+      "bundler": "rollup",
+      "bytes": 743,
+      "gzip": 385,
+      "brotli": 346,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/deque/state.js",
+          "bytes": 316,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/deque/deque.js",
+          "bytes": 473,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/deque/push-front.js",
+          "bytes": 167,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/deque/pop-back.js",
+          "bytes": 204,
+          "removedExports": []
+        },
+        {
+          "path": "apps/dequeOps.mjs",
+          "bytes": 78,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "singleOnly",
+      "bundler": "esbuild",
+      "bytes": 696,
+      "gzip": 365,
+      "brotli": 329,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/list-owner.js",
+          "bytes": 27
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/state.js",
+          "bytes": 323
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/construct.js",
+          "bytes": 302
+        },
+        {
+          "path": "apps/singleOnly.mjs",
+          "bytes": 25
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "singleOnly",
+      "bundler": "rollup",
+      "bytes": 671,
+      "gzip": 339,
+      "brotli": 308,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/list-owner.js",
+          "bytes": 39,
+          "removedExports": [
+            "requireOwned"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/state.js",
+          "bytes": 721,
+          "removedExports": [
+            "owned",
+            "unlink"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/construct.js",
+          "bytes": 609,
+          "removedExports": [
+            "doublyLinkedList"
+          ]
+        },
+        {
+          "path": "apps/singleOnly.mjs",
+          "bytes": 37,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "listEdits",
+      "bundler": "esbuild",
+      "bytes": 1398,
+      "gzip": 589,
+      "brotli": 543,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/list-owner.js",
+          "bytes": 124
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/state.js",
+          "bytes": 691
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/construct.js",
+          "bytes": 302
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/insert-before.js",
+          "bytes": 65
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/remove.js",
+          "bytes": 132
+        },
+        {
+          "path": "apps/listEdits.mjs",
+          "bytes": 65
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "listEdits",
+      "bundler": "rollup",
+      "bytes": 1388,
+      "gzip": 581,
+      "brotli": 535,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/list-owner.js",
+          "bytes": 226,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/state.js",
+          "bytes": 1690,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/construct.js",
+          "bytes": 615,
+          "removedExports": [
+            "linkedList"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/insert-before.js",
+          "bytes": 144,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/lists/remove.js",
+          "bytes": 419,
+          "removedExports": []
+        },
+        {
+          "path": "apps/listEdits.mjs",
+          "bytes": 123,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "diffOnly",
+      "bundler": "esbuild",
+      "bytes": 308,
+      "gzip": 237,
+      "brotli": 205,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/diff/diff-by.js",
+          "bytes": 218
+        },
+        {
+          "path": "apps/diffOnly.mjs",
+          "bytes": 72
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "diffOnly",
+      "bundler": "rollup",
+      "bytes": 309,
+      "gzip": 233,
+      "brotli": 203,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/diff/diff-by.js",
+          "bytes": 580,
+          "removedExports": []
+        },
+        {
+          "path": "apps/diffOnly.mjs",
+          "bytes": 81,
           "removedExports": []
         }
       ],

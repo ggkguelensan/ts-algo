@@ -25,6 +25,12 @@ export async function bundleInstalled(consumer){
     graphOrder:{code:`import {from,collect} from 'ts-algo';import {dependencies,causalOrder} from 'ts-algo/dependencies';export const run=()=>collect(causalOrder(dependencies(from(['b','a']),(_,id)=>id==='b'?['a']:[])));`,expected:['a','b']},
     spatialWithin:{code:`import {from,collect} from 'ts-algo';import {pointIndex,within} from 'ts-algo/spatial';export const run=()=>collect(within(pointIndex(from([{x:1,y:1},{x:10,y:10}]),{x:e=>e.x,y:e=>e.y}),{minX:0,minY:0,maxX:2,maxY:2}),{select:e=>e.x});`,expected:[1]},
     spatialNearest:{code:`import {from} from 'ts-algo';import {pointIndex,nearest} from 'ts-algo/spatial';export const run=()=>nearest(pointIndex(from(new Map([['a',{x:1,y:1}],['b',{x:10,y:10}]])),{x:e=>e.x,y:e=>e.y}),1,1,0);`,expected:{reference:'a',distance:0}},
+    queueOnly:{code:`import {queue} from 'ts-algo/queue';export const run=()=>[...queue([1,2])];`,expected:[1,2]},
+    fifo:{code:`import {queue,enqueue,dequeue} from 'ts-algo/queue';export const run=()=>{const q=queue([1,2]);enqueue(q,3);return [dequeue(q),dequeue(q),dequeue(q)];};`,expected:[1,2,3]},
+    dequeOps:{code:`import {deque,pushFront,popBack} from 'ts-algo/deque';export const run=()=>{const q=deque([1,2]);pushFront(q,0);return [popBack(q),...q];};`,expected:[2,0,1]},
+    singleOnly:{code:`import {linkedList} from 'ts-algo/lists';export const run=()=>[...linkedList([1,2])];`,expected:[1,2]},
+    listEdits:{code:`import {doublyLinkedList,insertBefore,remove} from 'ts-algo/lists';export const run=()=>{const list=doublyLinkedList([1,3]),node=insertBefore(list,list.last,2);remove(list,node);return [...list];};`,expected:[1,3]},
+    diffOnly:{code:`import {diffBy} from 'ts-algo/diff';export const run=()=>diffBy(new Map([[1,1],[2,2]]),new Map([[2,3],[3,3]]),(a,b)=>a===b);`,expected:{added:[3],removed:[1],changed:[2]}},
   };
   const rows=[];
   for(const [name,fixture] of Object.entries(fixtures)){
@@ -42,10 +48,14 @@ export async function bundleInstalled(consumer){
       const output=resolve(directory,`${name}-${bundler}.mjs`);writeFileSync(output,code);
       assert.deepEqual(await (await import(pathToFileURL(output).href)).run(),fixture.expected,`${name}/${bundler}`);
       const paths=modules.map(m=>m.path).join('\n');
-      assert(!/node_modules\/(zod|date-fns)|legacy|src\/(timeline\.js|point-index|queue|deque|linked-list|doubly-linked-list)/.test(paths),'Unneeded domain/dependency leaked');
+      assert(!/node_modules\/(zod|date-fns)|legacy|src\/(timeline\.js|point-index\.js|queue\.js|deque\.js|linked-list\.js|doubly-linked-list\.js)/.test(paths),'Unneeded domain/dependency leaked');
       if(!name.startsWith('tree'))assert(!/src\/tree\//.test(paths),'Unneeded hierarchy leaked');
       if(!name.startsWith('graph'))assert(!/src\/dependencies\//.test(paths),'Unneeded graph leaked');
       if(!name.startsWith('spatial'))assert(!/src\/spatial\//.test(paths),'Unneeded spatial index leaked');
+      if(!['queueOnly','fifo'].includes(name))assert(!/src\/queue\//.test(paths),'Unneeded FIFO leaked');
+      if(name!=='dequeOps')assert(!/src\/deque\//.test(paths),'Unneeded deque leaked');
+      if(!['singleOnly','listEdits'].includes(name))assert(!/src\/lists\//.test(paths),'Unneeded list leaked');
+      if(name!=='diffOnly')assert(!/src\/diff\//.test(paths),'Unneeded diff leaked');
       if(['sorted','collect'].includes(name))assert(!/src\/(time|ranges)\//.test(paths),'Core leaked time/ranges');
       if(name==='startsOnly')assert(!/overlapping\.js/.test(paths),'Starts retained overlap algorithm');
       if(name==='overlapOnly')assert(!/starts-between\.js/.test(paths),'Overlap retained start-range algorithm');
@@ -54,6 +64,9 @@ export async function bundleInstalled(consumer){
       if(name==='graphCauses')assert(!/reachable\.js|descendants\.js|ancestors\.js|causal-order\.js/.test(paths),'Direct causes retained graph query operations');
       if(name==='spatialWithin')assert(!/nearest\.js/.test(paths),'Within retained nearest search');
       if(name==='spatialNearest')assert(!/within\.js/.test(paths),'Nearest retained area search');
+      if(name==='queueOnly')assert(!/queue\/(enqueue|dequeue|peek|clear)\.js/.test(paths),'Constructor retained FIFO operations');
+      if(name==='singleOnly')assert(!/lists\/(remove|remove-ends|clear|insert-after|insert-before|append|prepend)\.js/.test(paths),'Constructor retained list operations');
+      if(name==='diffOnly')assert(!/index-by\.js/.test(paths),'Diff retained indexing');
       rows.push({name,bundler,bytes:Buffer.byteLength(code),gzip:gzipSync(code,{level:9}).length,brotli:brotliCompressSync(Buffer.from(code),{params:{[constants.BROTLI_PARAM_QUALITY]:11}}).length,modules,smoke:'passed'});
     }
   }

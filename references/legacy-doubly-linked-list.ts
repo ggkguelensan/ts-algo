@@ -1,4 +1,5 @@
-import { listOwner, requireOwned } from "./internal/list-owner.js";
+// Historical method-based API; excluded from the package.
+import { listOwner, requireOwned } from "../src/internal/list-owner.js";
 
 export interface DoublyLinkedNode<Value> {
   readonly value: Value;

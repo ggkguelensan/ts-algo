@@ -98,11 +98,14 @@ node bench-public-structure.ts
 bun bench-public-structure.ts
 node bench-public-spatial.ts
 bun bench-public-spatial.ts
+node bench-public-sequences.ts
+bun bench-public-sequences.ts
 node verify-package.mjs --migration
 node summarize-public-core.mjs
 node summarize-public-time.mjs
 node summarize-public-structure.mjs
 node summarize-public-spatial.mjs
+node summarize-public-sequences.mjs
 ```
 
 Run benchmarks sequentially. The installed-package gate bundles bare imports

@@ -2,7 +2,10 @@ import { timeline } from "../references/legacy-timeline.js";
 import assert from "node:assert/strict";
 import { writeFileSync } from "node:fs";
 import { cpus } from "node:os";
-import { queue, deque, linkedList, doublyLinkedList } from "../src/index.js";
+import { queue } from "../references/legacy-queue.js";
+import { deque } from "../references/legacy-deque.js";
+import { linkedList } from "../references/legacy-linked-list.js";
+import { doublyLinkedList } from "../references/legacy-doubly-linked-list.js";
 import { measure, checksum } from "./measure.js";
 
 const runtime = process.versions.bun ? "bun" : "node";

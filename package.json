@@ -35,6 +35,22 @@
     "./spatial": {
       "types": "./dist/src/spatial/index.d.ts",
       "import": "./dist/src/spatial/index.js"
+    },
+    "./queue": {
+      "types": "./dist/src/queue/index.d.ts",
+      "import": "./dist/src/queue/index.js"
+    },
+    "./deque": {
+      "types": "./dist/src/deque/index.d.ts",
+      "import": "./dist/src/deque/index.js"
+    },
+    "./lists": {
+      "types": "./dist/src/lists/index.d.ts",
+      "import": "./dist/src/lists/index.js"
+    },
+    "./diff": {
+      "types": "./dist/src/diff/index.d.ts",
+      "import": "./dist/src/diff/index.js"
     }
   },
   "peerDependencies": {

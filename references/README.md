@@ -45,3 +45,6 @@ legacy-tree.ts сохраняет прежнее дерево со снимко�
 
 legacy-point-index.ts сохраняет прежний spatial API с методами. Публичный
 конструктор и поиски импортируются из ts-algo/spatial; reference не поставляется.
+
+legacy-queue/deque/linked-list/doubly-linked-list сохраняют прежние методы
+для исторических сравнений. Публичные операции доступны в /queue, /deque, /lists.

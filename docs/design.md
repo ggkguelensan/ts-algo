@@ -12,8 +12,8 @@
 с заданием. Здесь описаны выбранные контракты и ход переноса в публичный API.
 Исследовательские прототипы остаются вне поставки. Текущий API показан в README.
 Миграция начата: Source/collect и Source-overload sorted уже реализованы;
-time/ranges/tree/dependencies/spatial вынесены в отдельные импорты; остальные модули
-пока сохраняют прежние методы.
+time/ranges/tree/dependencies/spatial вынесены в отдельные импорты; queue/deque/lists/diff тоже вынесены; корень содержит только ядро.
+Финальная проверка всех сценариев, типов и памяти ещё выполняется.
 
 ## Почему библиотека заслуживает существования
 
@@ -251,6 +251,37 @@ Node-входов, особенно совпадающих точек. Это п
 | Brand/density/Zod Mini | Сохранить узко | Проверка границы и сохранение типов; Brand не проверяет/не обеспечивает точность, Zod optional |
 | Собственная БД, statechart, Decimal/Money | Исключить | TanStack/Drizzle, XState, decimal.js/Dinero решают эти области; новых преимуществ не доказано |
 
+## Мутируемые последовательности и сверка
+
+queue/deque/lists находятся в отдельных entries. Функции изменяют структуру
+на месте, не копируют её ради функциональной формы. FIFO использует array/head,
+deque — кольцевой массив с ростом; конструктор deque читает source один раз без
+лишнего snapshot. Узлы списков имеют owner token; foreign/detached handles
+отклоняются, clear отвязывает все узлы. Значения сохраняют идентичность.
+
+Списки разделяют функции, но хранят только нужные ссылки: single — next,
+double — next/previous. remove известного single-node ищет predecessor O(n),
+double использует предыдущую ссылку O(1). insertBefore/removeLast — только double.
+Операции находятся отдельно от конструктора, не вызывают старые методы.
+Iterable даёт композицию с sorted и from/collect; Source с getter/context связывает
+ID-значения с внешними сущностями. При итерации мутация не поддерживается.
+
+indexBy/diffBy — отдельный модуль сверки по сценарию синхронизации. Первый
+принимает значения Iterable и отклоняет duplicate key. Второй принимает две
+ReadonlyMap с потенциально различающимися типами before/after и explicit equality.
+added/changed сохраняют after order, removed — before order. Getter/equality
+контекст передаётся явно в options; он не является source context. Ни общего
+query, ни скрытой relational/reactive модели эти helpers не добавляют.
+
+[Измерения последовательностей/сверки](../experiments/goal/results/migration-sequences.md)
+сохраняют сравнения с legacy, native и Mnemonist. Разделение private insert/unlink
+для single/double не устранило весь overhead: Node double-handle editing и часть
+Bun single FIFO превышают относительный порог. Это принято за независимые
+операции/проверку владения, с рекомендацией native batch/cursor или Mnemonist
+для чистого throughput. Ни функциональная форма, ни собственный список не
+объявляются универсально быстрее. Constructor-only импорты не включают
+самостоятельные мутации, хотя построение узлов требует private insert.
+
 ## Профили кандидатов и доказательства
 
 [Сравнительные таблицы](../experiments/goal/results/initial.md),
@@ -311,8 +342,8 @@ TanStack; удалённые данные и SQL — слой БД. LINQ слу�
 | Дерево | Внешняя топология, живые сущности; roots/children/соседи/subtree/sortChildren | ts-algo/tree | Реализовано; legacy вынесен из поставки |
 | Причинность | Удалить из timeline, отдельный DAG и симметричные обходы | ts-algo/dependencies | Реализовано отдельно от времени |
 | Пространство | Данные статического индекса отдельно от within/nearest, сохранить точность/ties/radius | ts-algo/spatial | Реализовано: данные + независимые операции |
-| Последовательности | Сохранить алгоритмы, вынести из core, заменить пользовательские методы независимыми операциями | ts-algo/queue, /deque, /lists | К переработке |
-| Сверка | indexBy/diffBy по сценариям, не общий relational engine | ts-algo/diff | К отбору и переносу |
+| Последовательности | Сохранить алгоритмы, вынести из core, заменить пользовательские методы независимыми операциями | ts-algo/queue, /deque, /lists | Реализованы функции над данными |
+| Сверка | indexBy/diffBy по сценариям, не общий relational engine | ts-algo/diff | Реализованы indexBy/diffBy |
 | Контракты | Brand/isDenseArray в core; Zod Mini отдельно | ts-algo/zod | Существующая реализация, перепроверить новую поставку |
 | Теоретические алгоритмы | QuickSort и отвергнутый query вне публичных exports | references / experiments | Сохраняются вне поставки |
 

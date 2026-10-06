@@ -1,3 +1,4 @@
+// Historical method-based API; excluded from the package.
 export interface Deque<Value> extends Iterable<Value> {
   readonly size: number;
   pushFront(value: Value): void;

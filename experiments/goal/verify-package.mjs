@@ -32,6 +32,8 @@ import {freeSlots,overloaded,conflicts} from 'ts-algo/ranges';
 import {tree,children,subtree,sortChildren,nextSibling} from 'ts-algo/tree';
 import {dependencies,causesOf,descendants,causalOrder} from 'ts-algo/dependencies';
 import {pointIndex,within,nearest} from 'ts-algo/spatial';
+import {queue,enqueue,dequeue} from 'ts-algo/queue';import {deque,pushFront,popBack} from 'ts-algo/deque';
+import {doublyLinkedList,insertBefore,remove} from 'ts-algo/lists';import {indexBy,diffBy} from 'ts-algo/diff';
 assert.deepEqual(sorted(new Map([['b', {n:2}], ['a', {n:1}]]), x=>x.n, (a,b)=>a-b), ['a','b']);
 assert.deepEqual(denseArray(z.number()).parse([1,2]), [1,2]);
 assert.equal(denseArray(z.number()).safeParse(new Array(2)).success, false);
@@ -58,6 +60,10 @@ assert.deepEqual(collect(causalOrder(graph)),['a','b']);
 const points=pointIndex(source,{x:e=>e.rank,y:()=>0});
 assert.deepEqual(collect(within(points,{minX:0,minY:0,maxX:3,maxY:0})),['a']);
 assert.deepEqual(nearest(points,2,0,0),{reference:'a',distance:0});
+const q=queue([1,2]);enqueue(q,3);assert.deepEqual([dequeue(q),...q],[1,2,3]);
+const dq=deque([1,2]);pushFront(dq,0);assert.equal(popBack(dq),2);
+const list=doublyLinkedList([1,3]),middle=insertBefore(list,list.last,2);assert.deepEqual([...list],[1,2,3]);remove(list,middle);assert.deepEqual([...list],[1,3]);
+assert.deepEqual(diffBy(indexBy([{id:1,n:1}],e=>e.id),indexBy([{id:1,n:2}],e=>e.id),(a,b)=>a.n===b.n),{added:[],removed:[],changed:[1]});
 `;
   writeFileSync(resolve(consumer, 'smoke.mjs'), smoke);
   run('node', ['smoke.mjs'], consumer);
@@ -67,6 +73,7 @@ import {denseArray} from 'ts-algo/zod';import * as z from 'zod/mini';
 import {timeline,overlapping} from 'ts-algo/time';
 import {tree,subtree} from 'ts-algo/tree';import {dependencies,descendants} from 'ts-algo/dependencies';
 import {pointIndex,within,nearest} from 'ts-algo/spatial';
+import {queue,enqueue} from 'ts-algo/queue';import {doublyLinkedList,append,type DoublyLinkedNode} from 'ts-algo/lists';
 type Id=Brand<string,'Id'>;declare const store:ReadonlyMap<Id,{rank:number}>;
 const refs:Id[]=sorted(store,e=>e.rank,(a,b)=>a-b);
 const source=from(store);const ordered:Id[]=sorted(source,e=>e.rank,(a,b)=>a-b);
@@ -78,12 +85,18 @@ const forest=tree(source,()=>null);const forestRefs:Id[]=collect(subtree(forest,
 const graph=dependencies(source,()=>[]);const graphRows:{id:Id;rank:number}[]=collect(descendants(graph,refs[0]!),{select:(e,id)=>({id,rank:e.rank})});
 const points=pointIndex(source,{x:e=>e.rank,y:()=>0});const spatialRefs:Id[]=collect(within(points,{minX:0,minY:0,maxX:100,maxY:100}));
 const hit:{readonly reference:Id;readonly distance:number}|undefined=nearest(points,0,0);
+const q=queue(refs);const sortedQueue:Id[]=sorted(q,id=>id,(a,b)=>a.localeCompare(b));
+const double=doublyLinkedList(refs);const doubleNode:DoublyLinkedNode<Id>=append(double,refs[0]!);
+// @ts-expect-error mutation keeps branded element type
+enqueue(q,'raw');
 // @ts-expect-error removed root chronology must not remain public
 import {timeline as oldTimeline} from 'ts-algo';
 // @ts-expect-error removed root hierarchy must not remain public
 import {tree as oldTree} from 'ts-algo';
 // @ts-expect-error spatial index is a separate public entry
 import {pointIndex as oldPoints} from 'ts-algo';
+// @ts-expect-error non-core collections moved to explicit entries
+import {queue as oldQueue} from 'ts-algo';
 // @ts-expect-error callback requires explicit operation context
 collect(source,{where:(e,id,c:{minimum:number})=>e.rank>c.minimum});
 // @ts-expect-error Source cannot fall back to selecting its reference as entity
@@ -97,7 +110,7 @@ void values;void wrong;
   run('node',[resolve(here,'node_modules/typescript/bin/tsc'),'-p','tsconfig.json'],consumer);
   const bundles=process.argv.includes('--migration')?await bundleInstalled(consumer):undefined;
   const declarationBytes=packed.files.filter(file=>file.path.endsWith('.d.ts')).reduce((sum,file)=>sum+file.size,0);
-  assert(![...files].some(path=>/legacy|dist\/src\/(timeline|tree|point-index)\./.test(path)), 'Stale historical structures entered package');
+  assert(![...files].some(path=>/legacy|dist\/src\/(timeline|tree|point-index|queue|deque|linked-list|doubly-linked-list)\./.test(path)), 'Stale historical structures entered package');
   for (const path of files) if(path.endsWith('.d.ts')) {
     const declaration=readFileSync(resolve(consumer,'node_modules/ts-algo',path),'utf8');
     assert(!/(?:\bfrom\s*|\bimport\s*\(\s*|\bimport\s*)["']date-fns(?:\/[^"']*)?["']/.test(declaration), 'Unexpected declaration dependency on date-fns');

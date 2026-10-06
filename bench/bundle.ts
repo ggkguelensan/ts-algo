@@ -18,8 +18,11 @@ try {
   for (const names of selections) {
     const fixture = join(directory, "entry.ts");
     const entry = names.includes("denseArray") ? "../../src/zod/index.ts" : "../../src/index.ts";
-    const coreNames = names.filter(name => name !== "timeline" && name !== "tree" && name !== "pointIndex");
+    const coreNames = names.filter(name => name !== "timeline" && name !== "tree" && name !== "pointIndex" && !["queue","deque","linkedList","doublyLinkedList"].includes(name));
     const code = (coreNames.length ? `export { ${coreNames.join(", ")} } from "${entry}";\n` : "") +
+      (names.includes("queue") ? `export {queue,enqueue,dequeue} from "../../src/queue/index.ts";\n` : "") +
+      (names.includes("deque") ? `export {deque,pushFront,popBack} from "../../src/deque/index.ts";\n` : "") +
+      (names.some(name => name === "linkedList" || name === "doublyLinkedList") ? `export {${names.filter(name=>name === "linkedList" || name === "doublyLinkedList").join(",")},append,insertAfter,remove} from "../../src/lists/index.ts";\n` : "") +
       (names.includes("pointIndex") ? `export {pointIndex,nearest,within} from "../../src/spatial/index.ts";${names.includes("tree") || names.includes("timeline") ? "" : 'export {from,collect} from "../../src/index.ts";'}\n` : "") +
       (names.includes("tree") ? `export {tree,children,nextSibling,previousSibling,sortChildren} from "../../src/tree/index.ts";${names.includes("timeline") ? "" : 'export {from,collect} from "../../src/index.ts";'}\n` : "") +
       (names.includes("timeline") ? `export {timeline,startsBetween,overlapping} from "../../src/time/index.ts";export {from,collect} from "../../src/index.ts";\n` : "");
@@ -59,10 +62,10 @@ try {
       }), (e: { start: number; end: number }) => e);
       assert.deepEqual(module.collect(module.overlapping(external, { start: 5, end: 6 }), { where: (e: { flag: boolean }) => e.flag }), ["span"]);
     }
-    if (module.queue) { const q = module.queue([1, 2]); assert.equal(q.dequeue(), 1); q.enqueue(3); assert.deepEqual([...q], [2, 3]); }
-    if (module.deque) { const q = module.deque([1, 2]); q.pushFront(0); assert.equal(q.popBack(), 2); assert.deepEqual([...q], [0, 1]); }
-    if (module.linkedList) { const list = module.linkedList([1]); list.insertAfter(list.first, 2); assert.deepEqual([...list], [1, 2]); }
-    if (module.doublyLinkedList) { const list = module.doublyLinkedList([1, 2]); assert.equal(list.last.previous.value, 1); list.remove(list.first); assert.deepEqual([...list], [2]); }
+    if (module.queue) { const q = module.queue([1, 2]); assert.equal(module.dequeue(q), 1); module.enqueue(q,3); assert.deepEqual([...q], [2, 3]); }
+    if (module.deque) { const q = module.deque([1, 2]); module.pushFront(q,0); assert.equal(module.popBack(q), 2); assert.deepEqual([...q], [0, 1]); }
+    if (module.linkedList) { const list = module.linkedList([1]); module.insertAfter(list,list.first,2); assert.deepEqual([...list], [1, 2]); }
+    if (module.doublyLinkedList) { const list = module.doublyLinkedList([1, 2]); assert.equal(list.last.previous.value, 1); module.remove(list,list.first); assert.deepEqual([...list], [2]); }
     rows.push({ exports: names, bytes: Buffer.byteLength(output), gzipBytes: gzipSync(output).length });
   }
 } finally { rmSync(directory, { recursive: true }); }

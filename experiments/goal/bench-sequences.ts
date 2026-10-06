@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import {Queue,LinkedList} from 'mnemonist';
-import {queue,linkedList,doublyLinkedList,deque} from '../../dist/src/index.js';
+import {queue} from '../../dist/references/legacy-queue.js';
+import {deque} from '../../dist/references/legacy-deque.js';
+import {linkedList} from '../../dist/references/legacy-linked-list.js';
+import {doublyLinkedList} from '../../dist/references/legacy-doubly-linked-list.js';
 import {measure,save} from './measure.ts';
 const rows=[];
 for(const n of [1000,20000,100000]){

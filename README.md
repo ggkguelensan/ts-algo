@@ -323,54 +323,69 @@ PointIndex сам реализует Source в порядке входа и ра
 from(ids), а сущности привязать к найденным ссылкам позже через subset.
 [Контракты и границы](docs/design.md#пространство).
 
-## Очереди
+## Очереди и списки
 
-FIFO для обработки заданий и deque для операций с обоих концов.
+Мутации — независимые функции; коллекция изменяется на месте, значения не копируются.
 
 ```ts
-import { queue, deque } from "ts-algo";
+import { queue, enqueue, dequeue, peek } from "ts-algo/queue";
+import { deque, pushFront, pushBack, popFront, popBack } from "ts-algo/deque";
+import { doublyLinkedList, insertBefore, remove } from "ts-algo/lists";
 
-const jobs = queue<string>();
-jobs.enqueue("send-email");
-jobs.enqueue("update-report");
-jobs.dequeue(); // "send-email"
-jobs.peek();    // "update-report"
+const jobs = queue(["send-email"]);
+enqueue(jobs, "update-report");
+dequeue(jobs); // "send-email"
+peek(jobs);    // "update-report"
 
 const pending = deque(["regular"]);
-pending.pushFront("urgent");
-pending.pushBack("later");
-pending.popFront(); // "urgent"
-pending.popBack();  // "later"
-```
-
-Операции с концами амортизированно O(1). Значения хранятся в массивах без объекта-узла на каждый элемент. Пустое извлечение возвращает undefined; если undefined — допустимое значение, проверяйте `size`.
-
-## Связные списки
-
-Используйте стабильные узлы для вставок и удаления рядом с известной позицией.
-
-```ts
-import { linkedList, doublyLinkedList } from "ts-algo";
-
-const single = linkedList(["a"]);
-const first = single.first;
-if (first) single.insertAfter(first, "b");
-// [...single]: ["a", "b"]
+pushFront(pending, "urgent");
+pushBack(pending, "later");
+popFront(pending); // "urgent"
+popBack(pending);  // "later"
 
 const sequence = doublyLinkedList(["a", "c"]);
 const last = sequence.last;
 if (last) {
-  const middle = sequence.insertBefore(last, "b");
+  const middle = insertBefore(sequence, last, "b");
   middle.previous?.value; // "a"
   middle.next?.value;     // "c"
-  sequence.remove(middle);
+  remove(sequence, middle);
 }
-// [...sequence]: ["a", "c"]
 ```
 
-У односвязного списка есть `next`, у двусвязного — также `previous`. Связи узлов доступны только для чтения; изменение выполняется методами списка. Чужие и отсоединённые узлы вызывают RangeError.
+FIFO — массив со смещением и периодическим уплотнением; deque — растущий
+кольцевой массив. Операции концов амортизированно O(1), без узла на значение.
+Пустое извлечение возвращает undefined; для допустимого undefined проверяйте size.
 
-Все очереди и списки реализуют Iterable и работают с `sorted`. Сортировка возвращает массив значений; порядок самой коллекции сохраняется. [Операции, сложность и выбор структуры](docs/sequences.md).
+linkedList хранит next, doublyLinkedList — next/previous. Ссылки узлов readonly,
+мутации выполняют append/prepend/insertAfter/insertBefore/remove и операции концов.
+Чужие/отсоединённые узлы вызывают RangeError. Удаление известного узла в double
+O(1), в single O(n); removeLast/insertBefore доступны только double.
+clear(list) отвязывает все сохранённые узлы, O(n).
+
+Коллекции реализуют Iterable: sorted возвращает значения в новом порядке,
+collect(from(collection)) делает выборку. Для внешних сущностей используйте
+from(collection, { context: storage, get }). Не меняйте коллекцию при итерации.
+
+## Сверка данных
+
+`ts-algo/diff` содержит indexBy над Iterable значений и diffBy над двумя Map.
+
+```ts
+import { indexBy, diffBy } from "ts-algo/diff";
+
+const before = indexBy([{ id: "a", revision: 1 }], item => item.id);
+const after = indexBy([{ id: "a", revision: 2 }, { id: "b", revision: 1 }], item => item.id);
+const change = diffBy(before, after, (a, b) => a.revision === b.revision);
+// { added: ["b"], removed: [], changed: ["a"] }
+```
+
+indexBy сохраняет значения без копирования и отклоняет повторный ключ.
+Для Map используйте values(), если индексируете сущности, а не entry tuples.
+added/changed следуют порядку after, removed — before; присутствующий undefined
+отличается от отсутствующего ключа. Сравнение содержимого задаёт вызывающий код.
+Контекст indexBy передаётся третьим аргументом `{ context }`, diffBy — четвёртым;
+callback получает его последним параметром. Это операция сверки, не storage engine.
 
 ## Производительность и размер
 
