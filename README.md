@@ -18,7 +18,8 @@ npm install ts-algo
 ```
 
 ```ts
-import { sorted, tree, pointIndex } from "ts-algo";
+import { sorted, pointIndex } from "ts-algo";
+import { tree, subtree } from "ts-algo/tree";
 import { timeline, overlapping } from "ts-algo/time";
 ```
 
@@ -150,38 +151,43 @@ const ordered = sorted(numbers, value => value, (a, b) => a - b);
 
 ## Дерево
 
-Создайте иерархию из Map с селектором родителя. Сущность не обязана хранить связи дерева; их можно получить из отдельного хранилища. Несколько корней допустимы.
+`ts-algo/tree` хранит снимок связей отдельно от живых сущностей.
 
 ```ts
-import { tree, sorted } from "ts-algo";
+import { from, entity, collect, sorted } from "ts-algo";
+import { tree, children, subtree, nextSibling, previousSibling, sortChildren } from "ts-algo/tree";
 
-type Item = Readonly<{ title: string }>;
-const items = new Map<string, Item>([
+const items = from(new Map([
   ["catalog", { title: "Каталог" }],
   ["phones", { title: "Телефоны" }],
   ["books", { title: "Книги" }],
-]);
-const parents = new Map<string, string>([
-  ["phones", "catalog"],
-  ["books", "catalog"],
-]);
+]));
+const parents = from(new Map<string, string | null>([
+  ["catalog", null], ["phones", "catalog"], ["books", "catalog"],
+]));
+const catalog = tree(items, (_, id) => entity(parents, id));
+children(catalog, "catalog");       // ["phones", "books"]
+nextSibling(catalog, "phones");     // "books"
+previousSibling(catalog, "books");  // "phones"
+collect(subtree(catalog, "catalog")); // ["catalog", "phones", "books"]
 
-const catalog = tree(items, { parent: (_item, id) => parents.get(id) });
-catalog.children("catalog");     // ["phones", "books"]
-catalog.nextSibling("phones");   // "books"
-catalog.previousSibling("books"); // "phones"
-[...catalog.subtree("catalog")]; // ["catalog", "phones", "books"]
-
-const ordered = catalog.sortBy(item => item.title, (a, b) => a.localeCompare(b));
-ordered.children("catalog"); // ["books", "phones"]
-
-const keys = sorted(catalog, item => item.title, (a, b) => a.localeCompare(b));
-// Плоский массив ключей, упорядоченный по названию.
+const ordered = sortChildren(catalog, item => item.title, (a, b) => a.localeCompare(b));
+children(ordered, "catalog"); // ["books", "phones"]
+const flat = sorted(catalog, item => item.title, (a, b) => a.localeCompare(b));
+// Плоская сортировка ссылок; порядок детей исходного дерева не меняется.
 ```
 
-`sortBy` возвращает новый вид с сохранением иерархии. Переходы к соседям остаются внутри одной группы детей. Корневой родитель — null/undefined; ключи узлов должны быть non-nullish. Отсутствующий родитель и циклы вызывают RangeError. Состав и связи — снимок при создании. [Контракт дерева](docs/tree-timeline.md#дерево).
+Если родитель хранится в сущности, getter может читать item.parentId.
+Контекст построения берётся из Source; контекст sortChildren задаётся отдельно
+четвёртым аргументом `{ context }`. Одиночные группы не вызывают селектор.
 
-Если связь уже хранится в сущности, используйте `parent: item => item.parentId`. В обоих вариантах дерево сохраняет собственный снимок связей и не добавляет полей сущностям.
+Несколько корней поддерживаются. Null/undefined обозначают отсутствие родителя
+и не могут быть ключами дерева. Отсутствующие родители, дубликаты и циклы
+отклоняются. Обход итеративный; subtree/ancestors повторяемы и допускают limit.
+Tree сам является Source с обходом preorder; parent, roots и переходы — функции.
+Связи меняются только перестроением; замена сущности видна при разрешении.
+Прямые roots/children — заимствованные readonly-массивы, не runtime freeze.
+[Контракт](docs/design.md#деревья-зависимости-и-пространство).
 
 ## Время и диапазоны
 
@@ -238,7 +244,39 @@ addHours имеют разную семантику на переходе лет
 [Контракты и границы](docs/design.md#время).
 
 Старый timeline с методами/причинностью перенесён в references и исключён из
-поставки. Причинный модуль находится на следующем этапе миграции.
+поставки. Причинность доступна отдельным импортом ниже.
+
+## Причинные зависимости
+
+`ts-algo/dependencies` создаёт статический DAG независимо от времени.
+
+```ts
+import { from, entity, collect } from "ts-algo";
+import { dependencies, causesOf, effectsOf, descendants, causalOrder } from "ts-algo/dependencies";
+
+const jobs = from(new Map([
+  ["order", { status: "done", owner: "alice" }],
+  ["payment", { status: "pending", owner: "alice" }],
+]));
+const links = new Map([["order", []], ["payment", ["order"]]]);
+const graph = dependencies(jobs, (_, id) => links.get(id) ?? []);
+causesOf(graph, "payment"); // ["order"]
+effectsOf(graph, "order");  // ["payment"]
+collect(causalOrder(graph)); // ["order", "payment"]
+collect(descendants(graph, "order"), { select: (job, id) => ({ id, owner: job.owner }) });
+const ready = collect(graph, {
+  where: (job, id) => job.status === "pending"
+    && causesOf(graph, id).every(cause => entity(graph, cause).status === "done"),
+}); // ["payment"]
+```
+
+Повторные рёбра объединяются; отсутствующие ссылки и циклы отклоняются.
+Причины задаются getter с контекстом Source; сущность не обязана знать свои связи.
+causalOrder использует порядок, рассчитанный при проверке циклов. ancestors и
+descendants обходят граф в ширину, исключают начальный узел и дубли, возвращают
+ленивый Source. Прямые причины/следствия — readonly-массивы ссылок.
+Исходный порядок Graph Source — порядок входа, не топологический порядок.
+Состав/рёбра фиксируются, сущности читаются из текущего источника.
 
 ## Пространственный поиск
 

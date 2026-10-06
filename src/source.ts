@@ -6,6 +6,9 @@ export interface Source<Ref, Entity, Context = undefined> extends Iterable<Ref> 
   readonly [sourceState]: {
     readonly resolve: (ref: Ref) => Entity;
     readonly context: Context;
+    /** Internal dense-array binding; only eligible while its iterator is unchanged. */
+    readonly references?: readonly Ref[];
+    readonly iterator?: () => Iterator<Ref>;
   };
 }
 

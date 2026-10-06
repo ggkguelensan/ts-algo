@@ -23,6 +23,14 @@
     "./ranges": {
       "types": "./dist/src/ranges/index.d.ts",
       "import": "./dist/src/ranges/index.js"
+    },
+    "./tree": {
+      "types": "./dist/src/tree/index.d.ts",
+      "import": "./dist/src/tree/index.js"
+    },
+    "./dependencies": {
+      "types": "./dist/src/dependencies/index.d.ts",
+      "import": "./dist/src/dependencies/index.js"
     }
   },
   "peerDependencies": {

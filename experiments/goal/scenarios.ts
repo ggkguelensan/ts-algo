@@ -5,7 +5,7 @@ import {aggregateBy,leftJoin} from './operators.ts';
 import {temporal,overlapping} from './temporal.ts';
 import {freeSlots,overloaded,conflicts,type Reservation} from './ranges.ts';
 import {diffBy} from './diff.ts';
-import {tree} from '../../dist/src/tree.js';
+import {tree} from '../../dist/references/legacy-tree.js';
 import {timeline} from '../../dist/references/legacy-timeline.js';
 import {hierarchy,subtree} from './hierarchy.ts';
 import {collect} from './collect.ts';

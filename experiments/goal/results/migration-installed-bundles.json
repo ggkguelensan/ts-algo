@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-05T23:44:13.254Z",
+  "date": "2026-10-06T00:18:52.661Z",
   "target": "ES2023/browser/ESM",
   "dependencies": {
     "@rollup/plugin-commonjs": "29.0.3",
@@ -30,8 +30,8 @@
       "name": "sorted",
       "bundler": "esbuild",
       "bytes": 1141,
-      "gzip": 511,
-      "brotli": 469,
+      "gzip": 512,
+      "brotli": 473,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -97,9 +97,9 @@
     {
       "name": "collect",
       "bundler": "esbuild",
-      "bytes": 1167,
-      "gzip": 573,
-      "brotli": 503,
+      "bytes": 1275,
+      "gzip": 608,
+      "brotli": 537,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -115,7 +115,7 @@
         },
         {
           "path": "node_modules/ts-algo/dist/src/collect.js",
-          "bytes": 305
+          "bytes": 413
         },
         {
           "path": "apps/collect.mjs",
@@ -127,9 +127,9 @@
     {
       "name": "collect",
       "bundler": "rollup",
-      "bytes": 1112,
-      "gzip": 547,
-      "brotli": 475,
+      "bytes": 1222,
+      "gzip": 586,
+      "brotli": 515,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -150,7 +150,7 @@
         },
         {
           "path": "node_modules/ts-algo/dist/src/collect.js",
-          "bytes": 1109,
+          "bytes": 1491,
           "removedExports": []
         },
         {
@@ -164,9 +164,9 @@
     {
       "name": "startsOnly",
       "bundler": "esbuild",
-      "bytes": 2684,
-      "gzip": 1187,
-      "brotli": 1092,
+      "bytes": 2792,
+      "gzip": 1219,
+      "brotli": 1123,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -182,7 +182,7 @@
         },
         {
           "path": "node_modules/ts-algo/dist/src/collect.js",
-          "bytes": 305
+          "bytes": 413
         },
         {
           "path": "node_modules/ts-algo/dist/src/time/state.js",
@@ -210,9 +210,9 @@
     {
       "name": "startsOnly",
       "bundler": "rollup",
-      "bytes": 2661,
-      "gzip": 1160,
-      "brotli": 1071,
+      "bytes": 2771,
+      "gzip": 1197,
+      "brotli": 1108,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -231,7 +231,7 @@
         },
         {
           "path": "node_modules/ts-algo/dist/src/collect.js",
-          "bytes": 1109,
+          "bytes": 1491,
           "removedExports": []
         },
         {
@@ -265,9 +265,9 @@
     {
       "name": "overlapOnly",
       "bundler": "esbuild",
-      "bytes": 2997,
-      "gzip": 1331,
-      "brotli": 1236,
+      "bytes": 3105,
+      "gzip": 1362,
+      "brotli": 1263,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -283,7 +283,7 @@
         },
         {
           "path": "node_modules/ts-algo/dist/src/collect.js",
-          "bytes": 305
+          "bytes": 413
         },
         {
           "path": "node_modules/ts-algo/dist/src/time/state.js",
@@ -311,9 +311,9 @@
     {
       "name": "overlapOnly",
       "bundler": "rollup",
-      "bytes": 2982,
-      "gzip": 1298,
-      "brotli": 1203,
+      "bytes": 3092,
+      "gzip": 1332,
+      "brotli": 1232,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -332,7 +332,7 @@
         },
         {
           "path": "node_modules/ts-algo/dist/src/collect.js",
-          "bytes": 1109,
+          "bytes": 1491,
           "removedExports": []
         },
         {
@@ -413,9 +413,9 @@
     {
       "name": "schedule",
       "bundler": "esbuild",
-      "bytes": 4383,
-      "gzip": 1797,
-      "brotli": 1675,
+      "bytes": 4491,
+      "gzip": 1824,
+      "brotli": 1706,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -431,7 +431,7 @@
         },
         {
           "path": "node_modules/ts-algo/dist/src/collect.js",
-          "bytes": 305
+          "bytes": 413
         },
         {
           "path": "node_modules/ts-algo/dist/src/time/state.js",
@@ -471,9 +471,9 @@
     {
       "name": "schedule",
       "bundler": "rollup",
-      "bytes": 4396,
-      "gzip": 1740,
-      "brotli": 1621,
+      "bytes": 4506,
+      "gzip": 1776,
+      "brotli": 1638,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -492,7 +492,7 @@
         },
         {
           "path": "node_modules/ts-algo/dist/src/collect.js",
-          "bytes": 1109,
+          "bytes": 1491,
           "removedExports": []
         },
         {
@@ -533,6 +533,516 @@
         {
           "path": "apps/schedule.mjs",
           "bytes": 370,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "treeChildren",
+      "bundler": "esbuild",
+      "bytes": 1868,
+      "gzip": 819,
+      "brotli": 742,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 478
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/state.js",
+          "bytes": 105
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/walk.js",
+          "bytes": 189
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/tree.js",
+          "bytes": 593
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/children.js",
+          "bytes": 54
+        },
+        {
+          "path": "apps/treeChildren.mjs",
+          "bytes": 74
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "treeChildren",
+      "bundler": "rollup",
+      "bytes": 1834,
+      "gzip": 806,
+      "brotli": 734,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1270,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/state.js",
+          "bytes": 178,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/walk.js",
+          "bytes": 680,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/tree.js",
+          "bytes": 1376,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/children.js",
+          "bytes": 115,
+          "removedExports": []
+        },
+        {
+          "path": "apps/treeChildren.mjs",
+          "bytes": 92,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "treeSubtree",
+      "bundler": "esbuild",
+      "bytes": 2315,
+      "gzip": 1003,
+      "brotli": 908,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 478
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 413
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/state.js",
+          "bytes": 100
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/walk.js",
+          "bytes": 189
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/tree.js",
+          "bytes": 593
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/subtree.js",
+          "bytes": 80
+        },
+        {
+          "path": "apps/treeSubtree.mjs",
+          "bytes": 87
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "treeSubtree",
+      "bundler": "rollup",
+      "bytes": 2287,
+      "gzip": 987,
+      "brotli": 915,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1270,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 1491,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/state.js",
+          "bytes": 160,
+          "removedExports": [
+            "empty"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/walk.js",
+          "bytes": 680,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/tree.js",
+          "bytes": 1376,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/tree/subtree.js",
+          "bytes": 214,
+          "removedExports": []
+        },
+        {
+          "path": "apps/treeSubtree.mjs",
+          "bytes": 110,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphCauses",
+      "bundler": "esbuild",
+      "bytes": 1763,
+      "gzip": 749,
+      "brotli": 669,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 419
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/state.js",
+          "bytes": 29
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 148
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/dependencies.js",
+          "bytes": 633
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/causes-of.js",
+          "bytes": 101
+        },
+        {
+          "path": "apps/graphCauses.mjs",
+          "bytes": 58
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphCauses",
+      "bundler": "rollup",
+      "bytes": 1727,
+      "gzip": 722,
+      "brotli": 651,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1060,
+          "removedExports": [
+            "subset"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/state.js",
+          "bytes": 47,
+          "removedExports": [
+            "empty",
+            "requireNode"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 347,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/dependencies.js",
+          "bytes": 1502,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/causes-of.js",
+          "bytes": 187,
+          "removedExports": []
+        },
+        {
+          "path": "apps/graphCauses.mjs",
+          "bytes": 84,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphDescendants",
+      "bundler": "esbuild",
+      "bytes": 2430,
+      "gzip": 1035,
+      "brotli": 930,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 478
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 413
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/state.js",
+          "bytes": 105
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 148
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/dependencies.js",
+          "bytes": 633
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/reachable.js",
+          "bytes": 136
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/descendants.js",
+          "bytes": 77
+        },
+        {
+          "path": "apps/graphDescendants.mjs",
+          "bytes": 65
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphDescendants",
+      "bundler": "rollup",
+      "bytes": 2399,
+      "gzip": 992,
+      "brotli": 909,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1270,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 1491,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/state.js",
+          "bytes": 179,
+          "removedExports": [
+            "empty"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 347,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/dependencies.js",
+          "bytes": 1502,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/reachable.js",
+          "bytes": 340,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/descendants.js",
+          "bytes": 168,
+          "removedExports": []
+        },
+        {
+          "path": "apps/graphDescendants.mjs",
+          "bytes": 100,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphOrder",
+      "bundler": "esbuild",
+      "bytes": 2111,
+      "gzip": 923,
+      "brotli": 830,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 419
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 413
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/state.js",
+          "bytes": 29
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 148
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/dependencies.js",
+          "bytes": 633
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/causal-order.js",
+          "bytes": 37
+        },
+        {
+          "path": "apps/graphOrder.mjs",
+          "bytes": 57
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "graphOrder",
+      "bundler": "rollup",
+      "bytes": 2077,
+      "gzip": 893,
+      "brotli": 810,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1060,
+          "removedExports": [
+            "subset"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 1491,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/state.js",
+          "bytes": 47,
+          "removedExports": [
+            "empty",
+            "requireNode"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 347,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/dependencies.js",
+          "bytes": 1502,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/dependencies/causal-order.js",
+          "bytes": 176,
+          "removedExports": []
+        },
+        {
+          "path": "apps/graphOrder.mjs",
+          "bytes": 92,
           "removedExports": []
         }
       ],

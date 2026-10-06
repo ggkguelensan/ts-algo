@@ -18,8 +18,9 @@ try {
   for (const names of selections) {
     const fixture = join(directory, "entry.ts");
     const entry = names.includes("denseArray") ? "../../src/zod/index.ts" : "../../src/index.ts";
-    const coreNames = names.filter(name => name !== "timeline");
+    const coreNames = names.filter(name => name !== "timeline" && name !== "tree");
     const code = (coreNames.length ? `export { ${coreNames.join(", ")} } from "${entry}";\n` : "") +
+      (names.includes("tree") ? `export {tree,children,nextSibling,previousSibling,sortChildren} from "../../src/tree/index.ts";${names.includes("timeline") ? "" : 'export {from,collect} from "../../src/index.ts";'}\n` : "") +
       (names.includes("timeline") ? `export {timeline,startsBetween,overlapping} from "../../src/time/index.ts";export {from,collect} from "../../src/index.ts";\n` : "");
     writeFileSync(fixture, code);
     const output = execFileSync("bun", ["build", fixture, "--target=browser", "--format=esm", "--minify"], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
@@ -42,13 +43,11 @@ try {
       x: (p: { x: number }) => p.x, y: (p: { y: number }) => p.y,
     }).nearest(1, 2).distance, 0);
     if (module.tree) {
-      const result = module.tree(new Map([["root", { parent: null }], ["child", { parent: "root" }], ["sibling", { parent: "root" }]]), {
-        parent: (e: { parent: string | null }) => e.parent,
-      });
-      assert.deepEqual([...result.keys()], ["root", "child", "sibling"]);
-      assert.equal(result.nextSibling("child"), "sibling");
-      assert.equal(result.previousSibling("sibling"), "child");
-      assert.deepEqual(result.sortBy(() => 0, () => 0).roots, ["root"]);
+      const result = module.tree(module.from(new Map([["root", { parent: null }], ["child", { parent: "root" }], ["sibling", { parent: "root" }]])), (e: { parent: string | null }) => e.parent);
+      assert.deepEqual(module.collect(result), ["root", "child", "sibling"]);
+      assert.equal(module.nextSibling(result, "child"), "sibling");
+      assert.equal(module.previousSibling(result, "sibling"), "child");
+      assert.deepEqual(module.children(module.sortChildren(result, () => 0, () => 0), "root"), ["child", "sibling"]);
     }
     if (module.timeline) {
       const result = module.timeline(module.from(new Map([["a", { at: 1 }], ["b", { at: 2 }]])), (e: { at: number }) => e.at);

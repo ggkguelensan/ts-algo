@@ -94,9 +94,12 @@ bun bench-public-core.ts
 node bundles-public-core.mjs
 node bench-public-time.ts
 bun bench-public-time.ts
+node bench-public-structure.ts
+bun bench-public-structure.ts
 node verify-package.mjs --migration
 node summarize-public-core.mjs
 node summarize-public-time.mjs
+node summarize-public-structure.mjs
 ```
 
 Run benchmarks sequentially. The installed-package gate bundles bare imports

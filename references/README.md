@@ -39,3 +39,6 @@ const sorted = sortedReferencesQuickSort(references, getValue, compare, { stable
 legacy-timeline.ts сохраняет прежний интерфейс времени+графа с методами для
 сравнений и исторических тестов. Публичный интерфейс времени — ts-algo/time;
 references не входят в npm-архив.
+
+legacy-tree.ts сохраняет прежнее дерево со снимком сущностей и методами для
+исторических сравнений. Публичное дерево — ts-algo/tree, с живым Source.

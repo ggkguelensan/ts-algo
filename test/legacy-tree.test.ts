@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { tree, sorted, pointIndex } from "../src/index.js";
+import { sorted, pointIndex } from "../src/index.js";
+import { tree } from "../references/legacy-tree.js";
 
 test("forest hierarchy, stable sibling sorting and flat sorting share entities", () => {
   const storage = new Map<string, Readonly<{ parentId: string | null; rank: number; x: number; y: number }>>([

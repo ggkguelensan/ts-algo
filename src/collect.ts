@@ -1,4 +1,5 @@
 import { entity, type Source } from "./source.js";
+import { sourceState } from "./internal/source-state.js";
 
 type Predicate<Ref, Entity, Context> = (entity: Entity, ref: Ref, context: Context) => boolean;
 type Select<Ref, Entity, Context, Value> = (entity: Entity, ref: Ref, context: Context) => Value;
@@ -43,6 +44,12 @@ export function collect<Ref, Entity, SourceContext, Value, Context>(
   const { where, select, limit = Infinity, context } = options;
   if (limit !== Infinity && (!Number.isSafeInteger(limit) || limit < 0)) {
     throw new RangeError("Invalid limit");
+  }
+  if (!where && !select && limit === Infinity) {
+    const data = source[sourceState];
+    // Only internal owned dense refs can use slice. Ordinary from/subset arrays
+    // keep iterable semantics (including holes), as do replaced iterators.
+    if (data.references && source[Symbol.iterator] === data.iterator) return data.references.slice();
   }
   const result: (Ref | Value)[] = [];
   if (limit === 0) return result;
