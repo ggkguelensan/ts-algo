@@ -1,6 +1,7 @@
+import { pointIndex } from "../references/legacy-point-index.js"; // Historical API.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { sorted, pointIndex } from "../src/index.js";
+import { sorted } from "../src/index.js";
 import { tree } from "../references/legacy-tree.js";
 
 test("forest hierarchy, stable sibling sorting and flat sorting share entities", () => {

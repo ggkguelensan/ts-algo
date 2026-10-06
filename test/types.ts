@@ -1,7 +1,8 @@
+import { pointIndex } from "../references/legacy-point-index.js"; // Historical API.
 import { tree } from "../references/legacy-tree.js"; // Historical contract only.
 import { timeline } from "../references/legacy-timeline.js"; // Historical contract only.
 // Compiled by tsc, not executed. Check inference and overload rejection.
-import { sorted, pointIndex, queue, deque, linkedList, doublyLinkedList } from "../src/index.js";
+import { sorted, queue, deque, linkedList, doublyLinkedList } from "../src/index.js";
 import type { Brand } from "../src/index.js";
 import * as z from "zod/mini";
 import { denseArray } from "../src/zod/index.js";

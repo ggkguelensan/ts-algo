@@ -18,8 +18,9 @@ try {
   for (const names of selections) {
     const fixture = join(directory, "entry.ts");
     const entry = names.includes("denseArray") ? "../../src/zod/index.ts" : "../../src/index.ts";
-    const coreNames = names.filter(name => name !== "timeline" && name !== "tree");
+    const coreNames = names.filter(name => name !== "timeline" && name !== "tree" && name !== "pointIndex");
     const code = (coreNames.length ? `export { ${coreNames.join(", ")} } from "${entry}";\n` : "") +
+      (names.includes("pointIndex") ? `export {pointIndex,nearest,within} from "../../src/spatial/index.ts";${names.includes("tree") || names.includes("timeline") ? "" : 'export {from,collect} from "../../src/index.ts";'}\n` : "") +
       (names.includes("tree") ? `export {tree,children,nextSibling,previousSibling,sortChildren} from "../../src/tree/index.ts";${names.includes("timeline") ? "" : 'export {from,collect} from "../../src/index.ts";'}\n` : "") +
       (names.includes("timeline") ? `export {timeline,startsBetween,overlapping} from "../../src/time/index.ts";export {from,collect} from "../../src/index.ts";\n` : "");
     writeFileSync(fixture, code);
@@ -39,9 +40,9 @@ try {
       assert.equal(schema.safeParse(new Array(1)).success, false);
     }
     if (module.sorted) assert.deepEqual(module.sorted([2, 1], (x: number) => x, (a: number, b: number) => a - b), [1, 2]);
-    if (module.pointIndex) assert.equal(module.pointIndex([{ x: 1, y: 2 }], {
+    if (module.pointIndex) assert.equal(module.nearest(module.pointIndex(module.from([{ x: 1, y: 2 }]), {
       x: (p: { x: number }) => p.x, y: (p: { y: number }) => p.y,
-    }).nearest(1, 2).distance, 0);
+    }),1,2).distance,0);
     if (module.tree) {
       const result = module.tree(module.from(new Map([["root", { parent: null }], ["child", { parent: "root" }], ["sibling", { parent: "root" }]])), (e: { parent: string | null }) => e.parent);
       assert.deepEqual(module.collect(result), ["root", "child", "sibling"]);

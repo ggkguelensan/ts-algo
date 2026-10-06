@@ -4,7 +4,6 @@ export type { Compare } from "./compare.js";
 export { sorted } from "./sorted.js";
 export { from, subset, entity, type Source } from "./source.js";
 export { collect } from "./collect.js";
-export { pointIndex, type PointIndex, type Bounds, type Nearest } from "./point-index.js";
 export { queue, type Queue } from "./queue.js";
 export { deque, type Deque } from "./deque.js";
 export { linkedList, type LinkedList, type LinkedNode } from "./linked-list.js";

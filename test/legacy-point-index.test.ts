@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { pointIndex } from "../src/index.js";
+import { pointIndex } from "../references/legacy-point-index.js";
 
 const coordinates = { x: (p: { x: number }) => p.x, y: (p: { y: number }) => p.y };
 

@@ -5,7 +5,7 @@ import {query,queryInput,filtered,selected} from './query.ts';
 import {temporal} from './temporal.ts';
 import {tree} from '../../dist/references/legacy-tree.js';
 import {timeline} from '../../dist/references/legacy-timeline.js';
-import {pointIndex} from '../../dist/src/point-index.js';
+import {pointIndex} from '../../dist/references/legacy-point-index.js';
 import KDBush from 'kdbush';
 import * as R from 'remeda';
 import {collect as collectReferences} from './collect.ts';

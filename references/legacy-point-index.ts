@@ -1,4 +1,5 @@
-import { isMapLike } from "./internal/collection.js";
+// Historical method-based spatial implementation; excluded from package.
+import { isMapLike } from "../src/internal/collection.js";
 
 export interface Bounds {
   readonly minX: number;

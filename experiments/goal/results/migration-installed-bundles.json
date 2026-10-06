@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-06T00:18:52.661Z",
+  "date": "2026-10-06T00:31:59.259Z",
   "target": "ES2023/browser/ESM",
   "dependencies": {
     "@rollup/plugin-commonjs": "29.0.3",
@@ -31,7 +31,7 @@
       "bundler": "esbuild",
       "bytes": 1141,
       "gzip": 512,
-      "brotli": 473,
+      "brotli": 468,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -98,8 +98,8 @@
       "name": "collect",
       "bundler": "esbuild",
       "bytes": 1275,
-      "gzip": 608,
-      "brotli": 537,
+      "gzip": 609,
+      "brotli": 536,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -165,8 +165,8 @@
       "name": "startsOnly",
       "bundler": "esbuild",
       "bytes": 2792,
-      "gzip": 1219,
-      "brotli": 1123,
+      "gzip": 1217,
+      "brotli": 1122,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -266,7 +266,7 @@
       "name": "overlapOnly",
       "bundler": "esbuild",
       "bytes": 3105,
-      "gzip": 1362,
+      "gzip": 1361,
       "brotli": 1263,
       "modules": [
         {
@@ -414,7 +414,7 @@
       "name": "schedule",
       "bundler": "esbuild",
       "bytes": 4491,
-      "gzip": 1824,
+      "gzip": 1826,
       "brotli": 1706,
       "modules": [
         {
@@ -542,8 +542,8 @@
       "name": "treeChildren",
       "bundler": "esbuild",
       "bytes": 1868,
-      "gzip": 819,
-      "brotli": 742,
+      "gzip": 820,
+      "brotli": 746,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -737,8 +737,8 @@
       "name": "graphCauses",
       "bundler": "esbuild",
       "bytes": 1763,
-      "gzip": 749,
-      "brotli": 669,
+      "gzip": 747,
+      "brotli": 668,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -834,8 +834,8 @@
       "name": "graphDescendants",
       "bundler": "esbuild",
       "bytes": 2430,
-      "gzip": 1035,
-      "brotli": 930,
+      "gzip": 1033,
+      "brotli": 938,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -946,8 +946,8 @@
       "name": "graphOrder",
       "bundler": "esbuild",
       "bytes": 2111,
-      "gzip": 923,
-      "brotli": 830,
+      "gzip": 921,
+      "brotli": 828,
       "modules": [
         {
           "path": "node_modules/ts-algo/dist/src/internal/collection.js",
@@ -1043,6 +1043,221 @@
         {
           "path": "apps/graphOrder.mjs",
           "bytes": 92,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "spatialWithin",
+      "bundler": "esbuild",
+      "bytes": 3259,
+      "gzip": 1471,
+      "brotli": 1336,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 478
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 413
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 148
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/state.js",
+          "bytes": 27
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/validate.js",
+          "bytes": 292
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/point-index.js",
+          "bytes": 1038
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/within.js",
+          "bytes": 375
+        },
+        {
+          "path": "apps/spatialWithin.mjs",
+          "bytes": 113
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "spatialWithin",
+      "bundler": "rollup",
+      "bytes": 3155,
+      "gzip": 1404,
+      "brotli": 1276,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1270,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/collect.js",
+          "bytes": 1491,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 347,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/state.js",
+          "bytes": 42,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/validate.js",
+          "bytes": 358,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/point-index.js",
+          "bytes": 2926,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/within.js",
+          "bytes": 1092,
+          "removedExports": []
+        },
+        {
+          "path": "apps/spatialWithin.mjs",
+          "bytes": 139,
+          "removedExports": []
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "spatialNearest",
+      "bundler": "esbuild",
+      "bytes": 2863,
+      "gzip": 1321,
+      "brotli": 1213,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 333
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 23
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 419
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 148
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/state.js",
+          "bytes": 27
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/validate.js",
+          "bytes": 88
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/point-index.js",
+          "bytes": 1038
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/nearest.js",
+          "bytes": 677
+        },
+        {
+          "path": "apps/spatialNearest.mjs",
+          "bytes": 91
+        }
+      ],
+      "smoke": "passed"
+    },
+    {
+      "name": "spatialNearest",
+      "bundler": "rollup",
+      "bytes": 2840,
+      "gzip": 1281,
+      "brotli": 1175,
+      "modules": [
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/collection.js",
+          "bytes": 711,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/source-state.js",
+          "bytes": 110,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/source.js",
+          "bytes": 1060,
+          "removedExports": [
+            "subset"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/internal/array-source.js",
+          "bytes": 347,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/state.js",
+          "bytes": 42,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/validate.js",
+          "bytes": 119,
+          "removedExports": [
+            "validateBounds"
+          ]
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/point-index.js",
+          "bytes": 2926,
+          "removedExports": []
+        },
+        {
+          "path": "node_modules/ts-algo/dist/src/spatial/nearest.js",
+          "bytes": 1936,
+          "removedExports": []
+        },
+        {
+          "path": "apps/spatialNearest.mjs",
+          "bytes": 112,
           "removedExports": []
         }
       ],

@@ -2,7 +2,7 @@ import KDBush from 'kdbush';
 import Flatbush from 'flatbush';
 import RBush from 'rbush';
 import {quadtree} from 'd3-quadtree';
-import {pointIndex} from '../../dist/src/point-index.js';
+import {pointIndex} from '../../dist/references/legacy-point-index.js';
 import {from,subset} from './source.ts';
 import {query,queryInput,filtered,selected} from './query.ts';
 import {random} from './measure.ts';

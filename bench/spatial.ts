@@ -2,7 +2,7 @@ import { measure, checksum } from "./measure.js";
 import { writeFileSync } from "node:fs";
 import { cpus } from "node:os";
 import assert from "node:assert/strict";
-import { pointIndex, type Bounds } from "../src/index.js";
+import { pointIndex, type Bounds } from "../references/legacy-point-index.js";
 
 const runtime = process.versions.bun ? "bun" : "node";
 const metadata = { runtime, version: process.versions.bun ?? process.version,

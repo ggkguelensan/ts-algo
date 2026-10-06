@@ -18,7 +18,8 @@ npm install ts-algo
 ```
 
 ```ts
-import { sorted, pointIndex } from "ts-algo";
+import { sorted } from "ts-algo";
+import { pointIndex, within, nearest } from "ts-algo/spatial";
 import { tree, subtree } from "ts-algo/tree";
 import { timeline, overlapping } from "ts-algo/time";
 ```
@@ -280,24 +281,47 @@ descendants обходят граф в ширину, исключают нача
 
 ## Пространственный поиск
 
-Найдите точки внутри области или ближайшую точку на плоскости.
+`ts-algo/spatial` — статический индекс точек с независимыми within/nearest.
 
 ```ts
-import { pointIndex } from "ts-algo";
+import { from, entity, collect } from "ts-algo";
+import { pointIndex, within, nearest } from "ts-algo/spatial";
 
-const places = new Map([
+const places = from(new Map([
+  ["office", { title: "Офис", enabled: true }],
+  ["warehouse", { title: "Склад", enabled: false }],
+]));
+const positions = from(new Map([
   ["office", { x: 10, y: 20 }],
   ["warehouse", { x: 80, y: 90 }],
-]);
-const index = pointIndex(places, { x: place => place.x, y: place => place.y });
-
-index.within({ minX: 0, minY: 0, maxX: 50, maxY: 50 }); // ["office"]
-index.nearest(12, 20, 10); // { reference: "office", distance: 2 }
+]));
+const index = pointIndex(places, {
+  x: (_, id) => entity(positions, id).x,
+  y: (_, id) => entity(positions, id).y,
+});
+const selection = within(index, { minX: 0, minY: 0, maxX: 50, maxY: 50 });
+collect(selection, { where: place => place.enabled, select: (place, id) => ({ id, title: place.title }) });
+// [{ id: "office", title: "Офис" }]
+nearest(index, 12, 20, 10); // { reference: "office", distance: 2 }
 ```
 
-Map возвращает ключи; Set, массив и Iterable — элементы. Границы области и радиус включены. Порядок `within` не определён; при равном расстоянии `nearest` выбирает первое вхождение источника. Если подходящей точки нет, результат — undefined.
+Геттеры координат получают сущность, ссылку и контекст Source. Они вызываются
+один раз на координату каждого вхождения. Позиции и состав фиксируются, сущности
+читаются из текущего источника. После изменения позиций/состава пересоздайте индекс.
 
-Координаты считываются один раз и должны быть конечными. После изменения координат или состава пересоздайте индекс. [Устройство и ограничения](docs/design.md#пространство).
+within возвращает ленивую повторяемую выборку, фиксирует границы при вызове и
+поддерживает limit через collect. Границы области и радиус включены. Порядок
+within не обещается; при равных расстояниях nearest выбирает первое вхождение
+источника. Не найдено — undefined; найденная ссылка сама может быть undefined,
+поэтому nearest возвращает объект. Координаты конечны, радиус неотрицателен,
+Infinity допускается. Совпадающие точки и повторные ссылки допустимы.
+
+Поиск ближайшей геометрической точки с последующим фильтром отличается от
+поиска ближайшей подходящей сущности; второй сценарий здесь не реализован.
+PointIndex сам реализует Source в порядке входа и работает с sorted/collect.
+Источник удерживается намеренно; для индекса только над IDs можно использовать
+from(ids), а сущности привязать к найденным ссылкам позже через subset.
+[Контракты и границы](docs/design.md#пространство).
 
 ## Очереди
 

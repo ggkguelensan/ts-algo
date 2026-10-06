@@ -23,6 +23,8 @@ export async function bundleInstalled(consumer){
     graphCauses:{code:`import {from} from 'ts-algo';import {dependencies,causesOf} from 'ts-algo/dependencies';export const run=()=>causesOf(dependencies(from(['a','b']),(_,id)=>id==='b'?['a']:[]),'b');`,expected:['a']},
     graphDescendants:{code:`import {from,collect} from 'ts-algo';import {dependencies,descendants} from 'ts-algo/dependencies';export const run=()=>collect(descendants(dependencies(from(['a','b','c']),(_,id)=>id==='a'?[]:['a']),'a'));`,expected:['b','c']},
     graphOrder:{code:`import {from,collect} from 'ts-algo';import {dependencies,causalOrder} from 'ts-algo/dependencies';export const run=()=>collect(causalOrder(dependencies(from(['b','a']),(_,id)=>id==='b'?['a']:[])));`,expected:['a','b']},
+    spatialWithin:{code:`import {from,collect} from 'ts-algo';import {pointIndex,within} from 'ts-algo/spatial';export const run=()=>collect(within(pointIndex(from([{x:1,y:1},{x:10,y:10}]),{x:e=>e.x,y:e=>e.y}),{minX:0,minY:0,maxX:2,maxY:2}),{select:e=>e.x});`,expected:[1]},
+    spatialNearest:{code:`import {from} from 'ts-algo';import {pointIndex,nearest} from 'ts-algo/spatial';export const run=()=>nearest(pointIndex(from(new Map([['a',{x:1,y:1}],['b',{x:10,y:10}]])),{x:e=>e.x,y:e=>e.y}),1,1,0);`,expected:{reference:'a',distance:0}},
   };
   const rows=[];
   for(const [name,fixture] of Object.entries(fixtures)){
@@ -43,12 +45,15 @@ export async function bundleInstalled(consumer){
       assert(!/node_modules\/(zod|date-fns)|legacy|src\/(timeline\.js|point-index|queue|deque|linked-list|doubly-linked-list)/.test(paths),'Unneeded domain/dependency leaked');
       if(!name.startsWith('tree'))assert(!/src\/tree\//.test(paths),'Unneeded hierarchy leaked');
       if(!name.startsWith('graph'))assert(!/src\/dependencies\//.test(paths),'Unneeded graph leaked');
+      if(!name.startsWith('spatial'))assert(!/src\/spatial\//.test(paths),'Unneeded spatial index leaked');
       if(['sorted','collect'].includes(name))assert(!/src\/(time|ranges)\//.test(paths),'Core leaked time/ranges');
       if(name==='startsOnly')assert(!/overlapping\.js/.test(paths),'Starts retained overlap algorithm');
       if(name==='overlapOnly')assert(!/starts-between\.js/.test(paths),'Overlap retained start-range algorithm');
       if(name==='freeOnly')assert(!/conflicts\.js|overloaded\.js/.test(paths),'Free-slots retained other range algorithms');
       if(name==='treeChildren')assert(!/sort-children\.js|siblings\.js|subtree\.js|ancestors\.js/.test(paths),'Children retained independent hierarchy operations');
       if(name==='graphCauses')assert(!/reachable\.js|descendants\.js|ancestors\.js|causal-order\.js/.test(paths),'Direct causes retained graph query operations');
+      if(name==='spatialWithin')assert(!/nearest\.js/.test(paths),'Within retained nearest search');
+      if(name==='spatialNearest')assert(!/within\.js/.test(paths),'Nearest retained area search');
       rows.push({name,bundler,bytes:Buffer.byteLength(code),gzip:gzipSync(code,{level:9}).length,brotli:brotliCompressSync(Buffer.from(code),{params:{[constants.BROTLI_PARAM_QUALITY]:11}}).length,modules,smoke:'passed'});
     }
   }
