@@ -1,7 +1,7 @@
 // Historical snapshot/method implementation; excluded from package.
 import type { Compare } from "../src/compare.js";
 import { sorted } from "../src/sorted.js";
-import { referenceMap, snapshotMap } from "../src/internal/reference-map.js";
+import { referenceMap, snapshotMap } from "./reference-map.js";
 
 export interface Tree<Key, Entity> extends ReadonlyMap<Key, Entity> {
   readonly roots: readonly Key[];

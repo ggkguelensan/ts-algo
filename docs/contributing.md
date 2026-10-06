@@ -45,8 +45,10 @@ npm run bench:validation:bun
 npm ci
 node verify-package.mjs --migration
 node type-public.mjs
+node type-migration-baseline.mjs
 node bench-public-memory.mjs
 node summarize-public-costs.mjs
+node verify-migration.mjs
 ```
 
 Проверка архива устанавливает пакет в отдельный consumer, компилирует примеры

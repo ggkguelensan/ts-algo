@@ -1,0 +1,317 @@
+{
+  "checkedAt": "2026-10-06T01:36:14.386Z",
+  "baseline": "bd9a160",
+  "baselineSourceHash": "b601972ea0ca40422573deaffacb96cf9c57014148e37e7e013ca49e6409d7be",
+  "publicDeclarationHash": "a8d00c91f1bb92b1b5a462b9c23bfefb54586011f0761192c1c57996fffbc9de",
+  "cpu": "Apple M5",
+  "node": "v25.8.1",
+  "typescript": "7.0.2",
+  "options": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "types": [
+      "node"
+    ],
+    "skipLibCheck": false,
+    "noEmit": true
+  },
+  "definitions": {
+    "publicCollect": {
+      "imports": "import {from,collect} from '../../../dist/src/index.js';",
+      "header": "declare const values:readonly {id:string;active:boolean;amount:number}[];",
+      "call": "collect(from(values),{where:e=>e.active,select:e=>({id:e.id,total:e.amount*2}),limit:20})"
+    },
+    "prototypeCollect": {
+      "imports": "import {from} from './library/source.js';import {collect} from './library/collect.js';",
+      "header": "declare const values:readonly {id:string;active:boolean;amount:number}[];",
+      "call": "collect(from(values),{where:e=>e.active,select:e=>({id:e.id,total:e.amount*2}),limit:20})"
+    },
+    "nativeCollect": {
+      "imports": "export {};",
+      "header": "declare const values:readonly {id:string;active:boolean;amount:number}[];",
+      "call": "values.filter(e=>e.active).map(e=>({id:e.id,total:e.amount*2})).slice(0,20)"
+    },
+    "beforeArray": {
+      "imports": "import {sorted} from './before.js';",
+      "header": "declare const values:readonly {amount:number}[];",
+      "call": "sorted(values,e=>e.amount,(a,b)=>a-b)"
+    },
+    "publicArray": {
+      "imports": "import {sorted} from '../../../dist/src/index.js';",
+      "header": "declare const values:readonly {amount:number}[];",
+      "call": "sorted(values,e=>e.amount,(a,b)=>a-b)"
+    },
+    "nativeArray": {
+      "imports": "export {};",
+      "header": "declare const values:readonly {amount:number}[];",
+      "call": "values.map(e=>({ref:e,value:e.amount})).sort((a,b)=>a.value-b.value).map(e=>e.ref)"
+    },
+    "beforeMap": {
+      "imports": "import {sorted} from './before.js';",
+      "header": "declare const values:ReadonlyMap<string,{amount:number}>;",
+      "call": "sorted(values,e=>e.amount,(a,b)=>a-b)"
+    },
+    "publicMap": {
+      "imports": "import {sorted} from '../../../dist/src/index.js';",
+      "header": "declare const values:ReadonlyMap<string,{amount:number}>;",
+      "call": "sorted(values,e=>e.amount,(a,b)=>a-b)"
+    },
+    "publicSource": {
+      "imports": "import {sorted,from} from '../../../dist/src/index.js';",
+      "header": "declare const store:ReadonlyMap<string,{amount:number}>;const values=from(store);",
+      "call": "sorted(values,e=>e.amount,(a,b)=>a-b)"
+    }
+  },
+  "oldDeclaration": "type Compare<T>=(a:T,b:T)=>number;\n\ntype IterableItem<Source> = Source extends Iterable<infer Item> ? Item : never;\n\n/** Sort Map keys using values selected directly from its entities. */\nexport declare function sorted<Key, Entity, Value>(\n  source: ReadonlyMap<Key, Entity>,\n  getValue: (entity: Entity, key: Key) => Value,\n  compare: Compare<Value>,\n): Key[];\n\n/** Sort Set elements while preserving their identity. */\nexport declare function sorted<Ref, Value>(\n  source: ReadonlySet<Ref>,\n  getValue: (ref: Ref) => Value,\n  compare: Compare<Value>,\n): Ref[];\n\nexport declare function sorted<Ref, Value>(\n  references: readonly Ref[],\n  getValue: (ref: Ref) => Value,\n  compare: Compare<Value>,\n): Ref[];\n\n/** Consume an iterable once; Map uses its entity/key overload instead. */\nexport declare function sorted<Source extends Iterable<unknown>, Value>(\n  source: Source extends ReadonlyMap<unknown, unknown> ? never : Source,\n  getValue: (ref: IterableItem<Source>) => Value,\n  compare: Compare<Value>,\n): IterableItem<Source>[];\n\n",
+  "rows": [
+    {
+      "variant": "beforeArray",
+      "calls": 5000,
+      "modules": 1,
+      "callsPerModule": 5000,
+      "samples": [
+        {
+          "wallMs": 4977.770292,
+          "raw": "Files:              198\nLines:           121790\nIdentifiers:     140956\nSymbols:         198333\nTypes:            87651\nInstantiations:  118941\nMemory used:    174647K\nMemory allocs:   985846\nConfig time:     0.002s\nParse time:      0.024s\nBind time:       0.009s\nCheck time:      4.737s\nEmit time:       0.000s\nTotal time:      4.775s\n"
+        },
+        {
+          "wallMs": 4434.448,
+          "raw": "Files:              198\nLines:           121790\nIdentifiers:     140956\nSymbols:         198333\nTypes:            87651\nInstantiations:  118941\nMemory used:    174522K\nMemory allocs:   985950\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.007s\nCheck time:      4.235s\nEmit time:       0.000s\nTotal time:      4.260s\n"
+        },
+        {
+          "wallMs": 4572.637999999999,
+          "raw": "Files:              198\nLines:           121790\nIdentifiers:     140956\nSymbols:         198333\nTypes:            87651\nInstantiations:  118941\nMemory used:    174617K\nMemory allocs:   985916\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.008s\nCheck time:      4.364s\nEmit time:       0.000s\nTotal time:      4.389s\n"
+        }
+      ]
+    },
+    {
+      "variant": "beforeArray",
+      "calls": 5000,
+      "modules": 50,
+      "callsPerModule": 100,
+      "samples": [
+        {
+          "wallMs": 379.2751250000001,
+          "raw": "Files:              247\nLines:           121888\nIdentifiers:     141103\nSymbols:         200828\nTypes:            87759\nInstantiations:  119713\nMemory used:    179626K\nMemory allocs:  1000898\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.007s\nCheck time:      0.169s\nEmit time:       0.000s\nTotal time:      0.196s\n"
+        },
+        {
+          "wallMs": 369.50174999999945,
+          "raw": "Files:              247\nLines:           121888\nIdentifiers:     141103\nSymbols:         200828\nTypes:            87759\nInstantiations:  119713\nMemory used:    179683K\nMemory allocs:   999488\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.007s\nCheck time:      0.164s\nEmit time:       0.000s\nTotal time:      0.191s\n"
+        },
+        {
+          "wallMs": 366.64750000000095,
+          "raw": "Files:              247\nLines:           121888\nIdentifiers:     141103\nSymbols:         200828\nTypes:            87759\nInstantiations:  119713\nMemory used:    179663K\nMemory allocs:   999726\nConfig time:     0.000s\nParse time:      0.020s\nBind time:       0.007s\nCheck time:      0.165s\nEmit time:       0.000s\nTotal time:      0.192s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicArray",
+      "calls": 5000,
+      "modules": 1,
+      "callsPerModule": 5000,
+      "samples": [
+        {
+          "wallMs": 5903.8855840000015,
+          "raw": "Files:              205\nLines:           121861\nIdentifiers:     141277\nSymbols:         198170\nTypes:            87658\nInstantiations:  123891\nMemory used:    174950K\nMemory allocs:  1111702\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.007s\nCheck time:      5.696s\nEmit time:       0.000s\nTotal time:      5.720s\n"
+        },
+        {
+          "wallMs": 6008.330457999997,
+          "raw": "Files:              205\nLines:           121861\nIdentifiers:     141277\nSymbols:         198170\nTypes:            87658\nInstantiations:  123891\nMemory used:    174927K\nMemory allocs:  1111663\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.007s\nCheck time:      5.787s\nEmit time:       0.000s\nTotal time:      5.812s\n"
+        },
+        {
+          "wallMs": 6238.753625000001,
+          "raw": "Files:              205\nLines:           121861\nIdentifiers:     141277\nSymbols:         198170\nTypes:            87658\nInstantiations:  123891\nMemory used:    174993K\nMemory allocs:  1111655\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.007s\nCheck time:      6.028s\nEmit time:       0.000s\nTotal time:      6.052s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicArray",
+      "calls": 5000,
+      "modules": 50,
+      "callsPerModule": 100,
+      "samples": [
+        {
+          "wallMs": 393.7256249999991,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     141424\nSymbols:         202094\nTypes:            89668\nInstantiations:  129615\nMemory used:    181338K\nMemory allocs:  1142927\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.007s\nCheck time:      0.186s\nEmit time:       0.000s\nTotal time:      0.213s\n"
+        },
+        {
+          "wallMs": 391.92412499999773,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     141424\nSymbols:         202094\nTypes:            89668\nInstantiations:  129615\nMemory used:    181383K\nMemory allocs:  1143165\nConfig time:     0.000s\nParse time:      0.020s\nBind time:       0.007s\nCheck time:      0.186s\nEmit time:       0.000s\nTotal time:      0.214s\n"
+        },
+        {
+          "wallMs": 392.75824999999895,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     141424\nSymbols:         202094\nTypes:            89668\nInstantiations:  129615\nMemory used:    181415K\nMemory allocs:  1142837\nConfig time:     0.000s\nParse time:      0.018s\nBind time:       0.007s\nCheck time:      0.184s\nEmit time:       0.000s\nTotal time:      0.210s\n"
+        }
+      ]
+    },
+    {
+      "variant": "nativeArray",
+      "calls": 5000,
+      "modules": 1,
+      "callsPerModule": 5000,
+      "samples": [
+        {
+          "wallMs": 939.318124999998,
+          "raw": "Files:              197\nLines:           121758\nIdentifiers:     215871\nSymbols:         547822\nTypes:           162340\nInstantiations:  353625\nMemory used:    300661K\nMemory allocs:  1504691\nConfig time:     0.000s\nParse time:      0.027s\nBind time:       0.009s\nCheck time:      0.700s\nEmit time:       0.000s\nTotal time:      0.740s\n"
+        },
+        {
+          "wallMs": 886.7345000000059,
+          "raw": "Files:              197\nLines:           121758\nIdentifiers:     215871\nSymbols:         547822\nTypes:           162340\nInstantiations:  353625\nMemory used:    300688K\nMemory allocs:  1504872\nConfig time:     0.000s\nParse time:      0.029s\nBind time:       0.009s\nCheck time:      0.676s\nEmit time:       0.000s\nTotal time:      0.715s\n"
+        },
+        {
+          "wallMs": 919.849000000002,
+          "raw": "Files:              197\nLines:           121758\nIdentifiers:     215871\nSymbols:         547822\nTypes:           162340\nInstantiations:  353625\nMemory used:    300707K\nMemory allocs:  1504687\nConfig time:     0.000s\nParse time:      0.023s\nBind time:       0.011s\nCheck time:      0.692s\nEmit time:       0.000s\nTotal time:      0.726s\n"
+        }
+      ]
+    },
+    {
+      "variant": "nativeArray",
+      "calls": 5000,
+      "modules": 50,
+      "callsPerModule": 100,
+      "samples": [
+        {
+          "wallMs": 445.880250000002,
+          "raw": "Files:              246\nLines:           121856\nIdentifiers:     215969\nSymbols:         540842\nTypes:           162998\nInstantiations:  354693\nMemory used:    306103K\nMemory allocs:  1514285\nConfig time:     0.000s\nParse time:      0.021s\nBind time:       0.009s\nCheck time:      0.207s\nEmit time:       0.000s\nTotal time:      0.237s\n"
+        },
+        {
+          "wallMs": 426.74987500000134,
+          "raw": "Files:              246\nLines:           121856\nIdentifiers:     215969\nSymbols:         540842\nTypes:           162998\nInstantiations:  354693\nMemory used:    306063K\nMemory allocs:  1514220\nConfig time:     0.000s\nParse time:      0.021s\nBind time:       0.007s\nCheck time:      0.198s\nEmit time:       0.000s\nTotal time:      0.228s\n"
+        },
+        {
+          "wallMs": 414.442667000003,
+          "raw": "Files:              246\nLines:           121856\nIdentifiers:     215969\nSymbols:         540842\nTypes:           162998\nInstantiations:  354693\nMemory used:    305843K\nMemory allocs:  1514260\nConfig time:     0.000s\nParse time:      0.021s\nBind time:       0.007s\nCheck time:      0.195s\nEmit time:       0.000s\nTotal time:      0.225s\n"
+        }
+      ]
+    },
+    {
+      "variant": "beforeMap",
+      "calls": 5000,
+      "modules": 50,
+      "callsPerModule": 100,
+      "samples": [
+        {
+          "wallMs": 352.69749999999476,
+          "raw": "Files:              247\nLines:           121888\nIdentifiers:     141153\nSymbols:         205557\nTypes:            88030\nInstantiations:  120562\nMemory used:    181350K\nMemory allocs:   931796\nConfig time:     0.000s\nParse time:      0.018s\nBind time:       0.007s\nCheck time:      0.151s\nEmit time:       0.000s\nTotal time:      0.177s\n"
+        },
+        {
+          "wallMs": 364.34295900000143,
+          "raw": "Files:              247\nLines:           121888\nIdentifiers:     141153\nSymbols:         205557\nTypes:            88030\nInstantiations:  120562\nMemory used:    181168K\nMemory allocs:   932054\nConfig time:     0.000s\nParse time:      0.020s\nBind time:       0.007s\nCheck time:      0.157s\nEmit time:       0.000s\nTotal time:      0.184s\n"
+        },
+        {
+          "wallMs": 354.88175000000047,
+          "raw": "Files:              247\nLines:           121888\nIdentifiers:     141153\nSymbols:         205557\nTypes:            88030\nInstantiations:  120562\nMemory used:    181302K\nMemory allocs:   931742\nConfig time:     0.000s\nParse time:      0.021s\nBind time:       0.004s\nCheck time:      0.152s\nEmit time:       0.000s\nTotal time:      0.177s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicMap",
+      "calls": 5000,
+      "modules": 50,
+      "callsPerModule": 100,
+      "samples": [
+        {
+          "wallMs": 410.8338750000039,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     141474\nSymbols:         210288\nTypes:            91426\nInstantiations:  128705\nMemory used:    184563K\nMemory allocs:  1417404\nConfig time:     0.000s\nParse time:      0.021s\nBind time:       0.007s\nCheck time:      0.208s\nEmit time:       0.000s\nTotal time:      0.236s\n"
+        },
+        {
+          "wallMs": 421.78433300000324,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     141474\nSymbols:         210288\nTypes:            91426\nInstantiations:  128705\nMemory used:    184613K\nMemory allocs:  1416938\nConfig time:     0.000s\nParse time:      0.021s\nBind time:       0.007s\nCheck time:      0.211s\nEmit time:       0.000s\nTotal time:      0.239s\n"
+        },
+        {
+          "wallMs": 415.6361670000042,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     141474\nSymbols:         210288\nTypes:            91426\nInstantiations:  128705\nMemory used:    184675K\nMemory allocs:  1417481\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.008s\nCheck time:      0.210s\nEmit time:       0.000s\nTotal time:      0.237s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicSource",
+      "calls": 5000,
+      "modules": 50,
+      "callsPerModule": 100,
+      "samples": [
+        {
+          "wallMs": 364.25208399999974,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     141674\nSymbols:         206127\nTypes:            88803\nInstantiations:  121552\nMemory used:    182735K\nMemory allocs:   974259\nConfig time:     0.000s\nParse time:      0.018s\nBind time:       0.007s\nCheck time:      0.163s\nEmit time:       0.000s\nTotal time:      0.190s\n"
+        },
+        {
+          "wallMs": 361.48408400000335,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     141674\nSymbols:         206127\nTypes:            88803\nInstantiations:  121552\nMemory used:    182777K\nMemory allocs:   974486\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.007s\nCheck time:      0.165s\nEmit time:       0.000s\nTotal time:      0.193s\n"
+        },
+        {
+          "wallMs": 380.7702910000007,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     141674\nSymbols:         206127\nTypes:            88803\nInstantiations:  121552\nMemory used:    182816K\nMemory allocs:   974522\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.006s\nCheck time:      0.167s\nEmit time:       0.000s\nTotal time:      0.194s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicCollect",
+      "calls": 5000,
+      "modules": 50,
+      "callsPerModule": 100,
+      "samples": [
+        {
+          "wallMs": 538.216042,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     186574\nSymbols:         422860\nTypes:           170399\nInstantiations: 1800542\nMemory used:    277466K\nMemory allocs:  4526536\nConfig time:     0.000s\nParse time:      0.023s\nBind time:       0.008s\nCheck time:      0.308s\nEmit time:       0.000s\nTotal time:      0.340s\n"
+        },
+        {
+          "wallMs": 534.6963750000001,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     186574\nSymbols:         422860\nTypes:           170399\nInstantiations: 1800542\nMemory used:    277362K\nMemory allocs:  4526441\nConfig time:     0.000s\nParse time:      0.023s\nBind time:       0.006s\nCheck time:      0.309s\nEmit time:       0.000s\nTotal time:      0.338s\n"
+        },
+        {
+          "wallMs": 520.8025419999999,
+          "raw": "Files:              254\nLines:           121959\nIdentifiers:     186574\nSymbols:         422860\nTypes:           170399\nInstantiations: 1800542\nMemory used:    277456K\nMemory allocs:  4527202\nConfig time:     0.000s\nParse time:      0.021s\nBind time:       0.009s\nCheck time:      0.299s\nEmit time:       0.000s\nTotal time:      0.330s\n"
+        }
+      ]
+    },
+    {
+      "variant": "prototypeCollect",
+      "calls": 5000,
+      "modules": 50,
+      "callsPerModule": 100,
+      "samples": [
+        {
+          "wallMs": 500.8336670000001,
+          "raw": "Files:              248\nLines:           121895\nIdentifiers:     186387\nSymbols:         423472\nTypes:           170897\nInstantiations: 1761382\nMemory used:    278266K\nMemory allocs:  4295026\nConfig time:     0.000s\nParse time:      0.022s\nBind time:       0.007s\nCheck time:      0.276s\nEmit time:       0.000s\nTotal time:      0.306s\n"
+        },
+        {
+          "wallMs": 500.54770800000006,
+          "raw": "Files:              248\nLines:           121895\nIdentifiers:     186387\nSymbols:         423472\nTypes:           170897\nInstantiations: 1761382\nMemory used:    278260K\nMemory allocs:  4295385\nConfig time:     0.000s\nParse time:      0.023s\nBind time:       0.005s\nCheck time:      0.277s\nEmit time:       0.000s\nTotal time:      0.306s\n"
+        },
+        {
+          "wallMs": 500.5188750000002,
+          "raw": "Files:              248\nLines:           121895\nIdentifiers:     186387\nSymbols:         423472\nTypes:           170897\nInstantiations: 1761382\nMemory used:    278042K\nMemory allocs:  4295041\nConfig time:     0.000s\nParse time:      0.022s\nBind time:       0.005s\nCheck time:      0.281s\nEmit time:       0.000s\nTotal time:      0.309s\n"
+        }
+      ]
+    },
+    {
+      "variant": "nativeCollect",
+      "calls": 5000,
+      "modules": 50,
+      "callsPerModule": 100,
+      "samples": [
+        {
+          "wallMs": 410.258292,
+          "raw": "Files:              246\nLines:           121856\nIdentifiers:     196069\nSymbols:         457401\nTypes:           118251\nInstantiations:  205893\nMemory used:    267043K\nMemory allocs:  1282835\nConfig time:     0.000s\nParse time:      0.023s\nBind time:       0.005s\nCheck time:      0.191s\nEmit time:       0.000s\nTotal time:      0.220s\n"
+        },
+        {
+          "wallMs": 403.6259170000003,
+          "raw": "Files:              246\nLines:           121856\nIdentifiers:     196069\nSymbols:         457401\nTypes:           118251\nInstantiations:  205893\nMemory used:    266996K\nMemory allocs:  1282596\nConfig time:     0.000s\nParse time:      0.026s\nBind time:       0.005s\nCheck time:      0.187s\nEmit time:       0.000s\nTotal time:      0.218s\n"
+        },
+        {
+          "wallMs": 404.6949170000007,
+          "raw": "Files:              246\nLines:           121856\nIdentifiers:     196069\nSymbols:         457401\nTypes:           118251\nInstantiations:  205893\nMemory used:    267088K\nMemory allocs:  1282850\nConfig time:     0.000s\nParse time:      0.025s\nBind time:       0.006s\nCheck time:      0.185s\nEmit time:       0.000s\nTotal time:      0.217s\n"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Before declaration is mechanically extracted from actual baseline source overloads; runtime is not executed.",
+    "Three fresh sequential compilers. Same 5000 independent unannotated calls, in one module or 50 modules.",
+    "Map and bound Source compare relevant application forms, not only plain-array sorting. Module split is a hypothesis; not an instruction to restructure applications."
+  ]
+}

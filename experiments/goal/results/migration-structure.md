@@ -154,15 +154,15 @@ The package verifier installs the tarball in an independent consumer and checks 
 
 | Fixture | Bundler | JS bytes | gzip | Brotli |
 |---|---|---:|---:|---:|
-| treeChildren | esbuild | 1868 | 819 | 742 |
+| treeChildren | esbuild | 1868 | 821 | 744 |
 | treeChildren | rollup | 1834 | 806 | 734 |
-| treeSubtree | esbuild | 2315 | 1003 | 908 |
+| treeSubtree | esbuild | 2315 | 1002 | 906 |
 | treeSubtree | rollup | 2287 | 987 | 915 |
-| graphCauses | esbuild | 1763 | 749 | 669 |
+| graphCauses | esbuild | 1763 | 745 | 670 |
 | graphCauses | rollup | 1727 | 722 | 651 |
-| graphDescendants | esbuild | 2430 | 1035 | 930 |
+| graphDescendants | esbuild | 2430 | 1031 | 939 |
 | graphDescendants | rollup | 2399 | 992 | 909 |
-| graphOrder | esbuild | 2111 | 923 | 830 |
+| graphOrder | esbuild | 2111 | 919 | 825 |
 | graphOrder | rollup | 2077 | 893 | 810 |
 
-This is an intermediate gate; final scaled typing, memory/allocation and remaining public modules are still required. Readonly relationship arrays are borrowed and are not runtime-frozen.
+The final public gate is documented in the migration audit; this report isolates hierarchy/DAG cost and granularity. Readonly relationship arrays are borrowed and are not runtime-frozen.

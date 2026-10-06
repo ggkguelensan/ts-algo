@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-06T01:31:25.847Z",
+  "date": "2026-10-06T01:45:16.931Z",
   "target": "ES2023/browser/ESM",
   "dependencies": {
     "@rollup/plugin-commonjs": "29.0.3",

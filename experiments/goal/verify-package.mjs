@@ -117,6 +117,9 @@ void values;void wrong;
   writeFileSync(resolve(consumer,'business-smoke.mjs'),`import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {allScenarios} from './business.js';assert.deepEqual(allScenarios(),JSON.parse(readFileSync(new URL('./expected.json',import.meta.url),'utf8')));`);
   run('node',['business-smoke.mjs'],consumer);
   run('bun',['business-smoke.mjs'],consumer);
+  writeFileSync(resolve(consumer,'business-oracles.test.js'),readFileSync(resolve(root,'dist/test/business-oracles.test.js'),'utf8'));
+  run('node',['--test','business-oracles.test.js'],consumer);
+  run('bun',['test','business-oracles.test.js'],consumer);
   writeFileSync(resolve(here,'results/migration-business-types.json'),JSON.stringify({checkedAt:new Date().toISOString(),typescript:JSON.parse(readFileSync(resolve(here,'node_modules/typescript/package.json'),'utf8')).version,inferredBusiness,notes:['Unannotated return types from copied public-import examples compiled against independently installed declarations; no paths and no skipLibCheck.']},null,2)+'\n');
   const bundles=process.argv.includes('--migration')?await bundleInstalled(consumer):undefined;
   const declarationBytes=packed.files.filter(file=>file.path.endsWith('.d.ts')).reduce((sum,file)=>sum+file.size,0);
@@ -126,7 +129,7 @@ void values;void wrong;
     assert(!/(?:\bfrom\s*|\bimport\s*\(\s*|\bimport\s*)["']date-fns(?:\/[^"']*)?["']/.test(declaration), 'Unexpected declaration dependency on date-fns');
   }
   const runtimeJSBytes=packed.files.filter(file=>file.path.endsWith('.js')).reduce((sum,file)=>sum+file.size,0);
-  const report = { checkedAt: new Date().toISOString(), node: process.version, bun:run('bun',['--version'],consumer).trim(),typescript:JSON.parse(readFileSync(resolve(here,'node_modules/typescript/package.json'),'utf8')).version,files: [...files], size: packed.size, unpackedSize: packed.unpackedSize, declarationBytes,runtimeJSBytes,coreAndZod: 'passed Node and Bun in isolated consumer',installedDeclarationConsumer:'passed strict TypeScript without skipLibCheck', excludedResearch: true, businessScenarios:{count:7,strictTypes:'passed without paths or skipLibCheck',node:'passed',bun:'passed',fixture:'examples/expected.json'}, installedBundleOutputs:bundles?.length };
+  const report = { checkedAt: new Date().toISOString(), node: process.version, bun:run('bun',['--version'],consumer).trim(),typescript:JSON.parse(readFileSync(resolve(here,'node_modules/typescript/package.json'),'utf8')).version,files: [...files], size: packed.size, unpackedSize: packed.unpackedSize, declarationBytes,runtimeJSBytes,coreAndZod: 'passed Node and Bun in isolated consumer',installedDeclarationConsumer:'passed strict TypeScript without skipLibCheck', excludedResearch: true, businessScenarios:{count:7,strictTypes:'passed without paths or skipLibCheck',node:'passed',bun:'passed',fixture:'examples/expected.json'}, businessOracles:{seed:543221,rounds:60,scenarios:7,node:'passed',bun:'passed',source:'test/business-oracles.test.ts'}, installedBundleOutputs:bundles?.length };
   mkdirSync(resolve(here, 'results'), {recursive:true});
   const reportName=process.argv.includes('--migration')?'migration-package.json':'package.json';
   writeFileSync(resolve(here, 'results',reportName), JSON.stringify(report, null, 2)+'\n');

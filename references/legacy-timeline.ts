@@ -1,6 +1,6 @@
 // Historical pre-migration implementation; used only by tests/benchmarks.
 import { sorted } from "../src/sorted.js";
-import { referenceMap } from "../src/internal/reference-map.js";
+import { referenceMap } from "./reference-map.js";
 import { isMapLike } from "../src/internal/collection.js";
 
 export interface TimeSpan { readonly start: number; readonly end: number; }

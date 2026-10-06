@@ -301,27 +301,43 @@ Bare ts-algo /time /ranges imports, two browser ES2023 bundlers. All artifacts e
 
 | Fixture | Bundler | JS bytes | gzip | Brotli |
 |---|---|---:|---:|---:|
-| sorted | esbuild | 1141 | 512 | 473 |
+| sorted | esbuild | 1139 | 513 | 472 |
 | sorted | rollup | 1128 | 517 | 460 |
-| collect | esbuild | 1275 | 608 | 537 |
+| collect | esbuild | 1273 | 609 | 537 |
 | collect | rollup | 1222 | 586 | 515 |
-| startsOnly | esbuild | 2792 | 1219 | 1123 |
+| startsOnly | esbuild | 2792 | 1213 | 1118 |
 | startsOnly | rollup | 2771 | 1197 | 1108 |
-| overlapOnly | esbuild | 3105 | 1362 | 1263 |
+| overlapOnly | esbuild | 3105 | 1358 | 1263 |
 | overlapOnly | rollup | 3092 | 1332 | 1232 |
 | freeOnly | esbuild | 558 | 334 | 298 |
 | freeOnly | rollup | 568 | 331 | 291 |
-| schedule | esbuild | 4491 | 1824 | 1706 |
+| schedule | esbuild | 4491 | 1826 | 1703 |
 | schedule | rollup | 4506 | 1776 | 1638 |
-| treeChildren | esbuild | 1868 | 819 | 742 |
+| treeChildren | esbuild | 1868 | 821 | 744 |
 | treeChildren | rollup | 1834 | 806 | 734 |
-| treeSubtree | esbuild | 2315 | 1003 | 908 |
+| treeSubtree | esbuild | 2315 | 1002 | 906 |
 | treeSubtree | rollup | 2287 | 987 | 915 |
-| graphCauses | esbuild | 1763 | 749 | 669 |
+| graphCauses | esbuild | 1763 | 745 | 670 |
 | graphCauses | rollup | 1727 | 722 | 651 |
-| graphDescendants | esbuild | 2430 | 1035 | 930 |
+| graphDescendants | esbuild | 2430 | 1031 | 939 |
 | graphDescendants | rollup | 2399 | 992 | 909 |
-| graphOrder | esbuild | 2111 | 923 | 830 |
+| graphOrder | esbuild | 2111 | 919 | 825 |
 | graphOrder | rollup | 2077 | 893 | 810 |
+| spatialWithin | esbuild | 3259 | 1472 | 1336 |
+| spatialWithin | rollup | 3155 | 1404 | 1276 |
+| spatialNearest | esbuild | 2863 | 1322 | 1218 |
+| spatialNearest | rollup | 2840 | 1281 | 1175 |
+| queueOnly | esbuild | 248 | 200 | 173 |
+| queueOnly | rollup | 253 | 198 | 169 |
+| fifo | esbuild | 559 | 316 | 278 |
+| fifo | rollup | 564 | 309 | 269 |
+| dequeOps | esbuild | 732 | 376 | 346 |
+| dequeOps | rollup | 743 | 385 | 346 |
+| singleOnly | esbuild | 696 | 365 | 329 |
+| singleOnly | rollup | 671 | 339 | 308 |
+| listEdits | esbuild | 1398 | 589 | 543 |
+| listEdits | rollup | 1388 | 581 | 535 |
+| diffOnly | esbuild | 308 | 237 | 205 |
+| diffOnly | rollup | 309 | 233 | 203 |
 
-Range functions preserve prototype algorithms with stronger malformed-span/overflow validation. Correctness uses independent sampled-segment/all-pairs oracles. Their final end-to-end runtime/allocation profile and the remaining domains are still required before the migration Goal finishes.
+Range functions preserve prototype algorithms with stronger malformed-span/overflow validation. Correctness uses independent sampled-segment/all-pairs oracles. Public range cost is measured separately in migration-ranges; combined schedule outputs have seeded independent business oracles. The migration audit links final memory/type/package coverage.

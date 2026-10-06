@@ -94,6 +94,9 @@ bun bench-public-core.ts
 node bundles-public-core.mjs
 node bench-public-time.ts
 bun bench-public-time.ts
+node bench-public-ranges.ts
+bun bench-public-ranges.ts
+node summarize-public-ranges.mjs
 node bench-public-structure.ts
 bun bench-public-structure.ts
 node bench-public-spatial.ts
@@ -103,6 +106,7 @@ bun bench-public-sequences.ts
 node verify-package.mjs --migration
 node type-public.mjs
 node type-investigate.mjs
+node type-migration-baseline.mjs
 node bench-public-memory.mjs
 node summarize-public-costs.mjs
 node summarize-public-core.mjs
@@ -330,4 +334,6 @@ Unbound temporal retention is runtime-dependent in the saved worker: Node
 releases the store, Bun retains it. No store-release guarantee is accepted from
 this experiment. Context/closure retainer mechanisms remain uncertain.
 
-The requirement-by-requirement completion audit is [completion.md](completion.md).
+The research requirement audit is [completion.md](completion.md). Public migration
+has a separate [requirement audit](migration-audit.md) and executable
+`node verify-migration.mjs` gate.

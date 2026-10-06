@@ -1,0 +1,196 @@
+{
+  "checkedAt": "2026-10-06T01:45:17.154Z",
+  "node": "v25.8.1",
+  "checks": [
+    {
+      "cwd": "root",
+      "command": "npm run check",
+      "exit": 0,
+      "elapsedMs": 602,
+      "stdout": "\n> ts-algo@0.1.0 check\n> tsc --noEmit\n\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "root",
+      "command": "npm test",
+      "exit": 0,
+      "elapsedMs": 1098,
+      "stdout": "\n> ts-algo@0.1.0 test\n> npm run build && node --test dist/test/*.test.js\n\n\n> ts-algo@0.1.0 build\n> node scripts/build.mjs\n\n✔ seven composed public scenarios match seeded independent business oracles (27.936833ms)\n✔ seven business scenarios execute through public package imports (7.78525ms)\n✔ Map selects entities directly and returns original keys, with stable ties (0.774458ms)\n✔ Map permits undefined entities and preserves object key identity (0.082334ms)\n✔ empty and singleton Map and Set skip selector and comparator (0.068708ms)\n✔ Set returns identical entities and leaves insertion order unchanged (0.054834ms)\n✔ one-shot iterable is consumed once and snapshots references before selecting (0.081292ms)\n✔ Map from another realm has the same entity/key semantics (0.446584ms)\n✔ ReadonlyMap wrapper uses the same key/entity protocol (0.092125ms)\n✔ collection callback errors propagate without changing the source (0.171209ms)\n✔ density checks distinguish holes from explicit undefined (0.332417ms)\n✔ density checks require own indices and do not read element values (0.581042ms)\n✔ denseArray checks original holes before optional elements can normalize them (0.623958ms)\n✔ denseArray rejects holes before running element callbacks; preserves item errors (0.138667ms)\n✔ denseArray supports transformed and asynchronous element schemas (0.347ms)\n✔ shape-only guard preserves references and works with sorted (0.137791ms)\n✔ reconciliation retains identity, stable key order, content comparison and undefined (0.677542ms)\n✔ indexBy closes iterator on duplicate or getter failure (0.078125ms)\n✔ Map selectors receive entities and keys, coordinates are cached, keys retain identity (1.084917ms)\n✔ empty, duplicates, tie order and undefined keys (8.534792ms)\n✔ single-use iterable and static coordinate snapshot (0.112ms)\n✔ differential range and nearest queries, clustered data and split boundaries (43.275542ms)\n✔ finite coordinates, ordered bounds, valid radius, very large and tiny coordinates (0.335625ms)\n✔ queue FIFO, compaction, cleared references, undefined values and identity (3.746333ms)\n✔ deque differential operations across wraps, growth, empty boundaries and clear (17.251209ms)\n✔ singly linked handles, insert/remove, invalid ownership and detached links (0.332041ms)\n✔ doubly linked handles remain stable through edits, backwards traversal and clear (0.201833ms)\n✔ linked lists differential local edits preserve every retained handle and neighbour (67.501416ms)\n✔ chronology, owners and multi-cause DAG remain independent (1.40275ms)\n✔ differential owner/time queries on random data and DAG reachability (14.417209ms)\n✔ empty timelines, identity keys/owners and invalid data (0.255709ms)\n✔ interval overlap includes earlier starts, points and half-open boundaries (0.146375ms)\n✔ external context supplies entities, time, causes or effects; properties are read live (4.90475ms)\n✔ entities may themselves be references; cause/effect declarations deduplicate (0.085083ms)\n✔ differential interval queries for long, overlapping, point and equal-end events (26.742292ms)\n✔ forest hierarchy, stable sibling sorting and flat sorting share entities (0.957583ms)\n✔ deep trees use iterative traversal; invalid forests and unknown nodes fail (31.069791ms)\n✔ object keys and undefined entities remain valid (0.125292ms)\n✔ queue operators preserve FIFO, identity, undefined, compaction and live iteration (2.970625ms)\n✔ deque differential end operations across wrapping, growth and clear (9.718ms)\n✔ singly linked functions preserve stable handles and invalidate detached/foreign nodes (0.6175ms)\n✔ double list bidirectional edits preserve handles and ownership (0.13825ms)\n✔ random double-list local edits match an array and every retained neighbor (17.79525ms)\n✔ native: empty/singleton return fresh arrays without reading values (1.522875ms)\n✔ native: frozen entities in external storage; stable ties; one lookup per occurrence (0.248583ms)\n✔ native: preserves object reference identity and permits explicit undefined keys (0.127625ms)\n✔ native: descending strings and callback errors (9.924708ms)\n✔ native: randomized differential check against native stable sort (48.529875ms)\n✔ quick: empty/singleton return fresh arrays without reading values (0.072083ms)\n✔ quick: frozen entities in external storage; stable ties; one lookup per occurrence (0.114833ms)\n✔ quick: preserves object reference identity and permits explicit undefined keys (0.03675ms)\n✔ quick: descending strings and callback errors (0.071833ms)\n✔ quick: randomized differential check against native stable sort (36.525625ms)\n✔ kernel handles structured inputs and all-equal keys in one partition (126.331834ms)\n✔ Source keeps live Map keys/entities and explicit reference snapshots (0.688625ms)\n✔ Source supports another realm Map and preserves value identity and duplicate occurrences (0.444166ms)\n✔ source and operation contexts remain separate; multiple bindings share references (0.080417ms)\n✔ collect observes where/select order, resolves once and closes on early exit (0.099792ms)\n✔ collect closes a generator on callback failure and validates limits without reading (0.103875ms)\n✔ reference-only collect never resolves; projected results have no attached source binding (0.080542ms)\n✔ bound sorted snapshots refs, caches each entity value and preserves stable undefined occurrences (0.134959ms)\n✔ bound sorted skips singleton resolution and propagates errors without changing Map (0.092583ms)\n✔ bound arrays and native containers keep their resolver before native dispatch (0.081667ms)\n✔ Map selectors receive entities and keys, coordinates are cached, keys retain identity (0.75175ms)\n✔ empty, duplicates, tie order and undefined keys (0.891916ms)\n✔ single-use iterable and static coordinate snapshot (0.083625ms)\n✔ differential range and nearest queries, clustered data and split boundaries (33.178042ms)\n✔ finite coordinates, ordered bounds, valid radius, very large and tiny coordinates (0.351625ms)\n✔ external coordinates snapshot while entities stay live; lazy bounds snapshot and context (0.168ms)\n✔ duplicate occurrences preserve input tie order and nearest-before-filter semantics (0.0815ms)\n✔ time operators use half-open windows, stable ties, points and nested intervals (5.484208ms)\n✔ time index snapshots metadata/membership, resolves entities live and never reads graph metadata (0.201375ms)\n✔ query bounds snapshot Dates now, selections are repeatable and limit stops entity reads (0.998333ms)\n✔ time index handles one-shot refs, identity keys, undefined and invalid temporal input (0.503834ms)\n✔ 900 public temporal queries match an independent sorted linear oracle (9.299667ms)\n✔ external schedule composes public time/core/range modules (0.312458ms)\n✔ range operations match 100 independently sampled segment/all-pair oracles (5.476375ms)\n✔ forest separates topology from live entities; flat and sibling sort differ (0.95175ms)\n✔ tree validates topology, consumes once, skips singleton sort getters and handles deep chains (5.704958ms)\n✔ DAG supports multiple causes, stable order, symmetric lazy traversals and live projections (0.396666ms)\n✔ DAG rejects invalid references/cycles and permits undefined IDs (0.146792ms)\n✔ owned-reference materialization preserves public iterator and sparse iterable semantics (0.09075ms)\n✔ seeded DAG reachability and ordering match independent closure/edge checks (3.926791ms)\nℹ tests 83\nℹ suites 0\nℹ pass 83\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 374.816959\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "root",
+      "command": "npm run test:bun",
+      "exit": 0,
+      "elapsedMs": 1016,
+      "stdout": "\n> ts-algo@0.1.0 test:bun\n> npm run build && bun test dist/test/*.test.js\n\n\n> ts-algo@0.1.0 build\n> node scripts/build.mjs\n\nbun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\ndist/test/legacy-point-index.test.js:\n(pass) Map selectors receive entities and keys, coordinates are cached, keys retain identity [0.90ms]\n(pass) empty, duplicates, tie order and undefined keys [1.16ms]\n(pass) single-use iterable and static coordinate snapshot [0.13ms]\n(pass) differential range and nearest queries, clustered data and split boundaries [14.66ms]\n(pass) finite coordinates, ordered bounds, valid radius, very large and tiny coordinates [0.62ms]\n\ndist/test/sequence-operators.test.js:\n(pass) queue operators preserve FIFO, identity, undefined, compaction and live iteration [0.79ms]\n(pass) deque differential end operations across wrapping, growth and clear [3.24ms]\n(pass) singly linked functions preserve stable handles and invalidate detached/foreign nodes [0.23ms]\n(pass) double list bidirectional edits preserve handles and ownership [0.09ms]\n(pass) random double-list local edits match an array and every retained neighbor [9.92ms]\n\ndist/test/diff-operators.test.js:\n(pass) reconciliation retains identity, stable key order, content comparison and undefined [0.23ms]\n(pass) indexBy closes iterator on duplicate or getter failure [0.11ms]\n\ndist/test/legacy-sequences.test.js:\n(pass) queue FIFO, compaction, cleared references, undefined values and identity [1.50ms]\n(pass) deque differential operations across wraps, growth, empty boundaries and clear [3.19ms]\n(pass) singly linked handles, insert/remove, invalid ownership and detached links [0.17ms]\n(pass) doubly linked handles remain stable through edits, backwards traversal and clear [0.16ms]\n(pass) linked lists differential local edits preserve every retained handle and neighbour [28.09ms]\n\ndist/test/legacy-tree.test.js:\n(pass) forest hierarchy, stable sibling sorting and flat sorting share entities [0.47ms]\n(pass) deep trees use iterative traversal; invalid forests and unknown nodes fail [9.42ms]\n(pass) object keys and undefined entities remain valid [0.12ms]\n\ndist/test/time-operators.test.js:\n(pass) time operators use half-open windows, stable ties, points and nested intervals [1.75ms]\n(pass) time index snapshots metadata/membership, resolves entities live and never reads graph metadata [0.12ms]\n(pass) query bounds snapshot Dates now, selections are repeatable and limit stops entity reads [0.10ms]\n(pass) time index handles one-shot refs, identity keys, undefined and invalid temporal input [0.18ms]\n(pass) 900 public temporal queries match an independent sorted linear oracle [5.64ms]\n(pass) external schedule composes public time/core/range modules [0.24ms]\n(pass) range operations match 100 independently sampled segment/all-pair oracles [4.24ms]\n\ndist/test/business-public.test.js:\n(pass) seven business scenarios execute through public package imports [1.05ms]\n\ndist/test/spatial-operators.test.js:\n(pass) Map selectors receive entities and keys, coordinates are cached, keys retain identity [0.10ms]\n(pass) empty, duplicates, tie order and undefined keys [0.51ms]\n(pass) single-use iterable and static coordinate snapshot [0.06ms]\n(pass) differential range and nearest queries, clustered data and split boundaries [11.94ms]\n(pass) finite coordinates, ordered bounds, valid radius, very large and tiny coordinates [0.17ms]\n(pass) external coordinates snapshot while entities stay live; lazy bounds snapshot and context [0.14ms]\n(pass) duplicate occurrences preserve input tie order and nearest-before-filter semantics [0.07ms]\n\ndist/test/dense-array.test.js:\n(pass) density checks distinguish holes from explicit undefined [0.11ms]\n(pass) density checks require own indices and do not read element values [0.49ms]\n(pass) denseArray checks original holes before optional elements can normalize them [0.33ms]\n(pass) denseArray rejects holes before running element callbacks; preserves item errors [0.07ms]\n(pass) denseArray supports transformed and asynchronous element schemas [0.35ms]\n(pass) shape-only guard preserves references and works with sorted [0.07ms]\n\ndist/test/collections.test.js:\n(pass) Map selects entities directly and returns original keys, with stable ties [0.09ms]\n(pass) Map permits undefined entities and preserves object key identity [0.03ms]\n(pass) empty and singleton Map and Set skip selector and comparator [0.03ms]\n(pass) Set returns identical entities and leaves insertion order unchanged [0.03ms]\n(pass) one-shot iterable is consumed once and snapshots references before selecting [0.07ms]\n(pass) Map from another realm has the same entity/key semantics [0.19ms]\n(pass) ReadonlyMap wrapper uses the same key/entity protocol [0.04ms]\n(pass) collection callback errors propagate without changing the source [0.07ms]\n\ndist/test/legacy-timeline.test.js:\n(pass) chronology, owners and multi-cause DAG remain independent [0.38ms]\n(pass) differential owner/time queries on random data and DAG reachability [6.16ms]\n(pass) empty timelines, identity keys/owners and invalid data [0.26ms]\n(pass) interval overlap includes earlier starts, points and half-open boundaries [0.11ms]\n(pass) external context supplies entities, time, causes or effects; properties are read live [0.12ms]\n(pass) entities may themselves be references; cause/effect declarations deduplicate [0.04ms]\n(pass) differential interval queries for long, overlapping, point and equal-end events [9.95ms]\n\ndist/test/tree-dependencies.test.js:\n(pass) forest separates topology from live entities; flat and sibling sort differ [0.32ms]\n(pass) tree validates topology, consumes once, skips singleton sort getters and handles deep chains [3.05ms]\n(pass) DAG supports multiple causes, stable order, symmetric lazy traversals and live projections [0.24ms]\n(pass) DAG rejects invalid references/cycles and permits undefined IDs [0.18ms]\n(pass) owned-reference materialization preserves public iterator and sparse iterable semantics [0.05ms]\n(pass) seeded DAG reachability and ordering match independent closure/edge checks [2.25ms]\n\ndist/test/sort.test.js:\n(pass) native: empty/singleton return fresh arrays without reading values [0.03ms]\n(pass) native: frozen entities in external storage; stable ties; one lookup per occurrence [0.06ms]\n(pass) native: preserves object reference identity and permits explicit undefined keys [0.02ms]\n(pass) native: descending strings and callback errors [0.05ms]\n(pass) native: randomized differential check against native stable sort [29.73ms]\n(pass) quick: empty/singleton return fresh arrays without reading values [0.02ms]\n(pass) quick: frozen entities in external storage; stable ties; one lookup per occurrence [0.04ms]\n(pass) quick: preserves object reference identity and permits explicit undefined keys\n(pass) quick: descending strings and callback errors [0.02ms]\n(pass) quick: randomized differential check against native stable sort [30.14ms]\n(pass) kernel handles structured inputs and all-equal keys in one partition [52.31ms]\n\ndist/test/source.test.js:\n(pass) Source keeps live Map keys/entities and explicit reference snapshots [0.29ms]\n(pass) Source supports another realm Map and preserves value identity and duplicate occurrences [0.22ms]\n(pass) source and operation contexts remain separate; multiple bindings share references [0.05ms]\n(pass) collect observes where/select order, resolves once and closes on early exit [0.08ms]\n(pass) collect closes a generator on callback failure and validates limits without reading [0.11ms]\n(pass) reference-only collect never resolves; projected results have no attached source binding [0.03ms]\n(pass) bound sorted snapshots refs, caches each entity value and preserves stable undefined occurrences [0.08ms]\n(pass) bound sorted skips singleton resolution and propagates errors without changing Map [0.06ms]\n(pass) bound arrays and native containers keep their resolver before native dispatch [0.08ms]\n\ndist/test/business-oracles.test.js:\n(pass) seven composed public scenarios match seeded independent business oracles [8.49ms]\n\n 83 pass\n 0 fail\nRan 83 tests across 15 files. [352.00ms]\n"
+    },
+    {
+      "cwd": "experiments/goal",
+      "command": "npm run check",
+      "exit": 0,
+      "elapsedMs": 688,
+      "stdout": "\n> check\n> tsc --noEmit\n\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "experiments/goal",
+      "command": "npm test",
+      "exit": 0,
+      "elapsedMs": 423,
+      "stdout": "\n> test\n> node --test *.test.ts\n\n✔ restricted source-bound collection: references, context, one read and closing (0.7575ms)\n✔ Map references, projections and query context (0.678084ms)\n✔ take/drop order, early stop and callback order (0.156958ms)\n✔ undefined values sort by selected value, repeated references and one-shot close (0.116291ms)\n✔ fused resolves once within a segment; lazy alternative resolves for each callback (0.119833ms)\n✔ catalogue: independent topology, roots, siblings, subtree and projections (5.764542ms)\n✔ schedule: independent store, point events, capacity and conflicts (2.807917ms)\n✔ range algorithms against independently sampled segments and all pairs (5.425584ms)\n✔ tasks: business owner, dependencies, ready work and change consequences (1.050042ms)\n✔ report: external lookup, missing customers, grouped aggregates and ranking (1.738917ms)\n✔ synchronization: stable keys, structural comparison, duplicates and undefined (0.283042ms)\n✔ spatial: same entities, inclusive areas, nearest ties, projection across indices (9.510667ms)\n✔ priority: immutable jobs, deadline changes, cancellation and stable ties (1.888833ms)\n✔ standalone operators: early stop, identity, undefined, aggregation and joins (0.289875ms)\n✔ source binding: live Map keys/entities, snapshot references and missing values (1.678ms)\n✔ external context and two bindings for the same references (0.120333ms)\n✔ iterable binding preserves identity, duplicates and one-shot consumption (0.0825ms)\n✔ collect callback failure closes a one-shot iterator (0.068792ms)\n✔ TanStack DB report matches native and updates joined aggregates (31.565875ms)\n✔ target time selection composes with separate query context, sorting, projection and capacity (6.252208ms)\n✔ target hierarchy separates external metadata from entities and flat ordering (0.583ms)\n✔ bound sorting keeps context, stable duplicate occurrences and undefined reference semantics (0.094791ms)\n✔ unbound time index can resolve entities only when a selection is used (0.132375ms)\n✔ hierarchy order is independent of flat sorting and has bidirectional sibling positions (0.420083ms)\n✔ DAG accepts multiple distinct causes and deduplicates repeated edges (0.122833ms)\n✔ half-open intervals, points, nesting, ties and empty windows (1.3735ms)\n✔ live entity reads, metadata snapshot and getter once per occurrence (0.375ms)\n✔ Date snapshot, invalid values, reverse, duplicate and external context (1.041208ms)\n✔ seeded differential tests against a linear oracle (5.075625ms)\nℹ tests 29\nℹ suites 0\nℹ pass 29\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 170.880375\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "experiments/goal",
+      "command": "npm run test:bun",
+      "exit": 0,
+      "elapsedMs": 338,
+      "stdout": "\n> test:bun\n> bun test *.test.ts\n\nbun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\ntarget.test.ts:\n(pass) target time selection composes with separate query context, sorting, projection and capacity [0.86ms]\n(pass) target hierarchy separates external metadata from entities and flat ordering [0.26ms]\n(pass) bound sorting keeps context, stable duplicate occurrences and undefined reference semantics [0.05ms]\n(pass) unbound time index can resolve entities only when a selection is used [0.07ms]\n(pass) hierarchy order is independent of flat sorting and has bidirectional sibling positions [0.33ms]\n(pass) DAG accepts multiple distinct causes and deduplicates repeated edges [0.11ms]\n\ntemporal.test.ts:\n(pass) half-open intervals, points, nesting, ties and empty windows [0.49ms]\n(pass) live entity reads, metadata snapshot and getter once per occurrence [0.06ms]\n(pass) Date snapshot, invalid values, reverse, duplicate and external context [0.10ms]\n(pass) seeded differential tests against a linear oracle [5.88ms]\n\ncollect.test.ts:\n(pass) restricted source-bound collection: references, context, one read and closing [0.18ms]\n\ntanstack.test.ts:\n(pass) TanStack DB report matches native and updates joined aggregates [28.12ms]\n\nquery.test.ts:\n(pass) Map references, projections and query context [0.51ms]\n(pass) take/drop order, early stop and callback order [0.11ms]\n(pass) undefined values sort by selected value, repeated references and one-shot close [0.08ms]\n(pass) fused resolves once within a segment; lazy alternative resolves for each callback [0.15ms]\n\nscenarios.test.ts:\n(pass) catalogue: independent topology, roots, siblings, subtree and projections [0.54ms]\n(pass) schedule: independent store, point events, capacity and conflicts [1.52ms]\n(pass) range algorithms against independently sampled segments and all pairs [2.86ms]\n(pass) tasks: business owner, dependencies, ready work and change consequences [0.94ms]\n(pass) report: external lookup, missing customers, grouped aggregates and ranking [1.77ms]\n(pass) synchronization: stable keys, structural comparison, duplicates and undefined [0.35ms]\n(pass) spatial: same entities, inclusive areas, nearest ties, projection across indices [8.01ms]\n(pass) priority: immutable jobs, deadline changes, cancellation and stable ties [1.81ms]\n(pass) standalone operators: early stop, identity, undefined, aggregation and joins [0.20ms]\n\nsource.test.ts:\n(pass) source binding: live Map keys/entities, snapshot references and missing values [0.34ms]\n(pass) external context and two bindings for the same references [0.05ms]\n(pass) iterable binding preserves identity, duplicates and one-shot consumption [0.05ms]\n(pass) collect callback failure closes a one-shot iterator [0.06ms]\n\n 29 pass\n 0 fail\nRan 29 tests across 7 files. [107.00ms]\n"
+    },
+    {
+      "cwd": "experiments/goal",
+      "command": "node summarize-public-ranges.mjs",
+      "exit": 0,
+      "elapsedMs": 104,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "cwd": "experiments/goal",
+      "command": "node summarize-public-costs.mjs",
+      "exit": 0,
+      "elapsedMs": 102,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "cwd": "experiments/goal",
+      "command": "node verify-package.mjs --migration",
+      "exit": 0,
+      "elapsedMs": 3254,
+      "stdout": "{\"files\":160,\"size\":31399,\"unpackedSize\":101732,\"smoke\":\"passed Node and Bun in isolated consumer\"}\n",
+      "stderr": "\n> ts-algo@0.1.0 prepack\n> npm run build\n\n\n> ts-algo@0.1.0 build\n> node scripts/build.mjs\n\n\nbusiness-oracles.test.js:\n(pass) seven composed public scenarios match seeded independent business oracles [12.77ms]\n\n 1 pass\n 0 fail\nRan 1 test across 1 file. [28.00ms]\n"
+    },
+    {
+      "cwd": "root",
+      "command": "git diff --check",
+      "exit": 0,
+      "elapsedMs": 43,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "migration-core-node.json",
+      "rows": 15,
+      "date": "2026-10-05T23:22:37.949Z",
+      "sha256": "604a1db7ca43d2506deaa81b33a53977911fe2c6bdb73c050f75c0dff12333bd"
+    },
+    {
+      "name": "migration-core-bun.json",
+      "rows": 15,
+      "date": "2026-10-05T23:22:49.759Z",
+      "sha256": "2891171fb1a4aacdf92fd17c91ce196a2660fc5c48b96f7cf58f95c91221e456"
+    },
+    {
+      "name": "migration-time-node.json",
+      "rows": 36,
+      "date": "2026-10-06T00:18:25.250Z",
+      "sha256": "26b90f0f7c4be0c0745b081f0b98da877dbfa6ee7a512b2e680c8bf6608ae4b2"
+    },
+    {
+      "name": "migration-time-bun.json",
+      "rows": 36,
+      "date": "2026-10-06T00:18:50.374Z",
+      "sha256": "fc1699690291635169d9b19b4d4b19c0bf8f5e0eb000f44c373a4ea991aeb8ae"
+    },
+    {
+      "name": "migration-ranges-node.json",
+      "rows": 24,
+      "date": "2026-10-06T01:40:22.719Z",
+      "sha256": "8fa0892022e565eb174bbb1e389fc307c274c5e30323312fa63785aeb678f760"
+    },
+    {
+      "name": "migration-ranges-bun.json",
+      "rows": 24,
+      "date": "2026-10-06T01:40:39.214Z",
+      "sha256": "68b4afd422668a7255426ef8acb4b1c1a5d27ad21626c31de93e5375f0678cf0"
+    },
+    {
+      "name": "migration-structure-node.json",
+      "rows": 15,
+      "date": "2026-10-06T00:17:46.055Z",
+      "sha256": "85446eb5d818dc8f2410f03aa974950b42a32d9f440508de5b61d5954ef38323"
+    },
+    {
+      "name": "migration-structure-bun.json",
+      "rows": 15,
+      "date": "2026-10-06T00:17:58.048Z",
+      "sha256": "382bd0a8bc7e504fa448fb2f521312741274100650671b4ed64d390837abb51e"
+    },
+    {
+      "name": "migration-spatial-node.json",
+      "rows": 45,
+      "date": "2026-10-06T00:30:53.800Z",
+      "sha256": "b5bc53bb4589951543f5bae166dc0f3174b986c0a5034f019460d0485c95b183"
+    },
+    {
+      "name": "migration-spatial-bun.json",
+      "rows": 45,
+      "date": "2026-10-06T00:31:56.875Z",
+      "sha256": "d814cf0dce0ac51d06a96803af5b1cecf97d66d614205271a64bf4dd0718020f"
+    },
+    {
+      "name": "migration-sequences-node.json",
+      "rows": 11,
+      "date": "2026-10-06T00:57:54.940Z",
+      "sha256": "e82c0e7fe81dff9272b39544e769997236104f4456901fc3c5844fceee609937"
+    },
+    {
+      "name": "migration-sequences-bun.json",
+      "rows": 11,
+      "date": "2026-10-06T00:58:04.515Z",
+      "sha256": "9a5242154cc83a851061c356bdc7781efc43cb1cf9ac8eb9040ed7a66c165593"
+    },
+    {
+      "name": "migration-type-cost.json",
+      "sha256": "4a650d2f3aaf28a7c3952fcf4d202edcee3976e81f4259c5f8233215201050d7"
+    },
+    {
+      "name": "migration-type-baseline.json",
+      "sha256": "616e16572f295d6b02d50816f616170c52c94c14d29436e308684a46125689b6"
+    },
+    {
+      "name": "migration-type-investigation.json",
+      "sha256": "d5bddb39c12686eb198c5209cbe5fac94f4e359a7d7df1c00846dc6561c00f15"
+    },
+    {
+      "name": "migration-memory.json",
+      "sha256": "1ab05b3e932acf4a7ab7bfc99419a9ecb53c6832902ab03baa1ab74d4c725864"
+    },
+    {
+      "name": "migration-installed-bundles.json",
+      "sha256": "b6e25267e4b498527c61a9cbabe890467a9a0a252e63f607017856a4cbe0f6c8"
+    },
+    {
+      "name": "migration-package.json",
+      "sha256": "84734a56bf7ddaf105947a0244a365b4569dad814d110da55147dc50673e9a9b"
+    },
+    {
+      "name": "migration-business-types.json",
+      "sha256": "296c51f0b1ddaa1d55eabc5ab110402e3966e894c2edddbd89b6302b3a4e6c33"
+    }
+  ],
+  "bundleOutputs": 38,
+  "business": {
+    "scenarios": 7,
+    "seededRounds": 60,
+    "installedBothRuntimes": true
+  },
+  "private": true,
+  "limitations": "Hashes/report-shape checks supplement output oracles and differential tests. This verifier does not by itself establish semantic coverage, causal retention mechanism, browser throughput, IDE responsiveness or accepted trade-offs; the requirement audit and canonical design decisions provide that assessment."
+}

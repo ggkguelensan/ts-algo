@@ -31,8 +31,29 @@ Public потребитель проверяет собранные d.ts. Bare e
 
 Для 5000 calls: publicCollect/prototype 1.22×; publicSorted/native decorated 6.64× по wall time.
 
-Масштабируемая стоимость превышает критерий расследования: это незавершённый пункт миграции. Array-first кандидат оказался хуже и отклонён; [изолированные гипотезы](migration-type-investigation.json) не обосновали замену публичного контракта.
+## Контроль исходной версии и раскладки модулей
 
-Выведенные branded refs, narrowed projection, domain selection и double-node сохранены вместе с шестью несупрессированными отрицательными диагностиками в [сырых результатах](migration-type-cost.json). Выведенные типы семи установленных бизнес-примеров находятся в [отдельном отчёте](migration-business-types.json).
+Те же 5000 независимых вызовов проверены в одном модуле и в 50 модулях по 100. Before-declaration механически извлечена из исходного sorted в bd9a160; исходный хеш сохранён.
 
-Воспроизведение из experiments/goal: `node type-public.mjs` после root build.
+| Variant | Modules | Median wall, ms |
+|---|---:|---:|
+| beforeArray | 1 | 4572.6 |
+| beforeArray | 50 | 369.5 |
+| publicArray | 1 | 6008.3 |
+| publicArray | 50 | 392.8 |
+| nativeArray | 1 | 919.8 |
+| nativeArray | 50 | 426.7 |
+| beforeMap | 50 | 354.9 |
+| publicMap | 50 | 415.6 |
+| publicSource | 50 | 364.3 |
+| publicCollect | 50 | 534.7 |
+| prototypeCollect | 50 | 500.5 |
+| nativeCollect | 50 | 404.7 |
+
+Большой одиночный модуль медленный уже до миграции. Public sorted дополнительно дороже исходной версии в этом случае; цена сохраняется как ограничение за Source/context overloads и безопасное исключение fallback. В раскладке 50×100 разница public/before array и public/prototype collect меньше 20%; Map и bound Source измерены отдельно. Это эксперимент о раскладке вызовов, не гарантия IDE и не инструкция пользователю переписывать приложение.
+
+Array-first кандидат оказался хуже и отклонён; [изолированные гипотезы](migration-type-investigation.json) не обосновали потерю публичных контрактов. Простая сигнатура без Map/Source не равноценна API. Переиспользование callbacks не рекомендуется как доказанное ускорение.
+
+Выведенные branded refs, narrowed projection, domain selection и double-node сохранены вместе с шестью несупрессированными отрицательными диагностиками в [сырых результатах](migration-type-cost.json). Выведенные типы семи установленных бизнес-примеров находятся в [отдельном отчёте](migration-business-types.json). Before/layout raw данные: [migration-type-baseline.json](migration-type-baseline.json).
+
+Воспроизведение из experiments/goal: `node type-public.mjs`, затем `node type-migration-baseline.mjs` после root build.

@@ -397,6 +397,7 @@ callback получает его последним параметром. Это
 | Область | Node / V8 и Bun / JavaScriptCore |
 |---|---|
 | Source, collect и sorted | [Ядро](experiments/goal/results/migration-core.md) |
+| Диапазоны и вместимость | [Ranges](experiments/goal/results/migration-ranges.md) |
 | Временной поиск | [Timeline](experiments/goal/results/migration-time.md) |
 | Дерево и зависимости | [Tree/DAG](experiments/goal/results/migration-structure.md) |
 | Пространственный поиск | [Spatial](experiments/goal/results/migration-spatial.md) |
@@ -414,6 +415,10 @@ callback получает его последним параметром. Это
 но не гарантируют ускорение каждого вызова. В отчётах указаны измеренные
 проигрыши и ограничения. Индексы с привязкой удерживают источник; результат
 другого вида сам по себе не гарантирует его освобождения.
+
+Тысячи независимых generic-вызовов в одном большом TS-модуле могут заметно
+увеличить компиляцию; [контроль до/после и раскладки модулей](experiments/goal/results/migration-type-baseline.json)
+сохраняет этот компромисс. Не обещаем одинаковую стоимость с нативными вызовами.
 
 Измерения относятся к конкретным версиям runtime и одной машине; они не
 доказывают скорость в браузере или истинный peak памяти. Прежние отчёты в docs
