@@ -1,0 +1,657 @@
+{
+  "checkedAt": "2026-10-06T01:25:59.431Z",
+  "node": "v25.8.1",
+  "typescript": "7.0.2",
+  "config": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "types": [
+      "node"
+    ],
+    "skipLibCheck": false,
+    "noEmit": true
+  },
+  "library": {
+    "wallMs": 385.28362500000003,
+    "raw": "Files:              198\nLines:           116818\nIdentifiers:      91277\nSymbols:         148625\nTypes:            77933\nInstantiations:   94460\nMemory used:    137479K\nMemory allocs:   738717\nConfig time:     0.002s\nParse time:      0.020s\nBind time:       0.005s\nCheck time:      0.140s\nEmit time:       0.003s\nTotal time:      0.175s\n"
+  },
+  "notes": [
+    "Public consumers import built package declarations, not implementation source. Installed bare exports are checked separately by verify-package.mjs.",
+    "Three sequential fresh compiler processes per fixture; no IDE latency claim. Unannotated outputs test inference.",
+    "Native/prototype/Remeda comparison repeats 100/1000/5000 independent call sites. Sorted comparison is separate from filtered/projection comparison.",
+    "Declaration checking is included; skipLibCheck=false. No time or heap claim is derived from types count alone."
+  ],
+  "rows": [
+    {
+      "variant": "native",
+      "calls": 100,
+      "samples": [
+        {
+          "wallMs": 307.19270800000004,
+          "memory": "140132K",
+          "instantiations": "95849",
+          "types": "78145",
+          "check": "0.111s",
+          "total": "0.133s",
+          "raw": "Files:              197\nLines:           116858\nIdentifiers:      92973\nSymbols:         154173\nTypes:            78145\nInstantiations:   95849\nMemory used:    140132K\nMemory allocs:   741424\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.111s\nEmit time:       0.000s\nTotal time:      0.133s\n"
+        },
+        {
+          "wallMs": 304.668458,
+          "memory": "140100K",
+          "instantiations": "95849",
+          "types": "78145",
+          "check": "0.116s",
+          "total": "0.137s",
+          "raw": "Files:              197\nLines:           116858\nIdentifiers:      92973\nSymbols:         154173\nTypes:            78145\nInstantiations:   95849\nMemory used:    140100K\nMemory allocs:   741408\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.004s\nCheck time:      0.116s\nEmit time:       0.000s\nTotal time:      0.137s\n"
+        },
+        {
+          "wallMs": 306.59062499999993,
+          "memory": "140009K",
+          "instantiations": "95849",
+          "types": "78145",
+          "check": "0.119s",
+          "total": "0.143s",
+          "raw": "Files:              197\nLines:           116858\nIdentifiers:      92973\nSymbols:         154173\nTypes:            78145\nInstantiations:   95849\nMemory used:    140009K\nMemory allocs:   741424\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.007s\nCheck time:      0.119s\nEmit time:       0.000s\nTotal time:      0.143s\n"
+        }
+      ]
+    },
+    {
+      "variant": "remeda",
+      "calls": 100,
+      "samples": [
+        {
+          "wallMs": 542.63975,
+          "memory": "272424K",
+          "instantiations": "411439",
+          "types": "277379",
+          "check": "0.334s",
+          "total": "0.356s",
+          "raw": "Files:              198\nLines:           129972\nIdentifiers:     108718\nSymbols:         255078\nTypes:           277379\nInstantiations:  411439\nMemory used:    272424K\nMemory allocs:  2220847\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.334s\nEmit time:       0.000s\nTotal time:      0.356s\n"
+        },
+        {
+          "wallMs": 529.451292,
+          "memory": "272571K",
+          "instantiations": "411439",
+          "types": "277379",
+          "check": "0.318s",
+          "total": "0.338s",
+          "raw": "Files:              198\nLines:           129972\nIdentifiers:     108718\nSymbols:         255078\nTypes:           277379\nInstantiations:  411439\nMemory used:    272571K\nMemory allocs:  2220838\nConfig time:     0.000s\nParse time:      0.015s\nBind time:       0.004s\nCheck time:      0.318s\nEmit time:       0.000s\nTotal time:      0.338s\n"
+        },
+        {
+          "wallMs": 546.450041,
+          "memory": "272434K",
+          "instantiations": "411439",
+          "types": "277379",
+          "check": "0.329s",
+          "total": "0.351s",
+          "raw": "Files:              198\nLines:           129972\nIdentifiers:     108718\nSymbols:         255078\nTypes:           277379\nInstantiations:  411439\nMemory used:    272434K\nMemory allocs:  2220930\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.329s\nEmit time:       0.000s\nTotal time:      0.351s\n"
+        }
+      ]
+    },
+    {
+      "variant": "restricted",
+      "calls": 100,
+      "samples": [
+        {
+          "wallMs": 319.13679200000024,
+          "memory": "140504K",
+          "instantiations": "127483",
+          "types": "79505",
+          "check": "0.125s",
+          "total": "0.147s",
+          "raw": "Files:              199\nLines:           116897\nIdentifiers:      92993\nSymbols:         154094\nTypes:            79505\nInstantiations:  127483\nMemory used:    140504K\nMemory allocs:   804000\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.125s\nEmit time:       0.000s\nTotal time:      0.147s\n"
+        },
+        {
+          "wallMs": 321.4737089999999,
+          "memory": "140610K",
+          "instantiations": "127483",
+          "types": "79505",
+          "check": "0.124s",
+          "total": "0.146s",
+          "raw": "Files:              199\nLines:           116897\nIdentifiers:      92993\nSymbols:         154094\nTypes:            79505\nInstantiations:  127483\nMemory used:    140610K\nMemory allocs:   804130\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.124s\nEmit time:       0.000s\nTotal time:      0.146s\n"
+        },
+        {
+          "wallMs": 318.512166,
+          "memory": "140523K",
+          "instantiations": "127483",
+          "types": "79505",
+          "check": "0.123s",
+          "total": "0.147s",
+          "raw": "Files:              199\nLines:           116897\nIdentifiers:      92993\nSymbols:         154094\nTypes:            79505\nInstantiations:  127483\nMemory used:    140523K\nMemory allocs:   804118\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.123s\nEmit time:       0.000s\nTotal time:      0.147s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicCollect",
+      "calls": 100,
+      "samples": [
+        {
+          "wallMs": 309.147958,
+          "memory": "140598K",
+          "instantiations": "128029",
+          "types": "79526",
+          "check": "0.113s",
+          "total": "0.136s",
+          "raw": "Files:              205\nLines:           116957\nIdentifiers:      93179\nSymbols:         153628\nTypes:            79526\nInstantiations:  128029\nMemory used:    140598K\nMemory allocs:   809555\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.113s\nEmit time:       0.000s\nTotal time:      0.136s\n"
+        },
+        {
+          "wallMs": 303.2482920000002,
+          "memory": "140634K",
+          "instantiations": "128029",
+          "types": "79526",
+          "check": "0.113s",
+          "total": "0.136s",
+          "raw": "Files:              205\nLines:           116957\nIdentifiers:      93179\nSymbols:         153628\nTypes:            79526\nInstantiations:  128029\nMemory used:    140634K\nMemory allocs:   809711\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.005s\nCheck time:      0.113s\nEmit time:       0.000s\nTotal time:      0.136s\n"
+        },
+        {
+          "wallMs": 297.30283299999974,
+          "memory": "140589K",
+          "instantiations": "128029",
+          "types": "79526",
+          "check": "0.112s",
+          "total": "0.133s",
+          "raw": "Files:              205\nLines:           116957\nIdentifiers:      93179\nSymbols:         153628\nTypes:            79526\nInstantiations:  128029\nMemory used:    140589K\nMemory allocs:   809429\nConfig time:     0.000s\nParse time:      0.015s\nBind time:       0.005s\nCheck time:      0.112s\nEmit time:       0.000s\nTotal time:      0.133s\n"
+        }
+      ]
+    },
+    {
+      "variant": "nativeSorted",
+      "calls": 100,
+      "samples": [
+        {
+          "wallMs": 298.8332909999999,
+          "memory": "140804K",
+          "instantiations": "98825",
+          "types": "79040",
+          "check": "0.112s",
+          "total": "0.134s",
+          "raw": "Files:              197\nLines:           116858\nIdentifiers:      93373\nSymbols:         155824\nTypes:            79040\nInstantiations:   98825\nMemory used:    140804K\nMemory allocs:   745946\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.112s\nEmit time:       0.000s\nTotal time:      0.134s\n"
+        },
+        {
+          "wallMs": 300.49854199999936,
+          "memory": "140840K",
+          "instantiations": "98825",
+          "types": "79040",
+          "check": "0.111s",
+          "total": "0.134s",
+          "raw": "Files:              197\nLines:           116858\nIdentifiers:      93373\nSymbols:         155824\nTypes:            79040\nInstantiations:   98825\nMemory used:    140840K\nMemory allocs:   745946\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.111s\nEmit time:       0.000s\nTotal time:      0.134s\n"
+        },
+        {
+          "wallMs": 306.4309999999996,
+          "memory": "140711K",
+          "instantiations": "98825",
+          "types": "79040",
+          "check": "0.119s",
+          "total": "0.141s",
+          "raw": "Files:              197\nLines:           116858\nIdentifiers:      93373\nSymbols:         155824\nTypes:            79040\nInstantiations:   98825\nMemory used:    140711K\nMemory allocs:   745840\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.004s\nCheck time:      0.119s\nEmit time:       0.000s\nTotal time:      0.141s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicSorted",
+      "calls": 100,
+      "samples": [
+        {
+          "wallMs": 304.56074999999964,
+          "memory": "138808K",
+          "instantiations": "94487",
+          "types": "77848",
+          "check": "0.111s",
+          "total": "0.133s",
+          "raw": "Files:              205\nLines:           116957\nIdentifiers:      92279\nSymbols:         149166\nTypes:            77848\nInstantiations:   94487\nMemory used:    138808K\nMemory allocs:   741462\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.111s\nEmit time:       0.000s\nTotal time:      0.133s\n"
+        },
+        {
+          "wallMs": 304.1629579999999,
+          "memory": "138931K",
+          "instantiations": "94487",
+          "types": "77848",
+          "check": "0.112s",
+          "total": "0.136s",
+          "raw": "Files:              205\nLines:           116957\nIdentifiers:      92279\nSymbols:         149166\nTypes:            77848\nInstantiations:   94487\nMemory used:    138931K\nMemory allocs:   741649\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.112s\nEmit time:       0.000s\nTotal time:      0.136s\n"
+        },
+        {
+          "wallMs": 300.0983750000005,
+          "memory": "138831K",
+          "instantiations": "94487",
+          "types": "77848",
+          "check": "0.112s",
+          "total": "0.134s",
+          "raw": "Files:              205\nLines:           116957\nIdentifiers:      92279\nSymbols:         149166\nTypes:            77848\nInstantiations:   94487\nMemory used:    138831K\nMemory allocs:   741385\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.112s\nEmit time:       0.000s\nTotal time:      0.134s\n"
+        }
+      ]
+    },
+    {
+      "variant": "native",
+      "calls": 1000,
+      "samples": [
+        {
+          "wallMs": 307.9452079999992,
+          "memory": "162063K",
+          "instantiations": "115649",
+          "types": "85345",
+          "check": "0.114s",
+          "total": "0.138s",
+          "raw": "Files:              197\nLines:           117758\nIdentifiers:     111873\nSymbols:         210873\nTypes:            85345\nInstantiations:  115649\nMemory used:    162063K\nMemory allocs:   839044\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.005s\nCheck time:      0.114s\nEmit time:       0.000s\nTotal time:      0.138s\n"
+        },
+        {
+          "wallMs": 316.2692500000003,
+          "memory": "162003K",
+          "instantiations": "115649",
+          "types": "85345",
+          "check": "0.117s",
+          "total": "0.140s",
+          "raw": "Files:              197\nLines:           117758\nIdentifiers:     111873\nSymbols:         210873\nTypes:            85345\nInstantiations:  115649\nMemory used:    162003K\nMemory allocs:   838929\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.117s\nEmit time:       0.000s\nTotal time:      0.140s\n"
+        },
+        {
+          "wallMs": 316.81124999999975,
+          "memory": "162088K",
+          "instantiations": "115649",
+          "types": "85345",
+          "check": "0.123s",
+          "total": "0.144s",
+          "raw": "Files:              197\nLines:           117758\nIdentifiers:     111873\nSymbols:         210873\nTypes:            85345\nInstantiations:  115649\nMemory used:    162088K\nMemory allocs:   839075\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.004s\nCheck time:      0.123s\nEmit time:       0.000s\nTotal time:      0.144s\n"
+        }
+      ]
+    },
+    {
+      "variant": "remeda",
+      "calls": 1000,
+      "samples": [
+        {
+          "wallMs": 645.0675839999994,
+          "memory": "300317K",
+          "instantiations": "460040",
+          "types": "287279",
+          "check": "0.421s",
+          "total": "0.444s",
+          "raw": "Files:              198\nLines:           130872\nIdentifiers:     128518\nSymbols:         318078\nTypes:           287279\nInstantiations:  460040\nMemory used:    300317K\nMemory allocs:  2527655\nConfig time:     0.000s\nParse time:      0.018s\nBind time:       0.004s\nCheck time:      0.421s\nEmit time:       0.000s\nTotal time:      0.444s\n"
+        },
+        {
+          "wallMs": 634.0648330000004,
+          "memory": "300262K",
+          "instantiations": "460039",
+          "types": "287279",
+          "check": "0.412s",
+          "total": "0.436s",
+          "raw": "Files:              198\nLines:           130872\nIdentifiers:     128518\nSymbols:         318078\nTypes:           287279\nInstantiations:  460039\nMemory used:    300262K\nMemory allocs:  2527664\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.007s\nCheck time:      0.412s\nEmit time:       0.000s\nTotal time:      0.436s\n"
+        },
+        {
+          "wallMs": 668.735999999999,
+          "memory": "300468K",
+          "instantiations": "460039",
+          "types": "287279",
+          "check": "0.445s",
+          "total": "0.467s",
+          "raw": "Files:              198\nLines:           130872\nIdentifiers:     128518\nSymbols:         318078\nTypes:           287279\nInstantiations:  460039\nMemory used:    300468K\nMemory allocs:  2527701\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.445s\nEmit time:       0.000s\nTotal time:      0.467s\n"
+        }
+      ]
+    },
+    {
+      "variant": "restricted",
+      "calls": 1000,
+      "samples": [
+        {
+          "wallMs": 451.96149999999943,
+          "memory": "164008K",
+          "instantiations": "426283",
+          "types": "95705",
+          "check": "0.253s",
+          "total": "0.275s",
+          "raw": "Files:              199\nLines:           117797\nIdentifiers:     110093\nSymbols:         202694\nTypes:            95705\nInstantiations:  426283\nMemory used:    164008K\nMemory allocs:  1438252\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.004s\nCheck time:      0.253s\nEmit time:       0.000s\nTotal time:      0.275s\n"
+        },
+        {
+          "wallMs": 456.0923750000002,
+          "memory": "163954K",
+          "instantiations": "426283",
+          "types": "95705",
+          "check": "0.257s",
+          "total": "0.280s",
+          "raw": "Files:              199\nLines:           117797\nIdentifiers:     110093\nSymbols:         202694\nTypes:            95705\nInstantiations:  426283\nMemory used:    163954K\nMemory allocs:  1438267\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.257s\nEmit time:       0.000s\nTotal time:      0.280s\n"
+        },
+        {
+          "wallMs": 456.91270800000166,
+          "memory": "163959K",
+          "instantiations": "426283",
+          "types": "95705",
+          "check": "0.257s",
+          "total": "0.280s",
+          "raw": "Files:              199\nLines:           117797\nIdentifiers:     110093\nSymbols:         202694\nTypes:            95705\nInstantiations:  426283\nMemory used:    163959K\nMemory allocs:  1438153\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.257s\nEmit time:       0.000s\nTotal time:      0.280s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicCollect",
+      "calls": 1000,
+      "samples": [
+        {
+          "wallMs": 486.05225000000064,
+          "memory": "163845K",
+          "instantiations": "434029",
+          "types": "95726",
+          "check": "0.284s",
+          "total": "0.308s",
+          "raw": "Files:              205\nLines:           117857\nIdentifiers:     110279\nSymbols:         202228\nTypes:            95726\nInstantiations:  434029\nMemory used:    163845K\nMemory allocs:  1485923\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.284s\nEmit time:       0.000s\nTotal time:      0.308s\n"
+        },
+        {
+          "wallMs": 487.19295800000145,
+          "memory": "163986K",
+          "instantiations": "434029",
+          "types": "95726",
+          "check": "0.287s",
+          "total": "0.310s",
+          "raw": "Files:              205\nLines:           117857\nIdentifiers:     110279\nSymbols:         202228\nTypes:            95726\nInstantiations:  434029\nMemory used:    163986K\nMemory allocs:  1485914\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.287s\nEmit time:       0.000s\nTotal time:      0.310s\n"
+        },
+        {
+          "wallMs": 487.23379099999875,
+          "memory": "163869K",
+          "instantiations": "434029",
+          "types": "95726",
+          "check": "0.289s",
+          "total": "0.311s",
+          "raw": "Files:              205\nLines:           117857\nIdentifiers:     110279\nSymbols:         202228\nTypes:            95726\nInstantiations:  434029\nMemory used:    163869K\nMemory allocs:  1486102\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.005s\nCheck time:      0.289s\nEmit time:       0.000s\nTotal time:      0.311s\n"
+        }
+      ]
+    },
+    {
+      "variant": "nativeSorted",
+      "calls": 1000,
+      "samples": [
+        {
+          "wallMs": 315.0992920000008,
+          "memory": "169833K",
+          "instantiations": "145625",
+          "types": "94340",
+          "check": "0.117s",
+          "total": "0.140s",
+          "raw": "Files:              197\nLines:           117758\nIdentifiers:     115873\nSymbols:         227824\nTypes:            94340\nInstantiations:  145625\nMemory used:    169833K\nMemory allocs:   885234\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.117s\nEmit time:       0.000s\nTotal time:      0.140s\n"
+        },
+        {
+          "wallMs": 307.72920800000065,
+          "memory": "169815K",
+          "instantiations": "145625",
+          "types": "94340",
+          "check": "0.115s",
+          "total": "0.138s",
+          "raw": "Files:              197\nLines:           117758\nIdentifiers:     115873\nSymbols:         227824\nTypes:            94340\nInstantiations:  145625\nMemory used:    169815K\nMemory allocs:   885200\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.115s\nEmit time:       0.000s\nTotal time:      0.138s\n"
+        },
+        {
+          "wallMs": 311.20329200000015,
+          "memory": "169920K",
+          "instantiations": "145625",
+          "types": "94340",
+          "check": "0.118s",
+          "total": "0.142s",
+          "raw": "Files:              197\nLines:           117758\nIdentifiers:     115873\nSymbols:         227824\nTypes:            94340\nInstantiations:  145625\nMemory used:    169920K\nMemory allocs:   885290\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.118s\nEmit time:       0.000s\nTotal time:      0.142s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicSorted",
+      "calls": 1000,
+      "samples": [
+        {
+          "wallMs": 472.3889170000002,
+          "memory": "145314K",
+          "instantiations": "99887",
+          "types": "79648",
+          "check": "0.278s",
+          "total": "0.301s",
+          "raw": "Files:              205\nLines:           117857\nIdentifiers:     101279\nSymbols:         158166\nTypes:            79648\nInstantiations:   99887\nMemory used:    145314K\nMemory allocs:   809377\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.278s\nEmit time:       0.000s\nTotal time:      0.301s\n"
+        },
+        {
+          "wallMs": 496.67704199999935,
+          "memory": "145265K",
+          "instantiations": "99887",
+          "types": "79648",
+          "check": "0.301s",
+          "total": "0.324s",
+          "raw": "Files:              205\nLines:           117857\nIdentifiers:     101279\nSymbols:         158166\nTypes:            79648\nInstantiations:   99887\nMemory used:    145265K\nMemory allocs:   809463\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.301s\nEmit time:       0.000s\nTotal time:      0.324s\n"
+        },
+        {
+          "wallMs": 473.34679099999994,
+          "memory": "145207K",
+          "instantiations": "99887",
+          "types": "79648",
+          "check": "0.277s",
+          "total": "0.300s",
+          "raw": "Files:              205\nLines:           117857\nIdentifiers:     101279\nSymbols:         158166\nTypes:            79648\nInstantiations:   99887\nMemory used:    145207K\nMemory allocs:   809358\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:      0.277s\nEmit time:       0.000s\nTotal time:      0.300s\n"
+        }
+      ]
+    },
+    {
+      "variant": "native",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 874.9815409999992,
+          "memory": "260741K",
+          "instantiations": "203649",
+          "types": "117345",
+          "check": "0.651s",
+          "total": "0.688s",
+          "raw": "Files:              197\nLines:           121758\nIdentifiers:     195873\nSymbols:         462873\nTypes:           117345\nInstantiations:  203649\nMemory used:    260741K\nMemory allocs:  1272990\nConfig time:     0.000s\nParse time:      0.025s\nBind time:       0.010s\nCheck time:      0.651s\nEmit time:       0.000s\nTotal time:      0.688s\n"
+        },
+        {
+          "wallMs": 886.1484999999993,
+          "memory": "260694K",
+          "instantiations": "203649",
+          "types": "117345",
+          "check": "0.656s",
+          "total": "0.691s",
+          "raw": "Files:              197\nLines:           121758\nIdentifiers:     195873\nSymbols:         462873\nTypes:           117345\nInstantiations:  203649\nMemory used:    260694K\nMemory allocs:  1272941\nConfig time:     0.000s\nParse time:      0.024s\nBind time:       0.010s\nCheck time:      0.656s\nEmit time:       0.000s\nTotal time:      0.691s\n"
+        },
+        {
+          "wallMs": 839.1295419999988,
+          "memory": "260717K",
+          "instantiations": "203649",
+          "types": "117345",
+          "check": "0.616s",
+          "total": "0.650s",
+          "raw": "Files:              197\nLines:           121758\nIdentifiers:     195873\nSymbols:         462873\nTypes:           117345\nInstantiations:  203649\nMemory used:    260717K\nMemory allocs:  1272903\nConfig time:     0.000s\nParse time:      0.025s\nBind time:       0.007s\nCheck time:      0.616s\nEmit time:       0.000s\nTotal time:      0.650s\n"
+        }
+      ]
+    },
+    {
+      "variant": "remeda",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 5887.073250000001,
+          "memory": "419228K",
+          "instantiations": "676039",
+          "types": "331279",
+          "check": "5.633s",
+          "total": "5.673s",
+          "raw": "Files:              198\nLines:           134872\nIdentifiers:     216518\nSymbols:         598078\nTypes:           331279\nInstantiations:  676039\nMemory used:    419228K\nMemory allocs:  3889922\nConfig time:     0.000s\nParse time:      0.029s\nBind time:       0.010s\nCheck time:      5.633s\nEmit time:       0.000s\nTotal time:      5.673s\n"
+        },
+        {
+          "wallMs": 6695.56825,
+          "memory": "419528K",
+          "instantiations": "676039",
+          "types": "331279",
+          "check": "6.448s",
+          "total": "6.484s",
+          "raw": "Files:              198\nLines:           134872\nIdentifiers:     216518\nSymbols:         598078\nTypes:           331279\nInstantiations:  676039\nMemory used:    419528K\nMemory allocs:  3889973\nConfig time:     0.000s\nParse time:      0.026s\nBind time:       0.010s\nCheck time:      6.448s\nEmit time:       0.000s\nTotal time:      6.484s\n"
+        },
+        {
+          "wallMs": 6093.752250000001,
+          "memory": "419233K",
+          "instantiations": "676039",
+          "types": "331279",
+          "check": "5.829s",
+          "total": "5.867s",
+          "raw": "Files:              198\nLines:           134872\nIdentifiers:     216518\nSymbols:         598078\nTypes:           331279\nInstantiations:  676039\nMemory used:    419233K\nMemory allocs:  3889953\nConfig time:     0.000s\nParse time:      0.027s\nBind time:       0.010s\nCheck time:      5.829s\nEmit time:       0.000s\nTotal time:      5.867s\n"
+        }
+      ]
+    },
+    {
+      "variant": "restricted",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 3715.3725410000043,
+          "memory": "267499K",
+          "instantiations": "1754283",
+          "types": "167705",
+          "check": "3.483s",
+          "total": "3.518s",
+          "raw": "Files:              199\nLines:           121797\nIdentifiers:     186093\nSymbols:         418694\nTypes:           167705\nInstantiations: 1754283\nMemory used:    267499K\nMemory allocs:  4256324\nConfig time:     0.000s\nParse time:      0.024s\nBind time:       0.011s\nCheck time:      3.483s\nEmit time:       0.000s\nTotal time:      3.518s\n"
+        },
+        {
+          "wallMs": 3600.6841669999994,
+          "memory": "267432K",
+          "instantiations": "1754283",
+          "types": "167705",
+          "check": "3.374s",
+          "total": "3.411s",
+          "raw": "Files:              199\nLines:           121797\nIdentifiers:     186093\nSymbols:         418694\nTypes:           167705\nInstantiations: 1754283\nMemory used:    267432K\nMemory allocs:  4256323\nConfig time:     0.000s\nParse time:      0.025s\nBind time:       0.010s\nCheck time:      3.374s\nEmit time:       0.000s\nTotal time:      3.411s\n"
+        },
+        {
+          "wallMs": 3837.947082999999,
+          "memory": "267437K",
+          "instantiations": "1754283",
+          "types": "167705",
+          "check": "3.606s",
+          "total": "3.639s",
+          "raw": "Files:              199\nLines:           121797\nIdentifiers:     186093\nSymbols:         418694\nTypes:           167705\nInstantiations: 1754283\nMemory used:    267437K\nMemory allocs:  4256306\nConfig time:     0.000s\nParse time:      0.024s\nBind time:       0.008s\nCheck time:      3.606s\nEmit time:       0.000s\nTotal time:      3.639s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicCollect",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 4538.546667000002,
+          "memory": "267592K",
+          "instantiations": "1794029",
+          "types": "167726",
+          "check": "4.303s",
+          "total": "4.344s",
+          "raw": "Files:              205\nLines:           121857\nIdentifiers:     186279\nSymbols:         418228\nTypes:           167726\nInstantiations: 1794029\nMemory used:    267592K\nMemory allocs:  4492079\nConfig time:     0.000s\nParse time:      0.029s\nBind time:       0.012s\nCheck time:      4.303s\nEmit time:       0.000s\nTotal time:      4.344s\n"
+        },
+        {
+          "wallMs": 4612.132458,
+          "memory": "267488K",
+          "instantiations": "1794029",
+          "types": "167726",
+          "check": "4.376s",
+          "total": "4.412s",
+          "raw": "Files:              205\nLines:           121857\nIdentifiers:     186279\nSymbols:         418228\nTypes:           167726\nInstantiations: 1794029\nMemory used:    267488K\nMemory allocs:  4492130\nConfig time:     0.000s\nParse time:      0.025s\nBind time:       0.011s\nCheck time:      4.376s\nEmit time:       0.000s\nTotal time:      4.412s\n"
+        },
+        {
+          "wallMs": 4476.653791999997,
+          "memory": "267538K",
+          "instantiations": "1794029",
+          "types": "167726",
+          "check": "4.248s",
+          "total": "4.283s",
+          "raw": "Files:              205\nLines:           121857\nIdentifiers:     186279\nSymbols:         418228\nTypes:           167726\nInstantiations: 1794029\nMemory used:    267538K\nMemory allocs:  4492129\nConfig time:     0.000s\nParse time:      0.023s\nBind time:       0.011s\nCheck time:      4.248s\nEmit time:       0.000s\nTotal time:      4.283s\n"
+        }
+      ]
+    },
+    {
+      "variant": "nativeSorted",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 891.4860830000034,
+          "memory": "300682K",
+          "instantiations": "353625",
+          "types": "162340",
+          "check": "0.680s",
+          "total": "0.715s",
+          "raw": "Files:              197\nLines:           121758\nIdentifiers:     215873\nSymbols:         547824\nTypes:           162340\nInstantiations:  353625\nMemory used:    300682K\nMemory allocs:  1504658\nConfig time:     0.000s\nParse time:      0.023s\nBind time:       0.012s\nCheck time:      0.680s\nEmit time:       0.000s\nTotal time:      0.715s\n"
+        },
+        {
+          "wallMs": 886.1039579999997,
+          "memory": "300765K",
+          "instantiations": "353625",
+          "types": "162340",
+          "check": "0.651s",
+          "total": "0.689s",
+          "raw": "Files:              197\nLines:           121758\nIdentifiers:     215873\nSymbols:         547824\nTypes:           162340\nInstantiations:  353625\nMemory used:    300765K\nMemory allocs:  1504649\nConfig time:     0.000s\nParse time:      0.025s\nBind time:       0.010s\nCheck time:      0.651s\nEmit time:       0.000s\nTotal time:      0.689s\n"
+        },
+        {
+          "wallMs": 883.3633750000008,
+          "memory": "300713K",
+          "instantiations": "353625",
+          "types": "162340",
+          "check": "0.655s",
+          "total": "0.690s",
+          "raw": "Files:              197\nLines:           121758\nIdentifiers:     215873\nSymbols:         547824\nTypes:           162340\nInstantiations:  353625\nMemory used:    300713K\nMemory allocs:  1504665\nConfig time:     0.000s\nParse time:      0.026s\nBind time:       0.009s\nCheck time:      0.655s\nEmit time:       0.000s\nTotal time:      0.690s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicSorted",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 5854.594375000008,
+          "memory": "174993K",
+          "instantiations": "123887",
+          "types": "87648",
+          "check": "5.654s",
+          "total": "5.679s",
+          "raw": "Files:              205\nLines:           121857\nIdentifiers:     141279\nSymbols:         198166\nTypes:            87648\nInstantiations:  123887\nMemory used:    174993K\nMemory allocs:  1111610\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.008s\nCheck time:      5.654s\nEmit time:       0.000s\nTotal time:      5.679s\n"
+        },
+        {
+          "wallMs": 6295.330582999988,
+          "memory": "174943K",
+          "instantiations": "123887",
+          "types": "87648",
+          "check": "6.088s",
+          "total": "6.112s",
+          "raw": "Files:              205\nLines:           121857\nIdentifiers:     141279\nSymbols:         198166\nTypes:            87648\nInstantiations:  123887\nMemory used:    174943K\nMemory allocs:  1111634\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.007s\nCheck time:      6.088s\nEmit time:       0.000s\nTotal time:      6.112s\n"
+        },
+        {
+          "wallMs": 5861.760000000009,
+          "memory": "174929K",
+          "instantiations": "123887",
+          "types": "87648",
+          "check": "5.644s",
+          "total": "5.669s",
+          "raw": "Files:              205\nLines:           121857\nIdentifiers:     141279\nSymbols:         198166\nTypes:            87648\nInstantiations:  123887\nMemory used:    174929K\nMemory allocs:  1111562\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.007s\nCheck time:      5.644s\nEmit time:       0.000s\nTotal time:      5.669s\n"
+        }
+      ]
+    }
+  ],
+  "inferred": "import type { Brand } from '../../../dist/src/index.js';\ntype Id = Brand<string, 'Id'>;\nexport declare const refs: Id[];\nexport declare const projected: {\n    id: Id;\n    total: number;\n}[];\nexport declare const contextual: Id[];\nexport declare const treeRefs: Id[];\nexport declare const timeRows: {\n    id: Id;\n    total: number;\n}[];\nexport declare const graphRefs: Id[];\nexport declare const pointRefs: Id[];\nexport declare const node: import(\"../../../dist/src/lists/state.js\").DoublyLinkedNode<Id>;\nexport declare const diff: import(\"../../../dist/src/diff/diff-by.js\").Difference<\"x\">;\nexport {};\n",
+  "diagnostics": [
+    {
+      "name": "entity",
+      "expectedCode": 2339,
+      "raw": ".generated-public-types/bad-entity.ts(4,35): error TS2339: Property 'missing' does not exist on type '{ id: string; active: boolean; amount: number; }'.\nFiles:              205\nLines:           116859\nIdentifiers:      91286\nSymbols:         148240\nTypes:            77708\nInstantiations:   94068\nMemory used:    137925K\nMemory allocs:   734592\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.115s\nEmit time:       0.000s\nTotal time:      0.139s\n"
+    },
+    {
+      "name": "reference",
+      "expectedCode": 2551,
+      "raw": ".generated-public-types/bad-reference.ts(4,68): error TS2551: Property 'toFixed' does not exist on type 'string'. Did you mean 'fixed'?\nFiles:              205\nLines:           116859\nIdentifiers:      91288\nSymbols:         148238\nTypes:            77751\nInstantiations:   94088\nMemory used:    137939K\nMemory allocs:   734759\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.004s\nCheck time:      0.119s\nEmit time:       0.000s\nTotal time:      0.139s\n"
+    },
+    {
+      "name": "missingContext",
+      "expectedCode": 2769,
+      "raw": ".generated-public-types/bad-missingContext.ts(4,22): error TS2769: No overload matches this call.\n  The last overload gave the following error.\n    Argument of type '{ where: (e: { id: string; active: boolean; amount: number; }, id: { id: string; active: boolean; amount: number; }, c: { minimum: number; }) => boolean; }' is not assignable to parameter of type 'Options<{ id: string; active: boolean; amount: number; }, { id: string; active: boolean; amount: number; }, { minimum: number; }>'.\n      Property 'context' is missing in type '{ where: (e: { id: string; active: boolean; amount: number; }, id: { id: string; active: boolean; amount: number; }, c: { minimum: number; }) => boolean; }' but required in type '{ context: { minimum: number; }; }'.\nFiles:              205\nLines:           116859\nIdentifiers:      91291\nSymbols:         148285\nTypes:            77762\nInstantiations:   94183\nMemory used:    137971K\nMemory allocs:   735509\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.004s\nCheck time:      0.113s\nEmit time:       0.000s\nTotal time:      0.138s\n"
+    },
+    {
+      "name": "wrongContext",
+      "expectedCode": 2339,
+      "raw": ".generated-public-types/bad-wrongContext.ts(4,61): error TS2339: Property 'userId' does not exist on type '{ minimum: number; }'.\nFiles:              205\nLines:           116859\nIdentifiers:      91291\nSymbols:         148285\nTypes:            77771\nInstantiations:   94167\nMemory used:    137947K\nMemory allocs:   735228\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.005s\nCheck time:      0.121s\nEmit time:       0.000s\nTotal time:      0.144s\n"
+    },
+    {
+      "name": "referenceAsEntity",
+      "expectedCode": 2769,
+      "raw": ".generated-public-types/bad-referenceAsEntity.ts(4,8): error TS2769: No overload matches this call.\n  The last overload gave the following error.\n    Argument of type 'Source<string, { amount: number; }, undefined>' is not assignable to parameter of type 'never'.\nFiles:              205\nLines:           116859\nIdentifiers:      91290\nSymbols:         148437\nTypes:            77767\nInstantiations:   94122\nMemory used:    138085K\nMemory allocs:   735044\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.004s\nCheck time:      0.121s\nEmit time:       0.000s\nTotal time:      0.141s\n"
+    },
+    {
+      "name": "singleList",
+      "expectedCode": 2345,
+      "raw": ".generated-public-types/bad-singleList.ts(4,12): error TS2345: Argument of type 'LinkedList<number>' is not assignable to parameter of type 'DoublyLinkedList<number>'.\n  Types of property 'first' are incompatible.\n    Type 'LinkedNode<number> | undefined' is not assignable to type 'DoublyLinkedNode<number> | undefined'.\n      Property 'previous' is missing in type 'LinkedNode<number>' but required in type 'DoublyLinkedNode<number>'.\nFiles:              216\nLines:           116950\nIdentifiers:      91611\nSymbols:         149244\nTypes:            78089\nInstantiations:   94520\nMemory used:    138682K\nMemory allocs:   739953\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.006s\nCheck time:      0.121s\nEmit time:       0.000s\nTotal time:      0.144s\n"
+    }
+  ]
+}

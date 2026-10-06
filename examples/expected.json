@@ -1,0 +1,97 @@
+{
+  "catalogue": {
+    "rows": [
+      {
+        "id": "b",
+        "title": "Books"
+      },
+      {
+        "id": "root",
+        "title": "Catalog"
+      }
+    ],
+    "children": [
+      "hidden",
+      "b",
+      "p"
+    ]
+  },
+  "schedule": {
+    "conflicts": [
+      [
+        0,
+        1
+      ]
+    ],
+    "free": [
+      {
+        "start": 15,
+        "end": 25
+      }
+    ],
+    "overloaded": [
+      {
+        "start": 5,
+        "end": 10
+      }
+    ]
+  },
+  "tasks": {
+    "ready": [
+      "c"
+    ],
+    "effects": [
+      "c",
+      "d"
+    ],
+    "order": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  "report": [
+    {
+      "region": "east",
+      "total": 30
+    },
+    {
+      "region": "west",
+      "total": 5
+    }
+  ],
+  "synchronization": {
+    "added": [
+      "c"
+    ],
+    "removed": [
+      "a"
+    ],
+    "changed": [
+      "b"
+    ]
+  },
+  "spatial": {
+    "rows": [
+      {
+        "id": "a",
+        "title": "A"
+      }
+    ],
+    "nearest": {
+      "reference": "a",
+      "distance": 0
+    }
+  },
+  "priority": [
+    {
+      "id": "c",
+      "deadline": 5
+    },
+    {
+      "id": "a",
+      "deadline": 20
+    }
+  ]
+}

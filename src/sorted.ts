@@ -22,20 +22,20 @@ export function sorted<Ref, Entity, SourceContext, Value, Context>(
 
 /** Sort Map keys using values selected directly from its entities. */
 export function sorted<Key, Entity, Value>(
-  source: ReadonlyMap<Key, Entity>,
+  source: ReadonlyMap<Key, Entity> & { readonly [sourceState]?: never },
   getValue: (entity: Entity, key: Key) => Value,
   compare: Compare<Value>,
 ): Key[];
 
 /** Sort Set elements while preserving their identity. */
 export function sorted<Ref, Value>(
-  source: ReadonlySet<Ref>,
+  source: ReadonlySet<Ref> & { readonly [sourceState]?: never },
   getValue: (ref: Ref) => Value,
   compare: Compare<Value>,
 ): Ref[];
 
 export function sorted<Ref, Value>(
-  references: readonly Ref[],
+  references: readonly Ref[] & { readonly [sourceState]?: never; readonly get?: never },
   getValue: (ref: Ref) => Value,
   compare: Compare<Value>,
 ): Ref[];

@@ -105,3 +105,15 @@ test("bound sorted skips singleton resolution and propagates errors without chan
   assert.deepEqual([...store.keys()], ["b", "a"]);
   assert.deepEqual(sorted(source, e => e.rank, numeric), ["a", "b"]);
 });
+
+test("bound arrays and native containers keep their resolver before native dispatch",()=>{
+  const store=new Map([["b",{rank:2}],["a",{rank:1}]]),binding=from(store);
+  const array=Object.assign(["unrelated"],binding);
+  const map=Object.assign(new Map([[0,"unrelated"]]),binding);
+  const set=Object.assign(new Set(["unrelated"]),binding);
+  for(const bound of [array,map,set]){
+    assert.deepEqual(sorted(bound,e=>e.rank,numeric),["a","b"]);
+    assert.equal(from(bound),bound);
+  }
+  assert.deepEqual([...store.keys()],["b","a"]);
+});

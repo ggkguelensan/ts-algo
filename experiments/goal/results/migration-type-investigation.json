@@ -1,0 +1,118 @@
+{
+  "checkedAt": "2026-10-06T01:28:49.808Z",
+  "node": "v25.8.1",
+  "typescript": "7.0.2",
+  "options": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "types": [
+      "node"
+    ],
+    "skipLibCheck": false,
+    "noEmit": true
+  },
+  "signatures": {
+    "simple": "export declare function sorted<R,V>(refs:readonly R[],get:(ref:R)=>V,compare:(a:V,b:V)=>number):R[];",
+    "noInferCompare": "export declare function sorted<R,V>(refs:readonly R[],get:(ref:R)=>V,compare:(a:NoInfer<V>,b:NoInfer<V>)=>number):R[];"
+  },
+  "variants": {
+    "publicInline": {
+      "imports": "import {sorted} from '../../../dist/src/index.js';",
+      "call": "sorted(values,e=>e.amount,(a,b)=>a-b)"
+    },
+    "simpleInline": {
+      "imports": "import {sorted} from './simple.js';",
+      "call": "sorted(values,e=>e.amount,(a,b)=>a-b)"
+    },
+    "noInferInline": {
+      "imports": "import {sorted} from './noInferCompare.js';",
+      "call": "sorted(values,e=>e.amount,(a,b)=>a-b)"
+    },
+    "publicReused": {
+      "imports": "import {sorted} from '../../../dist/src/index.js';const get=(e:{amount:number})=>e.amount;const compare=(a:number,b:number)=>a-b;",
+      "call": "sorted(values,get,compare)"
+    }
+  },
+  "rows": [
+    {
+      "variant": "publicInline",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 5849.100375,
+          "raw": "Files:              205\nLines:           121861\nIdentifiers:     141279\nSymbols:         198172\nTypes:            87658\nInstantiations:  123891\nMemory used:    174894K\nMemory allocs:  1111537\nConfig time:     0.003s\nParse time:      0.027s\nBind time:       0.006s\nCheck time:      5.599s\nEmit time:       0.000s\nTotal time:      5.640s\n"
+        },
+        {
+          "wallMs": 6589.15925,
+          "raw": "Files:              205\nLines:           121861\nIdentifiers:     141279\nSymbols:         198172\nTypes:            87658\nInstantiations:  123891\nMemory used:    174915K\nMemory allocs:  1111682\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.008s\nCheck time:      6.367s\nEmit time:       0.000s\nTotal time:      6.395s\n"
+        },
+        {
+          "wallMs": 6014.111125000001,
+          "raw": "Files:              205\nLines:           121861\nIdentifiers:     141279\nSymbols:         198172\nTypes:            87658\nInstantiations:  123891\nMemory used:    174984K\nMemory allocs:  1111723\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.005s\nCheck time:      5.810s\nEmit time:       0.000s\nTotal time:      5.834s\n"
+        }
+      ]
+    },
+    {
+      "variant": "simpleInline",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 2968.958290999999,
+          "raw": "Files:              198\nLines:           121759\nIdentifiers:     140892\nSymbols:         198264\nTypes:            87604\nInstantiations:  108908\nMemory used:    174605K\nMemory allocs:   890545\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.007s\nCheck time:      2.740s\nEmit time:       0.000s\nTotal time:      2.765s\n"
+        },
+        {
+          "wallMs": 3153.7752919999984,
+          "raw": "Files:              198\nLines:           121759\nIdentifiers:     140892\nSymbols:         198264\nTypes:            87604\nInstantiations:  108908\nMemory used:    174528K\nMemory allocs:   890517\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.007s\nCheck time:      2.949s\nEmit time:       0.000s\nTotal time:      2.973s\n"
+        },
+        {
+          "wallMs": 2911.8043340000004,
+          "raw": "Files:              198\nLines:           121759\nIdentifiers:     140892\nSymbols:         198264\nTypes:            87604\nInstantiations:  108908\nMemory used:    174530K\nMemory allocs:   890451\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.008s\nCheck time:      2.706s\nEmit time:       0.000s\nTotal time:      2.731s\n"
+        }
+      ]
+    },
+    {
+      "variant": "noInferInline",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 2842.058957999998,
+          "raw": "Files:              198\nLines:           121759\nIdentifiers:     140894\nSymbols:         198264\nTypes:            87608\nInstantiations:  118910\nMemory used:    174455K\nMemory allocs:   890473\nConfig time:     0.000s\nParse time:      0.019s\nBind time:       0.008s\nCheck time:      2.635s\nEmit time:       0.000s\nTotal time:      2.662s\n"
+        },
+        {
+          "wallMs": 2714.0778329999994,
+          "raw": "Files:              198\nLines:           121759\nIdentifiers:     140894\nSymbols:         198264\nTypes:            87608\nInstantiations:  118910\nMemory used:    174495K\nMemory allocs:   890503\nConfig time:     0.000s\nParse time:      0.018s\nBind time:       0.005s\nCheck time:      2.508s\nEmit time:       0.000s\nTotal time:      2.534s\n"
+        },
+        {
+          "wallMs": 2922.219957999994,
+          "raw": "Files:              198\nLines:           121759\nIdentifiers:     140894\nSymbols:         198264\nTypes:            87608\nInstantiations:  118910\nMemory used:    174506K\nMemory allocs:   890531\nConfig time:     0.000s\nParse time:      0.018s\nBind time:       0.006s\nCheck time:      2.719s\nEmit time:       0.000s\nTotal time:      2.743s\n"
+        }
+      ]
+    },
+    {
+      "variant": "publicReused",
+      "calls": 5000,
+      "samples": [
+        {
+          "wallMs": 9864.850208000003,
+          "raw": "Files:              205\nLines:           121861\nIdentifiers:     116289\nSymbols:         158183\nTypes:            77662\nInstantiations:   93895\nMemory used:    146408K\nMemory allocs:  1129751\nConfig time:     0.000s\nParse time:      0.016s\nBind time:       0.005s\nCheck time:      9.650s\nEmit time:       0.000s\nTotal time:      9.672s\n"
+        },
+        {
+          "wallMs": 9748.115958000002,
+          "raw": "Files:              205\nLines:           121861\nIdentifiers:     116289\nSymbols:         158183\nTypes:            77662\nInstantiations:   93895\nMemory used:    146386K\nMemory allocs:  1129608\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.004s\nCheck time:      9.547s\nEmit time:       0.000s\nTotal time:      9.569s\n"
+        },
+        {
+          "wallMs": 10367.876042000004,
+          "raw": "Files:              205\nLines:           121861\nIdentifiers:     116289\nSymbols:         158183\nTypes:            77662\nInstantiations:   93895\nMemory used:    146369K\nMemory allocs:  1129689\nConfig time:     0.000s\nParse time:      0.017s\nBind time:       0.006s\nCheck time:     10.138s\nEmit time:       0.001s\nTotal time:     10.164s\n"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Isolated compile-time hypotheses, not public changes. Three sequential fresh processes per candidate.",
+    "A smaller declaration has a different contract; speed alone does not justify replacing overloads."
+  ]
+}

@@ -9,7 +9,23 @@
     "declaration": true,
     "outDir": "dist",
     "rootDir": ".",
-    "types": ["node"]
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "ts-algo": [
+        "./src/index.ts"
+      ],
+      "ts-algo/*": [
+        "./src/*/index.ts"
+      ]
+    }
   },
-  "include": ["src/**/*.ts", "test/**/*.ts", "bench/**/*.ts", "references/**/*.ts"]
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "bench/**/*.ts",
+    "references/**/*.ts",
+    "examples/**/*.ts"
+  ]
 }

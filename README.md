@@ -391,15 +391,34 @@ callback получает его последним параметром. Это
 
 Измерения сравнивают операции с нативными решениями и учитывают стоимость построения индексов. Выбор зависит от данных: массив с курсором эффективен для разового FIFO, пакетный `filter` — для массовых удалений, индексы — для повторных выборочных запросов.
 
-| Область | Node / V8 | Bun / JavaScriptCore |
-|---|---|---|
-| Точки | [Отчёт](docs/spatial-results-node.md) | [Отчёт](docs/spatial-results-bun.md) |
-| Дерево и хронология | [Отчёт](docs/hierarchy-time-results-node.md) | [Отчёт](docs/hierarchy-time-results-bun.md) |
-| Очереди, списки и интервалы | [Отчёт](docs/sequences-intervals-results-node.md) | [Отчёт](docs/sequences-intervals-results-bun.md) |
+Сравнения **текущего публичного API** с исходной реализацией, прототипами,
+нативными решениями и профильными библиотеками:
 
-[Сортировка и кеширование](docs/benchmark-results.md) · [Map/Set](docs/collections-results.md) · [Размер отдельных импортов](docs/bundle-results.md).
+| Область | Node / V8 и Bun / JavaScriptCore |
+|---|---|
+| Source, collect и sorted | [Ядро](experiments/goal/results/migration-core.md) |
+| Временной поиск | [Timeline](experiments/goal/results/migration-time.md) |
+| Дерево и зависимости | [Tree/DAG](experiments/goal/results/migration-structure.md) |
+| Пространственный поиск | [Spatial](experiments/goal/results/migration-spatial.md) |
+| Очереди, списки и сверка | [Sequences/diff](experiments/goal/results/migration-sequences.md) |
+| Память | [Удержание и sampled allocations](experiments/goal/results/migration-memory.md) |
+| Типизация | [Стоимость компиляции и inference](experiments/goal/results/migration-types.md) |
 
-Отчёты фиксируют конкретные версии runtime и одну машину. Они не измеряют браузеры или пиковую память. Учебные алгоритмы находятся в [references](references/README.md) и используются только для сравнений.
+[Два сборщика установленного пакета](experiments/goal/results/migration-installed-bundles.json)
+проверяют minified JS, gzip, Brotli и состав включённых модулей.
+[Проверка поставки](experiments/goal/results/migration-package.json) отдельно
+фиксирует архив, декларации и выполнение семи [бизнес-примеров](examples/business.ts).
+
+Прямой нативный цикл может быть быстрее collect; статические индексы оправданы
+повторными выборочными запросами. Независимые функции уменьшают состав импорта,
+но не гарантируют ускорение каждого вызова. В отчётах указаны измеренные
+проигрыши и ограничения. Индексы с привязкой удерживают источник; результат
+другого вида сам по себе не гарантирует его освобождения.
+
+Измерения относятся к конкретным версиям runtime и одной машине; они не
+доказывают скорость в браузере или истинный peak памяти. Прежние отчёты в docs
+описывают исторические реализации. Учебные алгоритмы находятся в
+[references](references/README.md) и используются только для сравнений.
 
 ## Разработка
 

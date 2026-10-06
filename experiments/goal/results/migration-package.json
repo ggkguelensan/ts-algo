@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-06T00:58:07.029Z",
+  "checkedAt": "2026-10-06T01:31:25.848Z",
   "node": "v25.8.1",
   "bun": "1.3.14",
   "typescript": "7.0.2",
@@ -167,12 +167,19 @@
     "dist/src/zod/index.js",
     "package.json"
   ],
-  "size": 31126,
-  "unpackedSize": 100639,
-  "declarationBytes": 26405,
+  "size": 31638,
+  "unpackedSize": 102426,
+  "declarationBytes": 26557,
   "runtimeJSBytes": 45351,
   "coreAndZod": "passed Node and Bun in isolated consumer",
   "installedDeclarationConsumer": "passed strict TypeScript without skipLibCheck",
   "excludedResearch": true,
+  "businessScenarios": {
+    "count": 7,
+    "strictTypes": "passed without paths or skipLibCheck",
+    "node": "passed",
+    "bun": "passed",
+    "fixture": "examples/expected.json"
+  },
   "installedBundleOutputs": 38
 }

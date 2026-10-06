@@ -1,0 +1,26 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+const median=values=>values.slice().sort((a,b)=>a-b)[Math.floor(values.length/2)];
+const memory=JSON.parse(readFileSync(new URL('./results/migration-memory.json',import.meta.url),'utf8'));
+let md='# Память публичных модулей\n\n'+`Дата: ${memory.date}; ${memory.cpu}; ${memory.node}. 50 000 сущностей, три свежих процесса на каждый retained-case/runtime.\n\n`;
+md+='| Вариант | Runtime | Map жив в трёх случаях | Median heap Δ, MiB | External Δ, MiB | Array buffers Δ, MiB |\n|---|---|---|---:|---:|---:|\n';
+for(const runtime of ['node','bun'])for(const variant of [...new Set(memory.results.filter(x=>x.mode==='retained').map(x=>x.variant))]){
+  const rows=memory.results.filter(x=>x.runtime===runtime&&x.variant===variant&&x.mode==='retained');
+  const bytes=field=>(median(rows.map(x=>x[field]))/1024/1024).toFixed(2);
+  md+=`| ${variant} | ${runtime} | ${rows.map(x=>x.storeRetained?'да':'нет').join('/')} | ${bytes('retainedHeapDelta')} | ${bytes('retainedExternalDelta')} | ${bytes('retainedArrayBuffersDelta')} |\n`;
+}
+md+='\nHeap и external/arrayBuffers нельзя складывать механически: области могут перекрываться и по-разному учитываются движками. Очередь и списки удерживают сами сущности, даже если исходный Map недоступен. Bound Source и индексы намеренно сохраняют resolver и хранилище.\n\nУ публичного unbound timeline Bun сохраняет исходный Map в этом fixture; у Node — нет. Queue также показывает разное удержание Map между движками. Механизм без retainer graph не установлен; форма результата не гарантирует освобождения источника. Numeric projection в обоих движках не удерживает Map в проверенных случаях.\n\n';
+md+='| Natural workload | Runtime | Итерации | Sampled allocation, MiB | Observed heap maximum, MiB | GC events |\n|---|---|---:|---:|---:|---:|\n';
+for(const row of memory.results.filter(x=>x.mode==='natural'))md+=`| ${row.variant} | ${row.runtime} | ${row.iterations} | ${row.sampledAllocatedBytes===null?'недоступно':(row.sampledAllocatedBytes/1024/1024).toFixed(2)} | ${(row.observedPeakHeap/1024/1024).toFixed(2)} | ${row.naturalGC.length} |\n`;
+md+='\nNatural cases сверяются с нативным оракулом до профилирования. Cached sort сравнивается только с decorated sort; остальные cases выполняют одинаковые filter/projection. Public case создаёт Source на вызов, restricted prototype переиспользует привязку.\n\nNode Inspector sampling включает объекты, собранные minor/major GC; это оценка, не точный объём. Профилирование влияет на время, поэтому эти timings не ранжируют throughput. Bun не предоставляет здесь эквивалентных Inspector/GC данных; ноль событий означает отсутствие наблюдателя, а не отсутствие GC. Observed maximum после итераций не равен истинному peak.\n\n[Сырые результаты](migration-memory.json). Воспроизведение из experiments/goal: `node bench-public-memory.mjs` после root build.\n';
+writeFileSync(new URL('./results/migration-memory.md',import.meta.url),md);
+const types=JSON.parse(readFileSync(new URL('./results/migration-type-cost.json',import.meta.url),'utf8'));
+md='# Стоимость типов публичного ядра\n\n'+`TypeScript ${types.typescript}, ${types.node}. Strict, noUncheckedIndexedAccess, exactOptionalPropertyTypes, skipLibCheck=false. Три свежих последовательных процесса на fixture; декларации прототипа строятся один раз вне замеров.\n\n`;
+md+='| Calls | Variant | Median wall, ms | Median compiler memory | Instantiations |\n|---:|---|---:|---|---|\n';
+for(const row of types.rows)md+=`| ${row.calls} | ${row.variant} | ${median(row.samples.map(x=>x.wallMs)).toFixed(1)} | ${median(row.samples.map(x=>parseFloat(x.memory)))}K | ${row.samples[0].instantiations} |\n`;
+md+='\nPublic потребитель проверяет собранные d.ts. Bare exports установленного архива дополнительно проверяет verify-package.mjs. Fixtures — независимые вызовы, без аннотаций результата; это не проверка отзывчивости IDE или произвольных глубоких цепочек. Filter/projection и cached sort — разные группы сравнения.\n\n';
+for(const calls of [100,1000,5000]){
+ const find=v=>median(types.rows.find(x=>x.calls===calls&&x.variant===v).samples.map(x=>x.wallMs));
+ md+=`Для ${calls} calls: publicCollect/prototype ${(find('publicCollect')/find('restricted')).toFixed(2)}×; publicSorted/native decorated ${(find('publicSorted')/find('nativeSorted')).toFixed(2)}× по wall time.\n\n`;
+}
+md+='Масштабируемая стоимость превышает критерий расследования: это незавершённый пункт миграции. Array-first кандидат оказался хуже и отклонён; [изолированные гипотезы](migration-type-investigation.json) не обосновали замену публичного контракта.\n\nВыведенные branded refs, narrowed projection, domain selection и double-node сохранены вместе с шестью несупрессированными отрицательными диагностиками в [сырых результатах](migration-type-cost.json). Выведенные типы семи установленных бизнес-примеров находятся в [отдельном отчёте](migration-business-types.json).\n\nВоспроизведение из experiments/goal: `node type-public.mjs` после root build.\n';
+writeFileSync(new URL('./results/migration-types.md',import.meta.url),md);

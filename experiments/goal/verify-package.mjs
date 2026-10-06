@@ -17,7 +17,7 @@ try {
   for (const entry of Object.values(manifest.exports)) {
     for (const target of Object.values(entry)) assert(files.has(target.replace(/^\.\//, '')), target);
   }
-  assert(![...files].some(path => /^(test|bench|references|experiments)\//.test(path)));
+  assert(![...files].some(path => /^(?:dist\/)?(test|bench|references|experiments|examples)\//.test(path)));
   const consumer = resolve(scratch, 'consumer');
   mkdirSync(consumer);
   writeFileSync(resolve(consumer, 'package.json'), JSON.stringify({ name: 'isolated-packed-consumer', private: true, type: 'module' }));
@@ -106,8 +106,18 @@ const schema=denseArray(z.number());const values:number[]=schema.parse([1,2]);
 const wrong:{rank:number}[]=refs;
 void values;void wrong;
 `);
-  writeFileSync(resolve(consumer,'tsconfig.json'),JSON.stringify({compilerOptions:{target:'ES2023',module:'NodeNext',moduleResolution:'NodeNext',strict:true,noUncheckedIndexedAccess:true,exactOptionalPropertyTypes:true,noEmit:true,types:[],skipLibCheck:false},files:['types.ts']}));
+  writeFileSync(resolve(consumer,'tsconfig.json'),JSON.stringify({compilerOptions:{target:'ES2023',module:'NodeNext',moduleResolution:'NodeNext',strict:true,noUncheckedIndexedAccess:true,exactOptionalPropertyTypes:true,noEmit:true,types:[],skipLibCheck:false},files:['types.ts','business.ts']}));
+  writeFileSync(resolve(consumer,'business.ts'),readFileSync(resolve(root,'examples/business.ts'),'utf8'));
+  writeFileSync(resolve(consumer,'expected.json'),readFileSync(resolve(root,'examples/expected.json'),'utf8'));
   run('node',[resolve(here,'node_modules/typescript/bin/tsc'),'-p','tsconfig.json'],consumer);
+  writeFileSync(resolve(consumer,'examples.json'),JSON.stringify({compilerOptions:{target:'ES2023',module:'NodeNext',moduleResolution:'NodeNext',strict:true,noUncheckedIndexedAccess:true,exactOptionalPropertyTypes:true,declaration:true,types:[],skipLibCheck:false},files:['business.ts']}));
+  run('node',[resolve(here,'node_modules/typescript/bin/tsc'),'-p','examples.json'],consumer);
+  const inferredBusiness=readFileSync(resolve(consumer,'business.d.ts'),'utf8');
+  assert(!/\bany\b/.test(inferredBusiness),'Unexpected any in business result inference');
+  writeFileSync(resolve(consumer,'business-smoke.mjs'),`import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {allScenarios} from './business.js';assert.deepEqual(allScenarios(),JSON.parse(readFileSync(new URL('./expected.json',import.meta.url),'utf8')));`);
+  run('node',['business-smoke.mjs'],consumer);
+  run('bun',['business-smoke.mjs'],consumer);
+  writeFileSync(resolve(here,'results/migration-business-types.json'),JSON.stringify({checkedAt:new Date().toISOString(),typescript:JSON.parse(readFileSync(resolve(here,'node_modules/typescript/package.json'),'utf8')).version,inferredBusiness,notes:['Unannotated return types from copied public-import examples compiled against independently installed declarations; no paths and no skipLibCheck.']},null,2)+'\n');
   const bundles=process.argv.includes('--migration')?await bundleInstalled(consumer):undefined;
   const declarationBytes=packed.files.filter(file=>file.path.endsWith('.d.ts')).reduce((sum,file)=>sum+file.size,0);
   assert(![...files].some(path=>/legacy|dist\/src\/(timeline|tree|point-index|queue|deque|linked-list|doubly-linked-list)\./.test(path)), 'Stale historical structures entered package');
@@ -116,7 +126,7 @@ void values;void wrong;
     assert(!/(?:\bfrom\s*|\bimport\s*\(\s*|\bimport\s*)["']date-fns(?:\/[^"']*)?["']/.test(declaration), 'Unexpected declaration dependency on date-fns');
   }
   const runtimeJSBytes=packed.files.filter(file=>file.path.endsWith('.js')).reduce((sum,file)=>sum+file.size,0);
-  const report = { checkedAt: new Date().toISOString(), node: process.version, bun:run('bun',['--version'],consumer).trim(),typescript:JSON.parse(readFileSync(resolve(here,'node_modules/typescript/package.json'),'utf8')).version,files: [...files], size: packed.size, unpackedSize: packed.unpackedSize, declarationBytes,runtimeJSBytes,coreAndZod: 'passed Node and Bun in isolated consumer',installedDeclarationConsumer:'passed strict TypeScript without skipLibCheck', excludedResearch: true, installedBundleOutputs:bundles?.length };
+  const report = { checkedAt: new Date().toISOString(), node: process.version, bun:run('bun',['--version'],consumer).trim(),typescript:JSON.parse(readFileSync(resolve(here,'node_modules/typescript/package.json'),'utf8')).version,files: [...files], size: packed.size, unpackedSize: packed.unpackedSize, declarationBytes,runtimeJSBytes,coreAndZod: 'passed Node and Bun in isolated consumer',installedDeclarationConsumer:'passed strict TypeScript without skipLibCheck', excludedResearch: true, businessScenarios:{count:7,strictTypes:'passed without paths or skipLibCheck',node:'passed',bun:'passed',fixture:'examples/expected.json'}, installedBundleOutputs:bundles?.length };
   mkdirSync(resolve(here, 'results'), {recursive:true});
   const reportName=process.argv.includes('--migration')?'migration-package.json':'package.json';
   writeFileSync(resolve(here, 'results',reportName), JSON.stringify(report, null, 2)+'\n');

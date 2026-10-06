@@ -55,3 +55,29 @@ collect(external, { context: { minimum: 1 }, select: (e, id, ctx) => ctx.store }
 sorted(source, (e, id, ctx: { minimum: number }) => ctx.minimum, (a, b) => a - b);
 // @ts-expect-error incompatible context field.
 sorted(source, (e, id, ctx) => ctx.absent, (a, b) => a - b, { context: { minimum: 1 } });
+
+// An array carrying a binding still selects entities and preserves references.
+declare const boundArray: Source<Id, {rank:number}> & readonly Id[];
+const boundArrayOrder=sorted(boundArray,e=>e.rank,(a,b)=>a-b);
+type BoundArrayOrder=Assert<Equal<typeof boundArrayOrder,Id[]>>;
+// @ts-expect-error array overload must not bypass a Source binding
+sorted(boundArray,(id:Id)=>id,(a,b)=>a.localeCompare(b));
+
+// Structural Map/array hybrids follow the runtime Map dispatch.
+declare const mapArray: readonly string[] & ReadonlyMap<Id,{rank:number}>;
+const mapArrayOrder=sorted(mapArray,e=>e.rank,(a,b)=>a-b);
+type MapArrayOrder=Assert<Equal<typeof mapArrayOrder,Id[]>>;
+// @ts-expect-error array element must not replace Map entity selection
+sorted(mapArray,(value:string)=>value,(a,b)=>a.localeCompare(b));
+
+// Bound references keep priority over structural Map and Set identities.
+declare const boundMap: Source<Id,{rank:number}> & ReadonlyMap<number,string>;
+const boundMapOrder=sorted(boundMap,e=>e.rank,(a,b)=>a-b);
+type BoundMapOrder=Assert<Equal<typeof boundMapOrder,Id[]>>;
+// @ts-expect-error automatic Map overload cannot replace an existing Source resolver
+sorted(boundMap,(value:string)=>value,(a,b)=>a.localeCompare(b));
+declare const boundSet: Source<Id,{rank:number}> & ReadonlySet<Id>;
+const boundSetOrder=sorted(boundSet,e=>e.rank,(a,b)=>a-b);
+type BoundSetOrder=Assert<Equal<typeof boundSetOrder,Id[]>>;
+// @ts-expect-error Set element overload cannot replace an existing Source resolver
+sorted(boundSet,(value:Id)=>value,(a,b)=>a.localeCompare(b));

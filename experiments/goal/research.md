@@ -101,6 +101,10 @@ bun bench-public-spatial.ts
 node bench-public-sequences.ts
 bun bench-public-sequences.ts
 node verify-package.mjs --migration
+node type-public.mjs
+node type-investigate.mjs
+node bench-public-memory.mjs
+node summarize-public-costs.mjs
 node summarize-public-core.mjs
 node summarize-public-time.mjs
 node summarize-public-structure.mjs
